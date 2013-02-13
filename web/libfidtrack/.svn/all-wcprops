@@ -1,0 +1,155 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/peekabu.safecrack/!svn/ver/8/branches/web/libfidtrack
+END
+FrameThresholder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FrameThresholder.cpp
+END
+tiled_bernsen_threshold.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/tiled_bernsen_threshold.h
+END
+FrameProcessor.h.gch
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FrameProcessor.h.gch
+END
+FrameProcessor.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FrameProcessor.h
+END
+segment.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/segment.c
+END
+FrameThresholder.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FrameThresholder.h
+END
+FiducialObject.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FiducialObject.cpp
+END
+segment.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/segment.h
+END
+all.trees
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/all.trees
+END
+treeidmap.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/treeidmap.cpp
+END
+FiducialObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FiducialObject.h
+END
+fidtrackX.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/fidtrackX.c
+END
+FidtrackFinder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FidtrackFinder.cpp
+END
+license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/license.txt
+END
+treeidmap.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/treeidmap.h
+END
+FidtrackArea.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FidtrackArea.cpp
+END
+fidtrackX.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/fidtrackX.h
+END
+FidtrackFinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FidtrackFinder.h
+END
+floatpoint.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/floatpoint.h
+END
+floatpoint.h.gch
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/floatpoint.h.gch
+END
+FidtrackArea.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/FidtrackArea.h
+END
+tiled_bernsen_threshold.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/tiled_bernsen_threshold.c
+END
+hello_tutorial.cc
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/peekabu.safecrack/!svn/ver/8/branches/web/libfidtrack/hello_tutorial.cc
+END
+default_trees.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/default_trees.h
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/peekabu.safecrack/!svn/ver/5/branches/web/libfidtrack/CMakeLists.txt
+END
