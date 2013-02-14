@@ -12,23 +12,24 @@ timer = setInterval(
 			// update position of circle
 
 			//if input was not updated still update last position
-			if(!inputArray[0].wasUpdated) 
-			{
-				inputArray[0].x = smoothing*inputArray[0].x+ (1-smoothing)*inputArray[0].lastx ;
-				inputArray[0].y = smoothing*inputArray[0].y+ (1-smoothing)*inputArray[0].lasty ;
-			}
-			if(!inputArray[2].wasUpdated) 
-			{
-				inputArray[2].x = smoothing*inputArray[2].x+ (1-smoothing)*inputArray[2].lastx ;
-				inputArray[2].y = smoothing*inputArray[2].y+ (1-smoothing)*inputArray[2].lasty ;
-			}
+			// if(!inputArray[0].wasUpdated) 
+			// {
+			// 	inputArray[0].x = smoothing*inputArray[0].x+ (1-smoothing)*inputArray[0].lastx ;
+			// 	inputArray[0].y = smoothing*inputArray[0].y+ (1-smoothing)*inputArray[0].lasty ;
+			// }
+			// if(!inputArray[2].wasUpdated) 
+			// {
+			// 	inputArray[2].x = smoothing*inputArray[2].x+ (1-smoothing)*inputArray[2].lastx ;
+			// 	inputArray[2].y = smoothing*inputArray[2].y+ (1-smoothing)*inputArray[2].lasty ;
+			// }
 
-			stethoscope.x = 640 - inputArray[0].x;
-			stethoscope.y = inputArray[0].y;
-			knob.x = 300;
-			knob.y = 100;
-			knob.rotation = inputArray[2].rotation;
-			stage.update();
+			// stethoscope.x = 640 - inputArray[0].x;
+			// stethoscope.y = inputArray[0].y;
+			// knob.x = 300;
+			// knob.y = 100;
+			// knob.rotation = inputArray[2].rotation;
+			currStage.stage.update();
+			//stage.update();
 			// stage.addChild(new createjs.Shape()).setTransform(100,100).graphics.f("red").dc(0,0,50);
 	
 			ctx.drawImage(video, 0, 0, 640, 480);

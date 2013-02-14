@@ -95,70 +95,70 @@ function updateStatus(opt_message) {
 //
 //  initialise graphics
 
-//public drawables
-//main stage
-var stage;
-//players
-var stethoscopeImg = new Image();
-var stethoscope;
-var knobImg = new Image();
-var knob;
+// //public drawables
+// //main stage
+// var stage;
+// //players
+// var stethoscopeImg = new Image();
+// var stethoscope;
+// var knobImg = new Image();
+// var knob;
 
-//background
-var bkgImg = new Image();
-var bkg;
+// //background
+// var bkgImg = new Image();
+// var bkg;
 
-var gfxLoaded = 0;
+// var gfxLoaded = 0;
 
-function init() {
-	//init stage
-	stage = new createjs.Stage("game_canvas");
+//function init() {
+// 	//init stage
+// 	stage = new createjs.Stage("game_canvas");
 	
-	//init background
-    bkgImg.src    = 'assets/bg/bg.jpg';
-	bkgImg.name	 = 'bkg';
-    bkgImg.onload = loadGfx;
+// 	//init background
+//     bkgImg.src    = 'assets/bg/bg.jpg';
+// 	bkgImg.name	 = 'bkg';
+//     bkgImg.onload = loadGfx;
 	
-	//init player 0
-    stethoscopeImg.src    = 'assets/player/stethoscope.png';
-	stethoscopeImg.name	 = 'stethoscope';
-    stethoscopeImg.onload = loadGfx;
+// 	//init player 0
+//     stethoscopeImg.src    = 'assets/player/stethoscope.png';
+// 	stethoscopeImg.name	 = 'stethoscope';
+//     stethoscopeImg.onload = loadGfx;
 
-    //init player 2
-    knobImg.src		= 'assets/player/knob.png';
-	knobImg.name	= 'knob';
-    knobImg.onload	= loadGfx;
+//     //init player 2
+//     knobImg.src		= 'assets/player/knob.png';
+// 	knobImg.name	= 'knob';
+//     knobImg.onload	= loadGfx;
 	
-	// stage.addChild(new createjs.Shape()).setTransform(100,100).graphics.f("red").dc(0,0,50);
-	stage.update();
-	console.log("initialized graphics!");
-	pageDidLoad();
-}
+// 	// stage.addChild(new createjs.Shape()).setTransform(100,100).graphics.f("red").dc(0,0,50);
+// 	stage.update();
+// 	console.log("initialized graphics!");
+// 	pageDidLoad();
+// }
 
-//handling functions
-function loadGfx(e)
-{
-	if(e.target.name = 'bkg')				{bkg = new createjs.Bitmap(bkgImg);}
-	if(e.target.name = 'stethoscope')	{stethoscope = new createjs.Bitmap(stethoscopeImg);}
-	if(e.target.name = 'knob')			{
-		knob = new createjs.Bitmap(knobImg);
-		knob.regX = 247; //get width?
-		knob.regY = 247;
-	}
+// //handling functions
+// function loadGfx(e)
+// {
+// 	if(e.target.name = 'bkg')				{bkg = new createjs.Bitmap(bkgImg);}
+// 	if(e.target.name = 'stethoscope')	{stethoscope = new createjs.Bitmap(stethoscopeImg);}
+// 	if(e.target.name = 'knob')			{
+// 		knob = new createjs.Bitmap(knobImg);
+// 		knob.regX = 247; //get width?
+// 		knob.regY = 247;
+// 	}
 	
-	gfxLoaded++;
+// 	gfxLoaded++;
 	
-	/* Display graphics until all of them are loaded */
+// 	/* Display graphics until all of them are loaded */
 	
-	if(gfxLoaded == 3)
-	{
-		buildInterface();
-	}
-}
+// 	if(gfxLoaded == 3)
+// 	{
+// 		buildInterface();
+// 	}
+// }
 
-function buildInterface()
-{
+// function buildInterface()
+// {
 	
-	stage.addChild(bkg, knob, stethoscope);
-	stage.update(); // Very Important
-}
+// 	stage.addChild(bkg, knob, stethoscope);
+// 	stage.update(); // Very Important
+// }

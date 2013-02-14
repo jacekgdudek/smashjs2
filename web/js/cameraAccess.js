@@ -16,7 +16,9 @@ var localStream;
 
 //check for camera
 window.onload = function ()  {
-   init();
+
+  loadObjects();
+  // init();
   console.log("asking for local stream!");
   //Ask for local streams to be prepared, display self view
   //if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({video:true}, gotStream, noStream);
