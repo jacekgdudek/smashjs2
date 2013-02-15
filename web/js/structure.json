@@ -2,7 +2,7 @@
 	game: {
 		scenes: [
 			{
-				name: "sweet_spot",
+				_name: "sweet_spot",
 				init: sweetSpot.init,
 				update: sweetSpot.update,
 				isCurrent: true,
@@ -15,14 +15,26 @@
 					{
 					  src: "assets/player/knob.png",
 					  name: "knob",
-					  player_id: 0
+					  player_id: 0,
+					  hitClass: "collider101"
 					},
 					{
 					  src: "assets/player/stethoscope.png",
 					  name: "stethoscope",
-					  player_id: 2
+					  player_id: 2,
+					  hitClass: "collidee101"
 					}
-				]
+				],
+				collisions: [
+					{
+					collider: "collider101",
+					collidee: "collidee101",
+					event: {
+						type: "SWITCH_STAGE",
+						content: "sweet_spot"
+						}	
+					}
+		]
 			}
 		]
 	}

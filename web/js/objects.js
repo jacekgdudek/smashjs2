@@ -6,8 +6,8 @@
 
 //init stages
 var currPlayers = new Array();
-var currScene = new Object();
-var scenes = new Object();
+var currScene = 0;
+var scenes = {};
 
 var sweetSpot = (function() {
 	var scene;
@@ -26,6 +26,9 @@ var sweetSpot = (function() {
 			this.scene.stage.update();
 			var sceneFinished = false;		
 			return sceneFinished;
+		},
+		finalize : function() {
+
 		}
 	};
 })();
@@ -36,7 +39,7 @@ function loadObjects()
 	var txtFile = new XMLHttpRequest();
 	var allText;
 	var myRoot;
-	txtFile.open("GET", "https://s3-eu-west-1.amazonaws.com/smashandgrab/test/js/structure.json",true);//http://my.remote.url/myremotefile.txt", true);
+	txtFile.open("GET", "https://s3-eu-west-1.amazonaws.com/smashandgrab/Jacek/js/structure.json",true);//http://my.remote.url/myremotefile.txt", true);
 	txtFile.onreadystatechange = function() {
 	  if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
 	    if (txtFile.status === 200) {  // Makes sure it's found the file.
@@ -53,17 +56,19 @@ function loadObjects()
 
 function setup(gamejson)
 {
-	scenes = gamejson.game.scenes;
+	var _scenes = gamejson.game.scenes;
 	// For each scene
-	for (var i = 0; i < scenes.length; i++) {
+	for (var i = 0; i < _scenes.length; i++) {
 		// Set up the stage
-		scenes[i].stage = new createjs.Stage( scenes[i].stage_id );
+		_scenes[i].stage = new createjs.Stage( _scenes[i].stage_id );
 		// For set up the visuals in the scene and attach them to the stage
-		for (var j = 0; j < scenes[i].visuals.length; j++) {
-			scenes[i].visuals[j].bitmap = new createjs.Bitmap(scenes[i].visuals[j].src);
-			scenes[i].stage.addChild(scenes[i].visuals[j].bitmap);
+		for (var j = 0; j < _scenes[i].visuals.length; j++) {
+			_scenes[i].visuals[j].bitmap = new createjs.Bitmap(_scenes[i].visuals[j].src);
+			_scenes[i].stage.addChild(_scenes[i].visuals[j].bitmap);
 		}
+		scenes[_scenes[i]._name] = _scenes[i];
 	}
-	currScene = 0;
+	currScene = _scenes[0]._name;
+	console.log(scenes[currScene]._name);
 	scenes[currScene].init(scenes[currScene]);
 }
