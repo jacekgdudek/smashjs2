@@ -10,8 +10,6 @@ var refreshTime = 10;
 
 timer = setInterval(function () {
 	
-	
-
 	smoothInputs();
 	imageProcessing();
 	
@@ -19,23 +17,26 @@ timer = setInterval(function () {
 	var sceneComplete = scenes[currScene].update();
 	
 	// If the level is complete go to the next scene
-	if (sceneComplete) { currScene++; }
+	if (sceneComplete) { 
+		currScene++; 
+		scenes[currScene].init()
+	}
 	
 	
 }, refreshTime);
 
 function smoothInputs() {
-			//if input was not updated still update last position
-			if(!inputArray[0].wasUpdated) 
-			{
-				inputArray[0].x = smoothing*inputArray[0].x+ (1-smoothing)*inputArray[0].lastx ;
-				inputArray[0].y = smoothing*inputArray[0].y+ (1-smoothing)*inputArray[0].lasty ;
-			}
-			if(!inputArray[2].wasUpdated) 
-			{
-				inputArray[2].x = smoothing*inputArray[2].x+ (1-smoothing)*inputArray[2].lastx ;
-				inputArray[2].y = smoothing*inputArray[2].y+ (1-smoothing)*inputArray[2].lasty ;
-			}
+	//if input was not updated still update last position
+	if(!inputArray[0].wasUpdated) 
+	{
+		inputArray[0].x = smoothing*inputArray[0].x+ (1-smoothing)*inputArray[0].lastx ;
+		inputArray[0].y = smoothing*inputArray[0].y+ (1-smoothing)*inputArray[0].lasty ;
+	}
+	if(!inputArray[2].wasUpdated) 
+	{
+		inputArray[2].x = smoothing*inputArray[2].x+ (1-smoothing)*inputArray[2].lastx ;
+		inputArray[2].y = smoothing*inputArray[2].y+ (1-smoothing)*inputArray[2].lasty ;
+	}
 };
 
 function imageProcessing() {
