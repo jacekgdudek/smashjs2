@@ -68,7 +68,7 @@ function setup(gamejson)
 		}
 		scenes[_scenes[i]._name] = _scenes[i];
 	}
-	currScene = _scenes[0]._name;
+	currScene = _scenes[1]._name;
 	console.log(scenes[currScene]._name);
 	scenes[currScene].init(scenes[currScene]);
 }

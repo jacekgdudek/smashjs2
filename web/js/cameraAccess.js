@@ -17,16 +17,17 @@ var localStream;
 //check for camera
 window.onload = function ()  {
 
-  loadObjects();
-  // init();
   console.log("asking for local stream!");
   //Ask for local streams to be prepared, display self view
   //if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({video:true}, gotStream, noStream);
   if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({video:true}, gotStream, noStream);
   else {
-	console.log("webkitGetUserMedia not available - you're not using Chrome...");
-	console.log("TODO: add support for other browsers!");
+    console.log("webkitGetUserMedia not available - you're not using Chrome...");
+    console.log("TODO: add support for other browsers!");
   }
+
+  // Program entry point
+  init();
 };
 
 //react if got Stream

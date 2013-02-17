@@ -2,6 +2,32 @@
 //
 //      initialise stuff
 //////////////////////////////////////
+
+//init scenes
+var currPlayers = new Array();
+var currScene = new Object();
+var scenes = new Object();
+
+//init inputs
+var inputArray = new Array();
+
+function init() {
+	// initialize input arrays
+	for(var i = 0 ; i < 4 ; i++)
+	{
+		var fid = new Object();
+		fid.id = i;
+		fid.x = -1;
+		fid.y = -1;
+		fid.rotation = -1;
+		fid.lastx = -1;
+		fid.lasty = -1;
+		fid.wasUpdated = false;
+		inputArray[i] = fid;
+	}
+
+	loadObjects();
+}
 // init sal module
 FidtrackModule = null;  // Global application object.
 statusText = 'Loading...';
@@ -16,21 +42,6 @@ function moduleDidLoad() {
 function popPixels(imgStr) {
   FidtrackModule = document.getElementById('FidtrackModule');
   FidtrackModule.postMessage(imgStr);
-}
-
-//initialize input arrays
-var inputArray = new Array();
-for(var i = 0 ; i < 4 ; i++)
-{
-	var fid = new Object();
-	fid.id = i;
-	fid.x = -1;
-	fid.y = -1;
-	fid.rotation = -1;
-	fid.lastx = -1;
-	fid.lasty = -1;
-	fid.wasUpdated = false;
-	inputArray[i] = fid;
 }
 
 //Handle message
@@ -90,75 +101,3 @@ function updateStatus(opt_message) {
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-//
-//  initialise graphics
-/*
-//public drawables
-//main stage
-var stage;
-//players
-var stethoscopeImg = new Image();
-var stethoscope;
-var knobImg = new Image();
-var knob;
-
-//background
-var bkgImg = new Image();
-var bkg;
-
-var gfxLoaded = 0;
-
-function init() {
-	//init stage
-	stage = new createjs.Stage("game_canvas");
-     
-	//init background
-    	bkgImg.src    = 'assets/bg/bg.jpg';
-	bkgImg.name	 = 'bkg';
-    	bkgImg.onload = loadGfx;
-     
-	//init player 0
-    	stethoscopeImg.src    = 'assets/player/stethoscope.png';
-	stethoscopeImg.name	 = 'stethoscope';
-    	stethoscopeImg.onload = loadGfx;
-
-    	//init player 2
-    	knobImg.src		= 'assets/player/knob.png';
-	knobImg.name	= 'knob';
-    	knobImg.onload	= loadGfx;
-     
-	// stage.addChild(new createjs.Shape()).setTransform(100,100).graphics.f("red").dc(0,0,50);
-	stage.update();
-	console.log("initialized graphics!");
-	pageDidLoad();
-}
-
-//handling functions
-function loadGfx(e)
-{
-	if(e.target.name = 'bkg')				{bkg = new createjs.Bitmap(bkgImg);}
-	if(e.target.name = 'stethoscope')	{stethoscope = new createjs.Bitmap(stethoscopeImg);}
-	if(e.target.name = 'knob')			{
-		knob = new createjs.Bitmap(knobImg);
-		knob.regX = 247; //get width?
-		knob.regY = 247;
-	}
-     
-	gfxLoaded++;
-     
-	// Display graphics until all of them are loaded 
-     
-	if(gfxLoaded == 3)
-	{
-		buildInterface();
-	}
-}
-
-function buildInterface()
-{
-     
-	stage.addChild(bkg, knob, stethoscope);
-	stage.update(); // Very Important
-}*/

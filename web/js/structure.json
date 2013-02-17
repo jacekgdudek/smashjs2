@@ -34,7 +34,31 @@
 						content: "sweet_spot"
 						}	
 					}
-		]
+				]
+			},
+			{
+				_name: "combination_lock",
+				init: combinationScene.init,
+				update: combinationScene.update,
+				stage_id: "game_canvas",
+				visuals: [
+					{
+					  src: "assets/player/knob.png",
+					  name: "dial",
+					  player_id: 2
+					},
+					{
+					  src: "assets/player/stethoscope.png",
+					  name: "indicator",
+					  player_id: 2,
+					  hasHover: true
+					},
+					{
+					  src: "assets/player/knob.png",
+					  name: "knob",
+					  player_id: 0
+					}
+				]
 			}
 		]
 	}
