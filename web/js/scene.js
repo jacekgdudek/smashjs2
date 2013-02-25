@@ -1,4 +1,3 @@
-
 var defaultScene = (function() {
 	//var input;
 	var scene;
@@ -14,6 +13,7 @@ var defaultScene = (function() {
 			{
 				scene.scene.visuals[i].visible = true;
 			}
+
 
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;

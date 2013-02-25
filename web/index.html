@@ -3,7 +3,11 @@
 <head>
 	<!-- head includes (so C++) -->
 	<link href="css/demo.css" rel="stylesheet" type="text/css">
+
 	<script src="js/easeljs-0.6.0.min.js"></script>
+
+
+
 
 	<script src="js/objects.js"></script>
 	<script src="js/ndgmr.Collision.js"></script>
@@ -13,13 +17,12 @@
 	<!-- preload -->
 	<script type="text/javascript" src="./js/preloadjs-0.2.0.min.js"></script>
 
-	<!---   audio  -->
+	<!-- audio  -->
 	<script type="text/javascript" src="./js/audioManager.js"></script>
 	<script type="text/javascript" src="./js/soundjs/soundjs-0.3.0.min.js"></script>
 	<script type="text/javascript" src="./js/soundjs/HTMLAudioPlugin.js"></script>
 	<script type="text/javascript" src="./js/soundjs/swfobject.js"></script>
 	<script type="text/javascript" src="./js/soundjs/FlashPlugin.js"></script>
-	<!--      -->
 
 	<!-- scenes -->
 	<script src="js/scene.js"></script>
@@ -29,6 +32,7 @@
 	<script src="js/safeScene.js"></script>
 	<script src="js/stethoscopeScene.js"></script>
 	<script src="js/combinationScene.js"></script>
+	<script src="js/videoScene.js"></script>
 	<!-- -->
 
 	<!-- Structure -->
@@ -46,13 +50,12 @@
       <div id="listener">
         <script src="js/eventHandler.js"></script>
     
-        <embed name="nacl_module"
+        <embed 
            id="FidtrackModule"
            width=0 height=0
            src="NaCL/FidtrackModule.nmf"
            type="application/x-nacl" />
       </div>
-    </p>
     <!-- header -->
     <h1>Smash And Grab</h1>
 
@@ -63,8 +66,26 @@
         </canvas>
         <h2>Status : </h2>
 		<div id="status_field">Started</div>
-        <video id="live" width="640" height="480" autoplay style="visibility: hidden; "></video>
-        <canvas width="640" id="canvas" height="480" style="visibility: hidden;"></canvas>
+        <video 	id="live"
+		width="640" height="480" 
+		autoplay 
+		style="visibility: hidden; ">
+	</video>
+        <canvas id="canvas" 
+		width="640" height="480" 
+		style="visibility: hidden;">
+	</canvas>
+	<video 	id="videoPlayer" 
+		width="640" height="480" 
+		style="visibility: hidden;"			
+		controls
+		preload="auto" 	  
+		data-setup="{}">
+		<source src="assets/video/peekabu_promo_640.mp4" type="video/mp4">
+		<source src="assets/video/peekabu_promo_640.webm" type="video/webm">
+		<source src="assets/video/peekabu_promo_640.ogv" type="video/ogg">
+		Your browser does not support the video tag.
+	</video>
     </div>
     
 	<script src="js/cameraAccess.js"></script>

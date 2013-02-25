@@ -34,6 +34,35 @@ var structure = {
 						type: "SWITCH_SCENE",
 						content: "base_scene"
 						}	
+					},
+					{
+						x:400,
+						y:300,
+					  	src: "assets/button/play.png",
+					  	name: "btn_play",
+					  	hasDown: true,
+					 	downEvent: {
+							type: "SWITCH_SCENE",
+							content: "video_scene"
+						}	
+					}
+				]
+			},
+			{
+				_name: "video_scene",
+				init: videoScene.init,
+				update: videoScene.update,
+				stage_id: "game_canvas",
+				visuals: [
+					{
+					  src: "assets/combination/safe_bg.jpg",
+					  name: "bkg"
+					}
+				],
+				videos: [
+					{
+					  src: "assets/video/sample_mpeg4.mp4",
+					  name: "test"
 					}
 				]
 			},
