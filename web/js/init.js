@@ -8,6 +8,12 @@ var currPlayers = new Array();
 var currScene = new Object();
 var scenes = new Object();
 
+//setup audio manager
+var audioManager;
+
+//booleans
+var moduleLoaded = -1;
+
 //init inputs
 var inputArray = new Array();
 
@@ -27,6 +33,11 @@ function init() {
 	}
 
 	loadObjects();
+
+	//load sounds
+	audioManager = new SmashAndGrabAudioManager();
+	audioManager.setVolume(0.95,audioManagerAudioObject.NORMAL_CLICK);
+	audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
 }
 // init sal module
 FidtrackModule = null;  // Global application object.
@@ -35,6 +46,7 @@ statusText = 'Loading...';
 // Indicate load success.
 function moduleDidLoad() {
   FidtrackModule = document.getElementById('FidtrackModule');
+  moduleLoaded++;
   updateStatus('Loaded');
 }
 

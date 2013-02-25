@@ -1,6 +1,9 @@
 var combinationScene = (function() {
-	var listOfTargets, targetPointer, lastTargetPointer,spin;
-	var input;
+
+	var listOfTargets, targetPointer, lastTargetPointer , spin ,direction;
+
+	var currentNumber, lastNumber;
+
 	var scene;
 
 	return {
@@ -9,52 +12,35 @@ var combinationScene = (function() {
 
 			this.scene = scene;
 			// Setup the game stage
-			//rotatingDial = new createjs.Bitmap("../media/visuals/safe/dial.png");
-			rotatingDial = this.scene.visuals[0];
-			rotatingDial.bitmap.x = 0;//900+139;
-			rotatingDial.bitmap.y = 0;//200+139;
-			rotatingDial.bitmap.regX += 0;//139;
-			rotatingDial.bitmap.regY += 0;//139;
+			knob = this.scene.visuals[1];
+			knob.bitmap.x = 800-knob.bitmap.image.width;//900+139;
+			knob.bitmap.y = 20;//200+139;
+			knob.bitmap.regX += 0;//139;
+			knob.bitmap.regY += 0;//139;
 
-			//rotatingIndicator = new createjs.Bitmap("../media/visuals/safe/indicator.png");
-			rotatingIndicator = this.scene.visuals[1];			
-			rotatingIndicator.bitmap.x = 0;//900+139;
-			rotatingIndicator.bitmap.y = 0;//200+139;
-			rotatingIndicator.bitmap.regX += 0;//139;
-			rotatingIndicator.bitmap.regY += 0;//139;
+			knobNumbers = this.scene.visuals[2];			
+			knobNumbers.bitmap.x = knob.bitmap.x+115;//900+139;
+			knobNumbers.bitmap.y = knob.bitmap.y+117;//200+139;
+			knobNumbers.bitmap.regX += 115;//139;
+			knobNumbers.bitmap.regY += 117;//139;
 
-			//knob = new createjs.Bitmap("../media/visuals/safe/knob.png");
-			knob = this.scene.visuals[2];
-			knob.bitmap.x = 0;//900;
-			knob.bitmap.y = 0;//200;
-
-			//this.scene.stage.addChild(rotatingDial);
-			//this.scene.stage.addChild(rotatingIndicator);
-			//this.scene.stage.addChild(knob);
-
-			// Setup the input "wheel" that can be controlled
-			this.input = new Object();
-			this.input.rotation = 0;
+			stethoscope = this.scene.visuals[3];			
+			stethoscope.bitmap.x = 0;//900+139;
+			stethoscope.bitmap.y = 600;//200+139;
 
 			// Create a list of random targets e.g. 53, -124, 200, 5, etc
 			this.listOfTargets = new Array();
 
-			// Start with a random direction
-			var randomBoolean = !! Math.round(Math.random() * 1);
-			var direction = 1;
-			if (randomBoolean) {
-				direction *= -1;	
-			}
-
 			// create the targets
-			numberOfTargets = 3;
+			numberOfTargets = 1;
 			for (var i = 0; i < numberOfTargets; i++) {
 				// At a random point
-				this.listOfTargets.push(direction*Math.floor(Math.random() * 360));
-				// Change direction each time
-				direction *= -1;
+				var number = Math.floor((knobNumbers.maxNumber/360)*Math.floor(Math.random() * 360));
+				this.listOfTargets.push(number);
+				console.log( "number : " + number);
 			}
 
+			this.lastNumber = 9999;
 			this.targetPointer = 0;
 			this.lastTargetPointer = 0;
 			this.spin=0;
@@ -77,67 +63,95 @@ var combinationScene = (function() {
 					}
 				}
 			}
-			//createjs.Ticker.addListener(this.scene.stage);
-			// Handle resettng the audio so it can be played again
-			/*
-			buzzAudio.click.bind("ended", function() {
-				buzzAudio.click.load();
-				buzzAudio.click.setTime(0);
-			});			
-			buzzAudio.failure.bind("ended", function() {
-				buzzAudio.failure.load();
-				buzzAudio.failure.setTime(0);
-			});			
-			buzzAudio.tumbler.bind("ended", function() {
-				buzzAudio.tumbler.load();
-				buzzAudio.tumbler.setTime(0);
-			});*/
+
+			this.scene.stage.onMouseDown = function(mousePos) {
+				for(var i = 0 ; i < scene.visuals.length ; i++)
+				{
+					if(scene.visuals[i].hasDown)
+					{
+						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX , mousePos.stageY ))
+						{
+							console.log("down state initialized");
+						}
+					}
+				}
+			}
 		},
 		update: function() {
-			this.input.rotation = inputArray[2].rotation;
+			//-------update sthetoscope
+			//scale up and flip as well
+			stethoscope.bitmap.x = 800 - stethoscope.bitmap.image.width - (((800 - stethoscope.bitmap.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
+			stethoscope.bitmap.y = (600/480)*inputArray[0].y;
+
+			//----------------------------------- update dial
+			var directionNow = false;
+			var directionChanged = false;
+
+			var rotation = inputArray[2].rotation;
 			// Keep this.input rotation within bounds
-			if (this.input.rotation > 360) { this.input.rotation = 360; }
-			if (this.input.rotation <= -360) { this.input.rotation = -360; }
+			if (rotation > 360) { rotation = 360; }
+			if (rotation <= -360) { rotation = -360; }
 
-			// Make the dial spin if we win the game
-			var spinSpeed = 9;
-			var spinDuration = 400;
-			rotatingDial.bitmap.rotation = this.input.rotation;
+			knobNumbers.bitmap.rotation = rotation;
 
-			if (this.spin < spinDuration) {
-				// Otherwise use it to show progress (i.e. the value of targetPointer)
-				rotatingIndicator.bitmap.rotation = 90*this.targetPointer+(this.spin*spinSpeed);
+			//---------get currentNumber based on rotation
+			this.currentNumber = Math.floor((knobNumbers.maxNumber/360)*rotation);
+			if( this.lastNumber == 9999) this.lastNumber = this.currentNumber;
+
+			//---------check if changed direction on the number
+			directionNow = (currentNumber > lastNumber);
+			if(direction != directionNow)
+			{
+				directionChanged = true;
 			}
 
-			// If we hit the target move on to the next one
+			// -----------------------If we hit the target move on to the next one
 			var currentTarget = this.listOfTargets[this.targetPointer];
 			//console.log("Rotation: %s", input.rotation);
-			if (	(currentTarget >= 0 && this.input.rotation > currentTarget) ||
-				(currentTarget <  0 && this.input.rotation < currentTarget)) {
-					this.lastTargetPointer = this.targetPointer;
-					this.targetPointer++;
-					//buzzAudio.tumbler.play();
+			if (this.currentNumber == currentTarget)
+			{
+				this.lastTargetPointer = this.targetPointer;
+				this.targetPointer++;
+				//buzzAudio.tumbler.play();
 			}
-			// Reset if we went to far
-			var lastTarget = this.listOfTargets[this.lastTargetPointer];
-			var failDistance = 20;
-			if (	this.lastTargetPointer > 0 &&	
-				((lastTarget >= 0 && this.input.rotation > lastTarget+failDistance) ||
-				(lastTarget < 0 && this.input.rotation < lastTarget-failDistance))) {
-					this.lastTargetPointer = 0;
-					this.targetPointer = 0;
-					//buzzAudio.failure.play();
+
+			//trigger sound if number changed
+			if (this.currentNumber != this.lastNumber)
+			{
+				console.log(this.currentNumber);
+				audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
 			}
-			// Check if we have finished
+
+			// --------------------------------Reset if we went to far
+			// var lastTarget = this.listOfTargets[this.lastTargetPointer];
+			// var failDistance = 20;
+			// if (	this.lastTargetPointer > 0 &&	
+			// 	((lastTarget >= 0 && this.input.rotation > lastTarget+failDistance) ||
+			// 	(lastTarget < 0 && this.input.rotation < lastTarget-failDistance))) {
+			// 		this.lastTargetPointer = 0;
+			// 		this.targetPointer = 0;
+			// 		//buzzAudio.failure.play();
+			// }
+
+			// ---------------------------------Check if we have finished
 			if (this.targetPointer >= this.listOfTargets.length) {
 				console.log("Combination Found!");
+				this.scene.finalize();
 				// Aww yeah!
 				this.spin++;
 			}
+			//save last values
+			this.lastNumber = this.currentNumber;
 
 			//update scene
 			this.scene.stage.update();
 		},
+		finalize: function() {
+			for(var i = 0 ; i < this.scene.visuals.length ; i++)
+			{
+				this.scene.scene.visuals[i].visible = false;
+			}
+		}
 
 	};
 	function handleKeyDown(evt) {

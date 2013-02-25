@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB" lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<title>HTML5 getUserMedia()</title>
+
+</style>
+</head>
+
+<body>
+
+<h1><code>getUserMedia()</code> demo</h1>
+
+Demo accessing the local camera from an HTML5 Web page,
+using the standard <a href="http://www.w3.org/TR/mediacapture-streams/" rel="external"><code>getUserMedia()</code></a>. 
+The video image is sent to a websocket at regular intervals. 
+</p><p>
+Tested with:
+</p>
+<ul>
+<li>Opera   : not done</li>
+<li>IE      : not done</li>
+<li>Chrome  : latest</li>
+<li>Firefox : latest</li>
+</ul>
+
+<h2 id="demo">Images</h2>
+<p>
+<ul>
+<li>1. Video feed
+<li>2. Snapshot (use button to take snapshot)
+<li>3. Processed snapshot image received from server
+</ul>
+</p>
+<!--
+<div style="visibility: hidden;  width:0; height:0;">
+     <canvas width="320" id="canvas" height="240"></canvas>
+</div>
+ -->
+<div>
+	<p>
+    <video id="video" width="320" height="240" autoplay="autoplay"></video>
+	<canvas id="canvas" width="320" height="240"></canvas>
+    <canvas id="target" width="320" height="240" style="display: inline;"/>
+    </p>
+</div>
+<!--
+<p><video id="video" autoplay="autoplay"></video>
+<img id="target" style="display: inline;"/>
+</p>
+-->
+
+<p><input type="button" id="buttonSnap" value="Take screenshot" disabled="disabled" onclick="snapshot()" /></p>
+<p>
+<input type="button" id="buttonStart" value="Start" disabled="disabled" onclick="start()" />
+<input type="button" id="buttonStop" value="Stop" disabled="disabled" onclick="stop()" />
+</p>
+
+<h2 id="log">Log</h2>
+
+<pre id="preLog">Loading…</pre>
+
+
+<div class="sb">
+<code><a href="http://www.wessnitzer.net/jan/" title="" class="top">http://www.wessnitzer.net/jan/</a></code>
+</div>
+
+
+<script type="text/javascript">//<![CDATA[
+"use strict";
+var video = document.getElementById('video');
+var canvas = document.getElementById('canvas');
+var videoStream = null;
+var preLog = document.getElementById('preLog');
+// JW
+var target = document.getElementById('target');
+var timer=0;
+var messageTimerStart=new Date();
+var messageTimerStop=new Date();
+var messageIntervalTimerStart=new Date();
+var messageIntervalTimerStop=new Date();
+var elapsed=0;
+
+
+//var ws = new WebSocket("ws://127.0.0.1:9999");
+//var ws = new WebSocket("ws://127.0.0.1:9999", "echo-protocol");
+var ws = new WebSocket("ws://ec2-23-22-183-173.compute-1.amazonaws.com:9999", "echo-protocol");
+
+
+//ws.binaryType = "blob";
+ws.binaryType = "arraybuffer";
+
+ws.onopen = function () {
+              console.log("Opened connection to websocket");
+}
+
+    
+
+function log(text)
+{
+	if (preLog) preLog.textContent += ('\n' + text);
+	else alert(text);
+}
+
+function snapshot()
+{
+	//canvas.width = video.videoWidth;
+	//canvas.height = video.videoHeight;
+	canvas.getContext('2d').drawImage(video, 0, 0,320,240);
+	log("=== Sending checks ===")
+    // measure message intervals
+    messageIntervalTimerStop = new Date();
+    timing(messageIntervalTimerStart,messageIntervalTimerStop,"Interval = ");
+	// take image from canvas and prepare to send down websocket
+    // TODO: double check logic
+    var data = canvas.toDataURL('image/jpeg',1.0);
+    var ctx=canvas.getContext("2d");
+    var imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var canvaspixelarray = imagedata.data;
+    var canvaspixellen = canvaspixelarray.length;
+    var bytearray = new Uint8Array(canvaspixellen);
+    log("sending " + bytearray.length + " bytes");
+    for (var i=0;i<canvaspixellen;i++) {
+          bytearray[i] = imagedata.data[i];
+    }
+    //log("bytearray = " + bytearray.length);
+	// measure time
+    messageTimerStart = new Date();
+    ws.send(bytearray.buffer);
+    messageIntervalTimerStart = new Date();
+}
+
+function noStream()
+{
+	log('Access to camera was denied!');
+}
+
+function stop()
+{
+	var myButton = document.getElementById('buttonStop');
+	if (myButton) myButton.disabled = true;
+	myButton = document.getElementById('buttonSnap');
+	if (myButton) myButton.disabled = true;
+	if (videoStream)
+	{
+		if (videoStream.stop) videoStream.stop();
+		else if (videoStream.msStop) videoStream.msStop();
+		videoStream.onended = null;
+		videoStream = null;
+	}
+	if (video)
+	{
+		video.onerror = null;
+		video.pause();
+		if (video.mozSrcObject)
+			video.mozSrcObject = null;
+		video.src = "";
+	}
+	myButton = document.getElementById('buttonStart');
+	if (myButton) myButton.disabled = false;
+}
+
+function gotStream(stream)
+{
+	
+	var myButton = document.getElementById('buttonStart');
+	if (myButton) myButton.disabled = true;
+	videoStream = stream;
+	log('Got stream.');
+	video.onerror = function ()
+	{
+		log('video.onerror');
+		if (video) stop();
+	};
+	stream.onended = noStream;
+	if (window.webkitURL) video.src = window.webkitURL.createObjectURL(stream);
+	else if (video.mozSrcObject !== undefined)
+	{//FF18a
+		video.mozSrcObject = stream;
+		video.play();
+	}
+	else if (navigator.mozGetUserMedia)
+	{//FF16a, 17a
+		video.src = stream;
+		video.play();
+	}
+	else if (window.URL) video.src = window.URL.createObjectURL(stream);
+	else video.src = stream;
+	myButton = document.getElementById('buttonSnap');
+	if (myButton) myButton.disabled = false;
+	myButton = document.getElementById('buttonStop');
+	if (myButton) myButton.disabled = false;
+	// JW 
+	timer = setInterval(
+            function () {
+            	// JW
+            	/*
+            	log("=== Sending checks ===")
+            	// measure message intervals
+            	messageIntervalTimerStop = new Date();
+            	timing(messageIntervalTimerStart,messageIntervalTimerStop,"Interval = ");
+            	
+            	// draw video image to canvas every X ms
+                //canvas.width = video.videoWidth;
+				//canvas.height = video.videoHeight;
+                //canvas.getContext('2d').drawImage(video,0,0);
+                //snapshot();
+                // take image from canvas and prepare to send down websocket
+                // TODO: double check logic
+                var data = canvas.toDataURL('image/jpeg',1.0);
+                var ctx=canvas.getContext("2d");
+                var imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+     			var canvaspixelarray = imagedata.data;
+                var canvaspixellen = canvaspixelarray.length;
+                var bytearray = new Uint8Array(canvaspixellen);
+                log("sending " + bytearray.length + " bytes");
+     			for (var i=0;i<canvaspixellen;i++) {
+          			bytearray[i] = imagedata.data[i];
+     			}
+     			//log("bytearray = " + bytearray.length);
+				// measure time
+     			messageTimerStart = new Date();
+     			ws.send(bytearray.buffer);
+     			messageIntervalTimerStart = new Date();
+     			*/
+            }, 1000);
+	// JW
+}
+
+ws.onerror = function(description) {
+	log("=== Error log ===");
+	log(description);
+	log("=================");
+}
+
+ws.onmessage = function (msg) {
+		// checks
+		log("=== Receiving checks ===");
+		log("message from server " + msg.data);
+		//for (var i=0; i<5; i++) {
+		//	log("message["+i+"] = "+msg[i]);
+		//}
+		
+		if(msg.data instanceof ArrayBuffer)
+    	{
+    		log("ArrayBuffer!");
+    		log("receiving " + msg.data.byteLength + " bytes");
+    		log(ws.extensions);
+		}
+		else {
+			log("Not an ArrayBuffer");
+		}
+		if(typeof msg.data === "string")
+    	{
+    		log("String!");
+		}
+		else {
+			log("Not a String");
+		}
+		if(msg.data instanceof Blob)
+    	{
+    		log("Blob!");
+    		log("receiving " + msg.data.size + " bytes");
+		}
+		else {
+			log("Not a Blob");
+		}
+
+		messageTimerStop = new Date();
+		timing(messageTimerStart,messageTimerStop,"Return = ");
+
+		// this works, in so far that we can access the message bytes
+		var ba = new Uint8Array(msg.data); 
+		for (var i = 0; i < ba.length; i++) { 
+			if (i<5) {
+				log(ba[i]);
+			} 
+		}
+		// now we just need to display the arraybuffer in target elemnt!
+		var target = document.getElementById("target");
+		var canvasWidth  = target.width;
+		var canvasHeight = target.height;
+		var ctx = target.getContext("2d");
+		var imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+		var data = imageData.data;
+		var count = 0;
+		for (var y = 0; y < canvasHeight; ++y) {
+    		for (var x = 0; x < canvasWidth; ++x) {
+        		
+        		imageData.data[count]=ba[count];
+        		imageData.data[count+1]=ba[count+1];
+        		imageData.data[count+2]=ba[count+2];
+        		imageData.data[count+3]=ba[count+3];
+        		count=count+4;
+    		}
+		}
+		ctx.putImageData(imageData, 0, 0);	
+		
+		/*
+		// this code also works with Java WebsocketServerApp
+		//var blob = new Blob([msg.data],{type: "application/octet-binary"});
+		var blob = new Blob([msg.data]);
+		log("Size of blob = " + blob.size);
+		for (var i=0; i<5; i++) {
+			log(blob.type);
+			log(blob.slice(1,2));
+		}
+    	document.getElementById("target").src=window.URL.createObjectURL(blob);
+		*/
+		
+		/*
+		// this code below works with Java WebsocketServerApp
+        var target = document.getElementById("target");
+        var url=window.URL.createObjectURL(msg.data);
+        target.onload = function() {
+            window.URL.revokeObjectURL(url);
+        };
+        target.src = url;
+        */
+}
+
+function timing(start, stop, message) {
+		elapsed = stop - start;
+		log(message + elapsed);
+}
+
+function start()
+{
+	if ((typeof window === 'undefined') || (typeof navigator === 'undefined')) log('This page needs a Web browser with the objects window.* and navigator.*!');
+	else if (!(video && canvas)) log('HTML context error!');
+	else
+	{
+		log('Get user media…');
+		if (navigator.getUserMedia) navigator.getUserMedia({video:true}, gotStream, noStream);
+		else if (navigator.oGetUserMedia) navigator.oGetUserMedia({video:true}, gotStream, noStream);
+		else if (navigator.mozGetUserMedia) navigator.mozGetUserMedia({video:true}, gotStream, noStream);
+		else if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({video:true}, gotStream, noStream);
+		else if (navigator.msGetUserMedia) navigator.msGetUserMedia({video:true, audio:false}, gotStream, noStream);
+		else log('getUserMedia() not available from your Web browser!');
+	}
+}
+
+start();
+//]]></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "game": 
+  {
+    "stage": 
+    {
+      "-isCurrent": "1",
+      "-id": "game_canvas",
+      "visual": [
+        {
+          "-src": "assets/bg/bg.jpg",
+          "-name": "bkg"
+        },
+        {
+          "-src": "assets/player/knob.png",
+          "-name": "knob",
+          "-playerId": "0"
+        },
+        {
+          "-src": "assets/player/stethoscope.png",
+          "-name": "stethoscope",
+          "-playerId": "2"
+        }
+      ]
+    }
+  }
+}

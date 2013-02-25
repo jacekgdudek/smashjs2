@@ -7,16 +7,18 @@
 var timer;
 var refreshTime = 10;
 
-
 timer = setInterval(function () {
 	
-	
-
 	smoothInputs();
-	imageProcessing();
-	
+	if(moduleLoaded)
+	{
+		imageProcessing();
+	}
+
 	// Update the current scene
-	var sceneComplete = scenes[currScene].update();
+	if (typeof scenes[currScene] !== 'undefined') {
+		var sceneComplete = scenes[currScene].update();
+	}
 
 	//process collision
 	collide();

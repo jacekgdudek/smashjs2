@@ -28,7 +28,7 @@ function handleEvents()
 	while( events.length != 0 )
 	{
 		var event = events.shift()
-		if(event.type == "SWITCH_STAGE") switchStage(event.content);
+		if(event.type == "SWITCH_SCENE") switchStage(event.content);
 
 		else if(event.type == "SWITCH_SUB_STAGE") switchSubStage(event.content2);
 
@@ -54,13 +54,18 @@ function switchStage(content)
 		return;
 	}
 
-	if(scene[content]._name == NULL)
+	if(typeof scenes[content] == 'undefined')
 	{
 		console.log("Error on switching stage to " + content);
 	}
 	else
 	{
+		//finalize old scene
+		scenes[currScene].finalize();
+		//swap currScene
 		currScene = content;
+		//initialize new scene
+		scenes[currScene].init(scenes[currScene]);
 		console.log("Switched stage to " + content);
 	}
 }
