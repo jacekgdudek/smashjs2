@@ -43,6 +43,7 @@ var sweetSpot = (function() {
 
 function loadObjects()
 {
+	/*
 	//get access to sructer file
 	var txtFile = new XMLHttpRequest();
 	var allText;
@@ -58,7 +59,11 @@ function loadObjects()
 	    }
 	  }
 	}
-	txtFile.send(null);
+	txtFile.send(null);*/
+
+	var gamejson = structure;
+	console.log(gamejson.game.scenes[0].visuals.length);
+	setup(gamejson);
 }
 
 

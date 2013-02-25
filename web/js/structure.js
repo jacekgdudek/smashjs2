@@ -1,4 +1,4 @@
-{ 
+var structure = { 
 	game: {
 		scenes: [
 			{
@@ -468,4 +468,4 @@
 		}
 
 	}
-}
+};
