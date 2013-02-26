@@ -5,6 +5,11 @@ var rewardScene = (function() {
 
 	var grid;
 
+	//rewards
+	var rewardId;
+	var rewardImages = new Array();
+	var _rewards = new Array();
+
 	return {
 		init: function(scene) {
 			console.log("init: reward scene");
@@ -14,7 +19,8 @@ var rewardScene = (function() {
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)
 			{
-				scene.visuals[i].visible = true;
+				if(scene.visuals[i].visible != false)
+					scene.visuals[i].bitmap.visible = true;
 			}
 
 			//--------initialize grid
@@ -22,12 +28,15 @@ var rewardScene = (function() {
 			for (var i = 0; i < scene.rewardGrid.width; i++) {
 				grid[i] = new Array(scene.rewardGrid.height);
 				for (var j = 0; j < scene.rewardGrid.height; j++) {
-					grid[i][j] = -1;
+					var rewardObject = new Object();
+					rewardObject.visualId = -1;
+					grid[i][j] = rewardObject;
 				}
 			}
 
 			randObjects(/*grid*/ grid,
-						/*reward value*/currentJob.reward);
+						/*reward value*/currentJob.reward,
+						_rewards);
 
 			repositionObjects(grid);
 
@@ -51,17 +60,38 @@ var rewardScene = (function() {
 			}
 
 			this.scene.stage.onMouseDown = function(mousePos) {
-				for(var i = 0 ; i < scene.visuals.length ; i++)
+				if(scene._name == currScene)
 				{
-					if(scene.visuals[i].hasDown)
+					//---------------------------mouse down on reward
+					for(var i = 0 ; i < _rewards.length ; i++)
 					{
-						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
+						if(rewardImages[i].hasDown)
 						{
-							addEventEx(scene.visuals[i].downEvent);
-							console.log("down state initialized");
+							if(rewardImages[i].bitmap.hitTest( mousePos.stageX - rewardImages[i].bitmap.x , mousePos.stageY - rewardImages[i].bitmap.y ))
+							{
+								addEvent(rewardImages[i].downEvent.type, _rewards[i].value);
+								rewardImages[i].bitmap.visible = false;
+								console.log("down state on reward initialized");
+							}
+						}
+					}
+
+					for(var i = 0 ; i < scene.visuals.length ; i++)
+					{
+						if(scene.visuals[i].hasDown)
+						{
+							if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
+							{
+								if(scene.visuals[i].downEvent.type != "ADD_CREDITS")
+								{
+									addEventEx(scene.visuals[i].downEvent);
+									console.log("down state initialized");
+								}
+							}
 						}
 					}
 				}
+				
 			}
 
 		},
@@ -70,6 +100,7 @@ var rewardScene = (function() {
 
 
 			//update scene
+
 			this.scene.stage.update();
 		},
 		finalize: function() {
@@ -84,6 +115,13 @@ var rewardScene = (function() {
 					this.scene.messages[i].text.visible = false;
 				}
 			}
+			for(var i = 0 ; i < rewardImages.length ; i++)
+			{
+				this.scene.stage.removeChild(rewardImages[i]);
+			}
+			rewardImages = new Array();
+			_rewards = new Array();
+			
 		},
 	};
 
@@ -93,10 +131,9 @@ var rewardScene = (function() {
 		if (evt.keyIdentifier=="Right") { this.input.rotation += 10; }
 	};
 
-	function randObjects(grid, rewardLevel) {
+	function randObjects(grid, rewardLevel, rewards) {
 		var scene = scenes[currScene];
-		var possibleRewards = scenes[currScene].rewards;
-		var rewards = new Array();
+		possibleRewards = scenes[currScene].rewards;
 
 		var rewardValue = rewardLevel * 1000;
 
@@ -104,7 +141,7 @@ var rewardScene = (function() {
 		var finnished = false;
 		while(!finnished)
 		{
-			var rewardId = Math.floor(Math.random()*possibleRewards.length);
+			rewardId = Math.floor(Math.random()*possibleRewards.length);
 
 			if(possibleRewards[rewardId].value > rewardValue){
 				finnished = true;
@@ -124,10 +161,11 @@ var rewardScene = (function() {
 			{
 				x = Math.floor(Math.random()*grid.length);
 				y = Math.floor(Math.random()*grid[0].length);
-				if(grid[x][y] == -1)
+				if(grid[x][y].visualId == -1)
 				{
+
 					foundSpot = true;
-					grid[x][y] = rewards[i].visualId;
+					grid[x][y] = rewards[i];
 				}
 			}
 		}
@@ -138,19 +176,45 @@ var rewardScene = (function() {
 	{
 		for (var i = 0; i < grid.length; i++) {
 				for (var j = 0; j < grid[i].length; j++) {
-					if(grid[i][j] != -1)
-					{	
-						//var reward = scenes[currScene].visuals[grid[i][j]].bitmap;
-						scenes[currScene].visuals[grid[i][j]].bitmap.x = i * 100;
-						scenes[currScene].visuals[grid[i][j]].bitmap.y = j * 100;
-						scenes[currScene].visuals[grid[i][j]].bitmap.visible = true;
-
-						console.log("putting object on x:" + i*100 + " y : " + j*100 + " id : " + grid[i][j]);
-						var cFilter = new createjs.ColorFilter(1, 0, 0, 1);
-						scenes[currScene].visuals[grid[i][j]].bitmap.filters = [cFilter];
-
-							//image.cache(0,0 img.width, img.height);
-							//stage.addChild(image);*/
+					if(grid[i][j].visualId != -1)
+					{
+						console.log("Reward visualId : " + grid[i][j].visualId);
+						var rewardBMP  = new Object();
+						rewardBMP.hasDown = true;
+						rewardBMP.downEvent = scenes[currScene].visuals[grid[i][j].visualId].downEvent;
+						rewardBMP.bitmap =  scenes[currScene].visuals[grid[i][j].visualId].bitmap.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);
+						rewardBMP.bitmap.x = i * 100;
+						rewardBMP.bitmap.y = j * 100;
+						rewardBMP.bitmap.visible = true;
+						console.log("putting object on x:" + i*100 + " y : " + j*100);
+						
+						rewardBMP.bitmap.cache(0, 0, rewardBMP.bitmap.image.width, rewardBMP.bitmap.image.height);
+						/*var cFilter;
+						cFilter = new createjs.ColorFilter(0, 1, 0, 1);
+						rewardBMP.bitmap.filters = [cFilter];
+						*/
+						if (grid[i][j].visualId == 4){
+							var cFilter;
+							/*cFilter = new createjs.ColorFilter(1, 0, 0, 1);
+							rewardBMP.bitmap.filters = [cFilter];*/
+							console.log(grid[i][j].rgbColor);
+							if(grid[i][j].rgbColor == "red"){
+								cFilter = new createjs.ColorFilter(2, 0.9, 0.9, 1);
+								rewardBMP.bitmap.filters = [cFilter];
+							}
+							else if(grid[i][j].rgbColor == "green"){
+								cFilter = new createjs.ColorFilter(0.9, 2, 0.9, 1);
+								rewardBMP.bitmap.filters = [cFilter];
+							}
+							else if(grid[i][j].rgbColor == "blue"){
+								cFilter = new createjs.ColorFilter(0.9, 0.9, 2, 1);
+								rewardBMP.bitmap.filters = [cFilter];
+							}
+						}
+						
+						rewardImages.push(rewardBMP);
+						scenes[currScene].stage.addChild(rewardBMP.bitmap);
+						rewardBMP.bitmap.updateCache();
 					}
 				}
 			}

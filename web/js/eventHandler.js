@@ -33,8 +33,16 @@ function handleEvents()
 		else if(event.type == "SWITCH_SUB_STAGE") switchSubStage(event.content2);
 
 		else if(event.type == "COLLISION") processCollision(event);
+
+		else if(event.type == "ADD_CREDITS") addCredits(event.content);
 	}
 	events = [];
+}
+
+function addCredits(_credits)
+{
+	credits += _credits;
+	console.log("Credits : " + credits);
 }
 
 function processCollision(event)

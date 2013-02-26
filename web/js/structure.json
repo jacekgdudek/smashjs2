@@ -339,26 +339,26 @@
 				rewards: [
 					{
 						visualId: 3,
-						value: 500
+						value: 400
 					},
 					{
 						visualId: 4,
-						color: "red",
-						value: 200
+						value: 400
 					},
 					{
 						visualId: 4,
-						color: "green",
-						value: 200
+						value: 200,
+						rgbColor: "red"
 					},
 					{
 						visualId: 4,
-						color: "blue",
-						value: 200
+						value: 400,
+						rgbColor: "green"
 					},
 					{
-						visualId: 5,
-						value: 600
+						visualId: 4,
+						value: 500,
+						rgbColor: "blue"
 					}
 				],
 				visuals: [
@@ -367,25 +367,51 @@
 					  name: "bkg"
 					},
 					{
-						x:20,
-						y:20,
+						x:0,
+						y:0,
 					  src: "assets/reward/interior.jpg",
 					  name: "btn_play"
+					},
+					{
+						x:400,
+						y:500,
+						src: "assets/button/back_btn.jpg",
+						name: "btn_play",
+						hasDown: true,
+					 	downEvent: {
+							type: "SWITCH_SCENE",
+							content: "base_scene"
+						}	
 					},
 					{
 						x: 0,
 						y: 0,
 					  src: "assets/reward/ring.png",
+					  hasDown: true,
+					  visible: false,
+					  downEvent: {
+						type: "ADD_CREDITS"
+						}
 					},
 					{
 						x: 0,
 						y: 0,
 					  src: "assets/reward/watch.png",
+					  hasDown: true,
+					  visible: false,
+					  downEvent: {
+						type: "ADD_CREDITS"
+						}
 					},
 					{
 						x: 0,
 						y: 0,
 					  src: "assets/reward/cash.png",
+					  hasDown: true,
+					  visible: false,
+					  downEvent: {
+						type: "ADD_CREDITS"
+						}
 					}
 				]
 			},
