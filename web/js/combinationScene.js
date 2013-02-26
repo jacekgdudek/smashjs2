@@ -99,16 +99,21 @@ var combinationScene = (function() {
 			if( this.lastNumber == 9999) this.lastNumber = this.currentNumber;
 
 			//---------check if changed direction on the number
-			directionNow = (currentNumber > lastNumber);
-			if(direction != directionNow)
+			if(this.currentNumber != this.lastNumber)
 			{
-				directionChanged = true;
+				directionNow = (this.currentNumber > this.lastNumber);
+				if(this.direction != directionNow)
+				{
+					console.log("Changed Direction!");
+					directionChanged = true;
+					this.direction = directionNow;
+				}
 			}
 
 			// -----------------------If we hit the target move on to the next one
 			var currentTarget = this.listOfTargets[this.targetPointer];
 			//console.log("Rotation: %s", input.rotation);
-			if (this.currentNumber == currentTarget)
+			if (this.currentNumber == currentTarget && directionChanged)
 			{
 				this.lastTargetPointer = this.targetPointer;
 				this.targetPointer++;
@@ -136,9 +141,7 @@ var combinationScene = (function() {
 			// ---------------------------------Check if we have finished
 			if (this.targetPointer >= this.listOfTargets.length) {
 				console.log("Combination Found!");
-				this.scene.finalize();
-				// Aww yeah!
-				this.spin++;
+				addEvent("SWITCH_SCENE", "reward_scene");
 			}
 			//save last values
 			this.lastNumber = this.currentNumber;
@@ -157,7 +160,7 @@ var combinationScene = (function() {
 	function handleKeyDown(evt) {
 		// For now we use keyboard controls for the dial
 		if (evt.keyIdentifier=="Left") { this.input.rotation -= 10; } 
-		if (evt.keyIdentifier=="Right") { this.input.rotation += 10; }
+		if (evt.keyIdentifier=="Right") { addEvent("SWITCH_SCENE", "reward_scene"); }
 
 		/*
 		if (	((evt.keyIdentifier=="Left") || (evt.keyIdentifier=="Right")) &&    

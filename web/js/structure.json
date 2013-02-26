@@ -326,6 +326,59 @@
 				]
 			},
 			{
+				_name: "reward_scene",
+				init: rewardScene.init,
+				update: rewardScene.update,
+				finalize: rewardScene.finalize,
+				isCurrent: true,
+				stage_id: "game_canvas",
+				rewardGrid:{
+					width: 6,
+					height: 3,
+					},
+				rewards: [
+					{
+						visualId: 3,
+						value: 500
+					},
+					{
+						visualId: 4,
+						value: 200
+					},
+					{
+						visualId: 5,
+						value: 600
+					}
+				],
+				visuals: [
+					{
+					  src: "assets/base/base_bkg2.jpg",
+					  name: "bkg"
+					},
+					{
+						x:20,
+						y:20,
+					  src: "assets/reward/interior.jpg",
+					  name: "btn_play"
+					},
+					{
+						x: 0,
+						y: 0,
+					  src: "assets/reward/ring.png",
+					},
+					{
+						x: 0,
+						y: 0,
+					  src: "assets/reward/watch.png",
+					},
+					{
+						x: 0,
+						y: 0,
+					  src: "assets/reward/cash.png",
+					}
+				]
+			},
+			{
 				_name: "sweet_spot",
 				init: sweetSpot.init,
 				update: sweetSpot.update,
@@ -449,20 +502,6 @@
 			types:
 			{
 				name:"combination_lock"
-			},
-			rewards:
-			{
-				src:"assets/reward/interior.jpg",
-				width:5,
-				height:3,
-				objects:[
-					{
-						src:"assets/reward/jewel.jpg"
-					},
-					{
-						src:"assets/reward/pearls.jpg"
-					}
-				]
 			}
 
 		}

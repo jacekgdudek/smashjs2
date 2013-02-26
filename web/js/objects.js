@@ -10,8 +10,9 @@ var currScene = 0;
 var scenes = {};
 
 //user related
-var jobs = {};
-var currentJobs = {};
+var jobs = {};        //all the possible jobs
+var currentJobs = {};	//six set jobs for partiucular base
+var currentJob;				//current picked job
 
 //is first city -> no randomizing
 var isFirstCity = true;

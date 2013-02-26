@@ -4,7 +4,7 @@ var jobsScene = (function() {
 	var scene;
 
 	//job card
-	var currentJob;
+	var currentJobId;
 	var card;
 	var cats = new Array();
 
@@ -14,7 +14,7 @@ var jobsScene = (function() {
 
 			this.scene = scene;
 
-			var currentJob = 0; // -1 for not selected ?
+			currentJobId = 0; // -1 for not selected ?
 
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)
@@ -28,7 +28,8 @@ var jobsScene = (function() {
 			card.bitmap.y = 300;
 			card.bitmap.regX += 0;
 			card.bitmap.regY += 0;
-			setupCard(card, currentJobs[currentJob]);
+			setupCard(card, currentJobs[currentJobId]);
+			currentJob = currentJobs[currentJobId]
 
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;
