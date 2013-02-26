@@ -139,11 +139,18 @@ var rewardScene = (function() {
 		for (var i = 0; i < grid.length; i++) {
 				for (var j = 0; j < grid[i].length; j++) {
 					if(grid[i][j] != -1)
-					{
+					{	
+						//var reward = scenes[currScene].visuals[grid[i][j]].bitmap;
 						scenes[currScene].visuals[grid[i][j]].bitmap.x = i * 100;
 						scenes[currScene].visuals[grid[i][j]].bitmap.y = j * 100;
 						scenes[currScene].visuals[grid[i][j]].bitmap.visible = true;
+
 						console.log("putting object on x:" + i*100 + " y : " + j*100 + " id : " + grid[i][j]);
+						var cFilter = new createjs.ColorFilter(1, 0, 0, 1);
+						scenes[currScene].visuals[grid[i][j]].bitmap.filters = [cFilter];
+
+							//image.cache(0,0 img.width, img.height);
+							//stage.addChild(image);*/
 					}
 				}
 			}
