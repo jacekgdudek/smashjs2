@@ -199,8 +199,8 @@ var rewardScene = (function() {
 							rewardBMP.bitmap.filters = [cFilter];*/
 							console.log(grid[i][j].rgbColor);
 							if(grid[i][j].rgbColor == "red"){
-								cFilter = new createjs.ColorFilter(2, 0.9, 0.9, 1);
-								rewardBMP.bitmap.filters = [cFilter];
+								cFilter = new createjs.ColorFilter(2, 0.9, 0.9, 1); ///RGBA values
+								rewardBMP.bitmap.filters = [cFilter]; //applying filter
 							}
 							else if(grid[i][j].rgbColor == "green"){
 								cFilter = new createjs.ColorFilter(0.9, 2, 0.9, 1);
@@ -214,7 +214,7 @@ var rewardScene = (function() {
 						
 						rewardImages.push(rewardBMP);
 						scenes[currScene].stage.addChild(rewardBMP.bitmap);
-						rewardBMP.bitmap.updateCache();
+						rewardBMP.bitmap.updateCache(); //update to add colorFilter
 					}
 				}
 			}
