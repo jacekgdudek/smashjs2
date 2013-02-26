@@ -5,6 +5,10 @@ var rewardScene = (function() {
 
 	var grid;
 
+	//rewards
+	var rewardImages = new Array();
+	var _rewards = new Array();
+
 	return {
 		init: function(scene) {
 			console.log("init: reward scene");
@@ -14,7 +18,8 @@ var rewardScene = (function() {
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)
 			{
-				scene.visuals[i].visible = true;
+				if(scene.visuals[i].visible != false)
+					scene.visuals[i].bitmap.visible = true;
 			}
 
 			//--------initialize grid
@@ -27,7 +32,8 @@ var rewardScene = (function() {
 			}
 
 			randObjects(/*grid*/ grid,
-						/*reward value*/currentJob.reward);
+						/*reward value*/currentJob.reward,
+						_rewards);
 
 			repositionObjects(grid);
 
@@ -51,17 +57,38 @@ var rewardScene = (function() {
 			}
 
 			this.scene.stage.onMouseDown = function(mousePos) {
-				for(var i = 0 ; i < scene.visuals.length ; i++)
+				if(scene._name == currScene)
 				{
-					if(scene.visuals[i].hasDown)
+					//---------------------------mouse down on reward
+					for(var i = 0 ; i < _rewards.length ; i++)
 					{
-						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
+						if(rewardImages[i].hasDown)
 						{
-							addEventEx(scene.visuals[i].downEvent);
-							console.log("down state initialized");
+							if(rewardImages[i].bitmap.hitTest( mousePos.stageX - rewardImages[i].bitmap.x , mousePos.stageY - rewardImages[i].bitmap.y ))
+							{
+								addEvent(rewardImages[i].downEvent.type, _rewards[i].value);
+								rewardImages[i].bitmap.visible = false;
+								console.log("down state on reward initialized");
+							}
+						}
+					}
+
+					for(var i = 0 ; i < scene.visuals.length ; i++)
+					{
+						if(scene.visuals[i].hasDown)
+						{
+							if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
+							{
+								if(scene.visuals[i].downEvent.type != "ADD_CREDITS")
+								{
+									addEventEx(scene.visuals[i].downEvent);
+									console.log("down state initialized");
+								}
+							}
 						}
 					}
 				}
+				
 			}
 
 		},
@@ -84,6 +111,13 @@ var rewardScene = (function() {
 					this.scene.messages[i].text.visible = false;
 				}
 			}
+			for(var i = 0 ; i < rewardImages.length ; i++)
+			{
+				this.scene.stage.removeChild(rewardImages[i]);
+			}
+			rewardImages = new Array();
+			_rewards = new Array();
+			
 		},
 	};
 
@@ -93,10 +127,9 @@ var rewardScene = (function() {
 		if (evt.keyIdentifier=="Right") { this.input.rotation += 10; }
 	};
 
-	function randObjects(grid, rewardLevel) {
+	function randObjects(grid, rewardLevel, rewards) {
 		var scene = scenes[currScene];
 		var possibleRewards = scenes[currScene].rewards;
-		var rewards = new Array();
 
 		var rewardValue = rewardLevel * 1000;
 
@@ -140,10 +173,17 @@ var rewardScene = (function() {
 				for (var j = 0; j < grid[i].length; j++) {
 					if(grid[i][j] != -1)
 					{
-						scenes[currScene].visuals[grid[i][j]].bitmap.x = i * 100;
-						scenes[currScene].visuals[grid[i][j]].bitmap.y = j * 100;
-						scenes[currScene].visuals[grid[i][j]].bitmap.visible = true;
-						console.log("putting object on x:" + i*100 + " y : " + j*100 + " id : " + grid[i][j]);
+						console.log("Reward visualId : " + grid[i][j]);
+						var rewardBMP  = new Object();
+						rewardBMP.hasDown = true;
+						rewardBMP.downEvent = scenes[currScene].visuals[grid[i][j]].downEvent;
+						rewardBMP.bitmap =  scenes[currScene].visuals[grid[i][j]].bitmap.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);
+						rewardBMP.bitmap.x = i * 100;
+						rewardBMP.bitmap.y = j * 100;
+						rewardBMP.bitmap.visible = true;
+						console.log("putting object on x:" + i*100 + " y : " + j*100);
+						rewardImages.push(rewardBMP);
+						scenes[currScene].stage.addChild(rewardBMP.bitmap);
 					}
 				}
 			}

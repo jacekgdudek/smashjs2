@@ -10,7 +10,7 @@ var jobsScene = (function() {
 
 	return {
 		init: function(scene) {
-			console.log("init: combinationScene");
+			console.log("init: jobScene");
 
 			this.scene = scene;
 
@@ -51,14 +51,17 @@ var jobsScene = (function() {
 			}
 
 			this.scene.stage.onMouseDown = function(mousePos) {
-				for(var i = 0 ; i < scene.visuals.length ; i++)
+				if(scene._name == currScene)
 				{
-					if(scene.visuals[i].hasDown)
+					for(var i = 0 ; i < scene.visuals.length ; i++)
 					{
-						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
+						if(scene.visuals[i].hasDown)
 						{
-							addEventEx(scene.visuals[i].downEvent);
-							console.log("down state initialized");
+							if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
+							{
+								addEventEx(scene.visuals[i].downEvent);
+								console.log("down state initialized");
+							}
 						}
 					}
 				}

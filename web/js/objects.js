@@ -13,6 +13,8 @@ var scenes = {};
 var jobs = {};        //all the possible jobs
 var currentJobs = {};	//six set jobs for partiucular base
 var currentJob;				//current picked job
+var credits;
+var risk;
 
 //is first city -> no randomizing
 var isFirstCity = true;
@@ -65,6 +67,8 @@ function loadObjects()
 
 function setup(gamejson)
 {
+	credits = 0;
+	risk = 0;
 	var _scenes = gamejson.game.scenes;
 	jobs = gamejson.game.jobs;
 	if(isFirstCity) currentJobs = gamejson.game.jobs.initialJobs;
@@ -74,10 +78,15 @@ function setup(gamejson)
 		_scenes[i].stage = new createjs.Stage( _scenes[i].stage_id );
 		// For set up the visuals in the scene and attach them to the stage
 		for (var j = 0; j < _scenes[i].visuals.length; j++) {
-			_scenes[i].visuals[j].bitmap = new createjs.Bitmap(_scenes[i].visuals[j].src);
-			_scenes[i].visuals[j].bitmap.x = _scenes[i].visuals[j].x;
-			_scenes[i].visuals[j].bitmap.y = _scenes[i].visuals[j].y;
-			_scenes[i].stage.addChild(_scenes[i].visuals[j].bitmap);
+			var visual = _scenes[i].visuals[j];
+			visual.bitmap = new createjs.Bitmap(visual.src);
+			visual.bitmap.x = visual.x;
+			visual.bitmap.y = visual.y;
+			if(visual.visible == false)
+			{
+				visual.bitmap.visible = false;
+			}
+			_scenes[i].stage.addChild(visual.bitmap);
 		}
 		if (typeof _scenes[i].messages !== 'undefined') {
 			for (var j = 0; j < _scenes[i].messages.length; j++) {
