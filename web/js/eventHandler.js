@@ -41,8 +41,8 @@ function handleEvents()
 
 function addCredits(_credits)
 {
-	credits += _credits;
-	console.log("Credits : " + credits);
+	credits.nextValue += _credits;
+	console.log("Credits : " + credits.nextValue);
 }
 
 function processCollision(event)

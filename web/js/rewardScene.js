@@ -14,6 +14,7 @@ var rewardScene = (function() {
 			console.log("init: reward scene");
 
 			this.scene = scene;
+			setCredits();
 
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)
@@ -93,9 +94,6 @@ var rewardScene = (function() {
 
 		},
 		update: function() {
-
-
-
 			//update scene
 			this.scene.stage.update();
 		},
@@ -113,6 +111,7 @@ var rewardScene = (function() {
 			}
 			for(var i = 0 ; i < rewardImages.length ; i++)
 			{
+				rewardImages[i].bitmap.visible = false;
 				this.scene.stage.removeChild(rewardImages[i]);
 			}
 			rewardImages = new Array();

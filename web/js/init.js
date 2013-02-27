@@ -61,32 +61,36 @@ messageCount = 0;
 var smoothing = 0.1;
 function handleMessage(message_event) {
 	//reset was updated
-	for(var i = 0 ; i < 4 ; i++)
+	if(useFiducials)
 	{
-		inputArray[i].wasUpdated = false;
-	}
-	//parse message
-	var fidInfo = message_event.data.split(",");
-	if(fidInfo[0] != "")
-	{
-		for (var i = 0; i < fidInfo.length; i+=4) {
-			
-			var x = parseInt(fidInfo[i+1]);
-			var y = parseInt(fidInfo[i+2]);
-			var rotation = parseInt(fidInfo[i+3]);
-			if( x < 3000)
-			{ 
-				var fidId = parseInt(fidInfo[i]);
-				inputArray[fidId].lastx = inputArray[fidId].x;
-				inputArray[fidId].lasty = inputArray[fidId].y;
-				inputArray[fidId].x = smoothing*x+ (1-smoothing)*inputArray[fidId].lastx ;
-				inputArray[fidId].y = smoothing*y + (1-smoothing)*inputArray[fidId].lasty ;
-				inputArray[fidId].rotation = rotation;
-				inputArray[fidId].wasUpdated = true;
+		for(var i = 0 ; i < 4 ; i++)
+		{
+			inputArray[i].wasUpdated = false;
+		}
+		//parse message
+		var fidInfo = message_event.data.split(",");
+		if(fidInfo[0] != "")
+		{
+			for (var i = 0; i < fidInfo.length; i+=4) {
+				
+				var x = parseInt(fidInfo[i+1]);
+				var y = parseInt(fidInfo[i+2]);
+				var rotation = parseInt(fidInfo[i+3]);
+				if( x < 3000)
+				{ 
+					var fidId = parseInt(fidInfo[i]);
+					inputArray[fidId].lastx = inputArray[fidId].x;
+					inputArray[fidId].lasty = inputArray[fidId].y;
+					inputArray[fidId].x = smoothing*x+ (1-smoothing)*inputArray[fidId].lastx ;
+					inputArray[fidId].y = smoothing*y + (1-smoothing)*inputArray[fidId].lasty ;
+					inputArray[fidId].rotation = rotation;
+					inputArray[fidId].wasUpdated = true;
+				}
+				
 			}
-			
 		}
 	}
+	
 }
 
 //page didLoad

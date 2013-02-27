@@ -17,8 +17,10 @@ timer = setInterval(function () {
 
 	// Update the current scene
 	if (typeof scenes[currScene] !== 'undefined') {
+		updateCredits();
 		var sceneComplete = scenes[currScene].update();
 	}
+
 
 	//process collision
 	collide();
@@ -84,3 +86,47 @@ function imageProcessing() {
 	//imgData.data();
 	//Canvas2Image.saveAsPNG(canvas);
 };
+
+function updateCredits()
+{
+	var gap = 9;
+	if(credits.nextValue != credits.value)
+	{
+		gap = Math.floor((credits.nextValue - credits.value)/2);
+		if(gap < 1) gap = 1;
+		//determine direction
+		var direction = ( credits.nextValue > credits.value );
+		//determine new value
+		var newValue = credits.value - direction*(-1)*gap;
+		var lastDigits = new Array();
+		var newDigits = new Array();
+
+		//determine particular values for digits
+		for(var i = 5; i >= 0 ; i --)
+		{
+			lastDigits.push(Math.floor((credits.value%Math.pow(10,(i+1)))/Math.pow(10,i)));
+			newDigits.push(Math.floor((newValue%Math.pow(10,(i+1)))/Math.pow(10,i)));
+		}
+		
+		//compare and change digits
+		for(var i = 0; i < 6 ; i ++)
+		{
+			if(lastDigits[i] != newDigits[i] )
+			{
+				var index = i+1;
+				if(index>3) index++;
+				scenes[currScene].stage.removeChild(credits.numbers[index].bmp);
+
+				var x = credits.numbers[index].bmp.x;
+				var y = credits.numbers[index].bmp.y;
+				credits.numbers[index].bmp = credits.subelements[newDigits[i]].bmp.clone();
+				credits.numbers[index].bmp.x = x;
+				credits.numbers[index].bmp.y = y;
+				scenes[currScene].stage.addChild(credits.numbers[index].bmp);
+			}
+		}
+
+		credits.value = newValue;
+
+	}
+}

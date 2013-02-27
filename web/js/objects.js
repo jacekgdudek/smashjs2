@@ -9,11 +9,14 @@ var currPlayers = new Array();
 var currScene = 0;
 var scenes = {};
 
+//init enable fiducial control
+var useFiducials = false;
+
 //user related
 var jobs = {};        //all the possible jobs
 var currentJobs = {};	//six set jobs for partiucular base
 var currentJob;				//current picked job
-var credits;
+var credits = new Object();
 var risk;
 
 //is first city -> no randomizing
@@ -67,7 +70,19 @@ function loadObjects()
 
 function setup(gamejson)
 {
-	credits = 0;
+	///setup crdits disp
+	//--------------------------------------setup credits element
+	credits = gamejson.game.elements[0];
+	credits.value = 0;
+	credits.nextValue = 0;
+	credits.bg = new createjs.Bitmap(credits.src);
+	credits.bg.x = 0;
+	credits.bg.y = 0;
+	for (var j = 0; j < credits.subelements.length; j++) {
+		credits.subelements[j].bmp = new createjs.Bitmap(credits.subelements[j].src);
+		credits.subelements[j].bmp.x = -100;
+		credits.subelements[j].bmp.y = -100;
+	}
 	risk = 0;
 	var _scenes = gamejson.game.scenes;
 	jobs = gamejson.game.jobs;
@@ -87,6 +102,15 @@ function setup(gamejson)
 				visual.bitmap.visible = false;
 			}
 			_scenes[i].stage.addChild(visual.bitmap);
+			if (typeof visual.textLines !== 'undefined') {
+				for (var k = 0; k < visual.textLines.length; k++) {
+					console.log(j);
+					visual.textLines[k].textObj = new createjs.Text(visual.textLines[k].text, gamejson.game.font.type, gamejson.game.font.color);
+					visual.textLines[k].textObj.x = visual.textLines[k].x + visual.bitmap.x;
+					visual.textLines[k].textObj.y = visual.textLines[k].y + visual.bitmap.y;
+					_scenes[i].stage.addChild(visual.textLines[k].textObj);
+				}
+			}
 		}
 		if (typeof _scenes[i].messages !== 'undefined') {
 			for (var j = 0; j < _scenes[i].messages.length; j++) {
@@ -118,10 +142,72 @@ function setup(gamejson)
 			}
 		}
 		scenes[_scenes[i]._name] = _scenes[i];
+		addCreditsToStage(_scenes[i].stage);
 	}
 	currScene = _scenes[0]._name;
 	console.log(scenes[currScene]._name);
 	scenes[currScene].init(scenes[currScene]);
+
+}
+
+function addCreditsToStage(stage)
+{
+
+	stage.addChild(credits.bg.bmp);
+	//init numbers to 0
+	var numbersGrid = new Array(8);
+	for(var i = 0 ; i < numbersGrid.length ; i++)
+	{
+		var numberObj = new Object();
+		
+		if(i == 0)
+		{
+			numberObj.bmp = credits.subelements[10].bmp.clone();
+		}
+		//comma
+		else if(i == 4)
+		{
+			numberObj.bmp = credits.subelements[11].bmp.clone();
+		}
+		else
+		//rest
+		{
+			numberObj.bmp = credits.subelements[0].bmp.clone();
+		}
+			
+		numbersGrid[i] = numberObj;
+
+		numberObj.bmp.x = 9 + i*20;
+		numberObj.bmp.y = 7;
+		stage.addChild(numberObj.bmp);
+	}
+	credits.numbers = numbersGrid;
+}
+
+
+function setCredits()
+{
+	var digits = new Array();
+	//determine particular values for digits
+	for(var i = 5; i >= 0 ; i --)
+	{
+		digits.push(Math.floor((credits.value%Math.pow(10,(i+1)))/Math.pow(10,i)));
+	}
+	
+	//compare and change digits
+	for(var i = 0; i < 6 ; i ++)
+	{
+		var index = i+1;
+		if(index>3) index++;
+		scenes[currScene].stage.removeChild(credits.numbers[index].bmp);
+
+		var x = credits.numbers[index].bmp.x;
+		var y = credits.numbers[index].bmp.y;
+		credits.numbers[index].bmp = credits.subelements[digits[i]].bmp.clone();
+		credits.numbers[index].bmp.x = x;
+		credits.numbers[index].bmp.y = y;
+		scenes[currScene].stage.addChild(credits.numbers[index].bmp);
+	}
 }
 
 function changeText(text, messageObj)

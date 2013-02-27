@@ -8,11 +8,17 @@ var defaultScene = (function() {
 			console.log("init: combinationScene");
 
 			this.scene = scene;
+			setCredits();
 
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)
 			{
-				scene.scene.visuals[i].visible = true;
+				scene.visuals[i].bitmap.visible = true;
+				if(scene.visuals[i].name == "cash_disp")
+				{
+					scene.visuals[i].textLines[0].textObj.text = "Cash : " + credits;
+					scene.visuals[i].textLines[1].textObj.text = "Risk : " + risk;
+				}
 			}
 
 			// add a handler for all the events we're interested in

@@ -2,27 +2,29 @@ var combinationScene = (function() {
 
 	var listOfTargets, targetPointer, lastTargetPointer , spin ,direction;
 
-	var currentNumber, lastNumber;
+	var currentNumber, lastNumber, lastNumberAngle;
 
-	var scene;
+	var scene, sweet_spot;
 
 	return {
 		init: function(scene) {
 			console.log("init: combinationScene");
 
 			this.scene = scene;
+			setCredits();
+			sweet_spot = this.scene.sweet_spot;
 			// Setup the game stage
 			knob = this.scene.visuals[1];
-			knob.bitmap.x = 800-knob.bitmap.image.width;//900+139;
-			knob.bitmap.y = 20;//200+139;
-			knob.bitmap.regX += 0;//139;
-			knob.bitmap.regY += 0;//139;
+			knob.bitmap.x = 800-knob.bitmap.image.width+115;//900+139;
+			knob.bitmap.y = 20+117;//200+139;
+			knob.bitmap.regX = 115;//139;
+			knob.bitmap.regY = 117;//139;
 
 			knobNumbers = this.scene.visuals[2];			
-			knobNumbers.bitmap.x = knob.bitmap.x+115;//900+139;
-			knobNumbers.bitmap.y = knob.bitmap.y+117;//200+139;
-			knobNumbers.bitmap.regX += 115;//139;
-			knobNumbers.bitmap.regY += 117;//139;
+			knobNumbers.bitmap.x = knob.bitmap.x;//900+139;
+			knobNumbers.bitmap.y = knob.bitmap.y;//200+139;
+			knobNumbers.bitmap.regX = 115;//139;
+			knobNumbers.bitmap.regY = 117;//139;
 
 			stethoscope = this.scene.visuals[3];			
 			stethoscope.bitmap.x = 0;//900+139;
@@ -32,7 +34,7 @@ var combinationScene = (function() {
 			this.listOfTargets = new Array();
 
 			// create the targets
-			numberOfTargets = 1;
+			numberOfTargets = 2;
 			for (var i = 0; i < numberOfTargets; i++) {
 				// At a random point
 				var number = Math.floor((knobNumbers.maxNumber/360)*Math.floor(Math.random() * 360));
@@ -44,6 +46,7 @@ var combinationScene = (function() {
 			this.targetPointer = 0;
 			this.lastTargetPointer = 0;
 			this.spin=0;
+			this.lastNumberAngle = 0;
 
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;
@@ -52,6 +55,12 @@ var combinationScene = (function() {
 			//define mouse callback
 			//handle mouse events
 			this.scene.stage.onMouseMove = function(mousePos) {
+				if(!useFiducials)
+				{
+					inputArray[0].x = 640 - (mousePos.stageX/800)*640;
+					inputArray[0].y = (mousePos.stageY/600)*480;
+					inputArray[0].wasUpdated = true;
+				}
 				for(var i = 0 ; i < scene.visuals.length ; i++)
 				{
 					if(scene.visuals[i].hasHover)
@@ -82,6 +91,11 @@ var combinationScene = (function() {
 			//scale up and flip as well
 			stethoscope.bitmap.x = 800 - stethoscope.bitmap.image.width - (((800 - stethoscope.bitmap.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
 			stethoscope.bitmap.y = (600/480)*inputArray[0].y;
+			//------------------------------------ update volume
+			//distance from sweet spot
+			var distance = Math.sqrt(Math.pow(this.sweet_spot.x - stethoscope.bitmap.x,2) + Math.pow(this.sweet_spot.y - stethoscope.bitmap.y,2));
+			if (distance > 100) distance = 100;
+			audioManager.setVolume((100-distance)/100, audioManagerAudioObject.NORMAL_CLICK);
 
 			//----------------------------------- update dial
 			var directionNow = false;
@@ -92,7 +106,9 @@ var combinationScene = (function() {
 			if (rotation > 360) { rotation = 360; }
 			if (rotation <= -360) { rotation = -360; }
 
-			knobNumbers.bitmap.rotation = rotation;
+			knobNumbers.bitmap.rotation = lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
+			//rotate knob as well
+			knob.bitmap.rotation = lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
 
 			//---------get currentNumber based on rotation
 			this.currentNumber = Math.floor((knobNumbers.maxNumber/360)*rotation);
@@ -101,7 +117,19 @@ var combinationScene = (function() {
 			//---------check if changed direction on the number
 			if(this.currentNumber != this.lastNumber)
 			{
-				directionNow = (this.currentNumber > this.lastNumber);
+				if(this.currentNumber <= knobNumbers.maxNumber*0.25 && this.lastNumber >= knobNumbers.maxNumber*0.75) 
+				{
+					directionNow = true;
+				}
+				else if(this.currentNumber >= knobNumbers.maxNumber*0.75 && this.lastNumber <= knobNumbers.maxNumber*0.25) 
+				{
+					directionNow = false;
+				}
+				else
+				{
+					directionNow = (this.currentNumber > this.lastNumber);
+				}
+
 				if(this.direction != directionNow)
 				{
 					console.log("Changed Direction!");
@@ -113,17 +141,35 @@ var combinationScene = (function() {
 			// -----------------------If we hit the target move on to the next one
 			var currentTarget = this.listOfTargets[this.targetPointer];
 			//console.log("Rotation: %s", input.rotation);
-			if (this.currentNumber == currentTarget && directionChanged)
+			if (directionChanged)
 			{
-				this.lastTargetPointer = this.targetPointer;
-				this.targetPointer++;
-				//buzzAudio.tumbler.play();
+				if(this.lastNumber == currentTarget)
+				{
+					//trigger next pointer
+					this.lastTargetPointer = this.targetPointer;
+					this.targetPointer++;
+					console.log("Getting next number");
+				}
+				else
+				{
+					//reset combination
+					this.targetPointer = 0;
+					this.lastTargetPointer = 0;
+					console.log("Resetting combination !");
+				}
+				
 			}
 
-			//trigger sound if number changed
+			//trigger sound and visual rotation if number changed
 			if (this.currentNumber != this.lastNumber)
 			{
 				console.log(this.currentNumber);
+				knobNumbers.bitmap.rotation = rotation;
+				//rotate knob as well
+				knob.bitmap.rotation = rotation;
+
+				lastNumberAngle = rotation;
+
 				audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
 			}
 
@@ -159,8 +205,19 @@ var combinationScene = (function() {
 	};
 	function handleKeyDown(evt) {
 		// For now we use keyboard controls for the dial
-		if (evt.keyIdentifier=="Left") { this.input.rotation -= 10; } 
-		if (evt.keyIdentifier=="Right") { addEvent("SWITCH_SCENE", "reward_scene"); }
+		if (evt.keyIdentifier=="Left") { 
+			inputArray[2].rotation -= 5;
+			if(inputArray[2].rotation < 0) inputArray[2].rotation = 355; 
+		} 
+		if (evt.keyIdentifier=="Right") { 
+			inputArray[2].rotation += 5;
+			if(inputArray[2].rotation > 360) inputArray[2].rotation = 5;
+		}
+		if (evt.keyIdentifier=="Up") { addEvent("SWITCH_SCENE", "reward_scene"); }
+		if (evt.keyIdentifier=="Down") { 
+			useFiducials = !useFiducials;
+			console.log("using Fiducials : " + useFiducials);
+		}
 
 		/*
 		if (	((evt.keyIdentifier=="Left") || (evt.keyIdentifier=="Right")) &&    
@@ -168,7 +225,6 @@ var combinationScene = (function() {
 			// Play the sound if we pressed the button and it's not playing
 			buzzAudio.click.play();
 		}*/
-		scene.stage.update();
 	};
 
 })();
