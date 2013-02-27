@@ -377,12 +377,19 @@
 						value: 400
 					},
 					{
-						visualId: 5,
-						value: 200
+						visualId: 4,
+						value: 200,
+						rgbColor: "red"
 					},
 					{
-						visualId: 5,
-						value: 500
+						visualId: 4,
+						value: 400,
+						rgbColor: "green"
+					},
+					{
+						visualId: 4,
+						value: 500,
+						rgbColor: "blue"
 					}
 				],
 				visuals: [
