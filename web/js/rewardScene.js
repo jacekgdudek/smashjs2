@@ -92,9 +92,7 @@ var rewardScene = (function() {
 						}
 					}
 				}
-				
 			}
-
 		},
 		update: function() {
 			//update scene
