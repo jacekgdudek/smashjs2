@@ -53,7 +53,7 @@ function loadObjects()
 	var txtFile = new XMLHttpRequest();
 	var allText;
 	var myRoot;
-	txtFile.open("GET", "https://s3-eu-west-1.amazonaws.com/smashandgrab/Jakub/js/structure.json",true);//http://my.remote.url/myremotefile.txt", true);
+	txtFile.open("GET", "https://s3-eu-west-1.amazonaws.com/smashandgrab/Jacek/js/structure.json",true);//http://my.remote.url/myremotefile.txt", true);
 	txtFile.onreadystatechange = function() {
 	  if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
 	    if (txtFile.status === 200) {  // Makes sure it's found the file.

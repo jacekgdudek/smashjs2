@@ -66,7 +66,7 @@ var rewardScene = (function() {
 					//---------------------------mouse down on reward
 					for(var i = 0 ; i < _rewards.length ; i++)
 					{
-						if(rewardImages[i].hasDown)
+						if(rewardImages[i].hasDown && rewardImages[i].bitmap.visible)
 						{
 							if(rewardImages[i].bitmap.hitTest( mousePos.stageX - rewardImages[i].bitmap.x , mousePos.stageY - rewardImages[i].bitmap.y ))
 							{
