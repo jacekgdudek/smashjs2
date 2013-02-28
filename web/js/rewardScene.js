@@ -16,8 +16,7 @@ var rewardScene = (function() {
 
 			this.scene = scene;
 			//set ui
-			setCredits();
-			setHeat();
+			setGUI();
 
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)
@@ -120,6 +119,7 @@ var rewardScene = (function() {
 			}
 			rewardImages = new Array();
 			_rewards = new Array();
+			hideGUI();
 			
 		},
 	};

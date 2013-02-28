@@ -5,19 +5,19 @@
 	//1 - sliding up
 	//2 - up
 	//3 - sliding down
-var jobsScene = (function() {
+var cityScene = (function() {
 	//var input;
 	var scene;
 
-	//job card
-	var currentJobId;
+	//city card
+	var currentCityId;
 	var card;
-	var nextCardJob = new Object();
+	var nextCardCity = new Object();
 	var cats = new Array();
 	
 
 	//jobpointers
-	var jobPointers = new Array();
+	var cityPointers = new Array();
 
 	return {
 		init: function(scene) {
@@ -26,8 +26,8 @@ var jobsScene = (function() {
 			this.scene = scene;
 			setGUI();
 
-			currentJobId = -1; // -1 for not selected ?
-			nextCardJob.id = -1;
+			currentCityId = -1; // -1 for not selected ?
+			nextCardCity.id = -1;
 
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)
@@ -46,17 +46,14 @@ var jobsScene = (function() {
 			//currentJob = currentJobs[currentJobId];
 
 			//------setup pointers
-			for(var i = 0 ; i < currentJobs.length ; i++)
+			for(var key in cities)
 			{
-				if (typeof currentJobs[i].finnished === 'undefined' || currentJobs[i].finnished == false) {
-					var jobPointer = new Object();
-					jobPointer = currentJobs[i];
-					jobPointers.push(jobPointer);
-				}
+				var cityPointer = new Object();
+				cityPointer = cities[key];
+				cityPointers.push(cityPointer);
 			}
-			randomizePositions(jobPointers, scene.jobPointerSrc, scene.jobPointerRect);
-
-
+			randomizePositions(cityPointers, scene.cityPointerSrc, scene.cityPointerRect);
+			//toooo dooooo -------------------> link to areas
 
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;
@@ -65,25 +62,25 @@ var jobsScene = (function() {
 			//define mouse callback
 			//handle mouse events
 			this.scene.stage.onMouseMove = function(mousePos) {
-				nextCardJob.id = -1;
+				nextCardCity.id = -1;
 				// hover over pointers
-				for(var i = 0 ; i < jobPointers.length ; i++)
+				for(var i = 0 ; i < cityPointers.length ; i++)
 				{
-					if(jobPointers[i].pointer.hitTest( mousePos.stageX - jobPointers[i].pointer.x , mousePos.stageY - jobPointers[i].pointer.y ))
+					if(cityPointers[i].pointer.hitTest( mousePos.stageX - cityPointers[i].pointer.x , mousePos.stageY - cityPointers[i].pointer.y ))
 					{
-						nextCardJob = jobPointers[i];
-						nextCardJob.id = i;
+						nextCardCity = cityPointers[i];
+						nextCardCity.id = i;
 					}
 				}
 			}
 
 			this.scene.stage.onMouseDown = function(mousePos) {
 				// mouse down on pointers
-				for(var i = 0 ; i < jobPointers.length ; i++)
+				for(var i = 0 ; i < cityPointers.length ; i++)
 				{
-					if(jobPointers[i].pointer.hitTest( mousePos.stageX - jobPointers[i].pointer.x , mousePos.stageY - jobPointers[i].pointer.y ))
+					if(cityPointers[i].pointer.hitTest( mousePos.stageX - cityPointers[i].pointer.x , mousePos.stageY - cityPointers[i].pointer.y ))
 					{
-						addEvent("SWITCH_SCENE", jobPointers[i].type);
+						addEvent("CHANGE_CITY", cityPointers[i].name);
 					}
 				}
 
@@ -107,16 +104,16 @@ var jobsScene = (function() {
 		update: function() {
 			//--------animate card
 			//if next card is ready
-			if(nextCardJob.id != -1 && nextCardJob.id != currentJobId && cardState != 3)
+			if(nextCardCity.id != -1 && nextCardCity.id != currentCityId && cardState != 3)
 			{
 				switch(cardState)
 				{
 					//hidden
 					case 0:
-						currentJobId = nextCardJob.id;
-						setupCard(card, nextCardJob);
-						currentJob = jobPointers[currentJobId];
-						nextCardJob.id = -1;
+						currentCityId = nextCardCity.id;
+						setupCard(card, nextCardCity);
+						currentCity = cityPointers[currentCityId].name;
+						nextCardCity.id = -1;
 						cardState = 1;
 					break;
 					// sliding upwards
@@ -132,14 +129,14 @@ var jobsScene = (function() {
 					break;
 				}
 			}
-			else if (nextCardJob.id == -1)	
+			else if (nextCardCity.id == -1)	
 			{
 				if(cardState != 0)
 				{
 					cardState = 3;
 				}
 			}
-			else if (nextCardJob.id == currentJobId)	
+			else if (nextCardCity.id == currentCityId)	
 			{
 				if(cardState != 2)
 				{
@@ -150,9 +147,9 @@ var jobsScene = (function() {
 			{
 				if(card.bitmap.y > 550)
 				{
-					currentJobId = nextCardJob.id;
-					setupCard(card, nextCardJob);
-					currentJob = jobPointers[currentJobId];
+					currentCityId = nextCardCity.id;
+					setupCard(card, nextCardCity);
+					currentCity = cityPointers[currentCityId].name;
 					nextCardJob.id = -1;
 					cardState = 1;
 				}
@@ -165,9 +162,10 @@ var jobsScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
-			for(var i = 0 ; i < jobPointers.length ; i++)
+			hideCard(card);
+			for(var i = 0 ; i < cityPointers.length ; i++)
 			{
-				this.scene.stage.removeChild(jobPointers[i].pointer);
+				this.scene.stage.removeChild(cityPointers[i].pointer);
 			}
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{
@@ -180,9 +178,8 @@ var jobsScene = (function() {
 					this.scene.messages[i].text.visible = false;
 				}
 			}
-			jobPointers = new Array();
+			cityPointers = new Array();
 			hideGUI();
-			hideCard(card);
 		},
 	};
 
@@ -192,7 +189,7 @@ var jobsScene = (function() {
 		if (evt.keyIdentifier=="Right") { this.input.rotation += 10; }
 	};
 
-	function setupCard(card , job)
+	function setupCard(card , city)
 	{
 		if (typeof card.cats !== 'undefined') {
 			for(var j = 0 ; j < card.cats.length ; j ++)
@@ -211,11 +208,11 @@ var jobsScene = (function() {
 			switch(i)
 			{
 				case 0:
-					text = new createjs.Text("Location : " + job.name, "20px Arial", "#ff7700");
+					text = new createjs.Text("Location : " + city.name, "20px Arial", "#ff7700");
 				break;
 				case 1:
 					text = new createjs.Text("Reward : ", "20px Arial", "#ff7700");
-					for(var j = 0 ; j < job.reward ; j ++)
+					for(var j = 0 ; j < city.reward ; j ++)
 					{
 						cat = new createjs.Bitmap(scenes[currScene].catSrc);
 						cat.x = 40 + text.getMeasuredWidth() + j*25;
@@ -225,9 +222,9 @@ var jobsScene = (function() {
 					}
 				break;
 				case 2:
-					text = new createjs.Text("Risk : ", "20px Arial", "#ff7700");
+					text = new createjs.Text("Heat : ", "20px Arial", "#ff7700");
 					//display difficulty
-					for(var j = 0 ; j < job.risk ; j ++)
+					for(var j = 0 ; j < Math.floor((city.currHeat*5)/city.maxHeat)+1 ; j ++)
 					{
 						cat = new createjs.Bitmap(scenes[currScene].catSrc);
 						cat.x = 40 + text.getMeasuredWidth() + j*25;

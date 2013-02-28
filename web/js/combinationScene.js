@@ -11,8 +11,9 @@ var combinationScene = (function() {
 			console.log("init: combinationScene");
 
 			this.scene = scene;
-			setCredits();
-			setHeat();
+			setGUI();
+			armHeat();
+
 			sweet_spot = this.scene.sweet_spot;
 			// Setup the game stage
 			knob = this.scene.visuals[1];
@@ -201,6 +202,7 @@ var combinationScene = (function() {
 			{
 				this.scene.scene.visuals[i].visible = false;
 			}
+			hideGUI();
 		}
 
 	};
@@ -214,8 +216,13 @@ var combinationScene = (function() {
 			inputArray[2].rotation += 5;
 			if(inputArray[2].rotation > 360) inputArray[2].rotation = 5;
 		}
-		if (evt.keyIdentifier=="Up") { addEvent("FINNISHED_JOB",true); }
-		if (evt.keyIdentifier=="Down") { 
+		if (evt.keyCode =="S".charCodeAt(0)) { 
+			addEvent("FINNISHED_JOB",true);
+		}
+		if (evt.keyCode =="F".charCodeAt(0)) { 
+			addEvent("FINNISHED_JOB",false);
+		}
+		if (evt.keyCode =="I".charCodeAt(0)) { 
 			useFiducials = !useFiducials;
 			console.log("using Fiducials : " + useFiducials);
 		}

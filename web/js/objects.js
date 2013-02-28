@@ -6,6 +6,7 @@
 
 //init stages
 var currPlayers = new Array();
+var lastScene = 0;
 var currScene = 0;
 var scenes = {};
 
@@ -18,9 +19,12 @@ var currentJobs = {};	//six set jobs for partiucular base
 var currentJob;				//current picked job
 var credits = new Object();
 var heat = new Object();
+var cityGUI = new Object();
 
 //is first city -> no randomizing
 var isFirstCity = true;
+var cities = {};
+var currCity;
 
 
 var sweetSpot = (function() {
@@ -70,6 +74,14 @@ function loadObjects()
 
 function setup(gamejson)
 {
+	//setup cities
+	var _cities = gamejson.game.cities;
+	for(var i = 0 ; i < _cities.length ; i ++)
+	{
+		cities[_cities[i].name] = _cities[i];
+		_cities[i].heat = 20;
+	}
+	currCity = "Edinburgh";
 	///setup crdits disp
 	//--------------------------------------setup credits element
 	credits = gamejson.game.elements[0];
@@ -86,6 +98,7 @@ function setup(gamejson)
 	risk = 0;
 	var _scenes = gamejson.game.scenes;
 	jobs = gamejson.game.jobs;
+	
 	if(isFirstCity) currentJobs = gamejson.game.jobs.initialJobs;
 	// For each scene
 	for (var i = 0; i < _scenes.length; i++) {
@@ -144,11 +157,63 @@ function setup(gamejson)
 		scenes[_scenes[i]._name] = _scenes[i];
 		addCreditsToStage(_scenes[i].stage);
 		addHeatToStage(_scenes[i].stage, gamejson);
+		addLocationToStage(_scenes[i].stage, gamejson);
 	}
 	currScene = _scenes[0]._name;
 	console.log(scenes[currScene]._name);
 	scenes[currScene].init(scenes[currScene]);
 
+}
+function setGUI()
+{
+	setLocation();
+	setHeat();
+	setCredits();
+}
+function hideGUI()
+{
+	hideLocation();
+	hideHeat();
+	//hideCredits();
+}
+
+function addLocationToStage(stage, gamejson)
+{
+	cityGUI.x = 620;
+	cityGUI.y = 7;
+	cityGUI.width = 140;
+	cityGUI.height = 33;
+	//add background
+	cityGUI.bg = new createjs.Shape();
+	cityGUI.bg.graphics.beginFill("white").drawRect(cityGUI.x, cityGUI.y, cityGUI.width, cityGUI.height); // load from file
+	
+	//add text
+	cityGUI.text = new createjs.Text(currCity, gamejson.game.font.type, gamejson.game.font.color);
+	cityGUI.text.y = 20;
+	cityGUI.text.x = cityGUI.x+cityGUI.width/2-cityGUI.text.getMeasuredWidth()/2;
+
+	//stage.addChild(credits.bg.bmp);
+	//init numbers to 0
+
+	stage.addChild(cityGUI.bg, cityGUI.text);
+	cityGUI.text.visible = false;
+	
+}
+
+function setLocation()
+{
+	cityGUI.text.visible = true;
+	cityGUI.bg.visible = true;
+	scenes[currScene].stage.removeChild(cityGUI.text);
+	cityGUI.text.text = currCity;
+	cityGUI.text.x = cityGUI.x+cityGUI.width/2-cityGUI.text.getMeasuredWidth()/2;
+	scenes[currScene].stage.addChild(cityGUI.text);
+}
+
+function hideLocation()
+{
+	cityGUI.text.visible = false;
+	cityGUI.bg.visible = false;
 }
 
 function addHeatToStage(stage, gamejson)
@@ -158,8 +223,8 @@ function addHeatToStage(stage, gamejson)
 	heat.width = 400;
 	heat.height = 33;
 	heat.maxHeat = 200;
-	heat.value = 10;
-	heat.nextValue = 10;
+	heat.value = cities[currCity].heat;
+	heat.nextValue = cities[currCity].heat;
 	//add background
 	heat.bg = new createjs.Shape();
 	heat.bg.graphics.beginFill("white").drawRect(heat.x, heat.y, heat.width, heat.height); // load from file
@@ -177,6 +242,8 @@ function addHeatToStage(stage, gamejson)
 	//init numbers to 0
 
 	stage.addChild(heat.bg, heat.bar, heat.text);
+	heat.text.visible = false;
+
 	
 }
 
@@ -186,7 +253,38 @@ function setHeat()
 	heat.bar = null;
 	heat.bar = new createjs.Shape();
 	heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.text.text = "HEAT";
+	heat.text.visible = true;
+	heat.bar.visible = true;
+	heat.bg.visible = true;
 	scenes[currScene].stage.addChild(heat.bar, heat.text);
+}
+
+
+function armHeat()
+{
+	heat.armed = true;
+	heat.maxTime = (heat.maxHeat-heat.value);
+	heat.time = (6 - currentJob.risk)*heat.maxTime/5;
+	heat.bar.visible =false;
+	scenes[currScene].stage.removeChild(heat.bar, heat.text);
+	heat.bar = null;
+	heat.bar = new createjs.Shape();
+	heat.bar.graphics.beginFill("darkblue").drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.time) /heat.maxHeat)*(heat.width-20), heat.y+3, 
+														(heat.time/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.text.text = "TIME";
+	heat.text.visible = true;
+	heat.bar.visible = true;
+	heat.bg.visible = true;
+	scenes[currScene].stage.addChild(heat.bar, heat.text);
+}
+
+function hideHeat()
+{
+	heat.armed = false;
+	heat.text.visible = false;
+	heat.bar.visible = false;
+	heat.bg.visible = false;
 }
 
 function addCreditsToStage(stage)

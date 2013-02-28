@@ -91,24 +91,45 @@ function imageProcessing() {
 function updateHeat()
 {
 	var gap = 0;
-	if(heat.nextValue != heat.value)
+	if(!heat.armed)
 	{
-		gap = Math.floor((heat.nextValue - heat.value)/2);
-		if(gap < 1) gap = 1;
-		//determine direction
-		var direction = ( heat.nextValue > heat.value );
-		//determine new value
-		var newValue = heat.value - direction*(-1)*gap;
+		if(heat.nextValue != heat.value)
+		{
+			gap = Math.floor((heat.nextValue - heat.value)/2);
+			//determine direction
+			var direction = ( heat.nextValue > heat.value );
+			//validate gap
+			if((gap < 1 && direction) || (gap > -1 && !direction)) gap = (direction ? 1 : -1)*1;
+			//determine new value
+			var newValue = heat.value + gap;
 
-		//change width of bar
-		scenes[currScene].stage.removeChild(heat.bar, heat.text);
+			//change width of bar
+			scenes[currScene].stage.removeChild(heat.bar, heat.text);
+			heat.bar = null;
+			heat.bar = new createjs.Shape();
+			heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (newValue/heat.maxHeat)*(heat.width-20), heat.height-6);
+			scenes[currScene].stage.addChild(heat.bar, heat.text);
+
+			heat.value = newValue;
+		}
+	}
+	else
+	{
+		gap = 0.05;
+		heat.time -= gap;
+		if(heat.time < 0)
+		{
+			addEvent("FINNISHED_JOB", false);
+		}
+
+		scenes[currScene].stage.removeChild(heat.bg, heat.bar, heat.text);
 		heat.bar = null;
 		heat.bar = new createjs.Shape();
-		heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (newValue/heat.maxHeat)*(heat.width-20), heat.height-6);
-		scenes[currScene].stage.addChild(heat.bar, heat.text);
-
-		heat.value = newValue;
+		heat.bar.graphics.beginFill("darkblue").drawRect(heat.x + 10 + ((heat.value + (heat.maxTime-heat.time)) /heat.maxHeat)*(heat.width-20), heat.y+3, 
+														(heat.time/heat.maxHeat)*(heat.width-20), heat.height-6);
+		scenes[currScene].stage.addChild(heat.bg, heat.bar, heat.text);
 	}
+	
 }
 
 
@@ -118,11 +139,11 @@ function updateCredits()
 	if(credits.nextValue != credits.value)
 	{
 		gap = Math.floor((credits.nextValue - credits.value)/2);
-		if(gap < 1) gap = 1;
 		//determine direction
 		var direction = ( credits.nextValue > credits.value );
 		//determine new value
-		var newValue = credits.value - direction*(-1)*gap;
+		if((gap < 1 && direction) || (gap > -1 && !direction)) gap = (direction ? 1 : -1)*1;
+		var newValue = credits.value + gap;
 		var lastDigits = new Array();
 		var newDigits = new Array();
 

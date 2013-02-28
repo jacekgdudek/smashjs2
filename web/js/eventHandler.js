@@ -40,9 +40,65 @@ function handleEvents()
 
 		else if(event.type == "FINNISHED_JOB") finnishedJob(event.content);
 
+		else if(event.type == "CHANGE_CITY") changeCity(event.content);
+
+		else if(event.type == "DECREASE_GLOBAL_HEAT") decreaseGlobalHeat();
 
 	}
 	events = [];
+}
+
+function decreaseGlobalHeat()
+{
+	for(var key in cities)
+	{
+		if(key != currCity)
+		{
+			cities[key].currHeat -= 10;
+			if(cities[key].currHeat < 0) cities[key].currHeat = 0;
+		}
+	}
+}
+
+function changeCity(_city)
+{
+	//save heat level
+	cities[currCity].currHeat = heat.nextValue;
+	//set new city
+	if(_city == "random99")
+	{
+		var finnished = false;
+		var limit = 300;
+		var length = 0;
+		//get citeis length
+		for(var key in cities)
+		{
+			length++;
+		}
+		while(!finnished)
+		{
+			limit--;
+			var rand = Math.floor(Math.random()*length);
+			var i = 0;
+			for(var key in cities)
+			{
+				if(i == rand && key != currCity)
+				{
+					currCity = key;
+					finnished = true;
+					break;
+				}
+				i++;
+			}
+			if(limit < 0) finnished = true;
+		}
+	}
+	else
+	{
+		currCity = _city;
+	}
+	heat.nextValue = cities[currCity].currHeat;
+	addEvent("SWITCH_SCENE","base_scene");
 }
 
 function finnishedJob(success)
@@ -51,24 +107,33 @@ function finnishedJob(success)
 	{
 		addEvent("ADD_HEAT", currentJob.risk*10);
 		addEvent("SWITCH_SCENE", "reward_scene");
+		addEvent("DECREASE_GLOBAL_HEAT");
 	}
 	else
 	{
-
+		addEvent("ADD_HEAT", heat.maxHeat);
+		addEvent("ADD_CREDITS", "-3/4");
+		addEvent("CHANGE_CITY", "random99");
+		//todo : what happens when job fail?
 	}
 
 }
 
 function addCredits(_credits)
 {
-	credits.nextValue += _credits;
+	if(_credits == "-3/4") credits.nextValue = credits.nextValue/4;
+	else
+	{
+		credits.nextValue += _credits;
+	}
 	console.log("Credits : " + credits.nextValue);
 }
 
 function addHeat(_heat)
 {
 	heat.nextValue += _heat;
-	console.log("Credits : " + credits.nextValue);
+	if(heat.nextValue > heat.maxHeat) heat.nextValue = heat.maxHeat;
+	cities[currCity].currHeat += _heat;
 }
 
 function processCollision(event)
@@ -97,6 +162,7 @@ function switchStage(content)
 		//finalize old scene
 		scenes[currScene].finalize();
 		//swap currScene
+		lastScene = currScene;
 		currScene = content;
 		//initialize new scene
 		scenes[currScene].init(scenes[currScene]);

@@ -234,11 +234,19 @@
 			},
 			{
 				_name: "map_scene",
-				init: defaultScene.init,
-				update: defaultScene.update,
-				finalize: defaultScene.finalize,
-				isCurrent: true,
+				init: cityScene.init,
+				update: cityScene.update,
+				finalize: cityScene.finalize,
 				stage_id: "game_canvas",
+				catSrc: "assets/city_map/cat.jpg",
+				cityPointerSrc: "assets/city_map/cat.jpg",
+				cityPointerRect:
+				{
+					x: 0,
+					y: 0,
+					width: 320,
+					height: 240
+					},
 				visuals: [
 					{
 					  src: "assets/base/base_bkg2.jpg",
@@ -260,6 +268,12 @@
 						type: "SWITCH_SCENE",
 						content: "base_scene"
 						}	
+					},
+					{
+						x:40,
+						y:600,
+						src: "assets/city_map/card.jpg",
+						name: "btn_play"
 					}
 				]
 			},
@@ -601,6 +615,50 @@
 			}
 			]
 		}
+		],
+		cities:[
+			{
+				name:"Edinburgh",
+				maxHeat: 200,
+				currHeat: 20,
+				reward:1,
+				risk:1
+			},
+			{
+				name:"London",
+				maxHeat: 2000,
+				currHeat: 20,
+				reward:1,
+				risk:2
+			},
+			{
+				name:"Praga",
+				maxHeat: 400,
+				currHeat: 20,
+				reward:2,
+				risk:1
+			},
+			{
+				name:"Rome",
+				maxHeat: 200,
+				currHeat: 20,
+				reward:2,
+				risk:4
+			},
+			{
+				name:"Paris",
+				maxHeat: 200,
+				currHeat: 20,
+				reward:3,
+				risk:3
+			},
+			{
+				name:"PeekabuLand",
+				maxHeat: 2000,
+				currHeat: 20,
+				reward:5,
+				risk:1
+			}
 		],
 		font:
 		{
