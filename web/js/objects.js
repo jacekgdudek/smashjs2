@@ -17,7 +17,7 @@ var jobs = {};        //all the possible jobs
 var currentJobs = {};	//six set jobs for partiucular base
 var currentJob;				//current picked job
 var credits = new Object();
-var risk;
+var heat = new Object();
 
 //is first city -> no randomizing
 var isFirstCity = true;
@@ -143,11 +143,50 @@ function setup(gamejson)
 		}
 		scenes[_scenes[i]._name] = _scenes[i];
 		addCreditsToStage(_scenes[i].stage);
+		addHeatToStage(_scenes[i].stage, gamejson);
 	}
 	currScene = _scenes[0]._name;
 	console.log(scenes[currScene]._name);
 	scenes[currScene].init(scenes[currScene]);
 
+}
+
+function addHeatToStage(stage, gamejson)
+{
+	heat.x = 200;
+	heat.y = 7;
+	heat.width = 400;
+	heat.height = 33;
+	heat.maxHeat = 200;
+	heat.value = 10;
+	heat.nextValue = 10;
+	//add background
+	heat.bg = new createjs.Shape();
+	heat.bg.graphics.beginFill("white").drawRect(heat.x, heat.y, heat.width, heat.height); // load from file
+	
+	//add bar
+	heat.bar = new createjs.Shape();
+	heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+
+	//add text
+	heat.text = new createjs.Text("POLICJA/HEAT", gamejson.game.font.type, gamejson.game.font.color);
+	heat.text.y = 10;
+	heat.text.x = heat.x+heat.width/2-heat.text.getMeasuredWidth()/2;
+
+	//stage.addChild(credits.bg.bmp);
+	//init numbers to 0
+
+	stage.addChild(heat.bg, heat.bar, heat.text);
+	
+}
+
+function setHeat()
+{
+	scenes[currScene].stage.removeChild(heat.bar, heat.text);
+	heat.bar = null;
+	heat.bar = new createjs.Shape();
+	heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+	scenes[currScene].stage.addChild(heat.bar, heat.text);
 }
 
 function addCreditsToStage(stage)

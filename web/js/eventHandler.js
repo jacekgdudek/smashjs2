@@ -35,13 +35,39 @@ function handleEvents()
 		else if(event.type == "COLLISION") processCollision(event);
 
 		else if(event.type == "ADD_CREDITS") addCredits(event.content);
+
+		else if(event.type == "ADD_HEAT") addHeat(event.content);
+
+		else if(event.type == "FINNISHED_JOB") finnishedJob(event.content);
+
+
 	}
 	events = [];
+}
+
+function finnishedJob(success)
+{
+	if(success)
+	{
+		addEvent("ADD_HEAT", currentJob.risk*10);
+		addEvent("SWITCH_SCENE", "reward_scene");
+	}
+	else
+	{
+
+	}
+
 }
 
 function addCredits(_credits)
 {
 	credits.nextValue += _credits;
+	console.log("Credits : " + credits.nextValue);
+}
+
+function addHeat(_heat)
+{
+	heat.nextValue += _heat;
 	console.log("Credits : " + credits.nextValue);
 }
 

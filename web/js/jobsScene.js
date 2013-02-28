@@ -25,6 +25,7 @@ var jobsScene = (function() {
 
 			this.scene = scene;
 			setCredits();
+			setHeat();
 
 			currentJobId = -1; // -1 for not selected ?
 			nextCardJob.id = -1;

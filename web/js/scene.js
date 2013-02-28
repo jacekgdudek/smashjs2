@@ -9,6 +9,7 @@ var defaultScene = (function() {
 
 			this.scene = scene;
 			setCredits();
+			setHeat();
 
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)

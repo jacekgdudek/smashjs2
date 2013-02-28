@@ -12,6 +12,7 @@ var combinationScene = (function() {
 
 			this.scene = scene;
 			setCredits();
+			setHeat();
 			sweet_spot = this.scene.sweet_spot;
 			// Setup the game stage
 			knob = this.scene.visuals[1];
@@ -187,7 +188,7 @@ var combinationScene = (function() {
 			// ---------------------------------Check if we have finished
 			if (this.targetPointer >= this.listOfTargets.length) {
 				console.log("Combination Found!");
-				addEvent("SWITCH_SCENE", "reward_scene");
+				addEvent("FINNISHED_JOB",true);
 			}
 			//save last values
 			this.lastNumber = this.currentNumber;
@@ -213,7 +214,7 @@ var combinationScene = (function() {
 			inputArray[2].rotation += 5;
 			if(inputArray[2].rotation > 360) inputArray[2].rotation = 5;
 		}
-		if (evt.keyIdentifier=="Up") { addEvent("SWITCH_SCENE", "reward_scene"); }
+		if (evt.keyIdentifier=="Up") { addEvent("FINNISHED_JOB",true); }
 		if (evt.keyIdentifier=="Down") { 
 			useFiducials = !useFiducials;
 			console.log("using Fiducials : " + useFiducials);

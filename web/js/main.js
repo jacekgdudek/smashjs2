@@ -17,6 +17,7 @@ timer = setInterval(function () {
 
 	// Update the current scene
 	if (typeof scenes[currScene] !== 'undefined') {
+		updateHeat();
 		updateCredits();
 		var sceneComplete = scenes[currScene].update();
 	}
@@ -86,6 +87,30 @@ function imageProcessing() {
 	//imgData.data();
 	//Canvas2Image.saveAsPNG(canvas);
 };
+
+function updateHeat()
+{
+	var gap = 0;
+	if(heat.nextValue != heat.value)
+	{
+		gap = Math.floor((heat.nextValue - heat.value)/2);
+		if(gap < 1) gap = 1;
+		//determine direction
+		var direction = ( heat.nextValue > heat.value );
+		//determine new value
+		var newValue = heat.value - direction*(-1)*gap;
+
+		//change width of bar
+		scenes[currScene].stage.removeChild(heat.bar, heat.text);
+		heat.bar = null;
+		heat.bar = new createjs.Shape();
+		heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (newValue/heat.maxHeat)*(heat.width-20), heat.height-6);
+		scenes[currScene].stage.addChild(heat.bar, heat.text);
+
+		heat.value = newValue;
+	}
+}
+
 
 function updateCredits()
 {
