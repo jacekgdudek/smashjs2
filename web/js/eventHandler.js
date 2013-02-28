@@ -44,8 +44,117 @@ function handleEvents()
 
 		else if(event.type == "DECREASE_GLOBAL_HEAT") decreaseGlobalHeat();
 
+		else if(event.type == "RANDOMIZE_JOBS") randomizeJobs();
+
 	}
 	events = [];
+}
+
+function randomizeJobs()
+{
+	//clear previous jobs
+	currentJobs = new Array();
+
+	//randomize 1-3 levels
+	for(var i = 0 ; i < 3 ; i++)
+	{
+		var newJob = new Object();
+
+		var randName = jobs.names[Math.floor(Math.random()*jobs.names.length)].name;
+		var randType = jobs.types[Math.floor(Math.random()*jobs.types.length)].name;
+		var randRisk = Math.floor(Math.random()*2)+1;
+		var randReward = Math.floor(Math.random()*2)+1;
+
+		newJob.index = i;
+		newJob.name = randName;
+		newJob.risk = randRisk;
+		newJob.reward = randReward;
+		newJob.type = randType;
+
+		currentJobs.push(newJob);
+	}
+	//
+
+	//randomize levels 4-5
+	for(var i = 0 ; i < 2 ; i++)
+	{
+		var newJob = new Object();
+
+		var randName = jobs.names[Math.floor(Math.random()*jobs.names.length)].name;
+		var randType = jobs.types[Math.floor(Math.random()*jobs.types.length)].name;
+		var randRisk = Math.floor(Math.random()*3)+2;
+		var randReward = Math.floor(Math.random()*3)+2;
+
+		//prepare conditions
+		var conditions = new Array();
+		var randNoOfCond = Math.floor(Math.random()*2)+1;
+		for(var j = 0 ; j < randNoOfCond ; j++)
+		{
+			var failed = true;
+			var condition = new Object();
+			while(failed)
+			{
+				failed = false;
+				condition.value = Math.floor(Math.random()*3);
+				for(var k = 0 ; k < conditions.length ; k++)
+				{
+					if(conditions[k] == condition.value)
+					{
+						failed = true;
+					}
+				}
+			}
+			conditions.push(condition)
+		}
+
+		newJob.index = i+3;
+		newJob.name = randName;
+		newJob.risk = randRisk;
+		newJob.reward = randReward;
+		newJob.type = randType;
+		newJob.conditions = conditions;
+
+		currentJobs.push(newJob);
+	}
+
+	//add 6th job
+	var newJob = new Object();
+
+	var randName = jobs.names[Math.floor(Math.random()*jobs.names.length)].name;
+	var randType = jobs.types[Math.floor(Math.random()*jobs.types.length)].name;
+	var randRisk = Math.floor(Math.random()*3)+3;
+	var randReward = Math.floor(Math.random()*3)+3;
+
+	//prepare conditions
+	var conditions = new Array();
+	var randNoOfCond = Math.floor(Math.random()*3)+1;
+	for(var j = 0 ; j < randNoOfCond ; j++)
+	{
+		var failed = true;
+		var condition = new Object();
+		while(failed)
+		{
+			failed = false;
+			condition.value = Math.floor(Math.random()*5);
+			for(var k = 0 ; k < conditions.length ; k++)
+			{
+				if(conditions[k] == condition.value)
+				{
+					failed = true;
+				}
+			}
+		}
+		conditions.push(condition)
+	}
+
+	newJob.index = 6;
+	newJob.name = randName;
+	newJob.risk = randRisk;
+	newJob.reward = randReward;
+	newJob.type = randType;
+	newJob.conditions = conditions;
+
+	currentJobs.push(newJob);
 }
 
 function decreaseGlobalHeat()
@@ -95,16 +204,32 @@ function changeCity(_city)
 	}
 	else
 	{
-		currCity = _city;
+		//check if enough funds to move
+		if(credits.nextValue > cities[_city].travelCost)
+		{
+			currCity = _city;
+			credits.nextValue -= cities[_city].travelCost;
+		}
+		else
+		{
+			//display global message that not enough cash
+			setMessage("Not enough cash to move !", 100);
+			console.log("Not enough cash to move!");
+			return;
+		}
+		
 	}
 	heat.nextValue = cities[currCity].currHeat;
 	addEvent("SWITCH_SCENE","base_scene");
+	addEvent("RANDOMIZE_JOBS");
 }
 
 function finnishedJob(success)
 {
 	if(success)
 	{
+		currentJob.finnished = true;
+		clearConditionsForJobs(currentJob.index);
 		addEvent("ADD_HEAT", currentJob.risk*10);
 		addEvent("SWITCH_SCENE", "reward_scene");
 		addEvent("DECREASE_GLOBAL_HEAT");
@@ -117,6 +242,29 @@ function finnishedJob(success)
 		//todo : what happens when job fail?
 	}
 
+}
+
+function clearConditionsForJobs(id)
+{
+	for(var i = 0 ; i < currentJobs.length ; i ++)
+	{
+		if(typeof currentJobs[i].conditions !== 'undefined')
+		{
+			//var check = -1;
+			//if(currentJobs[i].conditions.length == 1) check = 0;
+			for(var j = 0 ; j < currentJobs[i].conditions.length ; j ++)
+			{
+				if(currentJobs[i].conditions[j].value == id)
+				{
+					//if(check == 0) check = 1;
+					//delete currentJobs[i].conditions[j];
+					currentJobs[i].conditions.splice(j,1);
+				}
+			}
+			//if(check == 1) delete currentJobs[i].conditions;
+
+		}
+	}	
 }
 
 function addCredits(_credits)
