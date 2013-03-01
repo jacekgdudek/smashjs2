@@ -26,6 +26,8 @@ var messageGUI = new Object();
 var isFirstCity = true;
 var cities = {};
 var currCity;
+var currSpecialRewards = new Array();
+var specialRewards = new Array();
 
 
 var sweetSpot = (function() {
@@ -83,6 +85,16 @@ function setup(gamejson)
 		_cities[i].heat = 20;
 	}
 	currCity = "Edinburgh";
+	//setup special rewards
+	specialRewards = gamejson.game.specialRewards;
+	for(var i = 0 ; i < specialRewards.rewards.length ; i ++)
+	{
+		specialRewards.rewards[i].thumbnail = new createjs.Bitmap(specialRewards.thumbnails[specialRewards.rewards[i].type].src);
+		specialRewards.rewards[i].thumbnail.x = -100;
+		specialRewards.rewards[i].thumbnail.y = -100;
+	}
+	currSpecialRewards.push(0);
+	currSpecialRewards.push(1);
 	///setup crdits disp
 	//--------------------------------------setup credits element
 	credits = gamejson.game.elements[0];
@@ -280,7 +292,7 @@ function addHeatToStage(stage, gamejson)
 	
 	//add bar
 	heat.bar = new createjs.Shape();
-	heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
 
 	//add text
 	heat.text = new createjs.Text("HEAT", gamejson.game.font._type, "#00FF00");
@@ -301,7 +313,7 @@ function setHeat()
 	scenes[currScene].stage.removeChild(heat.bar, heat.text);
 	heat.bar = null;
 	heat.bar = new createjs.Shape();
-	heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
 	heat.text.text = "HEAT";
 	heat.text.visible = true;
 	heat.bar.visible = true;
@@ -312,20 +324,31 @@ function setHeat()
 
 function armHeat()
 {
+	heat.state = 0;
 	heat.armed = true;
 	heat.maxTime = (heat.maxHeat-heat.value);
-	heat.time = (6 - currentJob.risk)*heat.maxTime/5;
+	heat.time = 0;
+	heat.risk = 0;
+	heat.maxRisk = (currentJob.risk-1)*heat.maxTime/5;
+	heat.riskOffset = 0;
+	heat.noRiskTime = (6 - currentJob.risk)*heat.maxTime/5;
 	heat.bar.visible =false;
-	scenes[currScene].stage.removeChild(heat.bar, heat.text);
+	scenes[currScene].stage.removeChild(heat.bar, heat.text,heat.modules);
+	//create bar
 	heat.bar = null;
 	heat.bar = new createjs.Shape();
 	heat.bar.graphics.beginFill("darkblue").drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.time) /heat.maxHeat)*(heat.width-20), heat.y+3, 
 														(heat.time/heat.maxHeat)*(heat.width-20), heat.height-6);
+	//create text
 	heat.text.text = "TIME";
+	//create risk modules
+	heat.modules = new createjs.Shape();
+	heat.modules.graphics.beginFill("grey").drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.risk) /heat.maxHeat)*(heat.width-20), heat.y+3, 
+														(heat.risk/heat.maxHeat)*(heat.width-20), heat.height-6);
 	heat.text.visible = true;
 	heat.bar.visible = true;
 	heat.bg.visible = true;
-	scenes[currScene].stage.addChild(heat.bar, heat.text);
+	scenes[currScene].stage.addChild(heat.bar, heat.modules, heat.text);
 }
 
 function hideHeat()

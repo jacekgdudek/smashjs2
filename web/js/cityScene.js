@@ -145,7 +145,7 @@ var cityScene = (function() {
 			}
 			else if( cardState == 3)
 			{
-				if(card.bitmap.y > 550)
+				if(card.bitmap.y > 600)
 				{
 					currentCityId = nextCardCity.id;
 					setupCard(card, nextCardCity);
@@ -283,7 +283,7 @@ var cityScene = (function() {
 			//sliding up
 			case 1:
 				card.bitmap.y -= 20;
-				if(card.bitmap.y < 600 - card.bitmap.image.height + 5)
+				if(card.bitmap.y < 600 - card.bitmap.image.height + 20)
 				{
 					cardState = 2;
 				}

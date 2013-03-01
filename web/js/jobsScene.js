@@ -150,7 +150,7 @@ var jobsScene = (function() {
 			}
 			else if( cardState == 3)
 			{
-				if(card.bitmap.y > 550)
+				if(card.bitmap.y > 600)
 				{
 					currentJobId = nextCardJob.id;
 					setupCard(card, nextCardJob);
@@ -259,9 +259,11 @@ var jobsScene = (function() {
 				scenes[currScene].stage.removeChild(card.cats[j]);
 			}
 		}
-		for(var i = 0 ; i < card.textLines.length ; i++)
-		{
-			scenes[currScene].stage.removeChild(card.textLines[i]);
+		if (typeof card.textLines !== 'undefined') {
+			for(var i = 0 ; i < card.textLines.length ; i++)
+			{
+				scenes[currScene].stage.removeChild(card.textLines[i]);
+			}
 		}
 
 	}
@@ -288,7 +290,7 @@ var jobsScene = (function() {
 			//sliding up
 			case 1:
 				card.bitmap.y -= 20;
-				if(card.bitmap.y < 600 - card.bitmap.image.height + 5)
+				if(card.bitmap.y < 600 - card.bitmap.image.height + 20)
 				{
 					cardState = 2;
 				}

@@ -31,8 +31,17 @@
 					  name: "btn_play",
 					  hasDown: true,
 					  downEvent: {
-						type: "SWITCH_SCENE",
-						content: "base_scene"
+						type: "START_NEW_GAME"
+						}	
+					},
+					{
+						x:400,
+						y:400,
+					  src: "assets/button/play.png",
+					  name: "btn_play",
+					  hasDown: true,
+					  downEvent: {
+						type: "CONTINUE_GAME"
 						}	
 					}
 				]
@@ -341,11 +350,15 @@
 			},
 			{
 				_name: "gallery_scene",
-				init: defaultScene.init,
-				update: defaultScene.update,
-				finalize: defaultScene.finalize,
+				init: galleryScene.init,
+				update: galleryScene.update,
+				finalize: galleryScene.finalize,
 				isCurrent: true,
 				stage_id: "game_canvas",
+				galleryGrid:{
+					width: 6,
+					height: 3,
+					},
 				visuals: [
 					{
 					  src: "assets/base/base_bkg2.jpg",
@@ -643,6 +656,38 @@
 				}
 			]
 
+		},
+		specialRewards:{
+			thumbnails:[
+				{
+					src: "assets/credits/0.jpg",
+					name: "audio"
+				},
+				{
+					src: "assets/credits/2.jpg",
+					name: "video"
+				}
+			],
+			rewards:[
+				{
+					contentId: 0,
+					src: "",
+					type: 0,
+					downEvent: {
+						type: "NOTHING_AT ALL"
+						}
+
+				},
+				{
+					contentId: 1,
+					src: "",
+					type: 1,
+					downEvent: {
+						type: "NOTHING_AT ALL"
+						}
+				}
+			]
+			
 		},
 		elements:[
 		{

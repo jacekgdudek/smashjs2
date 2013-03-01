@@ -121,7 +121,7 @@ function updateHeat()
 			scenes[currScene].stage.removeChild(heat.bar, heat.text);
 			heat.bar = null;
 			heat.bar = new createjs.Shape();
-			heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (newValue/heat.maxHeat)*(heat.width-20), heat.height-6);
+			heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (newValue/heat.maxHeat)*(heat.width-20), heat.height-6);
 			scenes[currScene].stage.addChild(heat.bar, heat.text);
 
 			heat.value = newValue;
@@ -129,19 +129,50 @@ function updateHeat()
 	}
 	else
 	{
-		gap = 0.05;
-		heat.time -= gap;
-		if(heat.time < 0)
+		switch(heat.state)
 		{
-			addEvent("FINNISHED_JOB", false);
+			//slide the time in
+			case 0:
+				if(heat.risk < heat.maxRisk)
+				{
+					heat.risk++;
+
+				}
+				else
+				{
+					heat.riskOffset++;
+					heat.time++;
+					if(heat.time > heat.noRiskTime)
+					{
+						heat.state = 1;
+					}
+				}
+
+			break;
+			//run time
+			case 1:
+				gap = 0.05;
+				heat.time -= gap;
+				if(heat.time < 0)
+				{
+					addEvent("FINNISHED_JOB", false);
+				}
+			break;
 		}
 
-		scenes[currScene].stage.removeChild(heat.bg, heat.bar, heat.text);
+		scenes[currScene].stage.removeChild(heat.bg, heat.bar,heat.modules, heat.text);
 		heat.bar = null;
+		heat.modules = null;
+		heat.modules = new createjs.Shape();
 		heat.bar = new createjs.Shape();
-		heat.bar.graphics.beginFill("darkblue").drawRect(heat.x + 10 + ((heat.value + (heat.maxTime-heat.time)) /heat.maxHeat)*(heat.width-20), heat.y+3, 
-														(heat.time/heat.maxHeat)*(heat.width-20), heat.height-6);
-		scenes[currScene].stage.addChild(heat.bg, heat.bar, heat.text);
+		//very nasty bad ass drawing function, do not touch it even with the stick UGH!!
+		heat.bar.graphics.beginLinearGradientFill(["#66F","#AAF","#66F","00D"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10 + ((heat.value + (heat.maxTime-heat.time)) /heat.maxHeat)*(heat.width-20), heat.y+3, 
+														(heat.time/heat.maxHeat)*(heat.width-20), heat.height-6).beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.nextValue/heat.maxHeat)*(heat.width-20), heat.height-6);;
+		//draw risk
+		heat.modules.graphics.beginLinearGradientFill(["#AAA","#FFF","#AAA","555"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.risk-heat.riskOffset) /heat.maxHeat)*(heat.width-20), heat.y+3, 
+														(heat.risk/heat.maxHeat)*(heat.width-20), heat.height-6);
+
+		scenes[currScene].stage.addChild(heat.bg, heat.bar,heat.modules, heat.text);
 	}
 	
 }
