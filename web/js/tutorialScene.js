@@ -301,6 +301,10 @@ var tutorialScene = (function() {
 		// For now we use keyboard controls for the dial
 		if (evt.keyIdentifier=="Left") { this.input.rotation -= 10; } 
 		if (evt.keyIdentifier=="Right") { this.input.rotation += 10; }
+		if (evt.keyCode =="I".charCodeAt(0)) { 
+			useFiducials = !useFiducials;
+			console.log("using Fiducials : " + useFiducials);
+		}
 
 		/*
 		if (	((evt.keyIdentifier=="Left") || (evt.keyIdentifier=="Right")) &&    
