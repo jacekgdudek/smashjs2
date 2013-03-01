@@ -674,7 +674,8 @@
 					src: "",
 					type: 0,
 					downEvent: {
-						type: "NOTHING_AT ALL"
+						type: "SPECIAL_REWARD_BUTTON_DOWN",
+						content: 0
 						}
 
 				},
@@ -683,7 +684,8 @@
 					src: "",
 					type: 1,
 					downEvent: {
-						type: "NOTHING_AT ALL"
+						type: "SPECIAL_REWARD_BUTTON_DOWN",
+						content: 1
 						}
 				}
 			]
@@ -736,6 +738,8 @@
 		cities:[
 			{
 				name:"Edinburgh",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
 				maxHeat: 200,
 				currHeat: 20,
 				travelCost: 200,
@@ -744,6 +748,8 @@
 			},
 			{
 				name:"London",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
 				maxHeat: 2000,
 				currHeat: 20,
 				travelCost: 2000,
@@ -752,6 +758,8 @@
 			},
 			{
 				name:"Praga",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
 				maxHeat: 400,
 				currHeat: 20,
 				travelCost: 2000,
@@ -760,6 +768,8 @@
 			},
 			{
 				name:"Rome",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
 				maxHeat: 200,
 				currHeat: 20,
 				travelCost: 20000,
@@ -768,6 +778,8 @@
 			},
 			{
 				name:"Paris",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
 				maxHeat: 200,
 				currHeat: 20,
 				travelCost: 20000,
@@ -776,6 +788,8 @@
 			},
 			{
 				name:"PeekabuLand",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
 				maxHeat: 2000,
 				currHeat: 20,
 				travelCost: 20000,

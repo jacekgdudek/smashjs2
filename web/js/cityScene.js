@@ -52,7 +52,7 @@ var cityScene = (function() {
 				cityPointer = cities[key];
 				cityPointers.push(cityPointer);
 			}
-			randomizePositions(cityPointers, scene.cityPointerSrc, scene.cityPointerRect);
+			setThumbnails(cityPointers);
 			//toooo dooooo -------------------> link to areas
 
 			// add a handler for all the events we're interested in
@@ -68,8 +68,13 @@ var cityScene = (function() {
 				{
 					if(cityPointers[i].pointer.hitTest( mousePos.stageX - cityPointers[i].pointer.x , mousePos.stageY - cityPointers[i].pointer.y ))
 					{
+						cityPointers[i].pointerHighlight.visible = true;
 						nextCardCity = cityPointers[i];
 						nextCardCity.id = i;
+					}
+					else
+					{
+						cityPointers[i].pointerHighlight.visible = false;
 					}
 				}
 			}
@@ -165,7 +170,7 @@ var cityScene = (function() {
 			hideCard(card);
 			for(var i = 0 ; i < cityPointers.length ; i++)
 			{
-				this.scene.stage.removeChild(cityPointers[i].pointer);
+				this.scene.stage.removeChild(cityPointers[i].pointer, cities[i].pointerHighlight);
 			}
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{
@@ -261,18 +266,20 @@ var cityScene = (function() {
 
 	}
 
-	function randomizePositions(jobs, pointerSrc, rect)
+	function setThumbnails(cities)
 	{
-		for(var i = 0 ; i < jobs.length ; i ++)
+		for(var i = 0 ; i < cities.length ; i ++)
 		{
-			var randX = rect.x + Math.floor(Math.random()*rect.width);
-			var randY = rect.y + Math.floor(Math.random()*rect.height);
+			cities[i].pointer = new createjs.Bitmap(cities[i].pointerSrc);
+			cities[i].pointerHighlight = new createjs.Bitmap(cities[i].pointerHighlightsSrc);
+			cities[i].pointerHighlight.visible = false;
+			//change to 0
+			cities[i].pointer.x = (i+1)*50;
+			cities[i].pointer.y = (i+1)*50;
+			cities[i].pointerHighlight.x = (i+1)*50;
+			cities[i].pointerHighlight.y = (i+1)*50;
 
-			jobs[i].pointer = new createjs.Bitmap(pointerSrc);
-			jobs[i].pointer.x = randX;
-			jobs[i].pointer.y = randY;
-
-			scenes[currScene].stage.addChild(jobs[i].pointer);
+			scenes[currScene].stage.addChild(cities[i].pointer, cities[i].pointerHighlight);
 		}
 	}
 

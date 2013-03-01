@@ -71,7 +71,8 @@ var rewardScene = (function() {
 						{
 							if(rewardImages[i].bitmap.hitTest( mousePos.stageX - rewardImages[i].bitmap.x , mousePos.stageY - rewardImages[i].bitmap.y ))
 							{
-								addEvent(rewardImages[i].downEvent.type, _rewards[i].value);
+								if(rewardImages[i].downEvent.type == "SPECIAL_REWARD_BUTTON_DOWN") addEvent(rewardImages[i].downEvent.type, rewardImages[i].downEvent.content);
+								else addEvent(rewardImages[i].downEvent.type, _rewards[i].value);
 								rewardImages[i].bitmap.visible = false;
 								console.log("down state on reward initialized");
 							}
@@ -151,6 +152,27 @@ var rewardScene = (function() {
 				rewards.push(possibleRewards[rewardId]);
 			}
 		}
+		//------------------------add special Reward
+		if(rewardLevel > 3)
+		{
+			finnished = false;
+			while(!finnished)
+			{
+				finnished = true;
+				rewardId = Math.floor(Math.random()*specialRewards.rewards.length);
+
+				for(var i = 0 ; i < currSpecialRewards.length ; i ++)
+				{
+					if(currSpecialRewards[i] == rewardId) finnished = false;
+				}
+
+				if(finnished)
+				{
+					specialRewards.rewards[rewardId].visualId = -2;
+					rewards.push(specialRewards.rewards[rewardId]);
+				}
+			}	
+		}
 
 		//----------------------randomize positions
 		for ( var i = 0 ; i < rewards.length ; i++)
@@ -162,7 +184,6 @@ var rewardScene = (function() {
 				y = Math.floor(Math.random()*grid[0].length);
 				if(grid[x][y].visualId == -1)
 				{
-
 					foundSpot = true;
 					grid[x][y] = rewards[i];
 				}
@@ -177,6 +198,48 @@ var rewardScene = (function() {
 				for (var j = 0; j < grid[i].length; j++) {
 					if(grid[i][j].visualId != -1)
 					{
+						if(grid[i][j].visualId == -2)
+						{
+							//special prize
+							var rewardBMP  = new Object();
+							rewardBMP.hasDown = true;
+							rewardBMP.downEvent = specialRewards.rewards[grid[i][j].contentId].downEvent;
+							rewardBMP.bitmap =  specialRewards.rewards[grid[i][j].contentId].thumbnail.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);
+							rewardBMP.bitmap.x = 100+i * 100;
+							rewardBMP.bitmap.y = 100+j * 100;
+							rewardBMP.bitmap.visible = true;
+							console.log("putting object on x:" + (i+1)*100 + " y : " + (100+(j*100)));
+							
+							// rewardBMP.bitmap.cache(0, 0, rewardBMP.bitmap.image.width, rewardBMP.bitmap.image.height);
+							// /*var cFilter;
+							// cFilter = new createjs.ColorFilter(0, 1, 0, 1);
+							// rewardBMP.bitmap.filters = [cFilter];
+							// */
+							// if (grid[i][j].visualId == 4){
+							// 	var cFilter;
+							// 	/*cFilter = new createjs.ColorFilter(1, 0, 0, 1);
+							// 	rewardBMP.bitmap.filters = [cFilter];*/
+							// 	console.log(grid[i][j].rgbColor);
+							// 	if(grid[i][j].rgbColor == "red"){
+							// 		cFilter = new createjs.ColorFilter(2, 0.9, 0.9, 1); ///RGBA values
+							// 		rewardBMP.bitmap.filters = [cFilter]; //applying filter
+							// 	}
+							// 	else if(grid[i][j].rgbColor == "green"){
+							// 		cFilter = new createjs.ColorFilter(0.9, 2, 0.9, 1);
+							// 		rewardBMP.bitmap.filters = [cFilter];
+							// 	}
+							// 	else if(grid[i][j].rgbColor == "blue"){
+							// 		cFilter = new createjs.ColorFilter(0.9, 0.9, 2, 1);
+							// 		rewardBMP.bitmap.filters = [cFilter];
+							// 	}
+							//}
+							
+							rewardImages.push(rewardBMP);
+							scenes[currScene].stage.addChild(rewardBMP.bitmap);
+						}
+						else
+						{
+							//regular prize
 						console.log("Reward visualId : " + grid[i][j].visualId);
 						var rewardBMP  = new Object();
 						rewardBMP.hasDown = true;
@@ -214,6 +277,8 @@ var rewardScene = (function() {
 						rewardImages.push(rewardBMP);
 						scenes[currScene].stage.addChild(rewardBMP.bitmap);
 						rewardBMP.bitmap.updateCache(); //update to add colorFilter
+
+						}
 					}
 				}
 			}

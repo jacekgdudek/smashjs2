@@ -93,8 +93,6 @@ function setup(gamejson)
 		specialRewards.rewards[i].thumbnail.x = -100;
 		specialRewards.rewards[i].thumbnail.y = -100;
 	}
-	currSpecialRewards.push(0);
-	currSpecialRewards.push(1);
 	///setup crdits disp
 	//--------------------------------------setup credits element
 	credits = gamejson.game.elements[0];

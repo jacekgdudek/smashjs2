@@ -34,6 +34,8 @@ function handleEvents()
 
 		else if(event.type == "COLLISION") processCollision(event);
 
+		else if(event.type == "SPECIAL_REWARD_BUTTON_DOWN") specialRewardDown(event.content);
+
 		else if(event.type == "ADD_CREDITS") addCredits(event.content);
 
 		else if(event.type == "ADD_HEAT") addHeat(event.content);
@@ -61,6 +63,14 @@ function handleEvents()
 
 	}
 	events = [];
+}
+
+function specialRewardDown(id)
+{
+	if(currScene == "reward_scene")
+	{
+		currSpecialRewards.push(id);
+	}
 }
 
 function startNewGame()
