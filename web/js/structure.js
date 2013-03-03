@@ -235,6 +235,29 @@ var structure = {
 						type: "SWITCH_SCENE",
 						content: "gallery_scene"
 						}	
+					},
+					{
+						x:600,
+						y:0,
+					  src: "assets/base/cashnrisk.jpg",
+					  name: "cash_disp",
+					  hasDown: true,
+					  textLines:[
+					  	{
+					  		text: "Cash: 0",
+					  		x: 40,
+					  		y: 40
+					  	},
+					  	{
+					  		text: "Risk: 0",
+					  		x: 140,
+					  		y: 40
+					  	}
+					  ],
+					  downEvent: {
+						type: "SWITCH_SCENE",
+						content: "gallery_scene"
+						}	
 					}
 				]
 			},
@@ -277,6 +300,14 @@ var structure = {
 				isCurrent: true,
 				stage_id: "game_canvas",
 				catSrc: "assets/city_map/cat.jpg",
+				jobPointerSrc: "assets/city_map/cat.jpg",
+				jobPointerRect:
+				{
+					x: 0,
+					y: 0,
+					width: 320,
+					height: 240
+					},
 				visuals: [
 					{
 					  src: "assets/base/base_bkg2.jpg",
@@ -355,6 +386,96 @@ var structure = {
 				]
 			},
 			{
+				_name: "reward_scene",
+				init: rewardScene.init,
+				update: rewardScene.update,
+				finalize: rewardScene.finalize,
+				isCurrent: true,
+				stage_id: "game_canvas",
+				rewardGrid:{
+					width: 6,
+					height: 3,
+					},
+				rewards: [
+					{
+						visualId: 3,
+						value: 400
+					},
+					{
+						visualId: 4,
+						value: 400
+					},
+					{
+						visualId: 4,
+						value: 200,
+						rgbColor: "red"
+					},
+					{
+						visualId: 4,
+						value: 400,
+						rgbColor: "green"
+					},
+					{
+						visualId: 4,
+						value: 500,
+						rgbColor: "blue"
+					}
+				],
+				visuals: [
+					{
+					  src: "assets/base/base_bkg2.jpg",
+					  name: "bkg"
+					},
+					{
+						x:0,
+						y:0,
+					  src: "assets/reward/interior.jpg",
+					  name: "btn_play"
+					},
+					{
+						x:400,
+						y:500,
+						src: "assets/button/back_btn.jpg",
+						name: "btn_play",
+						hasDown: true,
+					 	downEvent: {
+							type: "SWITCH_SCENE",
+							content: "base_scene"
+						}	
+					},
+					{
+						x: 0,
+						y: 0,
+					  src: "assets/reward/ring.png",
+					  hasDown: true,
+					  visible: false,
+					  downEvent: {
+						type: "ADD_CREDITS"
+						}
+					},
+					{
+						x: 0,
+						y: 0,
+					  src: "assets/reward/watch.png",
+					  hasDown: true,
+					  visible: false,
+					  downEvent: {
+						type: "ADD_CREDITS"
+						}
+					},
+					{
+						x: 0,
+						y: 0,
+					  src: "assets/reward/cash.png",
+					  hasDown: true,
+					  visible: false,
+					  downEvent: {
+						type: "ADD_CREDITS"
+						}
+					}
+				]
+			},
+			{
 				_name: "sweet_spot",
 				init: sweetSpot.init,
 				update: sweetSpot.update,
@@ -394,6 +515,11 @@ var structure = {
 				update: combinationScene.update,
 				finalize: combinationScene.finalize,
 				stage_id: "game_canvas",
+				sweet_spot:
+				{
+					x: 200,
+					y: 200
+				},
 				visuals: [
 					{
 					  src: "assets/combination/safe_bg.jpg",
@@ -406,7 +532,7 @@ var structure = {
 					{
 					  src: "assets/combination/dial_numbers.png",
 					  name: "numbers",
-					  maxNumber: 80
+					  maxNumber: 20
 					},
 					{
 					  src: "assets/combination/stethoscope_2.png",
@@ -420,80 +546,95 @@ var structure = {
 			[
 				{
 					name:"kindergarden",
-					type:0,
-					reward:1,
+					type:"combination_lock",
+					reward:2,
 					risk:1
 				},
 				{
 					name:"corner shop",
-					type:0,
-					reward:1,
+					type:"combination_lock",
+					reward:3,
 					risk:1
 				},
 				{
 					name:"Theodora's apartment",
-					type:0,
-					reward:1,
+					type:"combination_lock",
+					reward:2,
 					risk:1
 				},
 				{
 					name:"local supermarket",
-					type:0,
-					reward:1,
-					risk:1,
-					dependent:[
-						{
-							job_id:0
-						},
-						{
-							job_id:1
-						}
-					]
+					type:"combination_lock",
+					reward:5,
+					risk:1
 				},
 				{
 					name:"Peekabu office",
-					type:0,
-					reward:1,
-					risk:1,
-					dependent:[
-						{
-							job_id:2
-						},
-						{
-							job_id:3
-						}
-					]
+					type:"combination_lock",
+					reward:2,
+					risk:1
 				},
 				{
 					name:"jewelery shop",
-					type:0,
+					type:"combination_lock",
 					reward:1,
-					risk:1,
-					dependent:
-						{
-							job_id:4
-						}
+					risk:2
 				}
 			],
 			types:
 			{
 				name:"combination_lock"
-			},
-			rewards:
-			{
-				src:"assets/reward/interior.jpg",
-				width:5,
-				height:3,
-				objects:[
-					{
-						src:"assets/reward/jewel.jpg"
-					},
-					{
-						src:"assets/reward/pearls.jpg"
-					}
-				]
 			}
 
+		},
+		elements:[
+		{
+			src: "assets/credits/bg.jpg",
+			name: "bg",
+			subelements:[
+			{
+				src: "assets/credits/0.jpg",
+			},
+			{
+				src: "assets/credits/1.jpg",
+			},
+			{
+				src: "assets/credits/2.jpg",
+			},
+			{
+				src: "assets/credits/3.jpg",
+			},
+			{
+				src: "assets/credits/4.jpg",
+			},
+			{
+				src: "assets/credits/5.jpg",
+			},
+			{
+				src: "assets/credits/6.jpg",
+			},
+			{
+				src: "assets/credits/7.jpg",
+			},
+			{
+				src: "assets/credits/8.jpg",
+			},
+			{
+				src: "assets/credits/9.jpg",
+			},
+			{
+				src: "assets/credits/dollar.jpg",
+			},
+			{
+				src: "assets/credits/comma.jpg",
+			}
+			]
+		}
+		],
+		font:
+		{
+			_type: "20px Arial",
+			_color: "#ffffff",
 		}
 
 	}

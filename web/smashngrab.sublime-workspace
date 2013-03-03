@@ -1,0 +1,310 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"img",
+				"img"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 2260,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "\nvar rewardScene = (function() {\n	//var input;\n	var scene;\n\n	var grid;\n\n	return {\n		init: function(scene) {\n			console.log(\"init: reward scene\");\n\n			this.scene = scene;\n\n			//make sure all the assets are visible\n			for(var i = 0 ; i < scene.visuals.length ; i++)\n			{\n				scene.visuals[i].visible = true;\n			}\n\n			//--------initialize grid\n			grid = new Array(scene.rewardGrid.width);\n			for (var i = 0; i < scene.rewardGrid.width; i++) {\n				grid[i] = new Array(scene.rewardGrid.height);\n				for (var j = 0; j < scene.rewardGrid.height; j++) {\n					grid[i][j] = -1;\n				}\n			}\n\n			randObjects(/*grid*/ grid,\n						/*reward value*/currentJob.reward);\n\n			repositionObjects(grid);\n\n			// add a handler for all the events we're interested in\n			//this.scene.stage.onTick = update;\n			document.onkeydown = handleKeyDown;\n\n			//define mouse callback\n			//handle mouse events\n			this.scene.stage.onMouseMove = function(mousePos) {\n				for(var i = 0 ; i < scene.visuals.length ; i++)\n				{\n					if(scene.visuals[i].hasHover)\n					{\n						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX , mousePos.stageY ))\n						{\n							//console.log(\"hover state initialized\");\n						}\n					}\n				}\n			}\n\n			this.scene.stage.onMouseDown = function(mousePos) {\n				for(var i = 0 ; i < scene.visuals.length ; i++)\n				{\n					if(scene.visuals[i].hasDown)\n					{\n						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))\n						{\n							addEventEx(scene.visuals[i].downEvent);\n							console.log(\"down state initialized\");\n						}\n					}\n				}\n			}\n\n		},\n		update: function() {\n\n\n\n			//update scene\n			this.scene.stage.update();\n		},\n		finalize: function() {\n			for(var i = 0 ; i < this.scene.visuals.length ; i++)\n			{\n				this.scene.visuals[i].bitmap.visible = false;\n			}\n			if (typeof this.scene.messages !== 'undefined') {\n				for(var i = 0 ; i < this.scene.messages.length ; i++)\n				{\n					this.scene.messages[i].bg.visible = false;\n					this.scene.messages[i].text.visible = false;\n				}\n			}\n		},\n	};\n\n	function handleKeyDown(evt) {\n		// For now we use keyboard controls for the dial\n		if (evt.keyIdentifier==\"Left\") { this.input.rotation -= 10; } \n		if (evt.keyIdentifier==\"Right\") { this.input.rotation += 10; }\n	};\n\n	function randObjects(grid, rewardLevel) {\n		var scene = scenes[currScene];\n		var possibleRewards = scenes[currScene].rewards;\n		var rewards = new Array();\n\n		var rewardValue = rewardLevel * 1000;\n\n		//------------------------randomize rewards\n		var finnished = false;\n		while(!finnished)\n		{\n			var rewardId = Math.floor(Math.random()*possibleRewards.length);\n\n			if(possibleRewards[rewardId].value > rewardValue){\n				finnished = true;\n			}\n			else\n			{\n				rewardValue -= possibleRewards[rewardId].value;\n				rewards.push(possibleRewards[rewardId]);\n			}\n		}\n\n		//----------------------randomize positions\n		for ( var i = 0 ; i < rewards.length ; i++)\n		{\n			var foundSpot = false;\n			while(!foundSpot)\n			{\n				x = Math.floor(Math.random()*grid.length);\n				y = Math.floor(Math.random()*grid[0].length);\n				if(grid[x][y] == -1)\n				{\n					foundSpot = true;\n					grid[x][y] = rewards[i].visualId;\n				}\n			}\n		}\n\n	}\n\n	function repositionObjects(grid)\n	{\n		for (var i = 0; i < grid.length; i++) {\n				for (var j = 0; j < grid[i].length; j++) {\n					if(grid[i][j] != -1)\n					{\n						var applyColorFilter = new createjs.ColorFilter(0, 1, 1, 1);\n							var image = scenes[currScene].visuals[grid[i][j]].bitmap;\n							image.filters = [applyColorFilter];\n							image.cache(0,0, img.width, img.height);\n						scenes[currScene].visuals[grid[i][j]].bitmap.x = i * 100;\n						scenes[currScene].visuals[grid[i][j]].bitmap.y = j * 100;\n						scenes[currScene].visuals[grid[i][j]].bitmap.visible = true;\n						console.log(\"putting object on x:\" + i*100 + \" y : \" + j*100 + \" id : \" + grid[i][j]);\n					}\n				}\n			}\n	}\n\n\n\n})();",
+			"file": "js/rewardScene.js",
+			"file_size": 4066,
+			"file_write_time": 130063525968540598,
+			"settings":
+			{
+				"buffer_size": 3905,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/objects.js",
+			"settings":
+			{
+				"buffer_size": 4623,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/structure.json",
+			"settings":
+			{
+				"buffer_size": 9534,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 196.0,
+		"selected_items":
+		[
+			[
+				"Snippet: ",
+				"Snippet: html"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index2.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/index.html",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/doctype.sublime-snippet",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/HTML/html.sublime-snippet",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/C/Users/Jakub/Dropbox/Work/tuts/git/test/css/reset.css",
+		"/C/Users/Jakub/Dropbox/Work/tuts/git/test/index.html",
+		"/C/Users/Jakub/Dropbox/node/drawtut/index.html",
+		"/C/Users/Jakub/Google Drive/IMD/Playful/CW1/test.html",
+		"/C/Users/Jakub/Google Drive/other/dolezite/edinburgh.txt",
+		"/C/Users/Jakub/Google Drive/IMD/Playful (2)/handin/readme.txt",
+		"/C/Program Files (x86)/Git/etc/gitconfig",
+		"/C/Users/Jakub/Google Drive/IMD/Playful/CW1/style.css",
+		"/C/Users/Jakub/Dropbox/Icarus/web/ikarus.css",
+		"/C/Users/Jakub/Dropbox/node/drawtut/assets/js/script.js",
+		"/E/Crack/install.txt",
+		"/C/Users/Jakub/Dropbox/node/drawtut/index.html.txt"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"visuals",
+			"Bitmap",
+			"img",
+			"snippet",
+			"	<"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 2260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 486.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/rewardScene.js",
+					"settings":
+					{
+						"buffer_size": 3905,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3587,
+								3439
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2160.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/objects.js",
+					"settings":
+					{
+						"buffer_size": 4623,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1188,
+								1188
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 439.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/structure.json",
+					"settings":
+					{
+						"buffer_size": 9534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6741,
+								6741
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5850.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

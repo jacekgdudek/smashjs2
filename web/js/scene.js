@@ -7,11 +7,17 @@ var defaultScene = (function() {
 			console.log("init: combinationScene");
 
 			this.scene = scene;
+			setCredits();
 
 			//make sure all the assets are visible
 			for(var i = 0 ; i < scene.visuals.length ; i++)
 			{
-				scene.scene.visuals[i].visible = true;
+				scene.visuals[i].bitmap.visible = true;
+				if(scene.visuals[i].name == "cash_disp")
+				{
+					scene.visuals[i].textLines[0].textObj.text = "Cash : " + credits;
+					scene.visuals[i].textLines[1].textObj.text = "Risk : " + risk;
+				}
 			}
 
 
@@ -35,14 +41,17 @@ var defaultScene = (function() {
 			}
 
 			this.scene.stage.onMouseDown = function(mousePos) {
-				for(var i = 0 ; i < scene.visuals.length ; i++)
+				if(scene._name == currScene)
 				{
-					if(scene.visuals[i].hasDown)
+					for(var i = 0 ; i < scene.visuals.length ; i++)
 					{
-						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
+						if(scene.visuals[i].hasDown)
 						{
-							addEventEx(scene.visuals[i].downEvent);
-							console.log("down state initialized");
+							if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
+							{
+								addEventEx(scene.visuals[i].downEvent);
+								console.log("down state initialized");
+							}
 						}
 					}
 				}
