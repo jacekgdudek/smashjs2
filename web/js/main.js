@@ -8,31 +8,34 @@ var timer;
 var refreshTime = 10;
 
 timer = setInterval(function () {
-	
-	smoothInputs();
-	if(moduleLoaded)
+	if(loadedAssets && moduleLoaded)
 	{
-		imageProcessing();
+
+		smoothInputs();
+		if(moduleLoaded)
+		{
+			imageProcessing();
+		}
+
+		// Update the current scene
+		if (typeof scenes[currScene] !== 'undefined') {
+			updateMessage();
+			updateHeat();
+			updateCredits();
+			var sceneComplete = scenes[currScene].update();
+		}
+
+
+		//process collision
+		collide();
+
+		//process events
+		handleEvents();
+		
+		// If the level is complete go to the next scene
+		//if (sceneComplete) { currScene++; }
+
 	}
-
-	// Update the current scene
-	if (typeof scenes[currScene] !== 'undefined') {
-		updateMessage();
-		updateHeat();
-		updateCredits();
-		var sceneComplete = scenes[currScene].update();
-	}
-
-
-	//process collision
-	collide();
-
-	//process events
-	handleEvents();
-	
-	// If the level is complete go to the next scene
-	//if (sceneComplete) { currScene++; }
-	
 	
 }, refreshTime);
 
@@ -121,7 +124,7 @@ function updateHeat()
 			scenes[currScene].stage.removeChild(heat.bar, heat.text);
 			heat.bar = null;
 			heat.bar = new createjs.Shape();
-			heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (newValue/heat.maxHeat)*(heat.width-20), heat.height-6);
+			heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","#D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (newValue/heat.maxHeat)*(heat.width-20), heat.height-6);
 			scenes[currScene].stage.addChild(heat.bar, heat.text);
 
 			heat.value = newValue;

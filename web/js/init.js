@@ -3,6 +3,8 @@
 //      initialise stuff
 //////////////////////////////////////
 
+var verbose = true;
+
 //init scenes
 var currPlayers = new Array();
 var currScene = new Object();

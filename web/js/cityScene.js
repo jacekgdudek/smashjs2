@@ -170,7 +170,7 @@ var cityScene = (function() {
 			hideCard(card);
 			for(var i = 0 ; i < cityPointers.length ; i++)
 			{
-				this.scene.stage.removeChild(cityPointers[i].pointer, cities[i].pointerHighlight);
+				this.scene.stage.removeChild(cityPointers[i].pointer, cityPointers[i].pointerHighlight);
 			}
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{

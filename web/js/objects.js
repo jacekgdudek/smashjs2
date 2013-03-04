@@ -77,6 +77,7 @@ function loadObjects()
 
 function setup(gamejson)
 {
+	loadContent(gamejson);
 	//setup cities
 	var _cities = gamejson.game.cities;
 	for(var i = 0 ; i < _cities.length ; i ++)

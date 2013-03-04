@@ -47,8 +47,8 @@ var tutorialScene = (function() {
 			knobNumbers = this.scene.visuals[2];			
 			knobNumbers.bitmap.x = knob.bitmap.x+115;//900+139;
 			knobNumbers.bitmap.y = knob.bitmap.y+117;//200+139;
-			knobNumbers.bitmap.regX += 115;//139;
-			knobNumbers.bitmap.regY += 117;//139;
+			knobNumbers.bitmap.regX = 115;//139;
+			knobNumbers.bitmap.regY = 117;//139;
 
 			stethoscope = this.scene.visuals[3];			
 			stethoscope.bitmap.x = 0;//900+139;
