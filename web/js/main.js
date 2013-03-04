@@ -17,6 +17,7 @@ timer = setInterval(function () {
 
 	// Update the current scene
 	if (typeof scenes[currScene] !== 'undefined') {
+		updateMessage();
 		updateHeat();
 		updateCredits();
 		var sceneComplete = scenes[currScene].update();
@@ -87,6 +88,19 @@ function imageProcessing() {
 	//imgData.data();
 	//Canvas2Image.saveAsPNG(canvas);
 };
+
+function updateMessage()
+{
+	if(messageGUI.delay > 0)
+	{
+		messageGUI.delay--;
+	}
+	else
+	{
+		messageGUI.bg.visible = false;
+		messageGUI.text.visible = false;
+	}
+}
 
 function updateHeat()
 {

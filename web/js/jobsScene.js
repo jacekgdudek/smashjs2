@@ -48,10 +48,12 @@ var jobsScene = (function() {
 			//------setup pointers
 			for(var i = 0 ; i < currentJobs.length ; i++)
 			{
-				if (typeof currentJobs[i].finnished === 'undefined' || currentJobs[i].finnished == false) {
-					var jobPointer = new Object();
-					jobPointer = currentJobs[i];
-					jobPointers.push(jobPointer);
+				if (typeof currentJobs[i].conditions === 'undefined' || currentJobs[i].conditions.length == 0) {
+					if (typeof currentJobs[i].finnished === 'undefined' || currentJobs[i].finnished == false) {
+						var jobPointer = new Object();
+						jobPointer = currentJobs[i];
+						jobPointers.push(jobPointer);
+					}
 				}
 			}
 			randomizePositions(jobPointers, scene.jobPointerSrc, scene.jobPointerRect);

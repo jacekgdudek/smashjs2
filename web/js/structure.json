@@ -530,46 +530,118 @@
 			initialJobs:
 			[
 				{
+					index:0,
 					name:"kindergarden",
 					type:"combination_lock",
 					reward:2,
 					risk:1
 				},
 				{
+					index:1,
 					name:"corner shop",
 					type:"combination_lock",
 					reward:3,
 					risk:1
 				},
 				{
+					index:2,
 					name:"Theodora's apartment",
 					type:"combination_lock",
 					reward:2,
 					risk:1
 				},
 				{
+					index:3,
 					name:"local supermarket",
 					type:"combination_lock",
 					reward:5,
-					risk:1
+					risk:1,
+					conditions:[
+						{
+							value:1
+						},
+						{
+							value:0
+						}
+					]
 				},
 				{
+					index:4,
 					name:"Peekabu office",
 					type:"combination_lock",
 					reward:2,
-					risk:1
+					risk:1,
+					conditions:[
+						{
+							value:1
+						},
+						{
+							value:0
+						}
+					]
 				},
 				{
+					index:5,
 					name:"jewelery shop",
 					type:"combination_lock",
 					reward:1,
-					risk:2
+					risk:2,
+					conditions:[
+						{
+							value:0
+						}
+					]
 				}
 			],
-			types:
-			{
-				name:"combination_lock"
-			}
+			types:[
+				{
+					name:"combination_lock"
+				},
+				{
+					name:"combination_lock"
+				}
+			],
+			names:[
+				{
+					name:"a1"
+				},
+				{
+					name:"a2"
+				},
+				{
+					name:"a3"
+				},
+				{
+					name:"b1"
+				},
+				{
+					name:"b4"
+				},
+				{
+					name:"b6"
+				},
+				{
+					name:"a8"
+				},
+				{
+					name:"cffg"
+				},
+				{
+					name:"a1dasfd"
+				},
+				{
+					name:"a1asdfwweewe"
+				},
+				{
+					name:"1231231"
+				},
+				{
+					name:"cxvdsaga"
+				},
+				{
+					name:"asdfaswerrw"
+				}
+			]
 
 		},
 		elements:[
@@ -621,6 +693,7 @@
 				name:"Edinburgh",
 				maxHeat: 200,
 				currHeat: 20,
+				travelCost: 200,
 				reward:1,
 				risk:1
 			},
@@ -628,6 +701,7 @@
 				name:"London",
 				maxHeat: 2000,
 				currHeat: 20,
+				travelCost: 2000,
 				reward:1,
 				risk:2
 			},
@@ -635,6 +709,7 @@
 				name:"Praga",
 				maxHeat: 400,
 				currHeat: 20,
+				travelCost: 2000,
 				reward:2,
 				risk:1
 			},
@@ -642,6 +717,7 @@
 				name:"Rome",
 				maxHeat: 200,
 				currHeat: 20,
+				travelCost: 20000,
 				reward:2,
 				risk:4
 			},
@@ -649,6 +725,7 @@
 				name:"Paris",
 				maxHeat: 200,
 				currHeat: 20,
+				travelCost: 20000,
 				reward:3,
 				risk:3
 			},
@@ -656,13 +733,14 @@
 				name:"PeekabuLand",
 				maxHeat: 2000,
 				currHeat: 20,
+				travelCost: 20000,
 				reward:5,
 				risk:1
 			}
 		],
 		font:
 		{
-			_type: "20px Arial",
+			_type: "24px Arial",
 			_color: "#ffffff",
 		}
 
