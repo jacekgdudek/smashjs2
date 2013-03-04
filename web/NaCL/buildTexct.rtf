@@ -1,0 +1,26 @@
+
+ /Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c ../../include/libfidtrack/treeidmap.cpp -I ../../include/libfidtrack/\
+
+ /Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c ../../include/libfidtrack/segment.c -I ../../include/libfidtrack/\
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c ../../include/libfidtrack/fidtrackX.c -I ../../include/libfidtrack/\
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c ../../include/libfidtrack/tiled_bernsen_threshold.c -I ../../include/libfidtrack/\
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c ../../include/libfidtrack/FiducialObject.cpp -I ../../include/libfidtrack/\
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c ../../include/libfidtrack/FrameThresholder.cpp -I ../../include/libfidtrack/\
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c ../../include/libfidtrack/FidtrackFinder.cpp -I ../../include/libfidtrack/\
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c ../../include/libfidtrack/FidtrackArea.cpp -I ../../include/libfidtrack/\
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c -o ./CObjects/hello_tutorial_32.o ./libfidtrack/hello_tutorial.cc -m32 -O0 -g -I ./libfidtrack/
+
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -o FidtrackModule_x86_32.nexe ./CObjects/hello_tutorial_32.o ./CObjects/treeidmap.o ./CObjects/segment.o ./CObjects/fidtrackX.o ./CObjects/tiled_bernsen_threshold.o ./CObjects/FiducialObject.o ./CObjects/FidtrackFinder.o ./CObjects/FidtrackArea.o ./CObjects/FrameThresholder.o -m32 -O0 -g -pthread -std=gnu++98 -Wno-long-long -Wall -Wswitch-enum -pedantic -I/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/include/libfidtrack -lppapi_cpp -lppapi
+
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -c -o hello_tutorial_64.o hello_tutorial.cc -m64 -O0 -g -I ../../include/libfidtrack/
+
+/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/toolchain/mac_x86_newlib/bin/i686-nacl-g++ -o FidtrackModule_x86_64.nexe hello_tutorial_64.o treeidmap.o segment.o fidtrackX.o tiled_bernsen_threshold.o FiducialObject.o FidtrackFinder.o FidtrackArea.o FrameThresholder.o -m64 -O0 -g -pthread -std=gnu++98 -Wno-long-long -Wall -Wswitch-enum -pedantic -I/Users/Developer/Desktop/Projects/nacl_sdk/pepper_23/include/libfidtrack -lppapi_cpp -lppapi
