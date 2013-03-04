@@ -29,7 +29,7 @@ var tutorialScene = (function() {
 
 	return {
 		init: function(scene) {
-			console.log("init: combinationScene");
+			console.log("init: tutorialScene");
 
 			this.scene = scene;
 			this.hints = scene.hints;
@@ -308,7 +308,7 @@ var tutorialScene = (function() {
 			// Play the sound if we pressed the button and it's not playing
 			buzzAudio.click.play();
 		}*/
-		scene.stage.update();
+		this.scene.stage.update();
 	};
 
 })();

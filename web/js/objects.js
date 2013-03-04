@@ -150,8 +150,7 @@ function setup(gamejson) {
 
 }
 
-function addCreditsToStage(stage)
-{
+function addCreditsToStage(stage) {
 
 	stage.addChild(credits.bg.bmp);
 	//init numbers to 0
@@ -181,8 +180,7 @@ function addCreditsToStage(stage)
 }
 
 
-function setCredits()
-{
+function setCredits() {
 	var digits = new Array();
 	//determine particular values for digits
 	for(var i = 5; i >= 0 ; i --) {
@@ -204,8 +202,7 @@ function setCredits()
 	}
 }
 
-function changeText(text, messageObj)
-{
+function changeText(text, messageObj) {
 	messageObj.text.text = text;
 	if(messageObj.text.getMeasuredWidth() < messageObj.lineWidth) {
 		messageObj.text.lineWidth = messageObj.text.getMeasuredWidth();
@@ -222,8 +219,7 @@ function changeText(text, messageObj)
 	messageObj.bg.alpha = 0.5;
 }
 
-function adjustTextBox(textObj, textBox)
-{
+function adjustTextBox(textObj, textBox) {
 	textBox.graphics.beginFill("#111111").drawRoundRect(	textObj.x - 20,
 								textObj.y - 30,
 								textObj.lineWidth + 40,

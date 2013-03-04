@@ -5,7 +5,7 @@ var introScene = (function() {
 	var delay;
 	return {
 		init: function(scene) {
-			console.log("init: combinationScene");
+			console.log("init: tutorialScene");
 
 			this.scene = scene;
 			this.delay = 200;
