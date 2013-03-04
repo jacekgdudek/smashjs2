@@ -17,6 +17,8 @@ timer = setInterval(function () {
 
 	// Update the current scene
 	if (typeof scenes[currScene] !== 'undefined') {
+		updateMessage();
+		updateHeat();
 		updateCredits();
 		var sceneComplete = scenes[currScene].update();
 	}
@@ -87,17 +89,106 @@ function imageProcessing() {
 	//Canvas2Image.saveAsPNG(canvas);
 };
 
+function updateMessage()
+{
+	if(messageGUI.delay > 0)
+	{
+		messageGUI.delay--;
+	}
+	else
+	{
+		messageGUI.bg.visible = false;
+		messageGUI.text.visible = false;
+	}
+}
+
+function updateHeat()
+{
+	var gap = 0;
+	if(!heat.armed)
+	{
+		if(heat.nextValue != heat.value)
+		{
+			gap = Math.floor((heat.nextValue - heat.value)/2);
+			//determine direction
+			var direction = ( heat.nextValue > heat.value );
+			//validate gap
+			if((gap < 1 && direction) || (gap > -1 && !direction)) gap = (direction ? 1 : -1)*1;
+			//determine new value
+			var newValue = heat.value + gap;
+
+			//change width of bar
+			scenes[currScene].stage.removeChild(heat.bar, heat.text);
+			heat.bar = null;
+			heat.bar = new createjs.Shape();
+			heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (newValue/heat.maxHeat)*(heat.width-20), heat.height-6);
+			scenes[currScene].stage.addChild(heat.bar, heat.text);
+
+			heat.value = newValue;
+		}
+	}
+	else
+	{
+		switch(heat.state)
+		{
+			//slide the time in
+			case 0:
+				if(heat.risk < heat.maxRisk)
+				{
+					heat.risk++;
+
+				}
+				else
+				{
+					heat.riskOffset++;
+					heat.time++;
+					if(heat.time > heat.noRiskTime)
+					{
+						heat.state = 1;
+					}
+				}
+
+			break;
+			//run time
+			case 1:
+				gap = 0.05;
+				heat.time -= gap;
+				if(heat.time < 0)
+				{
+					addEvent("FINNISHED_JOB", false);
+				}
+			break;
+		}
+
+		scenes[currScene].stage.removeChild(heat.bg, heat.bar,heat.modules, heat.text);
+		heat.bar = null;
+		heat.modules = null;
+		heat.modules = new createjs.Shape();
+		heat.bar = new createjs.Shape();
+		//very nasty bad ass drawing function, do not touch it even with the stick UGH!!
+		heat.bar.graphics.beginLinearGradientFill(["#66F","#AAF","#66F","00D"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10 + ((heat.value + (heat.maxTime-heat.time)) /heat.maxHeat)*(heat.width-20), heat.y+3, 
+														(heat.time/heat.maxHeat)*(heat.width-20), heat.height-6).beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.nextValue/heat.maxHeat)*(heat.width-20), heat.height-6);;
+		//draw risk
+		heat.modules.graphics.beginLinearGradientFill(["#AAA","#FFF","#AAA","555"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.risk-heat.riskOffset) /heat.maxHeat)*(heat.width-20), heat.y+3, 
+														(heat.risk/heat.maxHeat)*(heat.width-20), heat.height-6);
+
+		scenes[currScene].stage.addChild(heat.bg, heat.bar,heat.modules, heat.text);
+	}
+	
+}
+
+
 function updateCredits()
 {
 	var gap = 9;
 	if(credits.nextValue != credits.value)
 	{
 		gap = Math.floor((credits.nextValue - credits.value)/2);
-		if(gap < 1) gap = 1;
 		//determine direction
 		var direction = ( credits.nextValue > credits.value );
 		//determine new value
-		var newValue = credits.value - direction*(-1)*gap;
+		if((gap < 1 && direction) || (gap > -1 && !direction)) gap = (direction ? 1 : -1)*1;
+		var newValue = credits.value + gap;
 		var lastDigits = new Array();
 		var newDigits = new Array();
 

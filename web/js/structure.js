@@ -31,8 +31,17 @@ var structure = {
 					  name: "btn_play",
 					  hasDown: true,
 					  downEvent: {
-						type: "SWITCH_SCENE",
-						content: "base_scene"
+						type: "START_NEW_GAME"
+						}	
+					},
+					{
+						x:400,
+						y:400,
+					  src: "assets/button/play.png",
+					  name: "btn_play",
+					  hasDown: true,
+					  downEvent: {
+						type: "CONTINUE_GAME"
 						}	
 					},
 					{
@@ -263,11 +272,19 @@ var structure = {
 			},
 			{
 				_name: "map_scene",
-				init: defaultScene.init,
-				update: defaultScene.update,
-				finalize: defaultScene.finalize,
-				isCurrent: true,
+				init: cityScene.init,
+				update: cityScene.update,
+				finalize: cityScene.finalize,
 				stage_id: "game_canvas",
+				catSrc: "assets/city_map/cat.jpg",
+				cityPointerSrc: "assets/city_map/cat.jpg",
+				cityPointerRect:
+				{
+					x: 0,
+					y: 0,
+					width: 320,
+					height: 240
+					},
 				visuals: [
 					{
 					  src: "assets/base/base_bkg2.jpg",
@@ -289,6 +306,12 @@ var structure = {
 						type: "SWITCH_SCENE",
 						content: "base_scene"
 						}	
+					},
+					{
+						x:40,
+						y:600,
+						src: "assets/city_map/card.jpg",
+						name: "btn_play"
 					}
 				]
 			},
@@ -356,11 +379,15 @@ var structure = {
 			},
 			{
 				_name: "gallery_scene",
-				init: defaultScene.init,
-				update: defaultScene.update,
-				finalize: defaultScene.finalize,
+				init: galleryScene.init,
+				update: galleryScene.update,
+				finalize: galleryScene.finalize,
 				isCurrent: true,
 				stage_id: "game_canvas",
+				galleryGrid:{
+					width: 6,
+					height: 3,
+					},
 				visuals: [
 					{
 					  src: "assets/base/base_bkg2.jpg",
@@ -545,47 +572,153 @@ var structure = {
 			initialJobs:
 			[
 				{
+					index:0,
 					name:"kindergarden",
 					type:"combination_lock",
 					reward:2,
 					risk:1
 				},
 				{
+					index:1,
 					name:"corner shop",
 					type:"combination_lock",
 					reward:3,
 					risk:1
 				},
 				{
+					index:2,
 					name:"Theodora's apartment",
 					type:"combination_lock",
 					reward:2,
 					risk:1
 				},
 				{
+					index:3,
 					name:"local supermarket",
 					type:"combination_lock",
 					reward:5,
-					risk:1
+					risk:1,
+					conditions:[
+						{
+							value:1
+						},
+						{
+							value:0
+						}
+					]
 				},
 				{
+					index:4,
 					name:"Peekabu office",
 					type:"combination_lock",
 					reward:2,
-					risk:1
+					risk:1,
+					conditions:[
+						{
+							value:1
+						},
+						{
+							value:0
+						}
+					]
 				},
 				{
+					index:5,
 					name:"jewelery shop",
 					type:"combination_lock",
 					reward:1,
-					risk:2
+					risk:2,
+					conditions:[
+						{
+							value:0
+						}
+					]
 				}
 			],
-			types:
-			{
-				name:"combination_lock"
-			}
+			types:[
+				{
+					name:"combination_lock"
+				},
+				{
+					name:"combination_lock"
+				}
+			],
+			names:[
+				{
+					name:"a1"
+				},
+				{
+					name:"a2"
+				},
+				{
+					name:"a3"
+				},
+				{
+					name:"b1"
+				},
+				{
+					name:"b4"
+				},
+				{
+					name:"b6"
+				},
+				{
+					name:"a8"
+				},
+				{
+					name:"cffg"
+				},
+				{
+					name:"a1dasfd"
+				},
+				{
+					name:"a1asdfwweewe"
+				},
+				{
+					name:"1231231"
+				},
+				{
+					name:"cxvdsaga"
+				},
+				{
+					name:"asdfaswerrw"
+				}
+			]
 
+		},
+		specialRewards:{
+			thumbnails:[
+				{
+					src: "assets/credits/0.jpg",
+					name: "audio"
+				},
+				{
+					src: "assets/credits/2.jpg",
+					name: "video"
+				}
+			],
+			rewards:[
+				{
+					contentId: 0,
+					src: "",
+					type: 0,
+					downEvent: {
+						type: "SPECIAL_REWARD_BUTTON_DOWN",
+						content: 0
+						}
+
+				},
+				{
+					contentId: 1,
+					src: "",
+					type: 1,
+					downEvent: {
+						type: "SPECIAL_REWARD_BUTTON_DOWN",
+						content: 1
+						}
+				}
+			]
+			
 		},
 		elements:[
 		{
@@ -631,9 +764,71 @@ var structure = {
 			]
 		}
 		],
+		cities:[
+			{
+				name:"Edinburgh",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				maxHeat: 200,
+				currHeat: 20,
+				travelCost: 200,
+				reward:1,
+				risk:1
+			},
+			{
+				name:"London",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				maxHeat: 2000,
+				currHeat: 20,
+				travelCost: 2000,
+				reward:1,
+				risk:2
+			},
+			{
+				name:"Praga",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				maxHeat: 400,
+				currHeat: 20,
+				travelCost: 2000,
+				reward:2,
+				risk:1
+			},
+			{
+				name:"Rome",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				maxHeat: 200,
+				currHeat: 20,
+				travelCost: 20000,
+				reward:2,
+				risk:4
+			},
+			{
+				name:"Paris",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				maxHeat: 200,
+				currHeat: 20,
+				travelCost: 20000,
+				reward:3,
+				risk:3
+			},
+			{
+				name:"PeekabuLand",
+				pointerSrc:"assets/credits/8.jpg",
+				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				maxHeat: 2000,
+				currHeat: 20,
+				travelCost: 20000,
+				reward:5,
+				risk:1
+			}
+		],
 		font:
 		{
-			_type: "20px Arial",
+			_type: "24px Arial",
 			_color: "#ffffff",
 		}
 
