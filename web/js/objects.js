@@ -26,7 +26,8 @@ var messageGUI = new Object();
 var isFirstCity = true;
 var cities = {};
 var currCity;
-
+var currSpecialRewards = new Array();
+var specialRewards = new Array();
 
 var sweetSpot = (function() {
 	var scene;
@@ -52,8 +53,8 @@ var sweetSpot = (function() {
 	};
 })();
 
-function loadObjects()
-{
+function loadObjects() {
+	/*
 	//get access to sructer file
 	var txtFile = new XMLHttpRequest();
 	var allText;
@@ -69,12 +70,17 @@ function loadObjects()
 	    }
 	  }
 	}
-	txtFile.send(null);
+	txtFile.send(null);*/
+
+	var gamejson = structure;
+	console.log(gamejson.game.scenes[0].visuals.length);
+	setup(gamejson);
 }
 
 
 function setup(gamejson)
 {
+	loadContent(gamejson);
 	//setup cities
 	var _cities = gamejson.game.cities;
 	for(var i = 0 ; i < _cities.length ; i ++)
@@ -83,6 +89,15 @@ function setup(gamejson)
 		_cities[i].heat = 20;
 	}
 	currCity = "Edinburgh";
+	//setup special rewards
+	specialRewards = gamejson.game.specialRewards;
+	for(var i = 0 ; i < specialRewards.rewards.length ; i ++)
+	{
+		specialRewards.rewards[i].thumbnail = new createjs.Bitmap(specialRewards.thumbnails[specialRewards.rewards[i].type].src);
+		specialRewards.rewards[i].thumbnail.x = -100;
+		specialRewards.rewards[i].thumbnail.y = -100;
+	}
+
 	///setup crdits disp
 	//--------------------------------------setup credits element
 	credits = gamejson.game.elements[0];
@@ -134,14 +149,12 @@ function setup(gamejson)
 	 			_scenes[i].messages[j].text.textBaseline = "alphabetic";
 				_scenes[i].messages[j].text.lineWidth = _scenes[i].messages[j].lineWidth;
 
-				if(_scenes[i].messages[j].text.getMeasuredWidth() < _scenes[i].messages[j].text.lineWidth)
-				{
+				if(_scenes[i].messages[j].text.getMeasuredWidth() < _scenes[i].messages[j].text.lineWidth) {
 					_scenes[i].messages[j].text.lineWidth = _scenes[i].messages[j].text.getMeasuredWidth();
 				}
 
 				var centeredX;
-				if(_scenes[i].messages[j].center_x)
-				{
+				if(_scenes[i].messages[j].center_x) {
 					centeredX = 800/2 - _scenes[i].messages[j].text.lineWidth/2;
 					_scenes[i].messages[j].text.x = centeredX;
 				}
@@ -280,7 +293,7 @@ function addHeatToStage(stage, gamejson)
 	
 	//add bar
 	heat.bar = new createjs.Shape();
-	heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
 
 	//add text
 	heat.text = new createjs.Text("HEAT", gamejson.game.font._type, "#00FF00");
@@ -301,7 +314,7 @@ function setHeat()
 	scenes[currScene].stage.removeChild(heat.bar, heat.text);
 	heat.bar = null;
 	heat.bar = new createjs.Shape();
-	heat.bar.graphics.beginFill("darkred").drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
 	heat.text.text = "HEAT";
 	heat.text.visible = true;
 	heat.bar.visible = true;
@@ -312,20 +325,31 @@ function setHeat()
 
 function armHeat()
 {
+	heat.state = 0;
 	heat.armed = true;
 	heat.maxTime = (heat.maxHeat-heat.value);
-	heat.time = (6 - currentJob.risk)*heat.maxTime/5;
+	heat.time = 0;
+	heat.risk = 0;
+	heat.maxRisk = (currentJob.risk-1)*heat.maxTime/5;
+	heat.riskOffset = 0;
+	heat.noRiskTime = (6 - currentJob.risk)*heat.maxTime/5;
 	heat.bar.visible =false;
-	scenes[currScene].stage.removeChild(heat.bar, heat.text);
+	scenes[currScene].stage.removeChild(heat.bar, heat.text,heat.modules);
+	//create bar
 	heat.bar = null;
 	heat.bar = new createjs.Shape();
 	heat.bar.graphics.beginFill("darkblue").drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.time) /heat.maxHeat)*(heat.width-20), heat.y+3, 
 														(heat.time/heat.maxHeat)*(heat.width-20), heat.height-6);
+	//create text
 	heat.text.text = "TIME";
+	//create risk modules
+	heat.modules = new createjs.Shape();
+	heat.modules.graphics.beginFill("grey").drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.risk) /heat.maxHeat)*(heat.width-20), heat.y+3, 
+														(heat.risk/heat.maxHeat)*(heat.width-20), heat.height-6);
 	heat.text.visible = true;
 	heat.bar.visible = true;
 	heat.bg.visible = true;
-	scenes[currScene].stage.addChild(heat.bar, heat.text);
+	scenes[currScene].stage.addChild(heat.bar, heat.modules, heat.text);
 }
 
 function hideHeat()
@@ -336,28 +360,23 @@ function hideHeat()
 	heat.bg.visible = false;
 }
 
-function addCreditsToStage(stage)
-{
+function addCreditsToStage(stage) {
 
 	stage.addChild(credits.bg.bmp);
 	//init numbers to 0
 	var numbersGrid = new Array(8);
-	for(var i = 0 ; i < numbersGrid.length ; i++)
-	{
+	for(var i = 0 ; i < numbersGrid.length ; i++) {
 		var numberObj = new Object();
 		
-		if(i == 0)
-		{
+		if(i == 0) {
 			numberObj.bmp = credits.subelements[10].bmp.clone();
-		}
+
 		//comma
-		else if(i == 4)
-		{
+		} else if(i == 4) {
 			numberObj.bmp = credits.subelements[11].bmp.clone();
-		}
-		else
-		//rest
-		{
+
+		//rest 
+		} else {
 			numberObj.bmp = credits.subelements[0].bmp.clone();
 		}
 			
@@ -371,18 +390,15 @@ function addCreditsToStage(stage)
 }
 
 
-function setCredits()
-{
+function setCredits() {
 	var digits = new Array();
 	//determine particular values for digits
-	for(var i = 5; i >= 0 ; i --)
-	{
+	for(var i = 5; i >= 0 ; i --) {
 		digits.push(Math.floor((credits.value%Math.pow(10,(i+1)))/Math.pow(10,i)));
 	}
 	
 	//compare and change digits
-	for(var i = 0; i < 6 ; i ++)
-	{
+	for(var i = 0; i < 6 ; i ++) {
 		var index = i+1;
 		if(index>3) index++;
 		scenes[currScene].stage.removeChild(credits.numbers[index].bmp);
@@ -396,17 +412,14 @@ function setCredits()
 	}
 }
 
-function changeText(text, messageObj)
-{
+function changeText(text, messageObj) {
 	messageObj.text.text = text;
-	if(messageObj.text.getMeasuredWidth() < messageObj.lineWidth)
-	{
+	if(messageObj.text.getMeasuredWidth() < messageObj.lineWidth) {
 		messageObj.text.lineWidth = messageObj.text.getMeasuredWidth();
 	}
 
 	var centeredX;
-	if(messageObj.center_x)
-	{
+	if(messageObj.center_x) {
 		centeredX = 800/2 - messageObj.text.lineWidth/2;
 		messageObj.text.x = centeredX;
 	}
@@ -416,11 +429,10 @@ function changeText(text, messageObj)
 	messageObj.bg.alpha = 0.5;
 }
 
-function adjustTextBox(textObj, textBox)
-{
-	textBox.graphics.beginFill("#111111").drawRoundRect(textObj.x - 20,
-													textObj.y - 30,
-													textObj.lineWidth + 40,
-													textObj.getMeasuredHeight() + 30,
-													10);
+function adjustTextBox(textObj, textBox) {
+	textBox.graphics.beginFill("#111111").drawRoundRect(	textObj.x - 20,
+								textObj.y - 30,
+								textObj.lineWidth + 40,
+								textObj.getMeasuredHeight() + 30,
+								10);
 }

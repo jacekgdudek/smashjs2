@@ -3,39 +3,67 @@
 <head>
 	<!-- head includes (so C++) -->
 	<link href="css/demo.css" rel="stylesheet" type="text/css">
-  <script src="js/easeljs-0.6.0.min.js"></script>
+	<script src="js/libs/easeljs-0.6.0.min.js"></script>
+	<script src="js/libs/easeljs-0.5.0.min.js"></script>
+	<script src="js/libs/ndgmr.Collision.js"></script>
+	<script src="js/hitTest.js"></script>
+
+	<!-- preload -->
+	<script src="js/libs/preloadjs-0.2.0.min.js"></script>
+
+	<!-- audio  -->
+	<script src="js/audioManager.js"></script>
+	<script src="js/libs/soundjs/soundjs-0.3.0.min.js"></script>
+	<script src="js/libs/soundjs/HTMLAudioPlugin.js"></script>
+	<script src="js/libs/soundjs/swfobject.js"></script>
+	<script src="js/libs/soundjs/FlashPlugin.js"></script>
+
 	<script src="js/ColorFilter.js"></script>
-  <script src="js/objects.js"></script>
-  <script src="js/ndgmr.Collision.js"></script>
-  <script src="js/hitTest.js"></script>
-  <script src="js/jquery-1.5.1.min.js"></script>
+	<script src="js/objects.js"></script>
+
+
+	<!-- scenes -->
+	<script src="js/scene.js"></script>
+	<script src="js/scenes/introScene.js"></script> 
+	<script src="js/scenes/tutorialScene.js"></script>
+	<script src="js/scenes/rewardScene.js"></script> 
+	<script src="js/scenes/jobScene.js"> </script>
+	<script src="js/scenes/safeScene.js"></script>
+	<script src="js/scenes/stethoscopeScene.js"></script>
+	<script src="js/scenes/combinationScene.js"></script>
+	<script src="js/scenes/videoScene.js"></script>
+
+	<!-- collision -->
+	<!-- preload -->
+	<script type="text/javascript" src="./js/preloadjs-0.2.0.min.js"></script>
+	<!-- save/load -->
+	<script type="text/javascript" src="./js/saveData.js"></script>
 
   <!-- preload -->
-  <script type="text/javascript" src="./js/preloadjs-0.2.0.min.js"></script>
+  <script type="text/javascript" src="./js/preloadjs-0.3.0.min.js"></script>
+  <script type="text/javascript" src="./js/loader.js"></script>
+  <!-- save/load -->
+  <script type="text/javascript" src="./js/saveData.js"></script>
+	<!-- Structure -->
+	<script src="js/structure.js"></script>
 
-  <!---   audio  -->
-  <script type="text/javascript" src="./js/audioManager.js"></script>
-  <script type="text/javascript" src="./js/soundjs/soundjs-0.3.0.min.js"></script>
-  <script type="text/javascript" src="./js/soundjs/HTMLAudioPlugin.js"></script>
-  <script type="text/javascript" src="./js/soundjs/swfobject.js"></script>
-  <script type="text/javascript" src="./js/soundjs/FlashPlugin.js"></script>
-  <!--      -->
+	<script src="js/init.js"></script>
 
-  <!-- scenes -->
-  <script src="js/scene.js"></script>
-  <script src="js/introScene.js"></script> 
-  <script src="js/tutorialScene.js"></script>
-  <script src="js/rewardScene.js"></script> 
-  <script src="js/cityScene.js"> </script>
-  <script src="js/jobsScene.js"> </script>
-  <script src="js/safeScene.js"></script>
-  <script src="js/stethoscopeScene.js"></script>
-  <script src="js/combinationScene.js"></script>
-  <!-- -->
+	<!-- scenes -->
+	<script src="js/scene.js"></script>
+	<script src="js/introScene.js"></script> 
+	<script src="js/tutorialScene.js"></script>
+	<script src="js/rewardScene.js"></script> 
+	<script src="js/cityScene.js"> </script>
+	<script src="js/jobsScene.js"> </script>
+	<script src="js/safeScene.js"></script>
+	<script src="js/galleryScene.js"></script>
+	<script src="js/stethoscopeScene.js"></script>
+	<script src="js/combinationScene.js"></script>
+	<!-- -->
 
-  <script src="js/init.js"></script>
-    <!-- title -->
-  	<title>SmashAndGrab</title>
+	<!-- title -->
+	<title>SmashAndGrab</title>
 </head>
 
 <body onLoad="init()">
@@ -44,13 +72,12 @@
       <div id="listener">
         <script src="js/eventHandler.js"></script>
     
-        <embed name="nacl_module"
+        <embed 
            id="FidtrackModule"
            width=0 height=0
            src="NaCL/FidtrackModule.nmf"
            type="application/x-nacl" />
       </div>
-    </p>
     <!-- header -->
     <h1>Smash And Grab</h1>
 
@@ -61,8 +88,26 @@
         </canvas>
         <h2>Status : </h2>
 		<div id="status_field">Started</div>
-        <video id="live" width="640" height="480" autoplay style="visibility: hidden; "></video>
-        <canvas width="640" id="canvas" height="480" style="visibility: hidden;"></canvas>
+        <video 	id="live"
+		width="640" height="480" 
+		autoplay 
+		style="visibility: hidden; ">
+	</video>
+        <canvas id="canvas" 
+		width="640" height="480" 
+		style="visibility: hidden;">
+	</canvas>
+	<video 	id="videoPlayer" 
+		width="640" height="480" 
+		style="visibility: hidden;"			
+		controls
+		preload="auto" 	  
+		data-setup="{}">
+		<source src="assets/video/peekabu_promo_640.mp4" type="video/mp4">
+		<source src="assets/video/peekabu_promo_640.webm" type="video/webm">
+		<source src="assets/video/peekabu_promo_640.ogv" type="video/ogg">
+		Your browser does not support the video tag.
+	</video>
     </div>
     
 	<script src="js/cameraAccess.js"></script>

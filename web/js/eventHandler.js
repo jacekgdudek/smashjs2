@@ -34,6 +34,8 @@ function handleEvents()
 
 		else if(event.type == "COLLISION") processCollision(event);
 
+		else if(event.type == "SPECIAL_REWARD_BUTTON_DOWN") specialRewardDown(event.content);
+
 		else if(event.type == "ADD_CREDITS") addCredits(event.content);
 
 		else if(event.type == "ADD_HEAT") addHeat(event.content);
@@ -46,8 +48,41 @@ function handleEvents()
 
 		else if(event.type == "RANDOMIZE_JOBS") randomizeJobs();
 
+		else if(event.type == "SAVE_GAME") saveData();
+
+		else if(event.type == "LOAD_GAME") loadData();
+
+		else if(event.type == "POP_UP_MESSAGE") setMessage(event.content, event.content2);
+
+		//------------------------------ start game
+		else if(event.type == "START_NEW_GAME") startNewGame();
+
+		else if(event.type == "CONTINUE_GAME") continueGame();
+
+		
+
 	}
 	events = [];
+}
+
+function specialRewardDown(id)
+{
+	if(currScene == "reward_scene")
+	{
+		currSpecialRewards.push(id);
+	}
+}
+
+function startNewGame()
+{
+	addEvent("SWITCH_SCENE","base_scene");
+	addEvent("SAVE_GAME");
+}
+
+function continueGame()
+{
+	addEvent("SWITCH_SCENE","base_scene");
+	addEvent("LOAD_GAME");
 }
 
 function randomizeJobs()
@@ -269,7 +304,7 @@ function clearConditionsForJobs(id)
 
 function addCredits(_credits)
 {
-	if(_credits == "-3/4") credits.nextValue = credits.nextValue/4;
+	if(_credits == "-3/4") credits.nextValue = Math.floor(credits.nextValue/4);
 	else
 	{
 		credits.nextValue += _credits;
@@ -295,6 +330,14 @@ function processCollision(event)
 
 function switchStage(content)
 {
+	//trigger saving game
+	if(content == "base_scene" && currScene == "reward_scene")
+	{
+		addEvent("SAVE_GAME");
+		addEvent("POP_UP_MESSAGE","game saved",100);
+	}
+
+
 	if(currScene == content)
 	{
 		console.log("Switching to the same Scene... very smart");
@@ -316,6 +359,7 @@ function switchStage(content)
 		scenes[currScene].init(scenes[currScene]);
 		console.log("Switched stage to " + content);
 	}
+	
 }
 
 function switchSubStage(content)
