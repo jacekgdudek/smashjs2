@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link href="demo.css" rel="stylesheet" type="text/css">
+	<script src="easeljs-0.5.0.min.js"></script>
+    <script type="text/javascript">
+		FidtrackModule = null;  // Global application object.
+		statusText = 'Loading..';
+		//initialize input arrays
+		var inputArray = new Array();
+		for(var i = 0 ; i < 4 ; i++)
+		{
+			var fid = new Object();
+			fid.id = i;
+			fid.x = -1;
+			fid.y = -1;
+			fid.lastx = -1;
+			fid.lasty = -1;
+			fid.wasUpdated = false;
+			inputArray[i] = fid;
+		}
+		
+		// Indicate load success.
+		function moduleDidLoad() {
+		  FidtrackModule = document.getElementById('hello_tutorial');
+		  updateStatus('Loaded');
+		}
+		
+		function popPixels(imgStr) {
+		  FidtrackModule = document.getElementById('hello_tutorial');
+		  FidtrackModule.postMessage(imgStr);
+		}
+	
+		messageCount = 0;
+		var smoothing = 0.1;
+		function handleMessage(message_event) {
+			//reset was updated
+			for(var i = 0 ; i < 4 ; i++)
+			{
+				inputArray[i].wasUpdated = false;
+			}
+			//parse message
+			var fidInfo = message_event.data.split(",");
+			if(fidInfo[0] != "")
+			{
+				for (var i = 0; i < fidInfo.length; i+=3) {
+					
+					var x = parseInt(fidInfo[i+1]);
+					var y = parseInt(fidInfo[i+2]);
+					if( x < 3000)
+					{ 
+						var fidId = parseInt(fidInfo[i]);
+						inputArray[fidId].lastx = inputArray[fidId].x;
+						inputArray[fidId].lasty = inputArray[fidId].y;
+						inputArray[fidId].x = smoothing*x+ (1-smoothing)*inputArray[fidId].lastx ;
+						inputArray[fidId].y = smoothing*y + (1-smoothing)*inputArray[fidId].lasty ;
+						inputArray[fidId].wasUpdated = true;
+					}
+					
+				}
+			}
+		}
+		//public drawables
+		var stage;
+		var circle0;
+		var circle2; 
+		
+		function init() {
+			//init easel
+			stage = new createjs.Stage("demoCanvas");
+			circle0 = new createjs.Shape();
+			circle2 = new createjs.Shape();
+			circle0.graphics.beginFill("red").drawCircle(0, 0, 20);
+			circle2.graphics.beginFill("green").drawCircle(0, 0, 20);
+			circle0.x = 100;
+			circle0.y = 100;
+			circle2.x = 200;
+			circle2.y = 100;
+			stage.addChild(circle0);
+			stage.addChild(circle2);
+			// stage.addChild(new createjs.Shape()).setTransform(100,100).graphics.f("red").dc(0,0,50);
+			stage.update();
+			console.log("initialized easel!");
+			pageDidLoad();
+		}
+		function pageDidLoad() {
+			
+			console.log("pageDidLoad");
+		  if (FidtrackModule == null) {
+			updateStatus('LOADING...');
+		  } else {
+			// It's possible that the Native Client module onload event fired
+			// before the page's onload event.  In this case, the status message
+			// will reflect 'SUCCESS', but won't be displayed.  This call will
+			// display the current message.
+			updateStatus();
+		  }
+		}
+	
+		// Set the global status message.  If the element with id 'statusField'
+		// exists, then set its HTML to the status message as well.
+		// opt_message The message test.  If this is null or undefined, then
+		// attempt to set the element with id 'statusField' to the value of
+		// |statusText|.
+		function updateStatus(opt_message) {
+		  if (opt_message)
+			statusText = opt_message;
+		  var statusField = document.getElementById('status_field');
+		  if (statusField) {
+			statusField.innerHTML = statusText;
+		  }
+		}
+	  </script>
+
+  	<title>Smash&Grab</title>
+</head>
+<body onLoad="init()">
+
+<h1>Smash & Grab</h1>
+<p>
+  <!-- Load the published .nexe.  This includes the 'nacl' attribute which
+  shows how to load multi-architecture modules.  Each entry in the "nexes"
+  object in the .nmf manifest file is a key-value pair: the key is the
+  instruction set architecture ('x86-32', 'x86-64', etc.); the value is a URL
+  for the desired NaCl module.
+  To load the debug versions of your .nexes, set the 'nacl' attribute to the
+  _dbg.nmf version of the manifest file.
+
+  Note: Since this NaCl module does not use any real-estate in the browser,
+  it's width and height are set to 0.
+
+  Note: The <EMBED> element is wrapped inside a <DIV>, which has both a 'load'
+  and a 'message' event listener attached.  This wrapping method is used
+  instead of attaching the event listeners directly to the <EMBED> element to
+  ensure that the listeners are active before the NaCl module 'load' event
+  fires.  This also allows you to use PPB_Messaging.PostMessage() (in C) or
+  pp::Instance.PostMessage() (in C++) from within the initialization code in
+  your NaCl module.
+  -->
+  <div id="listener">
+    <script type="text/javascript">
+      var listener = document.getElementById('listener');
+      listener.addEventListener('load', moduleDidLoad, true);
+      listener.addEventListener('message', handleMessage, true);
+    </script>
+
+    <embed name="nacl_module"
+       id="hello_tutorial"
+       width=0 height=0
+       src="hello_tutorial.nmf"
+       type="application/x-nacl" />
+  </div>
+</p>
+
+<div>
+	<canvas id="demoCanvas" width="640" height="480" style="display: inline;">
+		buuu !!
+	</canvas>
+     <video id="live" width="640" height="480" autoplay style="visibility: hidden; "></video>
+    <canvas width="640" id="canvas" height="480" style="visibility: hidden;"></canvas>
+</div>
+
+<h2>Status : </h2>
+<div id="status_field">Started</div>
+
+
+<script type="text/javascript">
+ 	"use strict";
+ 	var timer;
+    var videoStream=null;
+    var video = document.getElementById('live');
+    var canvas = document.getElementById('canvas');
+ 	var ctx = canvas.getContext('2d');
+ 	                                           
+ 	if (window.webkitURL) console.log("webkitURL is go!");
+ 	  
+ 	var localStream;
+	   window.onload = function ()  {
+		   init();
+		  console.log("asking for local stream!");
+		  //Ask for local streams to be prepared, display self view
+		  //if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({video:true}, gotStream, noStream);
+		  if (navigator.webkitGetUserMedia) navigator.webkitGetUserMedia({video:true}, gotStream, noStream);
+		  else {
+			console.log("webkitGetUserMedia not available - you're not using Chrome...");
+			console.log("TODO: add support for other browsers!");
+		  }
+	   };
+       function gotStream(stream) {
+          //document.getElementById("live").src = window.webkitURL.createObjectURL(localStream);
+          video.src = webkitURL.createObjectURL(stream);
+		  video.classList.add("grayscale");
+		  video.classList
+          video.play();
+          console.log("video.src");
+       };
+       function noStream(err) {
+       	  console.log("no stream available!");
+       };
+ 	
+    timer = setInterval(
+            function () {
+				// update position of circle
+				if(!inputArray[0].wasUpdated) 
+				{
+					inputArray[0].x = smoothing*inputArray[0].x+ (1-smoothing)*inputArray[0].lastx ;
+					inputArray[0].y = smoothing*inputArray[0].y+ (1-smoothing)*inputArray[0].lasty ;
+				}
+				if(!inputArray[2].wasUpdated) 
+				{
+					inputArray[2].x = smoothing*inputArray[2].x+ (1-smoothing)*inputArray[2].lastx ;
+					inputArray[2].y = smoothing*inputArray[2].y+ (1-smoothing)*inputArray[2].lasty ;
+				}
+				circle0.x = 640 - inputArray[0].x;
+				circle0.y = inputArray[0].y;
+				circle2.x = 640 - inputArray[2].x;
+				circle2.y = inputArray[2].y;
+				stage.update();
+				// stage.addChild(new createjs.Shape()).setTransform(100,100).graphics.f("red").dc(0,0,50);
+		
+				ctx.drawImage(video, 0, 0, 640, 480);
+				//video
+                var imgData=ctx.getImageData(0,0,640,480);
+				var j = 0;
+				for(var i = 0; i < imgData.data.length; i+=4) {
+					var r = imgData.data[i];
+					var g = imgData.data[i+1];
+					var b = imgData.data[i+2];
+					var brightness = (3*r+4*g+b)>>>3;
+					imgData.data[j] = brightness;
+					j++;
+					//imgData.data[i] = brightness;
+					//imgData.data[i+1] = brightness;
+					//imgData.data[i+2] = brightness;
+				}
+				//ctx.putImageData(imgData,0,0);
+				//canvas.classList.add("grayscale");
+				var imageStr = "";
+				
+				//console.log(imageStr);
+				//updateStatus(imageStr);
+				//popPixels(imageStr);
+				
+				var imageBuffer = new ArrayBuffer(j);//imgData.data.length);
+				var imageBufferView = new Uint8Array(imageBuffer);
+				for(var i = 0 ; i < j/*imgData.data.length*/ ; i++)
+				{
+					imageBufferView[i] = imgData.data[i];
+				}
+				//imgData.arrayBuffer = new ArrayBuffer(imgData.data.length);
+				popPixels(imageBuffer);//imgData.data);
+				imageBuffer = null;
+				imageBufferView = null;
+				
+				//imgData.data();
+				//Canvas2Image.saveAsPNG(canvas);
+				
+            }, 10);
+</script>
+</body>
+</html>

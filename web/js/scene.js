@@ -1,4 +1,3 @@
-
 var defaultScene = (function() {
 	//var input;
 	var scene;
@@ -9,6 +8,7 @@ var defaultScene = (function() {
 
 			this.scene = scene;
 			setGUI();
+
 
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;
