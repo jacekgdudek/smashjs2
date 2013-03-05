@@ -36,3 +36,18 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+
+
+# Vim #
+#######
+*~
+
+# Vim also creates swap files that have the swp, swn and swo extensions. to remove those use the lines:
+*.swp
+*.swo
+*.swn
+
+
+# SVN (No need for this as we've finally moved to git, yeo!) #
+##############################################################
+.svn*
