@@ -1,10 +1,12 @@
+console.log("Loading base scene");
+
 var defaultScene = (function() {
 	//var input;
 	var scene;
 
 	return {
 		init: function(scene) {
-			console.log("init: combinationScene");
+			console.log("init: scene");
 
 			this.scene = scene;
 			setGUI();
@@ -57,7 +59,7 @@ var defaultScene = (function() {
 			{
 				this.scene.visuals[i].visible = false;
 			}
-			if (typeof this.scene.messages !== 'undefined') {
+			if (messages in this.scene) {
 				for(var i = 0 ; i < this.scene.messages.length ; i++)
 				{
 					this.scene.messages[i].bg.visible = false;
