@@ -31,7 +31,6 @@ timer = setInterval(function () {
 
 		//process events
 		handleEvents();
-		
 		// If the level is complete go to the next scene
 		//if (sceneComplete) { currScene++; }
 
