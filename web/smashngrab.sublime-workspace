@@ -19,16 +19,75 @@
 			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
 			"settings":
 			{
-				"buffer_size": 676,
+				"buffer_size": 1083,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
+			"contents": "<html>\n<head>\n<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js\"></script>\n<script type=\"text/javascript\">\n	$(function(){\n		$('a[rel=lrg]').click(function(e){\n			\n			e.preventDefault();\n			var posTop = $(window).scrollTop() + 25;\n			var lrg_img = $(this).attr('href');\n			\n			$('body').append('<div id=\"fjp_overlay\"></div>')\n				 .append('<div id=\"fjp_lightbox\"><img src=\"' + lrg_img + '\" /><br /><a href=\"#\" id=\"fjp_light_close\">Close X</a></div>');\n				 \n			$('#fjp_lightbox').css('top', posTop + 'px');\n			\n			$('#fjp_overlay').fadeTo(500, 0.75, function(){\n				$('#fjp_lightbox').fadeTo(250, 1);\n			});\n			\n			$('#fjp_overlay, #fjp_lightbox, #fjp_light_close').live('click', function(e){\n				e.preventDefault();\n				$('#fjp_lightbox').fadeTo(100, 0, function(){\n					$(this).remove();\n					$('#fjp_overlay').fadeTo(250, 0, function(){\n						$(this).remove();\n					});\n				});\n			});\n			\n		});\n	});\n</script>\n<style type=\"text/css\">\n	#fjp_overlay {\n		position: absolute;\n		top: 0;\n		left: 0;\n		background-color: #000;\n		width: 100%;\n		height: 100%;\n		z-index: 998;\n		display: none;\n	}\n	#fjp_lightbox {\n		position: absolute;\n		top: 0;\n		left: 0;\n		z-index: 999;\n		width: 100%;\n		text-align: center;\n		display: none;\n	}\n	#fjp_lightbox a {\n		color: #fff;\n	}\n	#fjp_lightbox img {\n		border: 10px solid #e6e6e6;\n	}\n</style>\n</head>\n<body>\n<a href=\"large_image.jpg\" rel=\"lrg\"><img src=\"small_image.jpg\" /></a>\n</body>\n</html>",
+			"file": "/C/Users/Jakub/AppData/Local/Temp/7zO8958.tmp/index.html",
+			"file_size": 1471,
+			"file_write_time": 129306057840000000,
 			"settings":
 			{
-				"buffer_size": 3047,
+				"buffer_size": 1471,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Masks.html",
+			"settings":
+			{
+				"buffer_size": 4010,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/scenes/galleryScene.js",
+			"settings":
+			{
+				"buffer_size": 5412,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/main.js",
+			"settings":
+			{
+				"buffer_size": 6288,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/structure.js",
+			"settings":
+			{
+				"buffer_size": 4485,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/scenes/jobScene.js",
+			"settings":
+			{
+				"buffer_size": 7631,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision2.html",
+			"settings":
+			{
+				"buffer_size": 3052,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/index.html",
+			"settings":
+			{
+				"buffer_size": 1471,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -60,6 +119,9 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/fancyapps-fancyBox-0ffc358/demo - Copy/iframe.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/fancyapps-fancyBox-0ffc358/demo - Copy/index.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/HTML/html.sublime-snippet",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/easel.sublime-snippet",
@@ -134,6 +196,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"for",
+			"mouse",
+			"click",
+			"onClick",
+			"length",
+			"lenth",
+			"map",
 			"startBurger",
 			"stage",
 			"4",
@@ -170,7 +239,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -178,20 +247,48 @@
 					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
 					"settings":
 					{
-						"buffer_size": 676,
+						"buffer_size": 1083,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								434,
-								434
+								587,
+								587
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/Jakub/AppData/Local/Temp/7zO8958.tmp/index.html",
+					"settings":
+					{
+						"buffer_size": 1471,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								815,
+								815
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -200,11 +297,146 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
+					"buffer": 2,
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Masks.html",
 					"settings":
 					{
-						"buffer_size": 3047,
+						"buffer_size": 4010,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2988,
+								2988
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 972.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/scenes/galleryScene.js",
+					"settings":
+					{
+						"buffer_size": 5412,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1496,
+								1499
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1080.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/main.js",
+					"settings":
+					{
+						"buffer_size": 6288,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								225,
+								227
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "js/structure.js",
+					"settings":
+					{
+						"buffer_size": 4485,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								81,
+								82
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "js/scenes/jobScene.js",
+					"settings":
+					{
+						"buffer_size": 7631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2052,
+								2057
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 755.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision2.html",
+					"settings":
+					{
+						"buffer_size": 3052,
 						"regions":
 						{
 						},
@@ -220,6 +452,33 @@
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/index.html",
+					"settings":
+					{
+						"buffer_size": 1471,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

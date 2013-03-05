@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Easel.js playing Video</title>
+	<script src="easeljs-0.6.0.min.js"></script>
+	<script>
+
+	var canvas; 
+	var watch;
+	
+	function init() { 
+		canvas = document.getElementById('canvas');
+		stage = new createjs.Stage(canvas);
+
+		watch = new createjs.Bitmap('watch.png');
+			watch.x = 300;
+
+		stage.addChild(watch);
+
+		createjs.Ticker.setFPS(24);
+        createjs.Ticker.addListener(stage);
+        createjs.Ticker.addListener(watchVideo);
+
+		function watchVideo(){
+			var videoOpen = false;
+			watch.onPress =function(mouseEvent){
+				var getVideo = document.getElementById("introVideo");
+				videoPaused = false;
+				if(videoOpen == false){
+					getVideo.play();
+					var video = new createjs.Bitmap(getVideo);
+					video.x = 300;
+					video.y = 100;
+					stage.addChild(video);
+					video.alpha = 0.7;
+
+					var cancelVideo = new createjs.Bitmap('cancel.png');
+					cancelVideo.x = video.x + 370;
+					cancelVideo.y = video.y - 20;
+					console.log(video.x);
+					console.log(cancelVideo.x);
+					console.log(video.width);
+					stage.addChild(cancelVideo);
+					videoOpen = true;
+					console.log("openedVideo");
+				}else if (videoOpen == true){
+					stage.removeChild(video);
+					stage.removeChild(cancelVideo);
+					videoOpen = false;
+					getVideo.pause();
+					videoPaused = true;
+				}
+				cancelVideo.onPress = function(mouseEvent){
+					stage.removeChild(video);
+					stage.removeChild(cancelVideo);
+					videoOpen = false;
+					getVideo.pause();
+					videoPaused = true;
+				}
+				video.onPress = function(mouseEvent){
+					if(videoPaused == false){
+						getVideo.pause();
+						videoPaused = true;
+						console.log("pausedVideo");
+					}else if(videoPaused == true){
+						getVideo.play();
+						videoPaused = false;
+						console.log("startedVideo");
+					}
+				}
+			}
+			//stage.update();
+		}
+
+	stage.update();
+	}
+	</script>
+
+</head>
+
+
+<body <body onload="init();">
+	<canvas id="canvas" width="1024" height="768"></canvas>
+	<video id="introVideo" type="video/mp4" style="display:none">
+			<source src="video.mp4" type="video/mp4" />
+	</video>
+ </body>
+
+ </html>
