@@ -59,7 +59,7 @@ var defaultScene = (function() {
 			{
 				this.scene.visuals[i].visible = false;
 			}
-			if (messages in this.scene) {
+			if (this.scene.hasOwnProperty("messages")) {
 				for(var i = 0 ; i < this.scene.messages.length ; i++)
 				{
 					this.scene.messages[i].bg.visible = false;
