@@ -100,6 +100,8 @@ var tutorialScene = (function() {
 			}
 		},
 		update: function() {
+			//hide GUI
+			hideGUI();
 
 			// verbouse
 			if(this.lastHint != this.currentHint)

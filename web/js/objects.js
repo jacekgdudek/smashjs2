@@ -147,10 +147,13 @@ function loadObjects() {
 			}
 		}
 		scenes[_scenes[i]._name] = _scenes[i];
-		addCreditsToStage(_scenes[i].stage);
-		addHeatToStage(_scenes[i].stage, gamejson);
-		addLocationToStage(_scenes[i].stage, gamejson);
-		addMessageToStage(_scenes[i].stage, gamejson);
+		if(_scenes[i]._name != "welcome" && _scenes[i]._name != "tutorial_scene")
+		{
+			addCreditsToStage(_scenes[i].stage);
+			addHeatToStage(_scenes[i].stage, gamejson);
+			addLocationToStage(_scenes[i].stage, gamejson);
+			addMessageToStage(_scenes[i].stage, gamejson);
+		}
 	}
 	currScene = _scenes[0]._name;
 	console.log(scenes[currScene]._name);
@@ -168,7 +171,7 @@ function hideGUI()
 {
 	hideLocation();
 	hideHeat();
-	//hideCredits();
+	hideCredits();
 }
 
 function addMessageToStage(stage, gamejson)
@@ -387,6 +390,16 @@ function setCredits() {
 		credits.numbers[index].bmp.x = x;
 		credits.numbers[index].bmp.y = y;
 		scenes[currScene].stage.addChild(credits.numbers[index].bmp);
+	}
+}
+
+function hideCredits() {
+	
+	//compare and change digits
+	for(var i = 0; i < 6 ; i ++) {
+		var index = i+1;
+		if(index>3) index++;
+		scenes[currScene].stage.removeChild(credits.numbers[index].bmp);
 	}
 }
 

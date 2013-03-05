@@ -51,6 +51,11 @@ var defaultScene = (function() {
 		},
 		update: function() {
 
+			if(this.scene.name != "welcome")
+			{
+				hideGUI();
+			}
+
 			//update scene
 			this.scene.stage.update();
 		},
