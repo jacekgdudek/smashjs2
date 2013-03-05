@@ -1,6 +1,7 @@
 ////////////////////////////////////////////
 //
 //      initialise stuff
+//
 //////////////////////////////////////
 
 var verbose = true;
@@ -47,15 +48,15 @@ statusText = 'Loading...';
 
 // Indicate load success.
 function moduleDidLoad() {
-  FidtrackModule = document.getElementById('FidtrackModule');
-  moduleLoaded++;
-  updateStatus('Loaded');
+	FidtrackModule = document.getElementById('FidtrackModule');
+	moduleLoaded++;
+	updateStatus('Loaded');
 }
 
 //sending pixels to module
 function popPixels(imgStr) {
-  FidtrackModule = document.getElementById('FidtrackModule');
-  FidtrackModule.postMessage(imgStr);
+	FidtrackModule = document.getElementById('FidtrackModule');
+	FidtrackModule.postMessage(imgStr);
 }
 
 //Handle message
@@ -98,24 +99,19 @@ function handleMessage(message_event) {
 //page didLoad
 function pageDidLoad() {
 	
-  if (FidtrackModule == null) {
-	  
-	updateStatus('Loading...');
-	
-  } else {
-	  
-	updateStatus();
-	
-  }
+	if (FidtrackModule == null) {
+		updateStatus('Loading...');
+	} else {
+		updateStatus();
+	}
 }
 
 //update Status on the website
 function updateStatus(opt_message) {
-  if (opt_message)
-	statusText = opt_message;
-  var statusField = document.getElementById('status_field');
-  if (statusField) {
-	statusField.innerHTML = statusText;
-  }
+	if (opt_message)
+		statusText = opt_message;
+	var statusField = document.getElementById('status_field');
+	if (statusField) {
+		statusField.innerHTML = statusText;
+	}
 }
-////////////////////////////////////////////////////////////////////////////////

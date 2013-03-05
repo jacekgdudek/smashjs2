@@ -1,4 +1,3 @@
-
 var introScene = (function() {
 	//var input;
 	var scene;

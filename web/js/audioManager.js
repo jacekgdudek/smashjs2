@@ -36,7 +36,8 @@ function SmashAndGrabAudioManager(){
 		];
 		
 		
-		preloadQueue = new createjs.PreloadJS();		
+		//preloadQueue = new createjs.PreloadJS();		
+		preloadQueue = new createjs.LoadQueue();
 	    preloadQueue.installPlugin(createjs.SoundJS);
 	    preloadQueue.onProgress = handleProgress;
 		preloadQueue.onComplete = loadingComplete;		
