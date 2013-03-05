@@ -11,8 +11,8 @@ var videoSceneStructure = {
 	],
 	videos: [
 		{
-		  src: "assets/video/sample_mpeg4.mp4",
-		  name: "test"
+		  id: "test",
+		  src: "assets/video/Test.mp4"
 		}
 	]
 };
