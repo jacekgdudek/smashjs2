@@ -51,7 +51,7 @@ var defaultScene = (function() {
 		},
 		update: function() {
 
-			if(this.scene.name != "welcome")
+			if(this.scene._name == "welcome")
 			{
 				hideGUI();
 			}

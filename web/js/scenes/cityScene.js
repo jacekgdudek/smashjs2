@@ -205,7 +205,7 @@ var cityScene = (function() {
 
 		var textLines = new Array();
 		var cats = new Array()
-		for(var i = 0 ; i < 3 ; i++)
+		for(var i = 0 ; i < 4 ; i++)
 		{
 			//setup texts
 			var text;
@@ -221,7 +221,7 @@ var cityScene = (function() {
 					{
 						cat = new createjs.Bitmap(scenes[currScene].catSrc);
 						cat.x = 40 + text.getMeasuredWidth() + j*25;
-						cat.y = card.bitmap.y + 30 + i*60;
+						cat.y = card.bitmap.y + 30 + i*40;
 						cats.push(cat);
 						scenes[currScene].stage.addChild(cat);
 					}
@@ -233,16 +233,20 @@ var cityScene = (function() {
 					{
 						cat = new createjs.Bitmap(scenes[currScene].catSrc);
 						cat.x = 40 + text.getMeasuredWidth() + j*25;
-						cat.y = card.bitmap.y + 30 + i*60;
+						cat.y = card.bitmap.y + 30 + i*40;
 						cats.push(cat);
 						scenes[currScene].stage.addChild(cat);
 					}
 				break;
+				case 3:
+					text = new createjs.Text("Info : "+ city.info, "20px Arial", "#ff7700");
+				break;
 			}
 
-			text.y = card.bitmap.y + 40 + i*60;
+			text.y = card.bitmap.y + 40 + i*40;
 			text.x = 40;
 			text.textBaseline = "alphabetic";
+			text.lineWidth = 280;
 
 			scenes[currScene].stage.addChild(text);
 			textLines.push(text);
