@@ -7,7 +7,7 @@ var tutorialSceneStructure = {
 	nextStageEvent: 
 	{
 		type: "SWITCH_SCENE",
-		content: "welcome"
+		content: "base_scene"
 	},
 	sweet_spot:
 	{

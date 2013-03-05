@@ -13,17 +13,6 @@ var firstSceneStructure = {
 		  name: "bkg"
 		},
 		{
-			x: 200,
-			y: 300,
-		  src: "assets/button/play.png",
-		  name: "btn_play",
-		  hasDown: true,
-		  downEvent: {
-			type: "SWITCH_SCENE",
-			content: "tutorial_scene"
-			}	
-		},
-		{
 			x:200,
 			y:400,
 		  src: "assets/button/play.png",

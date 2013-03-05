@@ -320,7 +320,9 @@ var tutorialScene = (function() {
 			useFiducials = !useFiducials;
 			console.log("using Fiducials : " + useFiducials);
 		}
-
+		if (evt.keyCode =="S".charCodeAt(0)) { 
+			addEventEx(scenes[currScene].nextStageEvent);
+		}
 		/*
 		if (	((evt.keyIdentifier=="Left") || (evt.keyIdentifier=="Right")) &&    
 		      	buzzAudio.click.getTime()==0) {

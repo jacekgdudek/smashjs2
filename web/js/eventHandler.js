@@ -75,8 +75,7 @@ function specialRewardDown(id)
 
 function startNewGame()
 {
-	addEvent("SWITCH_SCENE","base_scene");
-	addEvent("SAVE_GAME");
+	addEvent("SWITCH_SCENE","tutorial_scene");
 }
 
 function continueGame()
