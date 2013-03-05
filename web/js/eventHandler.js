@@ -266,7 +266,6 @@ function finnishedJob(success)
 	{
 		currentJob.finnished = true;
 		clearConditionsForJobs(currentJob.index);
-		addEvent("ADD_HEAT", currentJob.risk*10);
 		addEvent("SWITCH_SCENE", "reward_scene");
 		addEvent("DECREASE_GLOBAL_HEAT");
 	}
@@ -334,6 +333,7 @@ function switchStage(content)
 	//trigger saving game
 	if(content == "base_scene" && currScene == "reward_scene")
 	{
+		addEvent("ADD_HEAT", currentJob.risk*10);
 		addEvent("SAVE_GAME");
 	}
 
