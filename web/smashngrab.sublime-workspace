@@ -16,85 +16,18 @@
 	"buffers":
 	[
 		{
-			"file": "index.html",
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
 			"settings":
 			{
-				"buffer_size": 2347,
+				"buffer_size": 676,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "js/objects.js",
-			"settings":
-			{
-				"buffer_size": 12067,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/rewardScene.js",
-			"settings":
-			{
-				"buffer_size": 6206,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/structure.json",
-			"settings":
-			{
-				"buffer_size": 12948,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/eventHandler.js",
-			"settings":
-			{
-				"buffer_size": 7403,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "<!DOCTYPE HTML>\n<html>\n  <head>\n    <style>\n      body {\n        margin: 0px;\n        padding: 0px;\n      }\n    </style>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <script src=\"js/ndgmr.Collision.js\"></script>\n    <script src=\"js/easeljs-0.5.0.min.js\"></script>\n    <script src=\"js/assetfactory.js\"></script>\n    <script src=\"js/stats.js\"></script>\n\n    <script>\n     var canvas;\n     var stage = new createjs.Stage(\"canvas\");\n     var burger;\n     var maze;\n     var lives = 100;\n     var message;\n\n\n     function init(){\n    canvas = document.getElementById(\"canvas\");\n     text = new createjs.Text(\"Hello World\", \"20px Arial\", \"#ff7700\");\n     stage.addChild(text);\n     maze2 = new createjs.Bitmap(\"maze.png\");\n     stage.addChild(maze);\n     stage.onMouseMove = function(mousePos) {\n        burger = new createjs.Bitmap(\"burger.png\");\n        burger.x = stage.mouseX;\n        burger.y = stage.mouseY;\n        stage.addChild(burger);\n     }\n         var intersection = ndgmr.checkRectCollision(maze, burger);\n          if(intersection != null){\n            lives -= 10;\n            console.log(\"collision\");\n          }\n      }\n    </script>\n  </head>\n  <body <body onload=\"init();\">>\n    <div>\n        <canvas id=\"canvas\" width=\"800\" height=\"600\" style=\"\">\n        </canvas>\n    </div>\n    <img id=\"maze\"src=\"maze.png\" width=\"800\" height=\"600\"/>\n    <img id=\"burger\"src=\"burger.png\"/>\n    <canvas id=\"myCanvas\" width=\"800\" height=\"600\"></canvas>\n  </body>",
 			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
-			"file_size": 1536,
-			"file_write_time": 130066338300226640,
 			"settings":
 			{
-				"buffer_size": 1482,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/hitTest.js",
-			"settings":
-			{
-				"buffer_size": 1105,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/style.css",
-			"settings":
-			{
-				"buffer_size": 119,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/basic.html",
-			"settings":
-			{
-				"buffer_size": 1800,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Jakub/Google Drive/IMD/Responsive/Max5/challenge6.maxpat",
-			"settings":
-			{
-				"buffer_size": 132068,
+				"buffer_size": 3047,
 				"line_ending": "Windows"
 			}
 		}
@@ -127,8 +60,29 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/HTML/html.sublime-snippet",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/easel.sublime-snippet",
+		"/C/Users/Jakub/Google Drive/IMD/Responsive/Max5/challenge6.maxpat",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/index.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/mazeScene.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/combinationScene.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structure.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/collisionStructure.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structure.json",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/basic.html",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/hitTest.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Masks.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/objects.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/combinationScene.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/main.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/style.css",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/eventHandler.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/rewardScene.js",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/pong/index.html",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/pong/Main.js",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/particles.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/Collision-Detection-for-EaselJS-master/example/index.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/Collision-Detection-for-EaselJS-master/example/js/app.js",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/js/assetfactory.js",
@@ -142,15 +96,12 @@
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/examples/Filters_simple.html",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/examples/Filters_input.html",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/examples/Filters.html",
-		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/basic.html",
 		"/C/Users/Jakub/AppData/Local/Temp/fz3temp-1/basic.html",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/js/ColorFilter.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/src/easeljs/filters/Filter.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index2.html",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index.html",
-		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/index.html",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/doctype.sublime-snippet",
-		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/HTML/html.sublime-snippet",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
@@ -169,7 +120,7 @@
 	],
 	"find":
 	{
-		"height": 43.0
+		"height": 42.0
 	},
 	"find_in_files":
 	{
@@ -183,6 +134,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"startBurger",
+			"stage",
+			"4",
+			"Ticker",
+			"ticker",
+			"tick",
 			"maze",
 			"context",
 			"visualId",
@@ -213,124 +170,41 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "index.html",
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
 					"settings":
 					{
-						"buffer_size": 2347,
+						"buffer_size": 676,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1869,
-								2245
+								434,
+								434
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 324.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "js/objects.js",
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
 					"settings":
 					{
-						"buffer_size": 12067,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2900,
-								2849
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1580.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "js/rewardScene.js",
-					"settings":
-					{
-						"buffer_size": 6206,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1147,
-								1187
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 457.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "js/structure.json",
-					"settings":
-					{
-						"buffer_size": 12948,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9450,
-								9450
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 8307.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "js/eventHandler.js",
-					"settings":
-					{
-						"buffer_size": 7403,
+						"buffer_size": 3047,
 						"regions":
 						{
 						},
@@ -343,149 +217,9 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 378.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
-					"settings":
-					{
-						"buffer_size": 1482,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								401,
-								401
-							]
-						],
-						"settings":
-						{
 							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 108.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "js/hitTest.js",
-					"settings":
-					{
-						"buffer_size": 1105,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								262,
-								262
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/style.css",
-					"settings":
-					{
-						"buffer_size": 119,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								74,
-								74
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 8,
-					"file": "/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/basic.html",
-					"settings":
-					{
-						"buffer_size": 1800,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								365,
-								322
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "/C/Users/Jakub/Google Drive/IMD/Responsive/Max5/challenge6.maxpat",
-					"settings":
-					{
-						"buffer_size": 132068,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								132068
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -513,18 +247,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -560,7 +287,7 @@
 		"width": 380.0
 	},
 	"show_minimap": true,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": false,
 	"side_bar_width": 208.0,
