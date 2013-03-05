@@ -25,10 +25,9 @@ timer = setInterval(function () {
 			var sceneComplete = scenes[currScene].update();
 		}
 
-
 		//process collision
 		collide();
-
+		
 		//process events
 		handleEvents();
 		// If the level is complete go to the next scene
