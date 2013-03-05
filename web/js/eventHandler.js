@@ -257,6 +257,7 @@ function changeCity(_city)
 	heat.nextValue = cities[currCity].currHeat;
 	addEvent("SWITCH_SCENE","base_scene");
 	addEvent("RANDOMIZE_JOBS");
+	addEvent("SAVE_GAME");
 }
 
 function finnishedJob(success)
@@ -334,7 +335,6 @@ function switchStage(content)
 	if(content == "base_scene" && currScene == "reward_scene")
 	{
 		addEvent("SAVE_GAME");
-		addEvent("POP_UP_MESSAGE","game saved",100);
 	}
 
 

@@ -12,11 +12,13 @@ function saveData()
 	for(var key in data.cities)
 	{
 		delete data.cities[key].pointer;
+		delete data.cities[key].pointerHighlight;
 	}
 
 	console.log(data);
 
 	localStorage.setItem('GnS_saveData', JSON.stringify(data));
+	addEvent("POP_UP_MESSAGE","game saved",100);
 
 }
 
