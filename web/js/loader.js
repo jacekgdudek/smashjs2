@@ -46,8 +46,13 @@ function loadContent(gamejson) {
 	for (var i = 0; i < scenes.length; i++) {
 
 		// Load the visuals
+<<<<<<< HEAD
 		var visuals = scene[i].visuals;
 		for (var j = 0; j < visuals.; j++) {
+=======
+		var visuals = scenes[i].visuals;
+		for (var j = 0; j < visuals.length; j++) {
+>>>>>>> structureUpdate
 			queue.loadFile(visuals[j].src);
 			loadCounter++;
 		}
@@ -129,33 +134,6 @@ function handleProgress(event) {
 	preloadStage.update();
 };
 
-/*
-function loadSubElementContent(element)
-{	
-	if(typeof element !== 'undefined')
-	{
-		for(var key in element)
-		{
-			if(depth < 6)
-			{
-				if(key == "src")
-				{
-					loadCounter++;
-					console.log(element[key]);
-					srcFiles.push(element[key]);
-				}
-				else
-				{
-					depth++;
-					loadSubElementContent(element[key]);
-					depth--;
-				}
-			}
-		}
-		
-	}
-
-}*/
 
 function loadingComplete() {
 	console.log("FINNISHED LOADING!!!!!!!!!!!!!!!!! ----> "+loadCounter+" files in ");

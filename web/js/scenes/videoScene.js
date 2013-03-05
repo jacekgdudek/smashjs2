@@ -1,87 +1,68 @@
+//
+// An example scene that allows for video playback
+//
 var videoScene = (function() {
 	//var input;
 	var scene;
-	var videoPlayer;
 
 	return {
-		init: function(scene) {
+		// Engine will soon be changing - 
+		// So that scenes 'init' method will no longer take any arguments
+		// but we have to leave it for now
+		init: function(paramNotActuallyNeeded) {
+
 			console.log("init: videoScene");
-
-			this.scene = scene;
-
-			//make sure all the assets are visible
-			for(var i = 0 ; i < scene.visuals.length ; i++)
-			{
-				scene.scene.visuals[i].visible = true;
-			}
+			scene = this;
 
 			// Video Player Code
-			videoPlayer = document.getElementById("videoPlayer");
-			var bitmap =  new createjs.Bitmap (videoPlayer);
-			this.scene.stage.addChild (bitmap);
+			
+			// Set the scene for the video manager
+			VideoManager.scene = scene;
 
-			videoPlayer.src = this.videos[0].src;
-			videoPlayer.load();
-			videoPlayer.play();
+			// Load the specific video you want to play
+			var video = VideoManager.load(	// Video Id
+							"test", 
+							// Function that is called when playback is finished
+							function() { 
+								console.log("Video playback finished");
+							});
+
+			// Position the video in the scene
+			scene.stage.addChild(video);
+
+			// Use the video manager to play the video
+			VideoManager.play();
 
 			// add a handler for all the events we're interested in
-			//this.scene.stage.onTick = update;
+			// in this case we can use left and right arrows to play
 			document.onkeydown = handleKeyDown;
 
-			//define mouse callback
-			//handle mouse events
-			this.scene.stage.onMouseMove = function(mousePos) {
-				for(var i = 0 ; i < scene.visuals.length ; i++)
-				{
-					if(scene.visuals[i].hasHover)
-					{
-						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX , mousePos.stageY ))
-						{
-							//console.log("hover state initialized");
-						}
-					}
-				}
-			}
-
-			this.scene.stage.onMouseDown = function(mousePos) {
-				for(var i = 0 ; i < scene.visuals.length ; i++)
-				{
-					if(scene.visuals[i].hasDown)
-					{
-						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
-						{
-							addEventEx(scene.visuals[i].downEvent);
-							console.log("down state initialized");
-						}
-					}
-				}
-			}
-
-		},
-		update: function() {
-
-			//update scene
-			this.scene.stage.update();
-		},
-		finalize: function() {
-			for(var i = 0 ; i < this.scene.visuals.length ; i++)
+			//make sure all the assets are visible
+			for(var i = 0 ; i < this.visuals.length ; i++)
 			{
-				this.scene.visuals[i].visible = false;
-			}
-			if (typeof this.scene.messages !== 'undefined') {
-				for(var i = 0 ; i < this.scene.messages.length ; i++)
-				{
-					this.scene.messages[i].bg.visible = false;
-					this.scene.messages[i].text.visible = false;
-				}
+				scene.visuals[i].visible = true;
 			}
 		},
+
+		// No update specfic stuff required for videos
+		update: function() {
+			//update scene
+			scene.stage.update();
+		},
+
+		// We always have a finalise method so we know when the scene has ended
+		finalize: function() {
+			for(var i = 0 ; i < this.visuals.length ; i++)
+			{
+				scene.visuals[i].visible = false;
+			}
+		}
 	};
 
 	function handleKeyDown(evt) {
-		// For now we use keyboard controls for the dial
-		if (evt.keyIdentifier=="Left") { videoPlayer.play(); } 
-		if (evt.keyIdentifier=="Right") { videoPlayer.pause(); }
+		// You may want keyboard controls
+		if (evt.keyIdentifier=="Left") { VideoManager.play(); } 
+		if (evt.keyIdentifier=="Right") { VideoManager.pause(); }
 	};
 
 })();
