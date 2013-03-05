@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"backgro",
+				"background-color"
+			],
+			[
 				"img",
 				"img"
 			]
@@ -12,37 +16,18 @@
 	"buffers":
 	[
 		{
-			"file": "index.html",
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
 			"settings":
 			{
-				"buffer_size": 2260,
+				"buffer_size": 676,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "\nvar rewardScene = (function() {\n	//var input;\n	var scene;\n\n	var grid;\n\n	return {\n		init: function(scene) {\n			console.log(\"init: reward scene\");\n\n			this.scene = scene;\n\n			//make sure all the assets are visible\n			for(var i = 0 ; i < scene.visuals.length ; i++)\n			{\n				scene.visuals[i].visible = true;\n			}\n\n			//--------initialize grid\n			grid = new Array(scene.rewardGrid.width);\n			for (var i = 0; i < scene.rewardGrid.width; i++) {\n				grid[i] = new Array(scene.rewardGrid.height);\n				for (var j = 0; j < scene.rewardGrid.height; j++) {\n					grid[i][j] = -1;\n				}\n			}\n\n			randObjects(/*grid*/ grid,\n						/*reward value*/currentJob.reward);\n\n			repositionObjects(grid);\n\n			// add a handler for all the events we're interested in\n			//this.scene.stage.onTick = update;\n			document.onkeydown = handleKeyDown;\n\n			//define mouse callback\n			//handle mouse events\n			this.scene.stage.onMouseMove = function(mousePos) {\n				for(var i = 0 ; i < scene.visuals.length ; i++)\n				{\n					if(scene.visuals[i].hasHover)\n					{\n						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX , mousePos.stageY ))\n						{\n							//console.log(\"hover state initialized\");\n						}\n					}\n				}\n			}\n\n			this.scene.stage.onMouseDown = function(mousePos) {\n				for(var i = 0 ; i < scene.visuals.length ; i++)\n				{\n					if(scene.visuals[i].hasDown)\n					{\n						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))\n						{\n							addEventEx(scene.visuals[i].downEvent);\n							console.log(\"down state initialized\");\n						}\n					}\n				}\n			}\n\n		},\n		update: function() {\n\n\n\n			//update scene\n			this.scene.stage.update();\n		},\n		finalize: function() {\n			for(var i = 0 ; i < this.scene.visuals.length ; i++)\n			{\n				this.scene.visuals[i].bitmap.visible = false;\n			}\n			if (typeof this.scene.messages !== 'undefined') {\n				for(var i = 0 ; i < this.scene.messages.length ; i++)\n				{\n					this.scene.messages[i].bg.visible = false;\n					this.scene.messages[i].text.visible = false;\n				}\n			}\n		},\n	};\n\n	function handleKeyDown(evt) {\n		// For now we use keyboard controls for the dial\n		if (evt.keyIdentifier==\"Left\") { this.input.rotation -= 10; } \n		if (evt.keyIdentifier==\"Right\") { this.input.rotation += 10; }\n	};\n\n	function randObjects(grid, rewardLevel) {\n		var scene = scenes[currScene];\n		var possibleRewards = scenes[currScene].rewards;\n		var rewards = new Array();\n\n		var rewardValue = rewardLevel * 1000;\n\n		//------------------------randomize rewards\n		var finnished = false;\n		while(!finnished)\n		{\n			var rewardId = Math.floor(Math.random()*possibleRewards.length);\n\n			if(possibleRewards[rewardId].value > rewardValue){\n				finnished = true;\n			}\n			else\n			{\n				rewardValue -= possibleRewards[rewardId].value;\n				rewards.push(possibleRewards[rewardId]);\n			}\n		}\n\n		//----------------------randomize positions\n		for ( var i = 0 ; i < rewards.length ; i++)\n		{\n			var foundSpot = false;\n			while(!foundSpot)\n			{\n				x = Math.floor(Math.random()*grid.length);\n				y = Math.floor(Math.random()*grid[0].length);\n				if(grid[x][y] == -1)\n				{\n					foundSpot = true;\n					grid[x][y] = rewards[i].visualId;\n				}\n			}\n		}\n\n	}\n\n	function repositionObjects(grid)\n	{\n		for (var i = 0; i < grid.length; i++) {\n				for (var j = 0; j < grid[i].length; j++) {\n					if(grid[i][j] != -1)\n					{\n						var applyColorFilter = new createjs.ColorFilter(0, 1, 1, 1);\n							var image = scenes[currScene].visuals[grid[i][j]].bitmap;\n							image.filters = [applyColorFilter];\n							image.cache(0,0, img.width, img.height);\n						scenes[currScene].visuals[grid[i][j]].bitmap.x = i * 100;\n						scenes[currScene].visuals[grid[i][j]].bitmap.y = j * 100;\n						scenes[currScene].visuals[grid[i][j]].bitmap.visible = true;\n						console.log(\"putting object on x:\" + i*100 + \" y : \" + j*100 + \" id : \" + grid[i][j]);\n					}\n				}\n			}\n	}\n\n\n\n})();",
-			"file": "js/rewardScene.js",
-			"file_size": 4066,
-			"file_write_time": 130063525968540598,
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
 			"settings":
 			{
-				"buffer_size": 3905,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/objects.js",
-			"settings":
-			{
-				"buffer_size": 4623,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/structure.json",
-			"settings":
-			{
-				"buffer_size": 9534,
+				"buffer_size": 3047,
 				"line_ending": "Windows"
 			}
 		}
@@ -75,11 +60,48 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/HTML/html.sublime-snippet",
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/easel.sublime-snippet",
+		"/C/Users/Jakub/Google Drive/IMD/Responsive/Max5/challenge6.maxpat",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/index.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/mazeScene.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/combinationScene.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structure.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/collisionStructure.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structure.json",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/basic.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/hitTest.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Masks.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/objects.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/combinationScene.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/main.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/style.css",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/eventHandler.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/rewardScene.js",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/pong/index.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/pong/Main.js",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/particles.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/Collision-Detection-for-EaselJS-master/example/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/Collision-Detection-for-EaselJS-master/example/js/app.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/js/assetfactory.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/social/fbapi/tweet.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/social/fbapi/fbshare.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fbapi/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fbapi/fbshare.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fbapi/fbshare",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/easeljs-0.6.0.min.js",
+		"/C/Users/Jakub/AppData/Local/Temp/fz3temp-1/basic 2.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/examples/Filters_simple.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/examples/Filters_input.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/examples/Filters.html",
+		"/C/Users/Jakub/AppData/Local/Temp/fz3temp-1/basic.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/js/ColorFilter.js",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/src/easeljs/filters/Filter.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index2.html",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index.html",
-		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/index.html",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/doctype.sublime-snippet",
-		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/HTML/html.sublime-snippet",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
@@ -98,7 +120,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 42.0
 	},
 	"find_in_files":
 	{
@@ -112,6 +134,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"startBurger",
+			"stage",
+			"4",
+			"Ticker",
+			"ticker",
+			"tick",
+			"maze",
+			"context",
+			"visualId",
+			"rewards",
+			"visualId",
+			"grid",
+			"updateImage",
+			"colorFilter",
 			"visuals",
 			"Bitmap",
 			"img",
@@ -134,15 +170,41 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "index.html",
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
 					"settings":
 					{
-						"buffer_size": 2260,
+						"buffer_size": 676,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								434,
+								434
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
+					"settings":
+					{
+						"buffer_size": 3047,
 						"regions":
 						{
 						},
@@ -160,88 +222,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 486.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "js/rewardScene.js",
-					"settings":
-					{
-						"buffer_size": 3905,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3587,
-								3439
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2160.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "js/objects.js",
-					"settings":
-					{
-						"buffer_size": 4623,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1188,
-								1188
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 439.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "js/structure.json",
-					"settings":
-					{
-						"buffer_size": 9534,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6741,
-								6741
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5850.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -295,16 +276,20 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"/C/Users/Jakub/Documents/GitHub/smashjs2/web/smashngrab.sublime-project"
+			]
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"show_minimap": true,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_visible": false,
+	"side_bar_width": 208.0,
 	"status_bar_visible": true
 }

@@ -3,13 +3,23 @@
 <head>
 	<!-- head includes (so C++) -->
 	<link href="css/demo.css" rel="stylesheet" type="text/css">
+	
+	<!-- easel -->
 	<script src="js/libs/easeljs-0.6.0.min.js"></script>
-	<script src="js/libs/easeljs-0.5.0.min.js"></script>
+	<script src="js/libs/jquery-1.5.1.min.js"></script>
+	<!-- Old version of easel -->
+	<!--<script src="js/libs/easeljs-0.5.0.min.js"></script>-->
+
+	<!-- collision -->
 	<script src="js/libs/ndgmr.Collision.js"></script>
 	<script src="js/hitTest.js"></script>
 
 	<!-- preload -->
-	<script src="js/libs/preloadjs-0.2.0.min.js"></script>
+	<script src="js/libs/preloadjs-0.3.0.min.js"></script>
+
+	<!-- save/load -->
+	<script src="js/saveData.js"></script>
+	<script src="js/loader.js"></script>
 
 	<!-- audio  -->
 	<script src="js/audioManager.js"></script>
@@ -18,9 +28,8 @@
 	<script src="js/libs/soundjs/swfobject.js"></script>
 	<script src="js/libs/soundjs/FlashPlugin.js"></script>
 
-	<script src="js/ColorFilter.js"></script>
-	<script src="js/objects.js"></script>
-
+	<!-- video  -->
+	<script src="js/videoManager.js"></script>
 
 	<!-- scenes -->
 	<script src="js/scene.js"></script>
@@ -29,38 +38,33 @@
 	<script src="js/scenes/rewardScene.js"></script> 
 	<script src="js/scenes/jobScene.js"> </script>
 	<script src="js/scenes/safeScene.js"></script>
+	<script src="js/scenes/galleryScene.js"></script>
 	<script src="js/scenes/stethoscopeScene.js"></script>
+	<script src="js/scenes/cityScene.js"> </script>
 	<script src="js/scenes/combinationScene.js"></script>
 	<script src="js/scenes/videoScene.js"></script>
 
-	<!-- collision -->
-	<!-- preload -->
-	<script type="text/javascript" src="./js/preloadjs-0.2.0.min.js"></script>
-	<!-- save/load -->
-	<script type="text/javascript" src="./js/saveData.js"></script>
 
-  <!-- preload -->
-  <script type="text/javascript" src="./js/preloadjs-0.3.0.min.js"></script>
-  <script type="text/javascript" src="./js/loader.js"></script>
-  <!-- save/load -->
-  <script type="text/javascript" src="./js/saveData.js"></script>
 	<!-- Structure -->
+	<script src="js/structures/baseSceneStructure.js"></script>
+	<script src="js/structures/citySceneStructure.js"></script>
+	<script src="js/structures/combinationSceneStructure.js"></script>
+	<script src="js/structures/firstSceneStructure.js"></script>
+	<script src="js/structures/gallerySceneStructure.js"></script>
+	<script src="js/structures/introSceneStructure.js"></script>
+	<script src="js/structures/jobSceneStructure.js"></script>
+	<script src="js/structures/rewardSceneStructure.js"></script>
+	<!-- <script src="js/structures/sweetSpotStructure.js"></script> -->
+	<script src="js/structures/tutorialSceneStructure.js"></script>
+	<script src="js/structures/videoSceneStructure.js"></script>
+
 	<script src="js/structure.js"></script>
+
+	<script src="js/ColorFilter.js"></script>
+	<script src="js/objects.js"></script>
 
 	<script src="js/init.js"></script>
 
-	<!-- scenes -->
-	<script src="js/scene.js"></script>
-	<script src="js/introScene.js"></script> 
-	<script src="js/tutorialScene.js"></script>
-	<script src="js/rewardScene.js"></script> 
-	<script src="js/cityScene.js"> </script>
-	<script src="js/jobsScene.js"> </script>
-	<script src="js/safeScene.js"></script>
-	<script src="js/galleryScene.js"></script>
-	<script src="js/stethoscopeScene.js"></script>
-	<script src="js/combinationScene.js"></script>
-	<!-- -->
 
 	<!-- title -->
 	<title>SmashAndGrab</title>

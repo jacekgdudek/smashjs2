@@ -54,32 +54,10 @@ var sweetSpot = (function() {
 })();
 
 function loadObjects() {
-	/*
-	//get access to sructer file
-	var txtFile = new XMLHttpRequest();
-	var allText;
-	var myRoot;
-	txtFile.open("GET", "https://s3-eu-west-1.amazonaws.com/smashandgrab/Jacek/js/structure.json",true);//http://my.remote.url/myremotefile.txt", true);
-	txtFile.onreadystatechange = function() {
-	  if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
-	    if (txtFile.status === 200) {  // Makes sure it's found the file.
-	      	allText = txtFile.responseText;  // Will separate each line into an array
-			var gamejson = eval('(' + allText + ')');
-			console.log(gamejson.game.scenes[0].visuals.length);
-			setup(gamejson);
-	    }
-	  }
-	}
-	txtFile.send(null);*/
 
 	var gamejson = structure;
-	console.log(gamejson.game.scenes[0].visuals.length);
-	setup(gamejson);
-}
+	//console.log(gamejson.game.scenes[0].visuals.length);
 
-
-function setup(gamejson)
-{
 	loadContent(gamejson);
 	//setup cities
 	var _cities = gamejson.game.cities;
