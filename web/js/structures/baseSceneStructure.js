@@ -42,29 +42,6 @@ var baseSceneStructure = {
 			type: "SWITCH_SCENE",
 			content: "gallery_scene"
 			}	
-		},
-		{
-			x:600,
-			y:0,
-		  src: "assets/base/cashnrisk.jpg",
-		  name: "cash_disp",
-		  hasDown: true,
-		  textLines:[
-			{
-				text: "Cash: 0",
-				x: 40,
-				y: 40
-			},
-			{
-				text: "Risk: 0",
-				x: 140,
-				y: 40
-			}
-		  ],
-		  downEvent: {
-			type: "SWITCH_SCENE",
-			content: "gallery_scene"
-			}	
 		}
 	]
 };
