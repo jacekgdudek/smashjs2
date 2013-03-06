@@ -11,7 +11,7 @@ var currScene = 0;
 var scenes = {};
 
 //init enable fiducial control
-var useFiducials = false;
+var useFiducials = true;
 
 //user related
 var jobs = {};        //all the possible jobs
@@ -147,7 +147,7 @@ function loadObjects() {
 			}
 		}
 		scenes[_scenes[i]._name] = _scenes[i];
-		if(_scenes[i]._name != "welcome" && _scenes[i]._name != "tutorial_scene")
+		if(!_scenes[i].noGUI)
 		{
 			addCreditsToStage(_scenes[i].stage);
 			addHeatToStage(_scenes[i].stage, gamejson);

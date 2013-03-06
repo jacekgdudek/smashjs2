@@ -52,6 +52,8 @@ function handleEvents()
 
 		else if(event.type == "LOAD_GAME") loadData();
 
+		else if(event.type == "OPEN_PREVIEW") openPreview();
+
 		else if(event.type == "POP_UP_MESSAGE") setMessage(event.content, event.content2);
 
 		//------------------------------ start game
@@ -63,6 +65,11 @@ function handleEvents()
 
 	}
 	events = [];
+}
+
+function openPreview()
+{
+	addEvent("SWITCH_SCENE","preview_scene");
 }
 
 function specialRewardDown(id)

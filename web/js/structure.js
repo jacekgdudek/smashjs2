@@ -25,7 +25,9 @@ var structure = {
 				jobSceneStructure,
 				gallerySceneStructure,
 				rewardSceneStructure,
-				combinationSceneStructure
+				combinationSceneStructure,
+				settingsSceneStructure,
+				previewSceneStructure
 		],
 		jobs: {
 			initialJobs:

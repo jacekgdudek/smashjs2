@@ -4,6 +4,7 @@ var tutorialSceneStructure = {
 	update: tutorialScene.update,
 	finalize: tutorialScene.finalize,
 	stage_id: "game_canvas",
+	noGUI: true,
 	nextStageEvent: 
 	{
 		type: "SWITCH_SCENE",

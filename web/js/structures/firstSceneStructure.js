@@ -6,6 +6,7 @@ var firstSceneStructure = {
 	update: defaultScene.update,
 	finalize: defaultScene.finalize,
 	isCurrent: true,
+	noGUI: true,
 	stage_id: "game_canvas",
 	visuals: [
 		{
@@ -41,6 +42,17 @@ var firstSceneStructure = {
 			downEvent: {
 				type: "SWITCH_SCENE",
 				content: "video_scene"
+			}	
+		},
+		{
+			x:600,
+			y:300,
+			src: "assets/button/play.png",
+			name: "btn_play",
+			hasDown: true,
+			downEvent: {
+				type: "SWITCH_SCENE",
+				content: "settings"
 			}	
 		}
 	]
