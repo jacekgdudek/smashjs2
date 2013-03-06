@@ -22,7 +22,7 @@ var previewScene = (function() {
 			capture.x =capture.regX+ 80;
 			capture.y = 60;
 			this.scene.stage.addChild(capture);
-			capture.alpha = 0.7;
+			capture.alpha = 0.1;
 
 			//setup indicators
 			left = this.scene.visuals[1].bitmap;
@@ -73,7 +73,7 @@ var previewScene = (function() {
 
 			left.x = 80 + 640 - inputArray[0].x;
 			left.y = 60+ inputArray[0].y;
-			left.rotation = inputArray[0].rotation;
+			left.rotation = -inputArray[0].rotation;
 
 			right.x = 80+ 640 - inputArray[2].x - 95;
 			right.y = 60+inputArray[2].y - 90;

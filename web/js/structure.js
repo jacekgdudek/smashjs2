@@ -27,7 +27,8 @@ var structure = {
 				rewardSceneStructure,
 				combinationSceneStructure,
 				settingsSceneStructure,
-				previewSceneStructure
+				previewSceneStructure,
+				mazeSceneStructure
 		],
 		jobs: {
 			initialJobs:
@@ -35,7 +36,7 @@ var structure = {
 				{
 					index:0,
 					name:"kindergarden",
-					type:"combination_lock",
+					type:"maze_scene",
 					reward:2,
 					risk:1
 				},
@@ -101,7 +102,7 @@ var structure = {
 					name:"combination_lock"
 				},
 				{
-					name:"combination_lock"
+					name:"maze_scene"
 				}
 			],
 			names:[
