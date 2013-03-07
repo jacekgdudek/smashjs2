@@ -20,12 +20,7 @@ var videoScene = (function() {
 			VideoManager.scene = scene;
 
 			// Load the specific video you want to play
-			var video = VideoManager.load(	// Video Id
-							"test", 
-							// Function that is called when playback is finished
-							function() { 
-								console.log("Video playback finished");
-							});
+			var video = VideoManager.load("test");
 
 			// Position the video in the scene
 			scene.stage.addChild(video);

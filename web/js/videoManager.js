@@ -10,11 +10,10 @@ var VideoManager = new function() {
 	// Videos with a specific id can be loaded
 	//
 	// id			- represents the id of the video in the structure file
-	// videoEndedCallback 	- a function that is called when video playback ends
 	//
 	// returns 		: easel.js object (or false if it doesnt exist)
 	//
-	this.load = function(id, videoEndedCallback) {
+	this.load = function(id) {
 
 		if (!this.hasOwnProperty("scene")) {
 			console.log("You need to set the VideoManager.scene before you can play a video");
@@ -33,8 +32,14 @@ var VideoManager = new function() {
 					VideoManager.player.load();
 					played = true;
 
-					// Ended event using JQuery
-					$('#videoPlayer').bind("ended", videoEndedCallback);
+					// Add the ended event from the structure if there is one
+					if (this.scene.videos[i].hasOwnProperty("endedEvent")) {
+						var endedEvent = this.scene.videos[i].endedEvent;
+						// Ended event using JQuery
+						$('#videoPlayer').bind("ended", function() {
+							addEventEx(endedEvent);
+						});
+					}
 
 					// Return an easel bitmap
 					var bitmap =  new createjs.Bitmap (VideoManager.player);

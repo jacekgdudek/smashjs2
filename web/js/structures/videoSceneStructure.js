@@ -5,14 +5,18 @@ var videoSceneStructure = {
 	stage_id: "game_canvas",
 	visuals: [
 		{
-		  src: "assets/combination/safe_bg.jpg",
-		  name: "bkg"
+			src: "assets/combination/safe_bg.jpg",
+			name: "bkg"
 		}
 	],
 	videos: [
 		{
-		  id: "test",
-		  src: "assets/video/Test.mp4"
+			id: "test",
+			src: "assets/video/Test.mp4"
+			endedEvent: {
+				type: "SWITCH_SCENE",
+				content: "map_scene"
+			}	
 		}
 	]
 };
