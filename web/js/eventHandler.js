@@ -56,6 +56,8 @@ function handleEvents()
 
 		else if(event.type == "POP_UP_MESSAGE") setMessage(event.content, event.content2);
 
+		else if(event.type == "SETTINGS_FLIP_X") flipX = !flipX;
+
 		//------------------------------ start game
 		else if(event.type == "START_NEW_GAME") startNewGame();
 
@@ -83,10 +85,12 @@ function specialRewardDown(id)
 function startNewGame()
 {
 	addEvent("SWITCH_SCENE","tutorial_scene",1);
+	saveFlipX();
 }
 
 function continueGame()
 {
+	saveFlipX();
 	addEvent("SWITCH_SCENE","base_scene");
 	addEvent("LOAD_GAME");
 }

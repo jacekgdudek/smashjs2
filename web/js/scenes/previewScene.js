@@ -18,7 +18,7 @@ var previewScene = (function() {
 			capture = new createjs.Bitmap(video);
 
 			capture.regX = 320;
-			capture.scaleX = -1;
+			(flipX ? capture.scaleX = -1 : null)
 			capture.x =capture.regX+ 80;
 			capture.y = 60;
 			this.scene.stage.addChild(capture);
@@ -71,11 +71,11 @@ var previewScene = (function() {
 		},
 		update: function() {
 
-			left.x = 80 + 640 - inputArray[0].x;
+			left.x = 80 + inputArray[0].x;
 			left.y = 60+ inputArray[0].y;
 			left.rotation = -inputArray[0].rotation;
 
-			right.x = 80+ 640 - inputArray[2].x - 95;
+			right.x = 80+ inputArray[2].x - 95;
 			right.y = 60+inputArray[2].y - 90;
 
 
@@ -83,6 +83,8 @@ var previewScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
+			this.scene.stage.removeChild(capture);
+
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{
 				this.scene.visuals[i].visible = false;

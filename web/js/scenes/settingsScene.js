@@ -58,6 +58,11 @@ var settingsScene = (function() {
 					case 3:
 					break;
 				}
+
+				if(i == 1 && !flipX)
+				{
+					this.settings[i].checkbox_bmp.ticked.visible = false;
+				}
 			}
 
 

@@ -6,7 +6,8 @@
 //-----------------types of transitions
 var TransitionType = {
 	'CROSS_FADE':0,
-	'FADE_IN_OUT':1
+	'FADE_IN_OUT':1,
+	'OPEN_SAFE':2
 };
 
 
@@ -52,6 +53,9 @@ function TransitionsManager(){
 				case 1:
 					this.scene2.visuals[i].bitmap.alpha = 0;
 				break;
+				case 2:
+					this.scene2.visuals[i].bitmap.alpha = 1;
+				break;
 			}
 			
 			//this.tempStage.addChild(this.scene2.visuals[i].bitmap);
@@ -84,12 +88,20 @@ function TransitionsManager(){
 				case TransitionType.FADE_IN_OUT:
 					this.updateFadeInOut();
 				break;
+				case TransitionType.OPEN_SAFE:
+					this.updateOpenSafe();
+				break;
 				default:
 					console.log("Failed to run transition");
 					this.active = false;
 				break;
 			}
 		}
+	};
+
+	this.updateOpenSafe = function()
+	{
+
 	};
 
 
@@ -99,12 +111,6 @@ function TransitionsManager(){
 		{
 		 	this.scene1.visuals[i].bitmap.alpha = (this.maxTime - this.time)/this.maxTime;
 		}
-		// for(var i = 0; i < this.scene2.visuals.length ; i ++)
-		// {
-		// 	var newAlpha = this.time/this.maxTime;
-		// 	if(newAlpha > 1) newAlpha = 1;
-		// 	this.scene2.visuals[i].bitmap.alpha = newAlpha;
-		// }
 	};
 
 	this.updateFadeInOut = function()

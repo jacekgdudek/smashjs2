@@ -17,11 +17,14 @@ var transitionsManager;
 
 //booleans
 var moduleLoaded = -1;
+var flipX = true;
 
 //init inputs
 var inputArray = new Array();
 
 function init() {
+	loadFlipX();
+	if(typeof flipX === 'undefined') flipX = true;
 	// initialize input arrays
 	for(var i = 0 ; i < 4 ; i++)
 	{
@@ -81,6 +84,7 @@ function handleMessage(message_event) {
 			for (var i = 0; i < fidInfo.length; i+=4) {
 				
 				var x = parseInt(fidInfo[i+1]);
+				(flipX ? x = 640 - x : null)
 				var y = parseInt(fidInfo[i+2]);
 				var rotation = parseInt(fidInfo[i+3]);
 				if( x < 3000)

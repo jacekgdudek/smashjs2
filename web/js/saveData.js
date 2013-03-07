@@ -7,6 +7,7 @@ function saveData()
 	data.currCity = currCity;
 	data.heat = heat.nextValue;
 	data.rewards = currSpecialRewards;
+	data.flipX = flipX;
 	//data.currentJobs = currentJobs;
 
 	for(var key in data.cities)
@@ -40,4 +41,28 @@ function loadData()
 	addEvent("RANDOMIZE_JOBS");
 	setLocation();
 
+}
+
+function saveFlipX()
+{
+	var data = new Object();
+
+	data.flipX = flipX;
+
+	console.log(data);
+
+	localStorage.setItem('GnS_saveDataFlipX', JSON.stringify(data));
+}
+
+function loadFlipX()
+{
+	///// test
+	var retrievedObject = localStorage.getItem('GnS_saveDataFlipX');
+
+	console.log('GnS_saveData: ', JSON.parse(retrievedObject));
+
+	var parsedObject = new Object();
+	parsedObject = JSON.parse(retrievedObject);
+
+	if(parsedObject) flipX = parsedObject.flipX;
 }

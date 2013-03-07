@@ -18,7 +18,6 @@ var defaultScene = (function() {
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
 
-
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;
 			document.onkeydown = handleKeyDown;

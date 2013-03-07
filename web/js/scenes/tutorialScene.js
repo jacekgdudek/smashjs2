@@ -136,7 +136,7 @@ var tutorialScene = (function() {
 				var directionChanged = false;
 				if(!this.hints[this.currentHint].fid0_disabled)
 				{
-					stethoscope.bitmap.x = 800 - stethoscope.bitmap.image.width - (((800 - stethoscope.bitmap.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
+					stethoscope.bitmap.x = (((800 - stethoscope.bitmap.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
 					stethoscope.bitmap.y = (600/480)*inputArray[0].y;
 				}
 				if(!this.hints[this.currentHint].fid2_disabled)
