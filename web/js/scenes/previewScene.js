@@ -22,7 +22,7 @@ var previewScene = (function() {
 			capture.x =capture.regX+ 80;
 			capture.y = 60;
 			this.scene.stage.addChild(capture);
-			capture.alpha = 0.1;
+			capture.alpha = 0.2;
 
 			//setup indicators
 			left = this.scene.visuals[1].bitmap;

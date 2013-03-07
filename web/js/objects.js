@@ -167,6 +167,14 @@ function setGUI()
 	setCredits();
 	//setMessage();
 }
+
+function updateGUI()
+{
+	updateMessage();
+	updateHeat();
+	updateCredits();
+}
+
 function hideGUI()
 {
 	hideLocation();
@@ -247,10 +255,10 @@ function setLocation()
 {
 	cityGUI.text.visible = true;
 	cityGUI.bg.visible = true;
-	scenes[currScene].stage.removeChild(cityGUI.text);
+	scenes[currScene].stage.removeChild(cityGUI.bg, cityGUI.text);
 	cityGUI.text.text = currCity;
 	cityGUI.text.x = cityGUI.x+cityGUI.width/2-cityGUI.text.getMeasuredWidth()/2;
-	scenes[currScene].stage.addChild(cityGUI.text);
+	scenes[currScene].stage.addChild(cityGUI.bg, cityGUI.text);
 }
 
 function hideLocation()
@@ -292,7 +300,7 @@ function addHeatToStage(stage, gamejson)
 
 function setHeat()
 {
-	scenes[currScene].stage.removeChild(heat.bar, heat.text);
+	scenes[currScene].stage.removeChild(heat.bg, heat.bar, heat.text);
 	heat.bar = null;
 	heat.bar = new createjs.Shape();
 	heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
@@ -300,7 +308,7 @@ function setHeat()
 	heat.text.visible = true;
 	heat.bar.visible = true;
 	heat.bg.visible = true;
-	scenes[currScene].stage.addChild(heat.bar, heat.text);
+	scenes[currScene].stage.addChild(heat.bg, heat.bar, heat.text);
 }
 
 
@@ -391,6 +399,11 @@ function setCredits() {
 		credits.numbers[index].bmp.y = y;
 		scenes[currScene].stage.addChild(credits.numbers[index].bmp);
 	}
+	//dollar and coma
+	scenes[currScene].stage.removeChild(credits.numbers[0].bmp);
+	scenes[currScene].stage.removeChild(credits.numbers[4].bmp);
+	scenes[currScene].stage.addChild(credits.numbers[0].bmp);
+	scenes[currScene].stage.addChild(credits.numbers[4].bmp);
 }
 
 function hideCredits() {
@@ -401,6 +414,8 @@ function hideCredits() {
 		if(index>3) index++;
 		scenes[currScene].stage.removeChild(credits.numbers[index].bmp);
 	}
+	scenes[currScene].stage.removeChild(credits.numbers[0].bmp);
+	scenes[currScene].stage.removeChild(credits.numbers[4].bmp);
 }
 
 function changeText(text, messageObj) {

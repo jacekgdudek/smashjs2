@@ -13,6 +13,7 @@ var scenes = new Object();
 
 //setup audio manager
 var audioManager;
+var transitionsManager;
 
 //booleans
 var moduleLoaded = -1;
@@ -41,6 +42,9 @@ function init() {
 	audioManager = new SmashAndGrabAudioManager();
 	audioManager.setVolume(0.95,audioManagerAudioObject.NORMAL_CLICK);
 	audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
+
+	//init transitions
+	transitionsManager = new TransitionsManager();
 }
 // init sal module
 FidtrackModule = null;  // Global application object.

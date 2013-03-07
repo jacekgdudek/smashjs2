@@ -19,10 +19,17 @@ timer = setInterval(function () {
 
 		// Update the current scene
 		if (typeof scenes[currScene] !== 'undefined') {
-			updateMessage();
-			updateHeat();
-			updateCredits();
+			//update scene
 			var sceneComplete = scenes[currScene].update();
+			
+			//updateGUI()
+			updateGUI();
+
+			//update transitions
+			transitionsManager.update();
+
+			scenes[currScene].stage.update();
+
 		}
 
 		//process collision

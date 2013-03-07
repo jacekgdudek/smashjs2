@@ -35,6 +35,11 @@ var tutorialScene = (function() {
 			this.scene = scene;
 			this.hints = scene.hints;
 
+			for(var i = 0; i < this.scene.visuals.length ; i ++)
+			{
+				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+			}
+
 			sweet_spot = this.scene.sweet_spot;
 			this.currentHint = 0;
 			this.hintDelay = 20;
@@ -256,11 +261,11 @@ var tutorialScene = (function() {
 				{
 					if(this.hints[this.currentHint].message !=  this.scene.messages[0].text.text)
 					{
-						this.scene.stage.removeChild(this.scene.messages[0].bg)
+						this.scene.stage.removeChild(this.scene.messages[0].bg,this.scene.messages[0].text)
 						changeText(this.hints[this.currentHint].message , this.scene.messages[0]);
 						this.scene.messages[0].bg.visible = true;
 						this.scene.messages[0].text.visible = true;
-						this.scene.stage.addChild(this.scene.messages[0].bg)
+						this.scene.stage.addChild(this.scene.messages[0].bg, this.scene.messages[0].text)
 					}
 					//make invisible if empt
 				}
@@ -297,7 +302,7 @@ var tutorialScene = (function() {
 				this.lastNumber = this.currentNumber;
 
 				//update scene
-				this.scene.stage.update();
+				//this.scene.stage.update();
 			}
 			else
 			{
@@ -328,8 +333,7 @@ var tutorialScene = (function() {
 		      	buzzAudio.click.getTime()==0) {
 			// Play the sound if we pressed the button and it's not playing
 			buzzAudio.click.play();
-		}*/
-		this.scene.stage.update();
+			*/
 	};
 
 })();

@@ -9,7 +9,7 @@ var mazeSceneStructure = {
 	stage_id: "game_canvas",
 	visuals: [
 		{
-		  src: "assets/bg/bg.jpg",
+		  src: "assets/maze/bottom.png",
 		  name: "bkg"
 		},
 		{
@@ -19,8 +19,8 @@ var mazeSceneStructure = {
 		  	name: "maze"
 		},
 		{
-			x:0,
-			y:0,
+			x:40,
+			y:40,
 		  src: "assets/maze/startpoint.png",
 		  name: "btn_play"
 		},
@@ -31,15 +31,8 @@ var mazeSceneStructure = {
 			name: "burger"	
 		},
 		{
-			x:600,
-			y:300,
-			src: "assets/button/play.png",
-			name: "btn_play",
-			hasDown: true,
-			downEvent: {
-				type: "SWITCH_SCENE",
-				content: "settings"
-			}	
+		  src: "assets/maze/bg.png",
+		  name: "bkg"
 		}
 	]
 };

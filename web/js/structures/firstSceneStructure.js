@@ -21,7 +21,7 @@ var firstSceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "START_NEW_GAME"
-			}	
+			}
 		},
 		{
 			x:400,
@@ -52,7 +52,8 @@ var firstSceneStructure = {
 			hasDown: true,
 			downEvent: {
 				type: "SWITCH_SCENE",
-				content: "settings"
+				content: "settings",
+				content2: 0
 			}	
 		}
 	]

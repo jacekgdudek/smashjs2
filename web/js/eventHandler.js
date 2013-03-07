@@ -18,7 +18,7 @@ function addEvent(type , content, content2 , extras, extras2)// string , string 
 //collision mostly
 function addEventEx(event)
 {
-	events[events.length] = event;
+	events.push( event );
 }
 
 function handleEvents()
@@ -28,7 +28,7 @@ function handleEvents()
 	while( events.length != 0 )
 	{
 		var event = events.shift()
-		if(event.type == "SWITCH_SCENE") switchStage(event.content);
+		if(event.type == "SWITCH_SCENE") switchStage(event.content, event.content2);
 
 		else if(event.type == "SWITCH_SUB_STAGE") switchSubStage(event.content2);
 
@@ -82,7 +82,7 @@ function specialRewardDown(id)
 
 function startNewGame()
 {
-	addEvent("SWITCH_SCENE","tutorial_scene");
+	addEvent("SWITCH_SCENE","tutorial_scene",1);
 }
 
 function continueGame()
@@ -268,6 +268,7 @@ function changeCity(_city)
 
 function finnishedJob(success)
 {
+	heat.armed = false;
 	if(success)
 	{
 		currentJob.finnished = true;
@@ -334,7 +335,7 @@ function processCollision(event)
 	//event.extras2.collided();
 }
 
-function switchStage(content)
+function switchStage(content, content2)
 {
 	//trigger saving game
 	if(content == "base_scene" && currScene == "reward_scene")
@@ -364,6 +365,13 @@ function switchStage(content)
 		//initialize new scene
 		scenes[currScene].init(scenes[currScene]);
 		console.log("Switched stage to " + content);
+
+		//init transition if defined
+		if(typeof content2 !== 'undefined')
+		{
+			transitionsManager.transition(scenes[lastScene], scenes[currScene],content2);
+		}
+		
 	}
 	
 }
