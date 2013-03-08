@@ -9,7 +9,6 @@ var defaultScene = (function() {
 			console.log("init: scene");
 
 			this.scene = scene;
-			setGUI();
 
 			for(var i = 0; i < this.scene.visuals.length ; i ++)
 			{
@@ -17,6 +16,7 @@ var defaultScene = (function() {
 				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
+			setGUI();
 
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;

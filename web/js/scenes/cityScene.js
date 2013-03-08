@@ -263,9 +263,11 @@ var cityScene = (function() {
 				scenes[currScene].stage.removeChild(card.cats[j]);
 			}
 		}
-		for(var i = 0 ; i < card.textLines.length ; i++)
-		{
-			scenes[currScene].stage.removeChild(card.textLines[i]);
+		if (typeof card.textLines !== 'undefined') {
+			for(var i = 0 ; i < card.textLines.length ; i++)
+			{
+				scenes[currScene].stage.removeChild(card.textLines[i]);
+			}
 		}
 
 	}
