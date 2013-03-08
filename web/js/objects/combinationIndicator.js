@@ -89,7 +89,7 @@ function CombinationIndicator(_stage){
 	{
 		for(var i = 0 ; i < indicatorPointers.length ; i ++)
 		{
-			stage.removeChild(indicatorPointer.bmp);
+			stage.removeChild(indicatorPointers[i].bmp);
 		}
 		indicatorPointers = new Array();
 
