@@ -101,7 +101,7 @@ function TransitionsManager(){
 
 	this.updateOpenSafe = function()
 	{
-
+		this.active = false;
 	};
 
 
@@ -125,8 +125,8 @@ function TransitionsManager(){
 			}
 			else
 			{
+				this.scene1.visuals[i].bitmap.alpha = 0;
 				fadeIn = true;
-				break;
 			}
 		 	
 		}
