@@ -24,6 +24,7 @@ var structure = {
 				citySceneStructure,
 				jobSceneStructure,
 				gallerySceneStructure,
+				galleryZoomSceneStructure,
 				rewardSceneStructure,
 				combinationSceneStructure,
 				settingsSceneStructure,
