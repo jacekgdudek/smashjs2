@@ -23,6 +23,8 @@ var flipX = true;
 var inputArray = new Array();
 
 function init() {
+	currSpecialRewards.push(0);
+	currSpecialRewards.push(1);
 	loadFlipX();
 	if(typeof flipX === 'undefined') flipX = true;
 	// initialize input arrays
