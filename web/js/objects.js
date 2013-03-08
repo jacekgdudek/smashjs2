@@ -7,7 +7,7 @@
 //
 // and the engine code (Anything that deals directly with gamejson)
 //
-//
+// -- this should somehow be made into a scene and the game engine logic separated
 //---------------------
 
 //init stages
