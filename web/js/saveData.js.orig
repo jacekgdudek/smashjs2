@@ -42,8 +42,6 @@ function loadData()
 	setLocation();
 
 }
-<<<<<<< HEAD
-=======
 
 function saveFlipX()
 {
@@ -68,4 +66,3 @@ function loadFlipX()
 
 	if(parsedObject) flipX = parsedObject.flipX;
 }
->>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772

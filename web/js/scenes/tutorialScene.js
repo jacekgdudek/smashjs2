@@ -73,6 +73,7 @@ TutorialScene.prototype.init = function() {
 	this.volume = 0;
 	this.lastHint = -1;
 
+<<<<<<< HEAD
 };
 
 TutorialScene.prototype.update = function() {
@@ -89,6 +90,89 @@ TutorialScene.prototype.update = function() {
 			this.lastHint = this.currentHint;
 			hintDelayCounter = 0;
 		}
+=======
+var tutorialScene = (function() {
+
+	var currentHint, hints, delay, startRotation/* for relative roation conditions*/ , volumeTarget, wentPastTarget;
+	var hintDelay, hintDelayCounter; /*for controlling delay between hints*/ 
+
+	var currentNumber, lastNumber;
+
+	var listOfTargets, targetPointer, lastTargetPointer, spin, direction, volume;
+
+	var scene;
+	/// text ouput
+	var message;
+
+	//verbouse
+	var lastHint;
+
+	return {
+		init: function(scene) {
+			console.log("init: tutorialScene");
+
+			this.scene = scene;
+			this.hints = scene.hints;
+
+			for(var i = 0; i < this.scene.visuals.length ; i ++)
+			{
+				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+			}
+
+			sweet_spot = this.scene.sweet_spot;
+			this.currentHint = 0;
+			this.hintDelay = 20;
+			this.hintDelayCounter = 0;
+
+			// Setup the game stage
+			knob = this.scene.visuals[1];
+			knob.bitmap.x = 800-knob.bitmap.image.width;//900+139;
+			knob.bitmap.y = 20;//200+139;
+			knob.bitmap.regX += 0;//139;
+			knob.bitmap.regY += 0;//139;
+			
+			knobNumbers = this.scene.visuals[2];			
+			knobNumbers.bitmap.x = knob.bitmap.x+115;//900+139;
+			knobNumbers.bitmap.y = knob.bitmap.y+117;//200+139;
+			knobNumbers.bitmap.regX = 115;//139;
+			knobNumbers.bitmap.regY = 117;//139;
+
+			stethoscope = this.scene.visuals[3];			
+			stethoscope.bitmap.x = 0;//900+139;
+			stethoscope.bitmap.y = 600;//200+139;
+
+			// Create a list of random targets e.g. 53, -124, 200, 5, etc
+			this.listOfTargets = new Array();
+
+			this.targetPointer = 0;
+			this.lastTargetPointer = 0;
+			this.spin=0;
+			this.lastNumber = 0;
+			this.delay = 9999;
+			this.startRotation = 9999;
+			this.volumeTarget = 9999;
+			this.wentPastTarget = false;
+			this.volume = 0;
+			this.lastHint = -1;
+
+			// add a handler for all the events we're interested in
+			document.onkeydown = handleKeyDown;
+
+			//define mouse callback
+			//handle mouse events
+			this.scene.stage.onMouseMove = function(mousePos) {
+				for(var i = 0 ; i < scene.visuals.length ; i++)
+				{
+					if(scene.visuals[i].hasHover)
+					{
+						if(scene.visuals[i].bitmap.hitTest( mousePos.stageX , mousePos.stageY ))
+						{
+							console.log("hover state initialized");
+						}
+					}
+				}
+			}
+>>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 
 
 		// ---------------------------------Check if we have finished
@@ -171,8 +255,13 @@ TutorialScene.prototype.update = function() {
 				if(this.startRotation == 9999) this.startRotation = knobNumbers.bitmap.rotation;
 				if(directionNow && this.startRotation + this.hints[this.currentHint].successCondition._value)
 				{
+<<<<<<< HEAD
 					startRotation = 9999;
 					this.currentHint++;
+=======
+					stethoscope.bitmap.x = (((800 - stethoscope.bitmap.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
+					stethoscope.bitmap.y = (600/480)*inputArray[0].y;
+>>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 				}
 			break;
 			//--relative rotation lesser than
@@ -199,7 +288,19 @@ TutorialScene.prototype.update = function() {
 				if(directionChanged && (this.currentNumber >= this.hints[this.currentHint].successCondition._value-1 ||
 											 this.currentNumber <= this.hints[this.currentHint].successCondition._value+1)) 
 				{
+<<<<<<< HEAD
 					this.currentHint++;
+=======
+					if(this.hints[this.currentHint].message !=  this.scene.messages[0].text.text)
+					{
+						this.scene.stage.removeChild(this.scene.messages[0].bg,this.scene.messages[0].text)
+						changeText(this.hints[this.currentHint].message , this.scene.messages[0]);
+						this.scene.messages[0].bg.visible = true;
+						this.scene.messages[0].text.visible = true;
+						this.scene.stage.addChild(this.scene.messages[0].bg, this.scene.messages[0].text)
+					}
+					//make invisible if empt
+>>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 				}
 			break;
 			//--get to number
@@ -224,10 +325,20 @@ TutorialScene.prototype.update = function() {
 			break;
 		}
 
+<<<<<<< HEAD
 		//--------------------------------------------------updateMessage
 		if(typeof this.hints[this.currentHint].message !== 'undefined')
 		{
 			if(this.hints[this.currentHint].message !=  this.structure.messages[0].text.text)
+=======
+				//save last values
+				this.lastNumber = this.currentNumber;
+
+				//update scene
+				//this.scene.stage.update();
+			}
+			else
+>>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 			{
 				this.stage.removeChild(this.structure.messages[0].bg)
 				changeText(this.hints[this.currentHint].message , this.structure.messages[0]);
@@ -265,6 +376,7 @@ TutorialScene.prototype.update = function() {
 			console.log(this.currentNumber);
 			audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
 		}
+<<<<<<< HEAD
 
 		//save last values
 		this.lastNumber = this.currentNumber;
@@ -304,3 +416,14 @@ TutorialScene.prototype.handleKeyDown = function(evt) {
 	this.stage.update();
 };
 
+=======
+		/*
+		if (	((evt.keyIdentifier=="Left") || (evt.keyIdentifier=="Right")) &&    
+		      	buzzAudio.click.getTime()==0) {
+			// Play the sound if we pressed the button and it's not playing
+			buzzAudio.click.play();
+			*/
+	};
+
+})();
+>>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772

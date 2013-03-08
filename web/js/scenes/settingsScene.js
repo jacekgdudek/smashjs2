@@ -61,7 +61,57 @@ SettingsScene.prototype.init = function() {
 		{
 			if(structure.settings[i].normal_bmp.hitTest( mousePos.stageX - structure.settings[i].normal_bmp.x , mousePos.stageY - structure.settings[i].normal_bmp.y ))
 			{
+<<<<<<< HEAD
 				structure.settings[i].hover_bmp.visible = true;
+=======
+				switch(this.scene.settings[i].type)
+				{
+					case 0:
+
+						var checkbox = new Object();
+						this.settings[i].text_bmp = new createjs.Text(this.settings[i].text, "20px Arial", "#ff77ff");
+						this.settings[i].normal_bmp = this.scene.visuals[this.settings[i].normal].bitmap.clone();
+						this.settings[i].hover_bmp = this.scene.visuals[this.settings[i].hover].bitmap.clone();
+						checkbox.ticked = this.scene.visuals[this.settings[i].checkbox[0]].bitmap.clone();
+						checkbox.unticked = this.scene.visuals[this.settings[i].checkbox[1]].bitmap.clone();
+
+						this.settings[i].normal_bmp.x = 800/2 - this.settings[i].normal_bmp.image.width/2;
+						this.settings[i].normal_bmp.y = this.settings[i].hover_bmp.y = 50 + i * 70;
+						this.settings[i].hover_bmp.x = 800/2 - this.settings[i].normal_bmp.image.width/2;;
+						checkbox.ticked.x = 800/2 + this.settings[i].normal_bmp.image.width/2 - 50;
+						checkbox.unticked.x = 800/2 + this.settings[i].normal_bmp.image.width/2 - 50;
+						checkbox.unticked.y = checkbox.ticked.y = 70 + i * 70;
+						this.settings[i].text_bmp.x = 800/2 - this.settings[i].text_bmp.lineWidth/2 - 60;
+						this.settings[i].text_bmp.y = 60 + i * 70;
+
+						this.settings[i].checkbox_bmp = checkbox;
+						this.settings[i].hover_bmp.visible = false;
+						this.scene.stage.addChild(this.settings[i].normal_bmp, this.settings[i].hover_bmp, checkbox.unticked, checkbox.ticked ,this.settings[i].text_bmp);
+						this.settings[i].state = 0;
+					break;
+					case 1:
+						this.settings[i].text_bmp = new createjs.Text(this.settings[i].text, "20px Arial", "#ff77ff");
+						this.settings[i].normal_bmp = this.scene.visuals[this.settings[i].normal].bitmap.clone();
+						this.settings[i].hover_bmp = this.scene.visuals[this.settings[i].hover].bitmap.clone();
+						this.settings[i].normal_bmp.x = 800/2 - this.settings[i].normal_bmp.image.width/2;
+						this.settings[i].normal_bmp.y = this.settings[i].hover_bmp.y = 50 + i * 70;
+						this.settings[i].hover_bmp.x = 800/2 - this.settings[i].normal_bmp.image.width/2;
+						this.settings[i].text_bmp.x = 800/2 - this.settings[i].text_bmp.lineWidth/2 - 60;
+						this.settings[i].text_bmp.y = 60 + i * 70;
+						this.settings[i].hover_bmp.visible = false;
+						this.scene.stage.addChild(this.settings[i].normal_bmp, this.settings[i].hover_bmp, checkbox.unticked, checkbox.ticked ,this.settings[i].text_bmp);
+					break;
+					case 2:
+					break;
+					case 3:
+					break;
+				}
+
+				if(i == 1 && !flipX)
+				{
+					this.settings[i].checkbox_bmp.ticked.visible = false;
+				}
+>>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 			}
 			else
 			{

@@ -44,9 +44,18 @@ Scene.prototype.init = function() {
 
 	//setGUI();
 
+<<<<<<< HEAD
 	// add a handler for all the events we're interested in
 	document.onkeydown = this.handleKeyDown;
 	//scene.stage.onTick = update;
+=======
+			for(var i = 0; i < this.scene.visuals.length ; i ++)
+			{
+				this.scene.visuals[i].bitmap.alpha = 1;
+				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
+				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+			}
+>>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 
 	var visuals = this.structure.visuals;
 
@@ -86,6 +95,7 @@ Scene.prototype.init = function() {
 
 }
 
+<<<<<<< HEAD
 Scene.prototype.update = function() {
 	if(this.structure._name == "welcome")
 	{
@@ -110,6 +120,31 @@ Scene.prototype.finalize = function() {
 	}
 	//hideGUI();
 }
+=======
+			if(this.scene._name == "welcome")
+			{
+				hideGUI();
+			}
+			
+			//update scene
+			this.scene.stage.update();
+		},
+		finalize: function() {
+			for(var i = 0 ; i < this.scene.visuals.length ; i++)
+			{
+				this.scene.visuals[i].visible = false;
+			}
+			if (this.scene.hasOwnProperty("messages")) {
+				for(var i = 0 ; i < this.scene.messages.length ; i++)
+				{
+					this.scene.messages[i].bg.visible = false;
+					this.scene.messages[i].text.visible = false;
+				}
+			}
+			hideGUI();
+		},
+	};
+>>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 
 Scene.prototype.handleKeyDown = function(evt) {
 	// For now we use keyboard controls for the dial
