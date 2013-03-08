@@ -2,9 +2,7 @@ console.log("Loading settings scene structure");
 
 var settingsSceneStructure = {
 	_name: "settings",
-	init: settingsScene.init,
-	update: settingsScene.update,
-	finalize: settingsScene.finalize,
+	hasGUI: true,
 	isCurrent: true,
 	noGUI: true,
 	stage_id: "game_canvas",

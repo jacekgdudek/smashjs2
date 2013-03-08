@@ -1,8 +1,6 @@
 var gallerySceneStructure = {
 	_name: "gallery_scene",
-	init: galleryScene.init,
-	update: galleryScene.update,
-	finalize: galleryScene.finalize,
+	hasGUI: true,
 	isCurrent: true,
 	stage_id: "game_canvas",
 	galleryGrid:{

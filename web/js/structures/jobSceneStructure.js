@@ -1,8 +1,6 @@
 var jobSceneStructure = {
 	_name: "job_board_scene",
-	init: jobsScene.init,
-	update: jobsScene.update,
-	finalize: jobsScene.finalize,
+	hasGUI: true,
 	isCurrent: true,
 	stage_id: "game_canvas",
 	catSrc: "assets/city_map/cat.jpg",

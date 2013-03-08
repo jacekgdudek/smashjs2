@@ -1,8 +1,6 @@
 var previewSceneStructure = {
 	_name: "preview_scene",
-	init: previewScene.init,
-	update: previewScene.update,
-	finalize: previewScene.finalize,
+	hasGUI: true,
 	stage_id: "game_canvas",
 	noGUI: true,
 	visuals: [

@@ -2,9 +2,7 @@ console.log("Loading maze scene structure");
 
 var mazeSceneStructure = {
 	_name: "maze_scene",
-	init: mazeScene.init,
-	update: mazeScene.update,
-	finalize: mazeScene.finalize,
+	hasGUI: true,
 	isCurrent: true,
 	stage_id: "game_canvas",
 	visuals: [

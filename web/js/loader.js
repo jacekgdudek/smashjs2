@@ -43,15 +43,16 @@ function loadContent(gamejson) {
 
 	// For each scene
 	var scenes = gamejson.game.scenes;
-	for (var i = 0; i < scenes.length; i++) {
+	//for (var i = 0; i < scenes.length; i++) {
+	var i = 0;
 
 		// Load the visuals
-		var visuals = scenes[i].visuals;
+		var visuals = scenes[i].structure.visuals;
 		for (var j = 0; j < visuals.length; j++) {
 			queue.loadFile(visuals[j].src);
 			loadCounter++;
 		}
-	}
+	//}
 
 }
 

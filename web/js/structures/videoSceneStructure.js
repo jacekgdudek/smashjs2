@@ -1,7 +1,6 @@
 var videoSceneStructure = {
 	_name: "video_scene",
-	init: videoScene.init,
-	update: videoScene.update,
+	hasGUI: true,
 	stage_id: "game_canvas",
 	visuals: [
 		{
@@ -12,7 +11,7 @@ var videoSceneStructure = {
 	videos: [
 		{
 			id: "test",
-			src: "assets/video/Test.mp4"
+			src: "assets/video/Test.mp4",
 			endedEvent: {
 				type: "SWITCH_SCENE",
 				content: "map_scene"

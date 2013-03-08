@@ -1,8 +1,6 @@
 var baseSceneStructure = {
 	_name: "base_scene",
-	init: defaultScene.init,
-	update: defaultScene.update,
-	finalize: defaultScene.finalize,
+	hasGUI: true,
 	isCurrent: true,
 	stage_id: "game_canvas",
 	visuals: [

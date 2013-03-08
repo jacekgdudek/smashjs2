@@ -1,8 +1,6 @@
 var rewardSceneStructure = {
 	_name: "reward_scene",
-	init: rewardScene.init,
-	update: rewardScene.update,
-	finalize: rewardScene.finalize,
+	hasGUI: true,
 	isCurrent: true,
 	stage_id: "game_canvas",
 	rewardGrid:{

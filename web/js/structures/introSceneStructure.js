@@ -1,8 +1,6 @@
 var introSceneStructure = {
 	_name: "intro",
-	init: introScene.init,
-	update: introScene.update,
-	finalize: introScene.finalize,
+	hasGUI: true,
 	stage_id: "game_canvas",
 	visuals: [
 		{

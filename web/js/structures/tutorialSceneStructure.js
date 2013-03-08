@@ -1,8 +1,6 @@
 var tutorialSceneStructure = {
 	_name: "tutorial_scene",
-	init: tutorialScene.init,
-	update: tutorialScene.update,
-	finalize: tutorialScene.finalize,
+	hasGUI: true,
 	stage_id: "game_canvas",
 	noGUI: true,
 	nextStageEvent: 

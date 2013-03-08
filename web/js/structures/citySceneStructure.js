@@ -1,8 +1,6 @@
 var citySceneStructure = {
 	_name: "map_scene",
-	init: cityScene.init,
-	update: cityScene.update,
-	finalize: cityScene.finalize,
+	hasGUI: true,
 	stage_id: "game_canvas",
 	catSrc: "assets/city_map/cat.jpg",
 	cityPointerSrc: "assets/city_map/cat.jpg",

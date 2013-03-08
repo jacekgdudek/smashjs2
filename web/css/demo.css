@@ -6,8 +6,58 @@ body {
 
 canvas {
 	border: solid 1px rgba(0,0,0,0.05);
+	width: 800px;
+	height: 600px;
 }
+video {
+	width: 800px;
+	height: 600px;
+	visibility: hidden;
+}
+
+/* Everything from NaCl */
+embed {
+        width: 0;
+	height: 0;
+	visibility: hidden;
+}
+
+#game {
+	position: absolute;
+	left: 20%;
+}
+
+/* The game canvas itself */
+#game_canvas {
+	width: 800px;
+	height: 600px;
+	/*visibility: hidden;*/
+}
+
+/**
+ *  Warning: what is this element with id: canvas referring to - please check it out
+ */
+#canvas {
+	width: 640px;
+	height: 480px;
+}
+
+/* Camera feed */
+#live {
+	visibility: hidden;
+}
+
+/* Videos are loaded into an html5 video element */
+#video_player {
+	width: 640px;
+	height: 480px;
+	/*margin: -100px 0 0 -200px;
+	top: 50%;
+	left: 50%;*/
+	visibility: hidden;
+}
+
 
 .grayscale {
   	-webkit-filter: grayscale(1);
- }
+}

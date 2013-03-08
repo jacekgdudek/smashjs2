@@ -2,11 +2,8 @@ console.log("Loading first scene structure");
 
 var firstSceneStructure = {
 	_name: "welcome",
-	init: defaultScene.init,
-	update: defaultScene.update,
-	finalize: defaultScene.finalize,
 	isCurrent: true,
-	noGUI: true,
+	hasGUI: true,
 	stage_id: "game_canvas",
 	visuals: [
 		{
@@ -56,4 +53,4 @@ var firstSceneStructure = {
 			}	
 		}
 	]
-};
+}

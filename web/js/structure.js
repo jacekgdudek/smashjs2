@@ -1,6 +1,10 @@
+// STRUCTURE //
+/* Structure holds all the data in the game in a structured format */
+
 console.log("Loading structure");
 
 var structure = { 
+	// The image for the loading bar at the start of the game
 	preload: {
 		stage_id: "game_canvas",
 		bgsrc: "assets/loading/bg.jpg",
@@ -15,20 +19,22 @@ var structure = {
 			ratio: [0,0.3,0.6, 1]
 			}
 		},
+	// game data
 	game: {
-		scenes: [	firstSceneStructure, 
-				videoSceneStructure,
-				introSceneStructure,
-				tutorialSceneStructure,
-				baseSceneStructure,
-				citySceneStructure,
-				jobSceneStructure,
-				gallerySceneStructure,
-				rewardSceneStructure,
-				combinationSceneStructure,
-				settingsSceneStructure,
-				previewSceneStructure,
-				mazeSceneStructure
+		// A dictionary of the scenes in the game
+		scenes: [	new FirstScene(), 
+				new VideoScene(), 
+				new IntroScene(),
+				new TutorialScene(),
+				new BaseScene(),
+				new CityScene(),
+				new JobScene(),
+				new GalleryScene(),
+				new RewardScene(),
+				new CombinationScene(),
+				new SettingsScene(),
+				new PreviewScene(),
+				new MazeScene() 
 		],
 		jobs: {
 			initialJobs:
@@ -105,6 +111,7 @@ var structure = {
 					name:"maze_scene"
 				}
 			],
+			// ? Why not ["a1","a2",..,etc] 
 			names:[
 				{
 					name:"a1"
@@ -226,6 +233,7 @@ var structure = {
 			]
 		}
 		],
+		// Data regarding the in game cities
 		cities:[
 			{
 				name:"Edinburgh",

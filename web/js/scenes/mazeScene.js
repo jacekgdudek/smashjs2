@@ -1,103 +1,100 @@
-var mazeScene = (function() {
+/**
+ *	The MAZE SCENE 
+ *
+ *	-- jacekgdudek
+ *	-- Peekabu Studios
+ *
+ */
 
-	var burger; //burger created on players cursor position
-    var maze; //maze itself
-    var lives; //text showing number of lives
-    var currentLives = 100; //number of current lives
-    var startHere; //position where players has to place his cursor before gamestart
-    var finnishHere;
-    var maskCircle; //circle masking area around the cursor 
-    var scene;
+function MazeScene() {}
 
-    var gameStarted = false;
 
-	return {
-		init: function(scene) {
-			console.log("init: mazeScene");
+MazeScene.prototype.init = function() {
+	Scene.prototype.init.call(this);
+	console.log("init: mazeScene");
+	
+       	setGUI();
+        this.gameStarted = false;
 
-			this.scene = scene;
-            setGUI();
-            currentLives = 700- currentJob.risk*100;
-            gameStarted = false;
-			lives = new createjs.Text(currentLives, "20px Arial", "#ff7700");
-        	lives.x = 700;
-        	lives.y = 10;
-	        this.scene.stage.addChild(lives);
-	        maze = this.scene.visuals[1].bitmap;//new createjs.Bitmap("assets/maze/maze1.png");
-            maze.visible = false;
+	//number of current lives
+	this.currentLives = 100; 
 
-	        startHere = this.scene.visuals[2].bitmap;//new createjs.Bitmap("assets/maze/startpoint.png");
-            finnishHere = this.scene.visuals[2].bitmap;//new createjs.Bitmap("assets/maze/startpoint.png");
+	//text showing number of lives
+        this.currentLives = 700- currentJob.risk*100;
+ 	this.lives = new createjs.Text(this.currentLives, "20px Arial", "#ff7700");
+        lives.x = 700;
+        lives.y = 10;
+	this.stage.addChild(lives);
 
-	        this.scene.stage.addChild(startHere);
+	var visuals = this.structure.visuals;
+	//maze itself
+	this.maze = visuals[1].bitmap;//new createjs.Bitmap("assets/maze/maze1.png");
+        this.maze.visible = false;
 
-	        burger = this.scene.visuals[3].bitmap;//new createjs.Bitmap("assets/maze/burger.png");
+	//position where players has to place his cursor before gamestart
+	this.startHere = visuals[2].bitmap;//new createjs.Bitmap("assets/maze/startpoint.png");
+        this.finishHere = visuals[2].bitmap;//new createjs.Bitmap("assets/maze/startpoint.png");
 
-	        burger.x = 500;
-	        this.scene.stage.addChild(burger);
+	this.stage.addChild(startHere);
 
-		},
-		update: function() {
-			//burger follows mouse cursor
-            burger.x = this.scene.stage.mouseX - burger.image.width/2;
-            burger.y = this.scene.stage.mouseY - burger.image.height/2;
+	//burger created on players cursor position
+	this.burger = visuals[3].bitmap;//new createjs.Bitmap("assets/maze/burger.png");
 
-            //checks for collision between burger and startpoint, if it occurs, starts the game
-            var startPoint = ndgmr.checkPixelCollision(burger, startHere, 0, true)
-            if (startPoint){
-                //createjs.Ticker.removeListener(gameReady);
-                console.log("START GAME");
-                gameStarted = true;
-    			//update scene
-    			this.scene.stage.update();
-		      }
+	this.burger.x = 500;
+	this.stage.addChild(burger);
+}
+
+MazeScene.prototype.update = function() {
+	//this.burger follows mouse cursor
+        this.burger.x = this.stage.mouseX - this.burger.image.width/2;
+        this.burger.y = this.stage.mouseY - this.burger.image.height/2;
+
+	//checks for collision between this.burger and startpoint, if it occurs, starts the game
+        var startPoint = ndgmr.checkPixelCollision(this.burger, startHere, 0, true)
+        if (startPoint){
+        	//createjs.Ticker.removeListener(gameReady);
+        	console.log("START GAME");
+        	this.gameStarted = true;
+    		//update scene
+    		this.stage.update();
+	}
             
-            if(gameStarted)
-            {
-                //creates the mask around cursor
-                maskCircle = new createjs.Shape();
-                maskCircle.graphics.beginStroke("black").setStrokeStyle(5).drawCircle(this.scene.stage.mouseX, this.scene.stage.mouseY, 100).endStroke();
-                maze.mask = maskCircle;
-                maze.visible = true;
-                finnishHere.x = 500;
-                finnishHere.y = 200;
-                finnishHere.mask = maskCircle;
-
-                this.scene.stage.addChild(maze);
-                //checks for collision between burger and maze, if it occurs takes 10lives
-                var intersection = ndgmr.checkPixelCollision(burger, maze,0, true);
-                if(intersection){
-                    console.log("collision");
-                    currentLives -= 10;
-                    lives.text = currentLives;
-                    console.log("Lives = "+currentLives);
-                }
-
-                //victory & fail
-                if(currentLives < 0)
-                {
-                    addEvent("FINNISHED_JOB",false);
-                }
-
-                var startPoint = ndgmr.checkPixelCollision(burger, finnishHere, 0, true)
-                if (startPoint){
-                    addEvent("FINNISHED_JOB",true);
-                }
-                
-            }
-            
-            //update scene
-            this.scene.stage.update();
-        },
-        finalize: function() {
-            for(var i = 0 ; i < this.scene.visuals.length ; i++)
-            {
-                this.scene.visuals[i].visible = false;
-            }
+	if(this.gameStarted) {
+		//creates the mask around cursor
+		//
+		// can be described as circle masking area around the cursor 
+		var maskCircle = new createjs.Shape();
+		maskCircle.graphics.beginStroke("black").setStrokeStyle(5).drawCircle(this.stage.mouseX, this.stage.mouseY, 100).endStroke();
+		this.maze.mask = maskCircle;
+		this.maze.visible = true;
+		this.finishHere.x = 500;
+		this.finishHere.y = 200;
+		this.finishHere.mask = maskCircle;
+		
+		this.stage.addChild(this.maze);
+		//checks for collision between this.burger and maze, if it occurs takes 10lives
+		var intersection = ndgmr.checkPixelCollision(this.burger, this.maze,0, true);
+		if(intersection){
+		    console.log("collision");
+		    this.currentLives -= 10;
+		    this.lives.text = this.currentLives;
+		    console.log("Lives = "+this.currentLives);
 		}
 		
-
-	};
+		//victory & fail
+		if(this.currentLives < 0)
+		{
+		    addEvent("FINNISHED_JOB",false);
+		}
+		
+		var startPoint = ndgmr.checkPixelCollision(this.burger, this.finishHere, 0, true)
+		if (startPoint){
+		    addEvent("FINNISHED_JOB",true);
+		}
+		
+	}
 	
+	//update scene
+	this.stage.update();
+}
 
-})();

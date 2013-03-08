@@ -1,63 +1,32 @@
 //
 // An example scene that allows for video playback
 //
-var videoScene = (function() {
-	//var input;
-	var scene;
+function VideoScene(){}
 
-	return {
-		// Engine will soon be changing - 
-		// So that scenes 'init' method will no longer take any arguments
-		// but we have to leave it for now
-		init: function(paramNotActuallyNeeded) {
+VideoScene.prototype = new Scene(videoSceneStructure);
 
-			console.log("init: videoScene");
-			scene = this;
+VideoScene.prototype.init = function() {
+	Scene.prototype.init.call(this);
+	console.log("init: videoScene");
 
-			// Video Player Code
-			
-			// Set the scene for the video manager
-			VideoManager.scene = scene;
+	// Video Player Code
+	
+	// Set the scene for the video manager
+	VideoManager.videos = this.structure.videos;
 
-			// Load the specific video you want to play
-			var video = VideoManager.load("test");
+	// Load the specific video you want to play
+	var video = VideoManager.load("test");
 
-			// Position the video in the scene
-			scene.stage.addChild(video);
+	// Position the video in the scene
+	this.stage.addChild(video);
 
-			// Use the video manager to play the video
-			VideoManager.play();
+	// Use the video manager to play the video
+	VideoManager.play();
+}
 
-			// add a handler for all the events we're interested in
-			// in this case we can use left and right arrows to play
-			document.onkeydown = handleKeyDown;
+VideoScene.prototype.handleKeyDown = function(evt) {
+	// For now we use keyboard controls for control
+	if (evt.keyIdentifier=="Left") { VideoManager.player.play(); } 
+	if (evt.keyIdentifier=="Right") { VideoManager.player.pause(); } 
+}
 
-			//make sure all the assets are visible
-			for(var i = 0 ; i < this.visuals.length ; i++)
-			{
-				scene.visuals[i].visible = true;
-			}
-		},
-
-		// No update specfic stuff required for videos
-		update: function() {
-			//update scene
-			scene.stage.update();
-		},
-
-		// We always have a finalise method so we know when the scene has ended
-		finalize: function() {
-			for(var i = 0 ; i < this.visuals.length ; i++)
-			{
-				scene.visuals[i].visible = false;
-			}
-		}
-	};
-
-	function handleKeyDown(evt) {
-		// You may want keyboard controls
-		if (evt.keyIdentifier=="Left") { VideoManager.play(); } 
-		if (evt.keyIdentifier=="Right") { VideoManager.pause(); }
-	};
-
-})();

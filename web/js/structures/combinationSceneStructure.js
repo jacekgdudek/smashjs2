@@ -1,8 +1,6 @@
 var combinationSceneStructure = {
 	_name: "combination_lock",
-	init: combinationScene.init,
-	update: combinationScene.update,
-	finalize: combinationScene.finalize,
+	hasGUI: true,
 	stage_id: "game_canvas",
 	sweet_spot:
 	{

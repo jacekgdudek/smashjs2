@@ -7,8 +7,6 @@
 	<!-- easel -->
 	<script src="js/libs/easeljs-0.6.0.min.js"></script>
 	<script src="js/libs/jquery-1.5.1.min.js"></script>
-	<!-- Old version of easel -->
-	<!--<script src="js/libs/easeljs-0.5.0.min.js"></script>-->
 
 	<!-- collision -->
 	<script src="js/libs/ndgmr.Collision.js"></script>
@@ -31,94 +29,99 @@
 	<!-- video  -->
 	<script src="js/videoManager.js"></script>
 
-	<!-- scenes -->
+	<!-- scene -->
 	<script src="js/scene.js"></script>
+
+	<!-- scenes and structure -->
+	<script src="js/structures/introSceneStructure.js"></script>
 	<script src="js/scenes/introScene.js"></script> 
+
+	<script src="js/structures/firstSceneStructure.js"></script>
+	<script src="js/scenes/firstScene.js"></script> 
+
+	<script src="js/structures/baseSceneStructure.js"></script>
+	<script src="js/scenes/baseScene.js"></script>
+
+	<script src="js/structures/tutorialSceneStructure.js"></script>
 	<script src="js/scenes/tutorialScene.js"></script>
+
+	<script src="js/structures/rewardSceneStructure.js"></script>
 	<script src="js/scenes/rewardScene.js"></script> 
+
+	<script src="js/structures/jobSceneStructure.js"></script>
 	<script src="js/scenes/jobScene.js"> </script>
+
+	<!-- Safe scene structure placeholder -->
 	<script src="js/scenes/safeScene.js"></script>
+
+	<script src="js/structures/gallerySceneStructure.js"></script>
 	<script src="js/scenes/galleryScene.js"></script>
+
+	<!-- Stethoscope scene structure placeholder -->
 	<script src="js/scenes/stethoscopeScene.js"></script>
+
+	<script src="js/structures/citySceneStructure.js"></script>
 	<script src="js/scenes/cityScene.js"> </script>
+
+	<script src="js/structures/combinationSceneStructure.js"></script>
 	<script src="js/scenes/combinationScene.js"></script>
+
+	<script src="js/structures/videoSceneStructure.js"></script>
 	<script src="js/scenes/videoScene.js"></script>
+
+	<script src="js/structures/settingsSceneStructure.js"></script>
 	<script src="js/scenes/settingsScene.js"></script>
+
+	<script src="js/structures/previewSceneStructure.js"></script>
 	<script src="js/scenes/previewScene.js"></script>
+
+	<script src="js/structures/mazeSceneStructure.js"></script>
 	<script src="js/scenes/mazeScene.js"></script>
 
 
-	<!-- Structure -->
-	<script src="js/structures/baseSceneStructure.js"></script>
-	<script src="js/structures/citySceneStructure.js"></script>
-	<script src="js/structures/combinationSceneStructure.js"></script>
-	<script src="js/structures/firstSceneStructure.js"></script>
-	<script src="js/structures/gallerySceneStructure.js"></script>
-	<script src="js/structures/introSceneStructure.js"></script>
-	<script src="js/structures/jobSceneStructure.js"></script>
-	<script src="js/structures/rewardSceneStructure.js"></script>
-	<!-- <script src="js/structures/sweetSpotStructure.js"></script> -->
-	<script src="js/structures/tutorialSceneStructure.js"></script>
-	<script src="js/structures/videoSceneStructure.js"></script>
-	<script src="js/structures/settingsSceneStructure.js"></script>
-	<script src="js/structures/previewSceneStructure.js"></script>
-	<script src="js/structures/mazeSceneStructure.js"></script>
-
+	<!-- engine -->
 	<script src="js/structure.js"></script>
-
 	<script src="js/ColorFilter.js"></script>
 	<script src="js/objects.js"></script>
-
 	<script src="js/init.js"></script>
 
-
-	<!-- title -->
 	<title>SmashAndGrab</title>
 </head>
 
 <body onLoad="init()">
-	<!-- define listener for events and module -->
-    <p>
-      <div id="listener">
-        <script src="js/eventHandler.js"></script>
-    
-        <embed 
-           id="FidtrackModule"
-           width=0 height=0
-           src="NaCL/FidtrackModule.nmf"
-           type="application/x-nacl" />
-      </div>
-    <!-- header -->
-    <h1>Smash And Grab</h1>
 
-	<!-- objects -->
-    <div>
-        <canvas id="game_canvas" width="800" height="600" style="">
-            buuu !!
-        </canvas>
-        <h2>Status : </h2>
-		<div id="status_field">Started</div>
-        <video 	id="live"
-		width="640" height="480" 
-		autoplay 
-		style="visibility: hidden; ">
-	</video>
-        <canvas id="canvas" 
-		width="640" height="480" 
-		style="visibility: hidden;">
-	</canvas>
-	<video 	id="videoPlayer" 
-		width="640" height="480" 
-		style="visibility: hidden;"			
-		controls
-		preload="auto" 	  
-		data-setup="{}">
-		<source src="assets/video/peekabu_promo_640.mp4" type="video/mp4">
-		<source src="assets/video/peekabu_promo_640.webm" type="video/webm">
-		<source src="assets/video/peekabu_promo_640.ogv" type="video/ogg">
-		Your browser does not support the video tag.
-	</video>
-    </div>
+	<div id="game">
+		    
+		<!-- define listener for events and module -->
+		<p>
+		
+		<div id="listener">
+			<script src="js/eventHandler.js"></script>
+			<embed id="FidtrackModule" src="NaCL/FidtrackModule.nmf" type="application/x-nacl" />
+		</div>
+		
+		<!-- header -->
+		<h1>Smash And Grab</h1>
+		<!-- the game! -->
+		<canvas id="game_canvas" width="800" height="600" > buuu !!  </canvas>
+		 
+		<h2>NaCl Status: </h2>
+		<div id="status_field">
+			Started
+		</div>
+		<!-- What is this for? (I've put a grey box around it) -->
+		<canvas id="canvas"> </canvas>
+		
+		<!-- camera feed -->
+		<video 	id="live" width="800" height="600" autoplay></video>
+		<!-- video player --> 
+		<video 	id="videoPlayer" controls preload="auto" data-setup="{}">
+			<source src="assets/video/peekabu_promo_640.mp4" type="video/mp4">
+			<source src="assets/video/peekabu_promo_640.webm" type="video/webm">
+			<source src="assets/video/peekabu_promo_640.ogv" type="video/ogg">
+			Your browser does not support the video tag.
+		</video>
+	</div>
     
 	<script src="js/cameraAccess.js"></script>
 	<script src="js/main.js"></script>

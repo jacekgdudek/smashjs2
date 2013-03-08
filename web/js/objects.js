@@ -1,7 +1,13 @@
-
 //-------------------------------------------
 //
 // initialize objects
+//
+//
+// In this class we programmatically parse the structure and set up a lot of the game logic
+//
+// and the engine code (Anything that deals directly with gamejson)
+//
+//
 //---------------------
 
 //init stages
@@ -29,38 +35,14 @@ var currCity;
 var currSpecialRewards = new Array();
 var specialRewards = new Array();
 
-var sweetSpot = (function() {
-	var scene;
-	return { 
-		init : function(scene) {
-			this.scene = scene;	
-			/*this.scene.visuals.stethoscope.x = 640 - inputArray[0].x;
-			this.scene.visuals.stethoscope.y = inputArray[0].y;
-			this.scene.visuals.knob.x = 300;
-			this.scene.visuals.knob.y = 100;*/
-		},
-		update : function() {
-			this.scene.visuals[0].bitmap.rotation = inputArray[2].rotation;
-			//stage = new createjs.Stage("game_canvas");
-			//stage.update();
-			this.scene.stage.update();
-			var sceneFinished = false;		
-			return sceneFinished;
-		},
-		finalize : function() {
-
-		}
-	};
-})();
 
 function loadObjects() {
 
-	var gamejson = structure;
-	//console.log(gamejson.game.scenes[0].visuals.length);
+	//console.log(structure.game.scenes[0].visuals.length);
 
-	loadContent(gamejson);
+	loadContent(structure);
 	//setup cities
-	var _cities = gamejson.game.cities;
+	var _cities = structure.game.cities;
 	for(var i = 0 ; i < _cities.length ; i ++)
 	{
 		cities[_cities[i].name] = _cities[i];
@@ -68,7 +50,7 @@ function loadObjects() {
 	}
 	currCity = "Edinburgh";
 	//setup special rewards
-	specialRewards = gamejson.game.specialRewards;
+	specialRewards = structure.game.specialRewards;
 	for(var i = 0 ; i < specialRewards.rewards.length ; i ++)
 	{
 		specialRewards.rewards[i].thumbnail = new createjs.Bitmap(specialRewards.thumbnails[specialRewards.rewards[i].type].src);
@@ -78,7 +60,7 @@ function loadObjects() {
 
 	///setup crdits disp
 	//--------------------------------------setup credits element
-	credits = gamejson.game.elements[0];
+	credits = structure.game.elements[0];
 	credits.value = 0;
 	credits.nextValue = 0;
 	credits.bg = new createjs.Bitmap(credits.src);
@@ -90,17 +72,18 @@ function loadObjects() {
 		credits.subelements[j].bmp.y = -100;
 	}
 	risk = 0;
-	var _scenes = gamejson.game.scenes;
-	jobs = gamejson.game.jobs;
+	var _scenes = structure.game.scenes;
+	jobs = structure.game.jobs;
 	
-	if(isFirstCity) currentJobs = gamejson.game.jobs.initialJobs;
+	if(isFirstCity) currentJobs = structure.game.jobs.initialJobs;
 	// For each scene
-	for (var i = 0; i < _scenes.length; i++) {
+	//for (var i = 0; i < _scenes.length; i++) {
+	for (var i = 0; i < 4; i++) {
 		// Set up the stage
-		_scenes[i].stage = new createjs.Stage( _scenes[i].stage_id );
+		_scenes[i].stage = new createjs.Stage( _scenes[i].structure.stage_id );
 		// For set up the visuals in the scene and attach them to the stage
-		for (var j = 0; j < _scenes[i].visuals.length; j++) {
-			var visual = _scenes[i].visuals[j];
+		for (var j = 0; j < _scenes[i].structure.visuals.length; j++) {
+			var visual = _scenes[i].structure.visuals[j];
 			visual.bitmap = new createjs.Bitmap(visual.src);
 			visual.bitmap.x = visual.x;
 			visual.bitmap.y = visual.y;
@@ -112,54 +95,58 @@ function loadObjects() {
 			if (typeof visual.textLines !== 'undefined') {
 				for (var k = 0; k < visual.textLines.length; k++) {
 					console.log(j);
-					visual.textLines[k].textObj = new createjs.Text(visual.textLines[k].text, gamejson.game.font._type, gamejson.game.font._color);
-					visual.textLines[k].textObj.x = visual.textLines[k].x + visual.bitmap.x;
-					visual.textLines[k].textObj.y = visual.textLines[k].y + visual.bitmap.y;
+					var textLines = visual.textLines[k];
+					textLine.textObj = new createjs.Text(textLine.text, structure.game.font._type, structure.game.font._color);
+					textLine.textObj.x = textLine.x + visual.bitmap.x;
+					textLine.textObj.y = textLine.y + visual.bitmap.y;
 					_scenes[i].stage.addChild(visual.textLines[k].textObj);
 				}
 			}
 		}
-		if (typeof _scenes[i].messages !== 'undefined') {
-			for (var j = 0; j < _scenes[i].messages.length; j++) {
-				_scenes[i].messages[j].text = new createjs.Text(_scenes[i].messages[j]._text, _scenes[i].messages[j]._font, _scenes[i].messages[j]._color);
-	 			_scenes[i].messages[j].text.x = _scenes[i].messages[j].x;
-	 			_scenes[i].messages[j].text.y = _scenes[i].messages[j].y;
-	 			_scenes[i].messages[j].text.textBaseline = "alphabetic";
-				_scenes[i].messages[j].text.lineWidth = _scenes[i].messages[j].lineWidth;
+		if (typeof _scenes[i].structure.messages !== 'undefined') {
+			var messages = _scenes[i].structure.messages;
+			for (var j = 0; j < messages.length; j++) {
+				var text = new createjs.Text(messages[j]._text, messages[j]._font, messages[j]._color);
+	 			text.x = messages[j].x;
+	 			text.y = messages[j].y;
+	 			text.textBaseline = "alphabetic";
+				text.lineWidth = messages[j].lineWidth;
 
-				if(_scenes[i].messages[j].text.getMeasuredWidth() < _scenes[i].messages[j].text.lineWidth) {
-					_scenes[i].messages[j].text.lineWidth = _scenes[i].messages[j].text.getMeasuredWidth();
+				messages[j].text = text;
+
+				if(messages[j].text.getMeasuredWidth() < messages[j].text.lineWidth) {
+					messages[j].text.lineWidth = messages[j].text.getMeasuredWidth();
 				}
 
 				var centeredX;
-				if(_scenes[i].messages[j].center_x) {
-					centeredX = 800/2 - _scenes[i].messages[j].text.lineWidth/2;
-					_scenes[i].messages[j].text.x = centeredX;
+				if(messages[j].center_x) {
+					centeredX = 800/2 - messages[j].text.lineWidth/2;
+					messages[j].text.x = centeredX;
 				}
 
-				console.log(_scenes[i].messages[j].text.getMeasuredHeight());
-				_scenes[i].messages[j].bg = new createjs.Shape();
-				adjustTextBox(_scenes[i].messages[j].text , _scenes[i].messages[j].bg);
-				_scenes[i].messages[j].bg.alpha = 0.5;
-				_scenes[i].messages[j].bg.visible = false;
-				_scenes[i].messages[j].text.visible = false;
-				_scenes[i].stage.addChild(_scenes[i].messages[j].bg,_scenes[i].messages[j].text);
+				console.log(messages[j].text.getMeasuredHeight());
+				messages[j].bg = new createjs.Shape();
+				adjustTextBox(messages[j].text , messages[j].bg);
+				messages[j].bg.alpha = 0.5;
+				messages[j].bg.visible = false;
+				messages[j].text.visible = false;
+				_scenes[i].stage.addChild(messages[j].bg,messages[j].text);
 			}
 		}
-		scenes[_scenes[i]._name] = _scenes[i];
-		if(!_scenes[i].noGUI)
+		if(_scenes[i].structure.hasGUI)
 		{
 			addCreditsToStage(_scenes[i].stage);
-			addHeatToStage(_scenes[i].stage, gamejson);
-			addLocationToStage(_scenes[i].stage, gamejson);
-			addMessageToStage(_scenes[i].stage, gamejson);
+			addHeatToStage(_scenes[i].stage, structure);
+			addLocationToStage(_scenes[i].stage, structure);
+			addMessageToStage(_scenes[i].stage, structure);
 		}
+		scenes[_scenes[i].structure._name] = _scenes[i];
 	}
-	currScene = _scenes[0]._name;
-	console.log(scenes[currScene]._name);
-	scenes[currScene].init(scenes[currScene]);
-
+	currScene = _scenes[0].structure._name;
+	scenes[currScene].init();
+	console.log(currScene);
 }
+
 function setGUI()
 {
 	setLocation();
@@ -174,9 +161,9 @@ function hideGUI()
 	hideCredits();
 }
 
-function addMessageToStage(stage, gamejson)
+function addMessageToStage(stage, structure)
 {
-	messageGUI.text = new createjs.Text("", gamejson.game.font._type, gamejson.game.font._color);
+	messageGUI.text = new createjs.Text("", structure.game.font._type, structure.game.font._color);
 	messageGUI.text.x = 0;
 	messageGUI.text.y = 360;
 	messageGUI.text.textBaseline = "alphabetic";
@@ -220,7 +207,7 @@ function setMessage(text, delay)
 	scenes[currScene].stage.addChild(messageGUI.bg,messageGUI.text);
 }
 
-function addLocationToStage(stage, gamejson)
+function addLocationToStage(stage, structure)
 {
 	cityGUI.x = 620;
 	cityGUI.y = 7;
@@ -231,7 +218,7 @@ function addLocationToStage(stage, gamejson)
 	cityGUI.bg.graphics.beginFill("white").drawRect(cityGUI.x, cityGUI.y, cityGUI.width, cityGUI.height); // load from file
 	
 	//add text
-	cityGUI.text = new createjs.Text(currCity, gamejson.game.font._type, "#00FF00");
+	cityGUI.text = new createjs.Text(currCity, structure.game.font._type, "#00FF00");
 	cityGUI.text.y = 7;
 	cityGUI.text.x = cityGUI.x+cityGUI.width/2-cityGUI.text.getMeasuredWidth()/2;
 
@@ -259,7 +246,7 @@ function hideLocation()
 	cityGUI.bg.visible = false;
 }
 
-function addHeatToStage(stage, gamejson)
+function addHeatToStage(stage, structure)
 {
 	heat.x = 200;
 	heat.y = 7;
@@ -277,7 +264,7 @@ function addHeatToStage(stage, gamejson)
 	heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
 
 	//add text
-	heat.text = new createjs.Text("HEAT", gamejson.game.font._type, "#00FF00");
+	heat.text = new createjs.Text("HEAT", structure.game.font._type, "#00FF00");
 	heat.text.y = 10;
 	heat.text.x = heat.x+heat.width/2-heat.text.getMeasuredWidth()/2;
 
