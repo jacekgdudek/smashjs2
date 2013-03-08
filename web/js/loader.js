@@ -20,8 +20,8 @@ function printTimeStamp() {
 	}
 }
 
-function loadContent(gamejson) {
-	setupLoaderGraphics(gamejson.preload);
+function loadContent() {
+	setupLoaderGraphics(structure.preload);
 	printTimeStamp();
 	//init queue
 	queue = new createjs.LoadQueue();

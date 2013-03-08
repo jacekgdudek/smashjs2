@@ -6,28 +6,14 @@
  *
  */
 
-<<<<<<< HEAD
 function MazeScene() {}
-=======
-    var back;
-	var burger; //burger created on players cursor position
-    var cable;
-    var maze; //maze itself
-    var lives; //text showing number of lives
-    var currentLives = 100; //number of current lives
-    var startHere; //position where players has to place his cursor before gamestart
-    var finnishHere;
-    var maskCircle; //circle masking area around the cursor 
-    var scene;
->>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 
-
-<<<<<<< HEAD
 MazeScene.prototype.init = function() {
 	Scene.prototype.init.call(this);
 	console.log("init: mazeScene");
 	
        	setGUI();
+    	armHeat();
         this.gameStarted = false;
 
 	//number of current lives
@@ -39,29 +25,11 @@ MazeScene.prototype.init = function() {
         lives.x = 700;
         lives.y = 10;
 	this.stage.addChild(lives);
-=======
-	return {
-		init: function(scene) {
-			console.log("init: mazeScene");
 
-			this.scene = scene;
-            setGUI();
-            armHeat();
-            gameStarted = false;
-			lives = new createjs.Text(currentLives, "20px Arial", "#ff7700");
-        	lives.x = 700;
-        	lives.y = 10;
-	        this.scene.stage.addChild(lives);
-	        maze = this.scene.visuals[1].bitmap;//new createjs.Bitmap("assets/maze/maze1.png");
-            maze.visible = false;
 
-            back = this.scene.visuals[4].bitmap;
+    	this.back = this.scene.visuals[4].bitmap;
 
-	        startHere = this.scene.visuals[2].bitmap;//new createjs.Bitmap("assets/maze/startpoint.png");
-            finnishHere = this.scene.visuals[2].bitmap;//new createjs.Bitmap("assets/maze/startpoint.png");
 
-	        this.scene.stage.addChild(this.scene.visuals[0].bitmap, startHere);
->>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
 
 	var visuals = this.structure.visuals;
 	//maze itself
@@ -72,7 +40,6 @@ MazeScene.prototype.init = function() {
 	this.startHere = visuals[2].bitmap;//new createjs.Bitmap("assets/maze/startpoint.png");
         this.finishHere = visuals[2].bitmap;//new createjs.Bitmap("assets/maze/startpoint.png");
 
-<<<<<<< HEAD
 	this.stage.addChild(startHere);
 
 	//burger created on players cursor position
@@ -131,13 +98,7 @@ MazeScene.prototype.update = function() {
 		}
 		
 	}
-	
-	//update scene
-	this.stage.update();
-}
-=======
-		},
-		update: function() {
+
 			//burger follows mouse cursor
             if(useFiducials)
             {
@@ -207,9 +168,16 @@ MazeScene.prototype.update = function() {
 
             var dist = Math.sqrt(Math.pow(this.cable.path[0].y - this.cable.path[this.cable.path.length-1].y,2) + Math.pow(this.cable.path[0].x - this.cable.path[this.cable.path.length-1].x,2));
 
-            this.cable.bmp.graphics.setStrokeStyle(12,"round")
-                            .beginRadialGradientStroke(["#D00","#000","#D00","#000","#D00","#000"], [0,0.1, 0.2, 0.4, 0.6, 1], this.cable.path[0].x, this.cable.path[0].y,0, this.cable.path[0].x, this.cable.path[0].y, this.cable.path[this.cable.path.length-1].y, dist )
-                            .moveTo(this.cable.path[0].x, this.cable.path[0].y);
+            this.cable.bmp.graphics	.setStrokeStyle(12,"round")
+                            		.beginRadialGradientStroke(	["#D00","#000","#D00","#000","#D00","#000"], 
+									[0,0.1, 0.2, 0.4, 0.6, 1], 
+									this.cable.path[0].x, 
+									this.cable.path[0].y,0, 
+									this.cable.path[0].x, 
+									this.cable.path[0].y, 
+									this.cable.path[this.cable.path.length-1].y, 
+									dist )
+                            		.moveTo(this.cable.path[0].x, this.cable.path[0].y);
 
             for(var i = 1 ; i < this.cable.path.length ; i ++)
             {
@@ -263,20 +231,16 @@ MazeScene.prototype.update = function() {
             setGUI();
             //update scene
             this.scene.stage.update();
-        },
-        finalize: function() {
-            for(var i = 0 ; i < this.scene.visuals.length ; i++)
-            {
-                this.scene.visuals[i].visible = false;
-            }
-		}
-		
+}
 
-	};
-	function updateCable(x, y)
-    {
-        
-        
-    }
->>>>>>> c0c7e01a16ddcb774f09d6e5cc4a99497e647772
+MazeScene.prototype.finalize = function() {
+	for(var i = 0 ; i < this.scene.visuals.length ; i++)
+	{
+	    this.scene.visuals[i].visible = false;
+	}
+}
+
+MazeScene.prototype.updateCable = function(x, y) {
+	 
+}
 

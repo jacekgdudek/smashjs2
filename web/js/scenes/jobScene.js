@@ -280,7 +280,7 @@ JobScene.prototype.randomizePositions = function(jobs, pointerSrc, rect)
 	}
 }
 
-JobScene.prototype.animateCard(card) {
+JobScene.prototype.animateCard = function(card) {
 	switch (this.cardState)
 	{
 		//sliding up
