@@ -26,7 +26,7 @@ function TransitionsManager(){
 		this.scene2 = scene2;
 		if(typeof type === 'undefined') this.type = TransitionType.CROSS_FADE;
 			else this.type = type;
-		if(typeof time === 'undefined') this.maxTime = 40;
+		if(typeof time === 'undefined') this.maxTime = 20;
 			else this.maxTime = time;
 		this.time = 0;
 		this.active = true;

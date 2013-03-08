@@ -6,14 +6,24 @@ var combinationScene = (function() {
 
 	var scene, sweet_spot;
 
+	//indicator references;
+	var indicator;
+
 	return {
 		init: function(scene) {
 			console.log("init: combinationScene");
 
 			this.scene = scene;
+			for(var i = 0; i < this.scene.visuals.length ; i ++)
+			{
+				this.scene.visuals[i].bitmap.alpha = 1;
+				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
+				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+			}
 			setGUI();
+			//start countdown
 			armHeat();
-
+			
 			sweet_spot = this.scene.sweet_spot;
 			// Setup the game stage
 			knob = this.scene.visuals[1];
@@ -36,7 +46,7 @@ var combinationScene = (function() {
 			this.listOfTargets = new Array();
 
 			// create the targets
-			numberOfTargets = 2;
+			numberOfTargets = 4;
 			for (var i = 0; i < numberOfTargets; i++) {
 				// At a random point
 				var number = Math.floor((knobNumbers.maxNumber/360)*Math.floor(Math.random() * 360));
@@ -49,6 +59,10 @@ var combinationScene = (function() {
 			this.lastTargetPointer = 0;
 			this.spin=0;
 			this.lastNumberAngle = 0;
+
+			//load indicator
+			indicator = new CombinationIndicator(this.scene.stage);
+			indicator.init(currentJob.risk, this.scene.visuals[5],numberOfTargets);
 
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;
@@ -89,6 +103,8 @@ var combinationScene = (function() {
 			}
 		},
 		update: function() {
+			//update indicator
+			indicator.update();
 			//-------update sthetoscope
 			//scale up and flip as well
 			stethoscope.bitmap.x = (((800 - stethoscope.bitmap.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
@@ -150,6 +166,8 @@ var combinationScene = (function() {
 					//trigger next pointer
 					this.lastTargetPointer = this.targetPointer;
 					this.targetPointer++;
+					//pass to indicator
+					indicator.add();
 					console.log("Getting next number");
 				}
 				else
@@ -157,6 +175,8 @@ var combinationScene = (function() {
 					//reset combination
 					this.targetPointer = 0;
 					this.lastTargetPointer = 0;
+					//pass to indicator
+					indicator.reset();
 					console.log("Resetting combination !");
 				}
 				
@@ -198,6 +218,7 @@ var combinationScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
+			indicator.finalize();
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{
 				this.scene.scene.visuals[i].visible = false;
@@ -234,5 +255,23 @@ var combinationScene = (function() {
 			buzzAudio.click.play();
 		}*/
 	};
+
+	function initIndicator(risk, pointerRef)
+	{
+		var num = Math.floor(Math.random*2 + 1);
+
+		for(var i = 0 ; i < num ; i ++)
+		{
+			var indicatorPointer = new Object();
+
+			indicatorPointer.bmp = pointerRef.bitmap.clone();
+			indicatorPointer.bmp.rotation = pointerRef.startAngle + i*widthAngle;
+
+			this.scene.stage.addChild(indicatorPointer.bmp);
+			this.indicatorPointers.push(indicatorPointer);
+
+		}
+	};
+
 
 })();

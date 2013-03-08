@@ -53,7 +53,8 @@ var settingsSceneStructure = {
 			hasDown: true,
 			downEvent: {
 				type: "SWITCH_SCENE",
-				content: "welcome"
+				content: "welcome",
+				content2: 1
 			}	
 		},
 	],

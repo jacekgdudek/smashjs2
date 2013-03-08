@@ -33,7 +33,8 @@ var jobSceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "SWITCH_SCENE",
-			content: "base_scene"
+			content: "base_scene",
+			content2: 0
 			}	
 		},
 		{
@@ -44,7 +45,8 @@ var jobSceneStructure = {
 			hasDown: true,
 			downEvent: {
 				type: "SWITCH_SCENE",
-				content: "combination_lock"
+				content: "combination_lock",
+				content2: 0
 				}	
 			},
 		{
@@ -55,7 +57,8 @@ var jobSceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "SWITCH_SCENE",
-			content: "base_scene"
+			content: "base_scene",
+			content2: 0
 			}	
 		}
 	]

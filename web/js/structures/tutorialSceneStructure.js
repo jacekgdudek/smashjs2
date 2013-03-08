@@ -8,7 +8,8 @@ var tutorialSceneStructure = {
 	nextStageEvent: 
 	{
 		type: "SWITCH_SCENE",
-		content: "base_scene"
+		content: "base_scene",
+		content2: 1
 	},
 	sweet_spot:
 	{
@@ -27,7 +28,7 @@ var tutorialSceneStructure = {
 		{
 		  src: "assets/combination/dial_numbers.png",
 		  name: "numbers",
-		  maxNumber: 80
+		  maxNumber: 62
 		},
 		{
 		  src: "assets/combination/stethoscope_2.png",

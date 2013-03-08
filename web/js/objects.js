@@ -102,8 +102,14 @@ function loadObjects() {
 		for (var j = 0; j < _scenes[i].visuals.length; j++) {
 			var visual = _scenes[i].visuals[j];
 			visual.bitmap = new createjs.Bitmap(visual.src);
-			visual.bitmap.x = visual.x;
-			visual.bitmap.y = visual.y;
+
+			if ( typeof visual.regX === 'undefined')visual.bitmap.regX = 0;
+			else visual.bitmap.regX = visual.regX;
+			if ( typeof visual.regY === 'undefined')visual.bitmap.regY = 0;
+			else visual.bitmap.regY = visual.regY;
+
+			visual.bitmap.x = visual.bitmap.regX + visual.x;
+			visual.bitmap.y = visual.bitmap.regY + visual.y;
 			if(visual.visible == false)
 			{
 				visual.bitmap.visible = false;

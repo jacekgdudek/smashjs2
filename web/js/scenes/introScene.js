@@ -7,6 +7,12 @@ var introScene = (function() {
 			console.log("init: tutorialScene");
 
 			this.scene = scene;
+			for(var i = 0; i < this.scene.visuals.length ; i ++)
+			{
+				this.scene.visuals[i].bitmap.alpha = 1;
+				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
+				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+			}
 			this.delay = 200;
 
 			//make sure all the assets are visible

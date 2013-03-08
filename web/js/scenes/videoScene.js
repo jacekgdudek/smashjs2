@@ -14,6 +14,13 @@ var videoScene = (function() {
 			console.log("init: videoScene");
 			scene = this;
 
+			for(var i = 0; i < this.scene.visuals.length ; i ++)
+			{
+				this.scene.visuals[i].bitmap.alpha = 1;
+				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
+				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+			}
+
 			// Video Player Code
 			
 			// Set the scene for the video manager

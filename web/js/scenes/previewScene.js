@@ -13,6 +13,12 @@ var previewScene = (function() {
 			console.log("init: scene");
 
 			this.scene = scene;
+			for(var i = 0; i < this.scene.visuals.length ; i ++)
+			{
+				this.scene.visuals[i].bitmap.alpha = 1;
+				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
+				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+			}
 
 			var video = document.getElementById("live");
 			capture = new createjs.Bitmap(video);
