@@ -4,6 +4,9 @@
 // initialize objects
 //---------------------
 
+// preloader 
+var preLoader = new SmashAndGrabPreLoader();
+
 //init stages
 var currPlayers = new Array();
 var lastScene = 0;
@@ -58,7 +61,7 @@ function loadObjects() {
 	var gamejson = structure;
 	//console.log(gamejson.game.scenes[0].visuals.length);
 
-	loadContent(gamejson);
+	preLoader.loadContent(gamejson);
 	//setup cities
 	var _cities = gamejson.game.cities;
 	for(var i = 0 ; i < _cities.length ; i ++)

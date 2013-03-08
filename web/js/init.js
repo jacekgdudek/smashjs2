@@ -4,6 +4,7 @@
 //
 //////////////////////////////////////
 
+var verboseDebugging = true;
 var verbose = true;
 
 //init scenes

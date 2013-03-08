@@ -1,117 +1,76 @@
 // Smash And Grab Audio Manager js : v0.01a : James Nesfield for Peekabu Feb 2013
-
-
 var audioManagerAudioObject = {
-'NORMAL_CLICK':1,
-'SPECIAL_CLICK':2,
-'BACKGROUND_MUSIC':3
+	'NORMAL_CLICK': 1,
+	'SPECIAL_CLICK': 2,
+	'BACKGROUND_MUSIC': 3
 };
 
 
-function SmashAndGrabAudioManager(){
 
-		var successfulLoadBool = true;
-		var preload;
-		var assetsPath = "assets/audio/";
-		var verboseDebugging = false;
-		var clickVolume = 1.0;
-		var clickInstance;
+function SmashAndGrabAudioManager() {
+	var progress = 0.0;
+	var assetsPath = "assets/audio/";
+	var clickVolume = 1.0;
+	var backgroundPlayer;
+	var backgroundPlayerLevel;
+	var effectsPlayer;
+	var effectsPlayerLevel;
 	
 	//INIT======================================
-
-    		createjs.FlashPlugin.BASE_PATH = "./soundjs/" // Initialize the base path from this document to the Flash Plugin
-    		 createjs.SoundJS.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashPlugin]);
-		if (!createjs.SoundJS.checkPlugin(true)) {
-			document.getElementById("error").style.display = "block";
-			document.getElementById("content").style.display = "none";
-			successfulLoadBool = false;
-			return;
-		};
-		
-		
-		
-		var manifest = [
-		    {src:assetsPath+"clickA.wav|"+assetsPath+"click.wav", id:audioManagerAudioObject.NORMAL_CLICK, data: 1},
-		    {src:assetsPath+"clickA.wav|"+assetsPath+"click.wav", id:audioManagerAudioObject.SPECIAL_CLICK, data: 1}
-		];
-		
-		
-		//preloadQueue = new createjs.PreloadJS();		
-		preloadQueue = new createjs.LoadQueue();
-	    preloadQueue.installPlugin(createjs.SoundJS);
-	    preloadQueue.onProgress = handleProgress;
-		preloadQueue.onComplete = loadingComplete;		
-	    preloadQueue.loadManifest(manifest, true);
-
-	
-
-	
-	
-	//PRELOAD JS CALLBACK METHODS======================================
-
-	function handleProgress(event) {
-		//displayStatus.innerText = "Loading: " + (queue.progress.toFixed(4) * 100) + "%";
-		console.log("Loading audio assets " + (preloadQueue.progress.toFixed(2) * 100) + "%");
+	createjs.FlashPlugin.BASE_PATH = "./soundjs/" // Initialize the base path from this document to the Flash Plugin
+	createjs.SoundJS.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashPlugin]);
+	if (!createjs.SoundJS.checkPlugin(true)) {
+		document.getElementById("error").style.display = "block";
+		document.getElementById("content").style.display = "none";
+		return;
 	};
-	
-		function loadingComplete(){
-	if(verboseDebugging){
-				successfulLoadBool?
-	console.log("Smash and Grab audio manager successfully initiated and loaded assets"):
-	console.log(" ERROR : could not load Smash and Grab Audio Manager!");
-	};
-	};
-	
 
+    backgroundPlayer = createjs.SoundJS;
+    effectsPlayer = createjs.SoundJS;
+	
 	//SOUND PLAYBACK METHODS
-	this.playSound = function(name){
-		if(verboseDebugging){console.log('Smash And Grab Audio Manager is playing sound :\''+name+'\'')};
-		
-		clickInstance = createjs.SoundJS.play(name);
-		clickInstance.setVolume(clickVolume);
-
+	this.playSound = function(name) {
+		if (verboseDebugging) {
+			console.log('Smash And Grab Audio Manager is playing sound :\'' + name + '\'')
+		};
+		var audioPlayerInstance = createjs.SoundJS.play(name);
 	};
-
 	
-	this.stopSound = function(){
-		if (preloadQueue != null) { preloadQueue.cancel(); }
+	this.stopSound = function() {
+		if (preloadQueue != null) {
+			preloadQueue.cancel();
+		}
 		createjs.SoundJS.stop();
 	}
 	
-	
-	
-	this.setVolume = function(volume,id){
-		if(volume >= 0.0 && volume <= 1.0){
-			switch (id){
-			case audioManagerAudioObject.NORMAL_CLICK:
-			clickVolume = volume;
-			break;
-				case audioManagerAudioObject.SPECIAL_CLICK:
-				///TODO:
-			break;
-				case audioManagerAudioObject.BACKGROUND_MUSIC:
-								///TODO:
-
-			break;
-			default:
-			console.log('warning : attempt to set volume on invalid Audio Manager audio object');
-			
-			}
-		}else{
+	this.setVolume = function(volume, id) {
+		if (volume >= 0.0 && volume <= 1.0) {
+		if(id == audioManagerAudioObject.BACKGROUND_MUSIC){
+						backgroundPlayerLevel=volume;
+						backgroundPlayer.setVolume(volume, id);
+						}else{
+						effectsPlayerLevel=volume;
+						}
+		} else {
 			console.log('warning : attempting to set Audio Manager volume beyond 0 - 1 limits');
 		}
 	}
 	
+
+	this.fadeInBackground = function(){
+		var volume = 0;
+		if(volume <= 1){
+			console.log('Smash And Grab Audio Manager is playing sound :\'' + name + '\'')
+			backgroundPlayer.setVolume(volume, audioManagerAudioObject.BACKGROUND_MUSIC);
+			setTimeout('fadeInBackground(' + (volume + 0.05) + ');',50);
+		}
+	}
+
 	//UTILITY
 	this.description = function() {
-			console.log('Smash And Grab Audio Manager v0.01a');
-    };
-
+		console.log('Smash And Grab Audio Manager v0.01a');
+	};
 	this.verbose = function(bl) {
-			verboseDebugging = bl;
-    };	
-	
-	
-	
-	
+		verboseDebugging = bl;
+	};
 }
