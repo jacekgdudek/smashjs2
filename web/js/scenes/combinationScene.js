@@ -9,6 +9,9 @@ var combinationScene = (function() {
 	//indicator references;
 	var indicator;
 
+	//out flags
+	var outRight, outLeft;
+
 	return {
 		init: function(scene) {
 			console.log("init: combinationScene");
@@ -59,6 +62,8 @@ var combinationScene = (function() {
 			this.lastTargetPointer = 0;
 			this.spin=0;
 			this.lastNumberAngle = 0;
+			this.outRight = false;
+			this.outLeft = false;
 
 			//load indicator
 			indicator = new CombinationIndicator(this.scene.stage);
@@ -125,6 +130,42 @@ var combinationScene = (function() {
 			if (rotation > 360) { rotation = 360; }
 			if (rotation <= -360) { rotation = -360; }
 
+			//validate rotation based on set span
+			if(!outRight && !outLeft)
+			{
+				if(rotation > knobNumbers.span/2 && rotation < 180)
+				{
+					outRight = true;
+				}
+				else if(rotation < 360 - knobNumbers.span/2 && rotation > 180)
+				{
+					outLeft = true;
+				}
+			}
+			else if (outRight)
+			{
+				if(rotation < knobNumbers.span/2)
+				{
+					outRight = false;
+				}
+				else
+				{
+					rotation = knobNumbers.span/2;
+				}
+			}
+			else if (outLeft)
+			{
+				if(rotation > 360 - knobNumbers.span/2)
+				{
+					outLeft = false;
+				}
+				else
+				{
+					rotation = 360 - knobNumbers.span/2;
+				}
+			}
+			
+
 			//validate lastNumber Angle
 			if(rotation <180 && lastNumberAngle > 180)
 			{
@@ -135,9 +176,9 @@ var combinationScene = (function() {
 				lastNumberAngle = lastNumberAngle + 360;
 			}
 
-			knobNumbers.bitmap.rotation = rotation; //lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
+			knobNumbers.bitmap.rotation = lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
 			//rotate knob as well
-			knob.bitmap.rotation = rotation; //lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
+			knob.bitmap.rotation = lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
 
 			///apply offset
 			var numRotation = -1*rotation + knobNumbers.offset + 360;
