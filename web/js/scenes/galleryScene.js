@@ -8,6 +8,7 @@ var galleryScene = (function() {
 	//rewards
 	var rewardId;
 	var rewardImages = new Array();
+	var rewardClicked;
 
 	return {
 		init: function(scene) {
@@ -36,8 +37,7 @@ var galleryScene = (function() {
 				}
 			}
 
-			loadThumbnails(/*grid*/ grid,
-						rewardImages);
+			loadThumbnails(/*grid*/ grid);
 
 			repositionObjects(grid);
 
@@ -73,9 +73,21 @@ var galleryScene = (function() {
 								if(scene.visuals[i].downEvent.type != "ADD_CREDITS")
 								{
 									addEventEx(scene.visuals[i].downEvent);
-									console.log("down state initialized");
 								}
 							}
+						}
+					}
+					for(var i = 0 ; i < rewardImages.length ; i++)
+						//react on clicks on rewards
+					{
+						if(rewardImages[i].img.bitmap.hitTest( mousePos.stageX - rewardImages[i].img.bitmap.x , mousePos.stageY - rewardImages[i].img.bitmap.y ))
+						{
+								addEvent("SPECIAL_REWARD_BUTTON_DOWN",0, rewardImages[i].contentId);
+								//remove rewards from stage to avoid multiplication
+							for (var i = 0; i < rewardImages.length; i++){
+								scene.stage.removeChild(rewardImages[i].img.bitmap);
+							}
+								console.log("clicked reward n."+rewardImages[i].contentId);
 						}
 					}
 				}
@@ -87,9 +99,12 @@ var galleryScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
-			for(var i = 0 ; i < this.scene.visuals.length ; i++)
-			{
-				this.scene.visuals[i].bitmap.visible = false;
+			if(typeof rewardImages[i] !== 'undefined'){
+				for(var i = 0 ; i < rewardImages.length ; i++)
+				{
+					rewardImages[i].img.bitmap.visible = false;
+					this.scene.stage.removeChild(rewardImages[i].img.bitmap);
+				}
 			}
 			if (typeof this.scene.messages !== 'undefined') {
 				for(var i = 0 ; i < this.scene.messages.length ; i++)
@@ -97,11 +112,6 @@ var galleryScene = (function() {
 					this.scene.messages[i].bg.visible = false;
 					this.scene.messages[i].text.visible = false;
 				}
-			}
-			for(var i = 0 ; i < rewardImages.length ; i++)
-			{
-				rewardImages[i].img.bitmap.visible = false;
-				this.scene.stage.removeChild(rewardImages[i].img.bitmap);
 			}
 			rewardImages = new Array();
 			hideGUI();
@@ -115,7 +125,7 @@ var galleryScene = (function() {
 		if (evt.keyIdentifier=="Right") { this.input.rotation += 10; }
 	};
 
-	function loadThumbnails(grid, rewards) {
+	function loadThumbnails(grid) {
 		var scene = scenes[currScene];
 
 		//------------------------getClonesOfThumbnails
@@ -123,11 +133,11 @@ var galleryScene = (function() {
 		{
 			var newThumbnail = new Object();
 			newThumbnail.contentId = currSpecialRewards[i];
-			rewards.push(newThumbnail);
+			rewardImages.push(newThumbnail);
 		}
 
 		//----------------------randomize positions
-		for ( var i = 0 ; i < rewards.length ; i++)
+		for ( var i = 0 ; i < rewardImages.length ; i++)
 		{
 			var foundSpot = false;
 			while(!foundSpot)
@@ -137,7 +147,7 @@ var galleryScene = (function() {
 				if(grid[x][y].contentId == -1)
 				{
 					foundSpot = true;
-					grid[x][y] = rewards[i];
+					grid[x][y] = rewardImages[i];
 				}
 			}
 		}

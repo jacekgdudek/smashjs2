@@ -3,9 +3,12 @@ var galleryZoomSceneStructure = {
 	init: galleryZoomScene.init,
 	update: galleryZoomScene.update,
 	finalize: galleryZoomScene.finalize,
+	setImageId: galleryZoomScene.setImageId,
+	nextImage: galleryZoomScene.nextImage,
+	previousImage: galleryZoomScene.previousImage,
 	isCurrent: true,
 	stage_id: "game_canvas",
-	galleryGrid:{
+	galleryZoomGrid:{
 		width: 6,
 		height: 3,
 		},
@@ -28,20 +31,28 @@ var galleryZoomSceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "SWITCH_SCENE",
-			content: "base_scene"
+			content: "gallery_scene"
 			}	
 		},
 		{
 			x:100,
 			y:500,
 			src: "assets/gallery/left-arrow.jpg",
-			name: "arrow-left"
+			name: "arrowLeft",
+			hasDown: true,
+		  	downEvent: {
+				type: "GALLERY_PREVIOUS",
+			}	
 		},
 		{
 			x:500,
 			y:500,
 			src: "assets/gallery/right-arrow.jpg",
-			name: "arrow-left"
+			name: "arrowRight",
+			hasDown: true,
+		  	downEvent: {
+				type: "GALLERY_NEXT",
+			}	
 		}
 	]
 };

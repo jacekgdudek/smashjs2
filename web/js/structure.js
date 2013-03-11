@@ -163,7 +163,7 @@ var structure = {
 			rewards:[
 				{
 					contentId: 0,
-					src: "",
+					src: "assets/reward/cash.png",
 					type: 0,
 					downEvent: {
 						type: "SPECIAL_REWARD_BUTTON_DOWN",
@@ -173,13 +173,22 @@ var structure = {
 				},
 				{
 					contentId: 1,
-					src: "",
+					src: "assets/reward/ring.png",
 					type: 1,
 					downEvent: {
 						type: "SPECIAL_REWARD_BUTTON_DOWN",
 						content: 1
 						}
 				}
+				/*{
+					contentId: 2,
+					src: "assets/reward/watch.png",
+					type: 2,
+					downEvent: {
+						type: "SPECIAL_REWARD_BUTTON_DOWN",
+						content: 2
+						}
+				}*/
 			]
 			
 		},

@@ -34,7 +34,13 @@ function handleEvents()
 
 		else if(event.type == "COLLISION") processCollision(event);
 
-		else if(event.type == "SPECIAL_REWARD_BUTTON_DOWN") specialRewardDown(event.content);
+		else if(event.type == "SPECIAL_REWARD_BUTTON_DOWN") specialRewardDown(event.content, event.content2);
+
+		else if(event.type == "GALLERY_SET_CURRENT") scenes[currScene].setImageId(event.content);
+		
+		else if(event.type == "GALLERY_NEXT") galleryNext();
+		
+		else if(event.type == "GALLERY_PREVIOUS") galleryPrevious();
 
 		else if(event.type == "ADD_CREDITS") addCredits(event.content);
 
@@ -74,12 +80,28 @@ function openPreview()
 	addEvent("SWITCH_SCENE","preview_scene");
 }
 
-function specialRewardDown(id)
+function specialRewardDown(id, imageId)
 {
+	console.log("switched to gallery scene");
 	if(currScene == "reward_scene")
 	{
 		currSpecialRewards.push(id);
 	}
+	else if (currScene == "gallery_scene")
+	{
+		addEvent("SWITCH_SCENE", "gallery_zoom_scene");
+		addEvent("GALLERY_SET_CURRENT", imageId);
+	}
+}
+
+function galleryNext(){
+	console.log("next image");
+	scenes[currScene].nextImage();
+}
+
+function galleryPrevious(){
+	console.log("previous image");
+	scenes[currScene].previousImage();
 }
 
 function startNewGame()
