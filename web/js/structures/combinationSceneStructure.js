@@ -26,6 +26,25 @@ var combinationSceneStructure = {
 		{
 		  src: "assets/combination/stethoscope_2.png",
 		  name: "stethoscope"
+		},
+		{
+		  src: "assets/combination/indicator_bg.png",
+		  name: "stethoscope",
+		  y: 300,
+		  x: 400
+		},
+		{
+		  src: "assets/combination/indicator_pointer.png",
+		  name: "stethoscope",
+		  startAngle: -60,
+		  finnishAngle: 60,
+		  widthAngle: 10,
+		  regX: 100,
+		  regY: 100,
+		  refY: 300,
+		  refX: 400,
+		  y: -300,
+		  x: -400
 		}
 	]
 }

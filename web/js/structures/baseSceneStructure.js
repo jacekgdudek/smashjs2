@@ -18,7 +18,8 @@ var baseSceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "SWITCH_SCENE",
-			content: "map_scene"
+			content: "map_scene",
+			content2: 0
 			}	
 		},
 		{
@@ -29,7 +30,8 @@ var baseSceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "SWITCH_SCENE",
-			content: "job_board_scene"
+			content: "job_board_scene",
+			content2: 0
 			}	
 		},
 		{
@@ -40,7 +42,8 @@ var baseSceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "SWITCH_SCENE",
-			content: "gallery_scene"
+			content: "gallery_scene",
+			content2: 0
 			}	
 		}
 	]

@@ -11,6 +11,12 @@ var settingsScene = (function() {
 			console.log("init: scene");
 
 			this.scene = scene;
+			for(var i = 0; i < this.scene.visuals.length ; i ++)
+			{
+				this.scene.visuals[i].bitmap.alpha = 1;
+				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
+				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+			}
 
 			this.settings = this.scene.settings;
 
@@ -99,38 +105,37 @@ var settingsScene = (function() {
 			}
 
 			this.scene.stage.onMouseDown = function(mousePos) {
-				for(var i = 0 ; i < scene.settings.length ; i++)
-				{
-					if(scene.settings[i].normal_bmp.hitTest( mousePos.stageX - scene.settings[i].normal_bmp.x , mousePos.stageY - scene.settings[i].normal_bmp.y ))
-					{
-						switch(scene.settings[i].type)
-						{
-							case 0:
-								if(scene.settings[i].checkbox_bmp.ticked.visible)
-								{
-									addEvent(scene.settings[i].downEvent, false);
-									scene.settings[i].checkbox_bmp.ticked.visible = false;
-									scene.settings[i].checkbox_bmp.unticked.visible = true;
-									console.log(scene.settings[i].downEvent + " disabled");
-								}
-								else
-								{
-									addEvent(scene.settings[i].downEvent, true);
-									scene.settings[i].checkbox_bmp.ticked.visible = true;
-									scene.settings[i].checkbox_bmp.unticked.visible = false;
-									console.log(scene.settings[i].downEvent + " enabled");
-								}
-							break;
-							case 1:
-								addEvent(scene.settings[i].downEvent, false);
-							break;
-						}
-
-					}
-				}
-
 				if(scene._name == currScene)
 				{
+					for(var i = 0 ; i < scene.settings.length ; i++)
+					{
+						if(scene.settings[i].normal_bmp.hitTest( mousePos.stageX - scene.settings[i].normal_bmp.x , mousePos.stageY - scene.settings[i].normal_bmp.y ))
+						{
+							switch(scene.settings[i].type)
+							{
+								case 0:
+									if(scene.settings[i].checkbox_bmp.ticked.visible)
+									{
+										addEvent(scene.settings[i].downEvent, false);
+										scene.settings[i].checkbox_bmp.ticked.visible = false;
+										scene.settings[i].checkbox_bmp.unticked.visible = true;
+										console.log(scene.settings[i].downEvent + " disabled");
+									}
+									else
+									{
+										addEvent(scene.settings[i].downEvent, true);
+										scene.settings[i].checkbox_bmp.ticked.visible = true;
+										scene.settings[i].checkbox_bmp.unticked.visible = false;
+										console.log(scene.settings[i].downEvent + " enabled");
+									}
+								break;
+								case 1:
+									addEvent(scene.settings[i].downEvent, false);
+								break;
+							}
+
+						}
+					}
 					for(var i = 0 ; i < scene.visuals.length ; i++)
 					{
 						if(scene.visuals[i].hasDown)

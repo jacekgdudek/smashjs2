@@ -308,7 +308,10 @@ var structure = {
 		{
 			_type: "24px Arial",
 			_color: "#ffffff",
-		}
-
+		},
+		audio:
+		[
+			audioContent
+		]
 	}
 };

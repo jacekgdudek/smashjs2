@@ -28,7 +28,8 @@ var gallerySceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "SWITCH_SCENE",
-			content: "base_scene"
+			content: "base_scene",
+			content2: 0
 			}	
 		}
 	]

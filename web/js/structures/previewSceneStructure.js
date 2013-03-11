@@ -26,7 +26,8 @@ var previewSceneStructure = {
 			hasDown: true,
 			downEvent: {
 				type: "SWITCH_SCENE",
-				content: "settings"
+				content: "settings",
+			content2: 0
 			}	
 		}
 	]
