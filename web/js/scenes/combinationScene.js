@@ -29,14 +29,14 @@ var combinationScene = (function() {
 			knob = this.scene.visuals[1];
 			knob.bitmap.x = 800-knob.bitmap.image.width+115;//900+139;
 			knob.bitmap.y = 20+117;//200+139;
-			knob.bitmap.regX = 115;//139;
-			knob.bitmap.regY = 117;//139;
+			knob.bitmap.regX = knob.bitmap.image.width/2;//139;
+			knob.bitmap.regY = knob.bitmap.image.height/2;//139;
 
 			knobNumbers = this.scene.visuals[2];			
 			knobNumbers.bitmap.x = knob.bitmap.x;//900+139;
 			knobNumbers.bitmap.y = knob.bitmap.y;//200+139;
-			knobNumbers.bitmap.regX = 115;//139;
-			knobNumbers.bitmap.regY = 117;//139;
+			knobNumbers.bitmap.regX = knob.bitmap.image.width/2;//139;
+			knobNumbers.bitmap.regY = knob.bitmap.image.height/2;//139;
 
 			stethoscope = this.scene.visuals[3];			
 			stethoscope.bitmap.x = 0;//900+139;
@@ -119,17 +119,42 @@ var combinationScene = (function() {
 			var directionNow = false;
 			var directionChanged = false;
 
-			var rotation = inputArray[2].rotation;
+			var rotation = inputArray[2].relative_rotation;
+			//console.log("relative roation : " +inputArray[2].relative_rotation + "  angle: " + inputArray[2].startingAngle);
 			// Keep this.input rotation within bounds
 			if (rotation > 360) { rotation = 360; }
 			if (rotation <= -360) { rotation = -360; }
 
-			knobNumbers.bitmap.rotation = lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
+			//validate lastNumber Angle
+			if(rotation <180 && lastNumberAngle > 180)
+			{
+				lastNumberAngle = lastNumberAngle - 360;
+			} 
+			else if(rotation >180 && lastNumberAngle < 180) 
+			{
+				lastNumberAngle = lastNumberAngle + 360;
+			}
+
+			knobNumbers.bitmap.rotation = rotation; //lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
 			//rotate knob as well
-			knob.bitmap.rotation = lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
+			knob.bitmap.rotation = rotation; //lastNumberAngle + 3*(rotation-lastNumberAngle)/5;
+
+			///apply offset
+			var numRotation = -1*rotation + knobNumbers.offset + 360;
+			if(numRotation > 360) numRotation = numRotation - 360;
+			else if(numRotation < 0) numRotation = numRotation + 360;
+
+			var actualMaxNumber = Math.floor((360/knobNumbers.span)*knobNumbers.maxNumber);
 
 			//---------get currentNumber based on rotation
-			this.currentNumber = Math.floor((knobNumbers.maxNumber/360)*rotation);
+			this.currentNumber = Math.floor((actualMaxNumber/360)*(numRotation));
+			//this.currentNumber += Math.floor(actualMaxNumber-knobNumbers.maxNumber - 1;
+			//translate overlap
+			if(this.currentNumber >= actualMaxNumber) this.currentNumber = Math.floor(this.currentNumber - actualMaxNumber);
+			//validate number
+			if(this.currentNumber >= knobNumbers.maxNumber) this.currentNumber = this.lastNumber;
+			else if ( this.currentNumber < 0 ) this.currentNumber = 0;
+
 			if( this.lastNumber == 9999) this.lastNumber = this.currentNumber;
 
 			//---------check if changed direction on the number

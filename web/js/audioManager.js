@@ -31,7 +31,7 @@ function SmashAndGrabAudioManager() {
 	//SOUND PLAYBACK METHODS
 	this.playSound = function(name) {
 		if (verboseDebugging) {
-			console.log('Smash And Grab Audio Manager is playing sound :\'' + name + '\'')
+			//console.log('Smash And Grab Audio Manager is playing sound :\'' + name + '\'')
 		};
 		var audioPlayerInstance = createjs.SoundJS.play(name);
 	};

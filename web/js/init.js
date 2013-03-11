@@ -38,6 +38,11 @@ function init() {
 		fid.rotation = -1;
 		fid.lastx = -1;
 		fid.lasty = -1;
+
+		//angle
+		fid.startingAngle = 9999;
+		fid.startingAngleDelay = 0;
+		fid.relative_rotation = -1;
 		fid.wasUpdated = false;
 		inputArray[i] = fid;
 	}
@@ -72,6 +77,7 @@ function popPixels(imgStr) {
 //Handle message
 messageCount = 0;
 var smoothing = 0.1;
+//starting angle
 function handleMessage(message_event) {
 	//reset was updated
 	if(useFiducials)
@@ -92,7 +98,7 @@ function handleMessage(message_event) {
 
 				//do some flippin
 				if(flipX) x = 640 - x;
-				if(flipX) rotation = -1*rotation;
+				if(flipX) rotation = (-1*rotation)+360;
 				if( x < 3000 && x > -3000)
 				{ 
 					var fidId = parseInt(fidInfo[i]);
@@ -102,6 +108,13 @@ function handleMessage(message_event) {
 					inputArray[fidId].y = smoothing*y + (1-smoothing)*inputArray[fidId].lasty ;
 					inputArray[fidId].rotation = rotation;
 					inputArray[fidId].wasUpdated = true;
+
+					//update relative angle
+					if(inputArray[fidId].startingAngle == 9999) inputArray[fidId].startingAngle = rotation;
+					inputArray[fidId].relative_rotation = rotation - inputArray[fidId].startingAngle;
+					if(inputArray[fidId].relative_rotation > 360 ) inputArray[fidId].relative_rotation -= 360;
+					else if(inputArray[fidId].relative_rotation < 0 ) inputArray[fidId].relative_rotation += 360;
+					inputArray[fidId].startingAngleDelay = 0;
 				}
 				
 			}

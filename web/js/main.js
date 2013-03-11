@@ -50,11 +50,17 @@ function smoothInputs() {
 			{
 				inputArray[0].x = smoothing*inputArray[0].x+ (1-smoothing)*inputArray[0].lastx ;
 				inputArray[0].y = smoothing*inputArray[0].y+ (1-smoothing)*inputArray[0].lasty ;
+				//angle
+				inputArray[0].startingAngleDelay++;
+				if(inputArray[0].startingAngleDelay > 20) inputArray[0].startingAngle = 9999;
 			}
 			if(!inputArray[2].wasUpdated) 
 			{
 				inputArray[2].x = smoothing*inputArray[2].x+ (1-smoothing)*inputArray[2].lastx ;
 				inputArray[2].y = smoothing*inputArray[2].y+ (1-smoothing)*inputArray[2].lasty ;
+				//angle
+				inputArray[2].startingAngleDelay++;
+				if(inputArray[2].startingAngleDelay > 20) inputArray[2].startingAngle = 9999;
 			}
 };
 
