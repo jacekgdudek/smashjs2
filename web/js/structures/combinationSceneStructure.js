@@ -15,13 +15,14 @@ var combinationSceneStructure = {
 		  name: "bg"
 		},
 		{
-		  src: "assets/combination/dial_base.png",
+		  src: "assets/combination/dial_knob.png",
 		  name: "knob"
 		},
 		{
-		  src: "assets/combination/dial_numbers.png",
+		  src: "assets/combination/dial_num_0-12.png",
 		  name: "numbers",
-		  maxNumber: 20
+		  maxNumber: 13,
+		  span: 240
 		},
 		{
 		  src: "assets/combination/stethoscope_2.png",
