@@ -153,11 +153,11 @@ var structure = {
 			thumbnails:[
 				{
 					src: "assets/credits/0.jpg",
-					name: "audio"
+					name: "audio",
 				},
 				{
 					src: "assets/credits/2.jpg",
-					name: "video"
+					name: "video",
 				}
 			],
 			rewards:[
@@ -165,6 +165,7 @@ var structure = {
 					contentId: 0,
 					src: "assets/reward/cash.png",
 					type: 0,
+					contentType: "audio",
 					downEvent: {
 						type: "SPECIAL_REWARD_BUTTON_DOWN",
 						content: 0
@@ -175,6 +176,8 @@ var structure = {
 					contentId: 1,
 					src: "assets/reward/ring.png",
 					type: 1,
+					contentType: "video",
+					videoId:"videoPlayer",
 					downEvent: {
 						type: "SPECIAL_REWARD_BUTTON_DOWN",
 						content: 1
@@ -308,10 +311,6 @@ var structure = {
 		{
 			_type: "24px Arial",
 			_color: "#ffffff",
-		},
-		audio:
-		[
-			audioContent
-		]
+		}
 	}
 };

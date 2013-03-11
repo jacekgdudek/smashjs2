@@ -31,12 +31,7 @@ var galleryZoomSceneStructure = {
 		  hasDown: true,
 		  downEvent: {
 			type: "SWITCH_SCENE",
-<<<<<<< HEAD
 			content: "gallery_scene"
-=======
-			content: "base_scene",
-			content2: 0
->>>>>>> 7dcabe80ead327c194b40f24351c102c12b7e34b
 			}	
 		},
 		{

@@ -11,11 +11,15 @@ var galleryZoomScene = (function() {
 	var enlargedReward;
 
 	var contentId;
+	//video vars
+	var video;
+	var getVideo;
+	var videoPaused;
+	var videoOpen;
 
 	return {
 		init: function(scene) {
 
-			console.log(rewardImages);
 			this.scene = scene;
 			for(var i = 0; i < this.scene.visuals.length ; i ++)
 			{
@@ -53,7 +57,7 @@ var galleryZoomScene = (function() {
 						if(scene.visuals[i].hasDown)
 						{
 							if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
-							{
+							{	
 								if(scene.visuals[i].downEvent.type != "ADD_CREDITS")
 								{
 									addEventEx(scene.visuals[i].downEvent);
@@ -96,10 +100,18 @@ var galleryZoomScene = (function() {
 			scenes[currScene].stage.removeChild(enlargedReward.bitmap);
 			contentId++;
 			console.log(contentId);
-
+			}
+			//also remove Video
+			if (videoOpen == true){
+			scenes[currScene].stage.removeChild(video);
+			videoOpen = false;
+			getVideo.pause();
+			videoPaused = true;
+			console.log("removing VIDEO");
+			}
 			this.scene.stage.update();
 			showCurrentZoom(contentId);
-			}
+			
 		
 		},
 		previousImage:function() {
@@ -107,10 +119,18 @@ var galleryZoomScene = (function() {
 			scenes[currScene].stage.removeChild(enlargedReward.bitmap);
 			contentId--;
 			console.log(contentId);
-
+			}
+			//also remove Video
+			if (videoOpen == true){
+			scenes[currScene].stage.removeChild(video);
+			videoOpen = false;
+			getVideo.pause();
+			videoPaused = true;
+			console.log("removing VIDEO");
+			}
 			this.scene.stage.update();
 			showCurrentZoom(contentId);
-			}
+			
 		}
 	};
 
@@ -134,8 +154,6 @@ var galleryZoomScene = (function() {
 			console.log("You are on n."+contentId);
 						enlargedReward  = new Object();
 						enlargedReward.hasDown = true;
-						//enlargedReward.downEvent = specialRewards.rewards[grid[i][j].contentId].downEvent;
-						//enlargedReward.bitmap =  specialRewards.rewards[grid[i][j].contentId].thumbnail.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);
 						enlargedReward.bitmap = specialRewards.rewards[contentId].thumbnail.clone();
 						enlargedReward.bitmap.x = 200;
 						enlargedReward.bitmap.y = 200;
@@ -143,9 +161,48 @@ var galleryZoomScene = (function() {
 						enlargedReward.bitmap.scaleY = 8.0;
 						enlargedReward.bitmap.visible = true;
 						
-						//grid[i][j].img = enlargedReward;
 						scenes[currScene].stage.addChild(enlargedReward.bitmap);
-						//rewardBMP.bitmap.updateCache(); //update to add colorFilter
+
+						//Video stuff
+						videoOpen = false;
+						enlargedReward.bitmap.onPress = function(mouseEvent){
+							//check if contentType equals video and if current scene is gallery_zoom_scene
+							if (specialRewards.rewards[contentId].contentType == "video"){
+								if (currScene == "gallery_zoom_scene"){
+									//get ID of the video (video must be included in index.html)
+									getVideo = document.getElementById(specialRewards.rewards[contentId].videoId);
+									videoPaused = false;
+									if(videoOpen == false){
+										getVideo.play();
+										video = new createjs.Bitmap(getVideo);
+										//video position and scale(width,height)
+										video.x = 200;
+										video.y = 200;
+										video.scaleX = 0.7;
+										video.scaleY = 0.75;
+										scenes[currScene].stage.addChild(video);
+
+										videoOpen = true;
+										console.log("openedVideo");
+									}
+								}
+								video.onPress = function(mouseEvent){
+									if (currScene == "gallery_zoom_scene"){
+										if(videoPaused == false){
+											//if video is playing pause on click
+											getVideo.pause();
+											videoPaused = true;
+											console.log("pausedVideo");
+										}else if(videoPaused == true){
+											//if video is paused play on click
+											getVideo.play();
+											videoPaused = false;
+											console.log("startedVideo");
+										}
+									}
+								}
+							}
+					}
 	}
 
 	})();

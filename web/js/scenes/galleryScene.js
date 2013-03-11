@@ -93,7 +93,6 @@ var galleryScene = (function() {
 							for (var i = 0; i < rewardImages.length; i++){
 								scene.stage.removeChild(rewardImages[i].img.bitmap);
 							}
-								console.log("clicked reward n."+rewardImages[i].contentId);
 						}
 					}
 				}
