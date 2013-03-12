@@ -85,13 +85,23 @@ function loadObjects() {
 	credits.value = 0;
 	credits.nextValue = 0;
 	credits.bg = new createjs.Bitmap(credits.src);
-	credits.bg.x = 0;
-	credits.bg.y = 0;
+	credits.bg.x = credits.x;
+	credits.bg.y = credits.y;
+	credits.roller = new createjs.Bitmap(credits.roller);
+	credits.roller.x = -100;
+	credits.roller.y = -100;
 	for (var j = 0; j < credits.subelements.length; j++) {
 		credits.subelements[j].bmp = new createjs.Bitmap(credits.subelements[j].src);
 		credits.subelements[j].bmp.x = -100;
 		credits.subelements[j].bmp.y = -100;
 	}
+	////---------------------------------------setup heat element
+	heat = gamejson.game.elements[1];
+	heat.x += heat.horizontal_offset;
+	heat.y += heat.vertical_offset;
+	///------------------------------------------setup cityGUI
+	cityGUI = gamejson.game.elements[2];
+
 	risk = 0;
 	var _scenes = gamejson.game.scenes;
 	jobs = gamejson.game.jobs;
@@ -239,23 +249,28 @@ function setMessage(text, delay)
 
 function addLocationToStage(stage, gamejson)
 {
-	cityGUI.x = 620;
-	cityGUI.y = 7;
-	cityGUI.width = 140;
-	cityGUI.height = 33;
+	//add frame
+	cityGUI.frame = new createjs.Bitmap(cityGUI.src);
+	cityGUI.frame.x = cityGUI.x;
+	cityGUI.frame.y = cityGUI.y;
+
+	//set sizes
+	cityGUI.width = cityGUI.frame.image.width;
+	cityGUI.height = cityGUI.frame.image.height;
+
 	//add background
 	cityGUI.bg = new createjs.Shape();
-	cityGUI.bg.graphics.beginFill("white").drawRect(cityGUI.x, cityGUI.y, cityGUI.width, cityGUI.height); // load from file
+	cityGUI.bg.graphics.beginFill("#4d3623").drawRect(cityGUI.x + cityGUI.horizontal_offset, cityGUI.y+cityGUI.vertical_offset, cityGUI.frame.image.width - cityGUI.horizontal_offset*2, cityGUI.frame.image.height - cityGUI.vertical_offset*2); // load from file
 	
 	//add text
-	cityGUI.text = new createjs.Text(currCity, gamejson.game.font._type, "#00FF00");
-	cityGUI.text.y = 7;
+	cityGUI.text = new createjs.Text(currCity, gamejson.game.font._type, "#fccfac");
+	cityGUI.text.y = 18;
 	cityGUI.text.x = cityGUI.x+cityGUI.width/2-cityGUI.text.getMeasuredWidth()/2;
 
 	//stage.addChild(credits.bg.bmp);
 	//init numbers to 0
 
-	stage.addChild(cityGUI.bg, cityGUI.text);
+	stage.addChild(cityGUI.bg, cityGUI.text,cityGUI.frame);
 	cityGUI.text.visible = false;
 	
 }
@@ -264,44 +279,46 @@ function setLocation()
 {
 	cityGUI.text.visible = true;
 	cityGUI.bg.visible = true;
-	scenes[currScene].stage.removeChild(cityGUI.bg, cityGUI.text);
+	cityGUI.frame.visible = true;
+	scenes[currScene].stage.removeChild(cityGUI.bg, cityGUI.text,cityGUI.frame);
 	cityGUI.text.text = currCity;
 	cityGUI.text.x = cityGUI.x+cityGUI.width/2-cityGUI.text.getMeasuredWidth()/2;
-	scenes[currScene].stage.addChild(cityGUI.bg, cityGUI.text);
+	scenes[currScene].stage.addChild(cityGUI.bg, cityGUI.text,cityGUI.frame);
 }
 
 function hideLocation()
 {
 	cityGUI.text.visible = false;
 	cityGUI.bg.visible = false;
+	cityGUI.frame.visible = false;
 }
 
 function addHeatToStage(stage, gamejson)
 {
-	heat.x = 200;
-	heat.y = 7;
-	heat.width = 400;
-	heat.height = 33;
-	heat.maxHeat = 200;
 	heat.value = cities[currCity].heat;
 	heat.nextValue = cities[currCity].heat;
 	//add background
 	heat.bg = new createjs.Shape();
-	heat.bg.graphics.beginFill("white").drawRect(heat.x, heat.y, heat.width, heat.height); // load from file
+	heat.bg.graphics.beginFill("#4d3623").drawRect(heat.x, heat.y, heat.width, heat.height); // load from file
 	
 	//add bar
 	heat.bar = new createjs.Shape();
-	heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.bar.graphics.beginLinearGradientFill([heat.regular_color,heat.highlight_color,heat.regular_color,heat.shadow_color], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
 
 	//add text
-	heat.text = new createjs.Text("HEAT", gamejson.game.font._type, "#00FF00");
-	heat.text.y = 10;
+	heat.text = new createjs.Text("HEAT", gamejson.game.font._type, "#fccfac");
+	heat.text.y = 18;
 	heat.text.x = heat.x+heat.width/2-heat.text.getMeasuredWidth()/2;
+
+	//add frame
+	heat.frame = new createjs.Bitmap(heat.src);
+	heat.frame.x = heat.x - heat.horizontal_offset;
+	heat.frame.y = heat.y - heat.vertical_offset;
 
 	//stage.addChild(credits.bg.bmp);
 	//init numbers to 0
 
-	stage.addChild(heat.bg, heat.bar, heat.text);
+	stage.addChild(heat.bg, heat.bar, heat.text,heat.frame);
 	heat.text.visible = false;
 
 	
@@ -309,15 +326,16 @@ function addHeatToStage(stage, gamejson)
 
 function setHeat()
 {
-	scenes[currScene].stage.removeChild(heat.bg, heat.bar, heat.text);
+	scenes[currScene].stage.removeChild(heat.bg, heat.bar, heat.text , heat.frame);
 	heat.bar = null;
 	heat.bar = new createjs.Shape();
-	heat.bar.graphics.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6).drawRect(heat.x + 10, heat.y+3, (heat.value/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.bar.graphics.beginLinearGradientFill([heat.regular_color,heat.highlight_color,heat.regular_color,heat.shadow_color], [0,0.3,0.6, 1], 0, 0, 0, heat.height).drawRect(heat.x, heat.y, (heat.value/heat.maxHeat)*(heat.width), heat.height);
 	heat.text.text = "HEAT";
 	heat.text.visible = true;
 	heat.bar.visible = true;
 	heat.bg.visible = true;
-	scenes[currScene].stage.addChild(heat.bg, heat.bar, heat.text);
+	heat.frame.visible = true;
+	scenes[currScene].stage.addChild(heat.bg, heat.bar, heat.text , heat.frame);
 }
 
 
@@ -332,22 +350,22 @@ function armHeat()
 	heat.riskOffset = 0;
 	heat.noRiskTime = (6 - currentJob.risk)*heat.maxTime/5;
 	heat.bar.visible =false;
-	scenes[currScene].stage.removeChild(heat.bar, heat.text,heat.modules);
+	scenes[currScene].stage.removeChild(heat.bar, heat.text,heat.modules, heat.frame);
 	//create bar
 	heat.bar = null;
 	heat.bar = new createjs.Shape();
-	heat.bar.graphics.beginFill("darkblue").drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.time) /heat.maxHeat)*(heat.width-20), heat.y+3, 
-														(heat.time/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.bar.graphics.beginFill("darkblue").drawRect(heat.x + ((heat.value + heat.maxTime-heat.time) /heat.maxHeat)*(heat.width), heat.y, 
+														(heat.time/heat.maxHeat)*(heat.width), heat.height);
 	//create text
 	heat.text.text = "TIME";
 	//create risk modules
 	heat.modules = new createjs.Shape();
-	heat.modules.graphics.beginFill("grey").drawRect(heat.x + 10 + ((heat.value + heat.maxTime-heat.risk) /heat.maxHeat)*(heat.width-20), heat.y+3, 
-														(heat.risk/heat.maxHeat)*(heat.width-20), heat.height-6);
+	heat.modules.graphics.beginFill("grey").drawRect(heat.x + ((heat.value + heat.maxTime-heat.risk) /heat.maxHeat)*(heat.width), heat.y, 
+														(heat.risk/heat.maxHeat)*(heat.width), heat.height);
 	heat.text.visible = true;
 	heat.bar.visible = true;
 	heat.bg.visible = true;
-	scenes[currScene].stage.addChild(heat.bar, heat.modules, heat.text);
+	scenes[currScene].stage.addChild(heat.bar, heat.modules, heat.text, heat.frame);
 }
 
 function hideHeat()
@@ -356,39 +374,64 @@ function hideHeat()
 	heat.text.visible = false;
 	heat.bar.visible = false;
 	heat.bg.visible = false;
+	heat.frame.visible = false;
 }
 
 function addCreditsToStage(stage) {
 
-	stage.addChild(credits.bg.bmp);
-	//init numbers to 0
 	var numbersGrid = new Array(8);
 	for(var i = 0 ; i < numbersGrid.length ; i++) {
 		var numberObj = new Object();
-		
+		numberObj.bg = credits.roller.clone();
+		numberObj.bg.x = credits.x + i*credits.slot_width + credits.horizontal_offset;
+		numberObj.bg.y = credits.y + credits.vertical_offset;
+		numbersGrid[i] = numberObj;
+		stage.addChild(numberObj.bg);
+	}
+
+	stage.addChild(credits.bg);
+
+	//init numbers to 0
+	for(var i = 0 ; i < numbersGrid.length ; i++) {
+
 		if(i == 0) {
-			numberObj.bmp = credits.subelements[10].bmp.clone();
+			numbersGrid[i].bmp = credits.subelements[10].bmp.clone();
 
 		//comma
 		} else if(i == 4) {
-			numberObj.bmp = credits.subelements[11].bmp.clone();
+			numbersGrid[i].bmp = credits.subelements[11].bmp.clone();
 
 		//rest 
 		} else {
-			numberObj.bmp = credits.subelements[0].bmp.clone();
+			numbersGrid[i].bmp = credits.subelements[0].bmp.clone();
 		}
-			
-		numbersGrid[i] = numberObj;
+		numbersGrid[i].bmp.x = credits.x + i*credits.slot_width + credits.horizontal_offset + 1;
+		numbersGrid[i].bmp.y = credits.y + credits.vertical_offset;
 
-		numberObj.bmp.x = 9 + i*20;
-		numberObj.bmp.y = 7;
-		stage.addChild(numberObj.bmp);
+		stage.addChild(numbersGrid[i].bmp);
 	}
 	credits.numbers = numbersGrid;
 }
 
 
 function setCredits() {
+
+	//setup roller
+	for(var i = 0; i < 8 ; i ++) {
+		scenes[currScene].stage.removeChild(credits.numbers[i].bg);
+
+		var x = credits.numbers[i].bg.x;
+		var y = credits.numbers[i].bg.y;
+
+		credits.numbers[i].bg = credits.roller.clone();
+		credits.numbers[i].bg.x = x;
+		credits.numbers[i].bg.y = y;
+		scenes[currScene].stage.addChild(credits.numbers[i].bg);
+	}
+
+	scenes[currScene].stage.removeChild(credits.bg);
+	credits.bg.visible = true;
+	scenes[currScene].stage.addChild(credits.bg);
 	var digits = new Array();
 	//determine particular values for digits
 	for(var i = 5; i >= 0 ; i --) {
@@ -409,22 +452,17 @@ function setCredits() {
 		scenes[currScene].stage.addChild(credits.numbers[index].bmp);
 	}
 	//dollar and coma
-	scenes[currScene].stage.removeChild(credits.numbers[0].bmp);
-	scenes[currScene].stage.removeChild(credits.numbers[4].bmp);
-	scenes[currScene].stage.addChild(credits.numbers[0].bmp);
-	scenes[currScene].stage.addChild(credits.numbers[4].bmp);
+	scenes[currScene].stage.removeChild(credits.numbers[0].bmp,credits.numbers[4].bmp);
+	scenes[currScene].stage.addChild(credits.numbers[0].bmp , credits.numbers[4].bmp);
 }
 
 function hideCredits() {
 	
 	//compare and change digits
-	for(var i = 0; i < 6 ; i ++) {
-		var index = i+1;
-		if(index>3) index++;
-		scenes[currScene].stage.removeChild(credits.numbers[index].bmp);
+	for(var i = 0; i < 8 ; i ++) {
+		scenes[currScene].stage.removeChild(credits.numbers[i].bg , credits.numbers[i].bmp);
 	}
-	scenes[currScene].stage.removeChild(credits.numbers[0].bmp);
-	scenes[currScene].stage.removeChild(credits.numbers[4].bmp);
+	scenes[currScene].stage.removeChild(credits.bg);
 }
 
 function changeText(text, messageObj) {

@@ -15,18 +15,18 @@ var combinationSceneStructure = {
 		  name: "bg"
 		},
 		{
-		  src: "assets/combination/dial_knob.png",
+		  src: "assets/combination/knob.png",
 		  name: "knob"
 		},
 		{
-		  src: "assets/combination/dial_num_0-12.png",
+		  src: "assets/combination/numbers_0_12.png",
 		  name: "numbers",
 		  maxNumber: 13,
 		  span: 260,
 		  offset: 130 
 		},
 		{
-			
+
 		  src: "assets/combination/stethoscope_2.png",
 		  name: "stethoscope"
 		},
