@@ -9,20 +9,21 @@ var jobSceneStructure = {
 	jobPointerSrc: "assets/city_map/safe_icon.png",
 	jobPointerRect:
 	{
-		x: 0,
-		y: 0,
-		width: 320,
-		height: 240
+		x: 186,
+		y: 181,
+		width: 450,
+		height: 250
 		},
 	visuals: [
 		{
-		  src: "assets/base/base_bkg2.jpg",
+		  src: "assets/base/desk_base.jpg",
 		  name: "bkg"
 		},
 		{
-			x:20,
-			y:20,
-		  src: "assets/city_map/city_map.jpg",
+			x:100,
+			y:100,
+			
+		  src: "assets/city_map/citymap.png",
 		  name: "btn_play"
 		},
 		{

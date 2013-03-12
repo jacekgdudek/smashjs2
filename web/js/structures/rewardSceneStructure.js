@@ -94,7 +94,7 @@ var rewardSceneStructure = {
 		  name: "btn_play"
 		},
 		{
-			x:400,
+			x:700,
 			y:500,
 			src: "assets/button/back_btn.jpg",
 			name: "btn_play",
