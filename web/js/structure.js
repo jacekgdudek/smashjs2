@@ -152,11 +152,11 @@ var structure = {
 		specialRewards:{
 			thumbnails:[
 				{
-					src: "assets/credits/0.jpg",
+					src: "assets/reward/dvd_1.png",
 					name: "audio",
 				},
 				{
-					src: "assets/credits/2.jpg",
+					src: "assets/reward/dvd_2.png",
 					name: "video",
 				}
 			],

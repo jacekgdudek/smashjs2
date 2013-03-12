@@ -6,7 +6,7 @@ var jobSceneStructure = {
 	isCurrent: true,
 	stage_id: "game_canvas",
 	catSrc: "assets/city_map/cat.jpg",
-	jobPointerSrc: "assets/city_map/cat.jpg",
+	jobPointerSrc: "assets/city_map/safe_icon.png",
 	jobPointerRect:
 	{
 		x: 0,

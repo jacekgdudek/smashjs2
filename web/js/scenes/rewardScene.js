@@ -207,16 +207,16 @@ var rewardScene = (function() {
 					{
 						if(grid[i][j].visualId == -2)
 						{
+							
 							//special prize
 							var rewardBMP  = new Object();
 							rewardBMP.hasDown = true;
 							rewardBMP.downEvent = specialRewards.rewards[grid[i][j].contentId].downEvent;
 							rewardBMP.bitmap =  specialRewards.rewards[grid[i][j].contentId].thumbnail.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);
-							rewardBMP.bitmap.x = 100+i * 100;
-							rewardBMP.bitmap.y = 100+j * 100;
+							rewardBMP.bitmap.x = 45+i * 90;
+							rewardBMP.bitmap.y = 30+j * 175;
 							rewardBMP.bitmap.visible = true;
 							console.log("putting object on x:" + (i+1)*100 + " y : " + (100+(j*100)));
-							
 							// rewardBMP.bitmap.cache(0, 0, rewardBMP.bitmap.image.width, rewardBMP.bitmap.image.height);
 							// /*var cFilter;
 							// cFilter = new createjs.ColorFilter(0, 1, 0, 1);
@@ -252,8 +252,8 @@ var rewardScene = (function() {
 						rewardBMP.hasDown = true;
 						rewardBMP.downEvent = scenes[currScene].visuals[grid[i][j].visualId].downEvent;
 						rewardBMP.bitmap =  scenes[currScene].visuals[grid[i][j].visualId].bitmap.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);
-						rewardBMP.bitmap.x = i * 100;
-						rewardBMP.bitmap.y = j * 100;
+						rewardBMP.bitmap.x = 45+i * 90;
+						rewardBMP.bitmap.y = 30+j * 175;
 						rewardBMP.bitmap.visible = true;
 						console.log("putting object on x:" + i*100 + " y : " + j*100);
 						
@@ -262,7 +262,7 @@ var rewardScene = (function() {
 						cFilter = new createjs.ColorFilter(0, 1, 0, 1);
 						rewardBMP.bitmap.filters = [cFilter];
 						*/
-						if (grid[i][j].visualId == 4){
+						//if (grid[i][j].visualId == 4){
 							var cFilter;
 							/*cFilter = new createjs.ColorFilter(1, 0, 0, 1);
 							rewardBMP.bitmap.filters = [cFilter];*/
@@ -275,11 +275,19 @@ var rewardScene = (function() {
 								cFilter = new createjs.ColorFilter(0.9, 2, 0.9, 1);
 								rewardBMP.bitmap.filters = [cFilter];
 							}
+							else if(grid[i][j].rgbColor == "purple"){
+								cFilter = new createjs.ColorFilter(2, 0.2, 0.7, 1);
+								rewardBMP.bitmap.filters = [cFilter];
+							}
+							else if(grid[i][j].rgbColor == "yellow"){
+								cFilter = new createjs.ColorFilter(2, 1.5, 0.7, 1);
+								rewardBMP.bitmap.filters = [cFilter];
+							}
 							else if(grid[i][j].rgbColor == "blue"){
 								cFilter = new createjs.ColorFilter(0.9, 0.9, 2, 1);
 								rewardBMP.bitmap.filters = [cFilter];
 							}
-						}
+						//}
 						
 						rewardImages.push(rewardBMP);
 						scenes[currScene].stage.addChild(rewardBMP.bitmap);

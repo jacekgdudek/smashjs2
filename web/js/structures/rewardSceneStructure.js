@@ -11,27 +11,75 @@ var rewardSceneStructure = {
 		},
 	rewards: [
 		{
-			visualId: 3,
-			value: 400
+			visualId: 4,
+			value: 100
 		},
 		{
-			visualId: 4,
-			value: 400
+			visualId: 9,
+			value: 200
 		},
 		{
-			visualId: 4,
-			value: 200,
+			visualId: 5,
+			value: 200
+		},
+		{
+			visualId: 10,
+			value: 250,
 			rgbColor: "red"
 		},
 		{
-			visualId: 4,
-			value: 400,
-			rgbColor: "green"
+			visualId: 13,
+			value: 300,
+			rgbColor: "red"
 		},
 		{
-			visualId: 4,
-			value: 500,
+			visualId: 3,
+			value: 300
+		},
+		{
+			visualId: 12,
+			value: 350,
+			rgbColor: "yellow"
+		},
+		{
+			visualId: 10,
+			value: 350
+		},
+		{
+			visualId: 6,
+			value: 400
+		},
+		{
+			visualId: 13,
+			value: 400,
+			rgbColor: "purple"
+		},
+		{
+			visualId: 12,
+			value: 550,
+			rgbColor: "red"
+		},
+		{
+			visualId: 12,
+			value: 600,
 			rgbColor: "blue"
+		},
+		{
+			visualId: 7,
+			value: 800
+		},
+		{
+			visualId: 11,
+			value: 1000,
+			rgbColor: "red"
+		},
+		{
+			visualId: 12,
+			value: 1200
+		},
+		{
+			visualId: 11,
+			value: 1600
 		}
 	],
 	visuals: [
@@ -58,8 +106,6 @@ var rewardSceneStructure = {
 			}	
 		},
 		{
-			x: 0,
-			y: 0,
 		  src: "assets/reward/ring.png",
 		  hasDown: true,
 		  visible: false,
@@ -68,8 +114,6 @@ var rewardSceneStructure = {
 			}
 		},
 		{
-			x: 0,
-			y: 0,
 		  src: "assets/reward/watch.png",
 		  hasDown: true,
 		  visible: false,
@@ -78,9 +122,71 @@ var rewardSceneStructure = {
 			}
 		},
 		{
-			x: 0,
-			y: 0,
-		  src: "assets/reward/cash.png",
+		  src: "assets/reward/cash_1.png",
+		  hasDown: true,
+		  visible: false,
+		  downEvent: {
+			type: "ADD_CREDITS"
+			}
+		},
+		{
+		  src: "assets/reward/cash_2.png",
+		  hasDown: true,
+		  visible: false,
+		  downEvent: {
+			type: "ADD_CREDITS"
+			}
+		},
+		{
+		  src: "assets/reward/cash_3.png",
+		  hasDown: true,
+		  visible: false,
+		  downEvent: {
+			type: "ADD_CREDITS"
+			}
+		},
+		{
+		  src: "assets/reward/cash_4.png",
+		  hasDown: true,
+		  visible: false,
+		  downEvent: {
+			type: "ADD_CREDITS"
+			}
+		},
+		{
+		  src: "assets/reward/cash_5.png",
+		  hasDown: true,
+		  visible: false,
+		  downEvent: {
+			type: "ADD_CREDITS"
+			}
+		},
+		{
+		  src: "assets/reward/bracelet.png",
+		  hasDown: true,
+		  visible: false,
+		  downEvent: {
+			type: "ADD_CREDITS"
+			}
+		},
+		{
+		  src: "assets/reward/diamonds.png",
+		  hasDown: true,
+		  visible: false,
+		  downEvent: {
+			type: "ADD_CREDITS"
+			}
+		},
+		{
+		  src: "assets/reward/gems.png",
+		  hasDown: true,
+		  visible: false,
+		  downEvent: {
+			type: "ADD_CREDITS"
+			}
+		},
+		{
+		  src: "assets/reward/pearls.png",
 		  hasDown: true,
 		  visible: false,
 		  downEvent: {

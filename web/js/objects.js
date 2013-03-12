@@ -255,7 +255,7 @@ function addLocationToStage(stage, gamejson)
 	cityGUI.frame.y = cityGUI.y;
 
 	//set sizes
-	cityGUI.width = cityGUI.frame.image.width;
+	cityGUI.width = 177;
 	cityGUI.height = cityGUI.frame.image.height;
 
 	//add background
