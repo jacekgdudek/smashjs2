@@ -202,6 +202,7 @@ var jobsScene = (function() {
 
 	function setupCard(card , job)
 	{
+		scenes[currScene].stage.addChild(card.bitmap);
 		if (typeof card.cats !== 'undefined') {
 			for(var j = 0 ; j < card.cats.length ; j ++)
 			{

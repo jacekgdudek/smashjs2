@@ -245,6 +245,7 @@ function setMessage(text, delay)
 	messageGUI.text.visible = true;
 	//add to stage
 	scenes[currScene].stage.addChild(messageGUI.bg,messageGUI.text);
+	
 }
 
 function addLocationToStage(stage, gamejson)
@@ -255,12 +256,12 @@ function addLocationToStage(stage, gamejson)
 	cityGUI.frame.y = cityGUI.y;
 
 	//set sizes
-	cityGUI.width = 177;
-	cityGUI.height = cityGUI.frame.image.height;
+	cityGUI.width = 170;
+	cityGUI.height = 50;
 
 	//add background
 	cityGUI.bg = new createjs.Shape();
-	cityGUI.bg.graphics.beginFill("#4d3623").drawRect(cityGUI.x + cityGUI.horizontal_offset, cityGUI.y+cityGUI.vertical_offset, cityGUI.frame.image.width - cityGUI.horizontal_offset*2, cityGUI.frame.image.height - cityGUI.vertical_offset*2); // load from file
+	cityGUI.bg.graphics.beginFill("#4d3623").drawRect(cityGUI.x + cityGUI.horizontal_offset, cityGUI.y+cityGUI.vertical_offset, cityGUI.width - cityGUI.horizontal_offset*2, cityGUI.height - cityGUI.vertical_offset*2); // load from file
 	
 	//add text
 	cityGUI.text = new createjs.Text(currCity, gamejson.game.font._type, "#fccfac");
