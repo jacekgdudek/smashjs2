@@ -12,7 +12,7 @@ var baseSceneStructure = {
 		},
 		{
 			x: 60,
-			y: 100,
+			y: 200,
 		  src: "assets/map/desk_europemap.png",
 		  name: "btn_play",
 		  hasDown: true,
@@ -23,8 +23,8 @@ var baseSceneStructure = {
 			}	
 		},
 		{
-			x:80,
-			y:60,
+			x:130,
+			y:150,
 		  src: "assets/city_map/desk_citymap.png",
 		  name: "btn_play",
 		  hasDown: true,
@@ -35,8 +35,8 @@ var baseSceneStructure = {
 			}	
 		},
 		{
-			x:600,
-			y:120,
+			x:540,
+			y:80,
 		  src: "assets/gallery/desk_notebook_1.png",
 		  name: "btn_play",
 		  hasDown: true,

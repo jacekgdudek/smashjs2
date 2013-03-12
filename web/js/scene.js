@@ -38,6 +38,8 @@ var defaultScene = (function() {
 			}
 
 			this.scene.stage.onMouseDown = function(mousePos) {
+				var collidedObject = new Object();
+				var currentId = -1;
 				if(scene._name == currScene)
 				{
 					for(var i = 0 ; i < scene.visuals.length ; i++)
@@ -46,11 +48,19 @@ var defaultScene = (function() {
 						{
 							if(scene.visuals[i].bitmap.hitTest( mousePos.stageX - scene.visuals[i].bitmap.x , mousePos.stageY - scene.visuals[i].bitmap.y ))
 							{
-								addEventEx(scene.visuals[i].downEvent);
-								console.log("down state initialized");
+								if(scene.stage.getChildIndex(scene.visuals[i].bitmap) > currentId)
+								{
+									collidedObject = scene.visuals[i];
+								} 
 							}
 						}
 					}
+				}
+
+				if(typeof collidedObject.downEvent !== 'undefined')
+				{
+					addEventEx(collidedObject.downEvent);
+					console.log("down state initialized");
 				}
 			}
 
