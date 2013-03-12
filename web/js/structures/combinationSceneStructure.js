@@ -22,11 +22,11 @@ var combinationSceneStructure = {
 		  src: "assets/combination/dial_num_0-12.png",
 		  name: "numbers",
 		  maxNumber: 13,
-		  span: 250,
-		  
+		  span: 260,
 		  offset: 130 
 		},
 		{
+			
 		  src: "assets/combination/stethoscope_2.png",
 		  name: "stethoscope"
 		},
