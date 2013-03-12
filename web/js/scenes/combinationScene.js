@@ -4,6 +4,8 @@ var combinationScene = (function() {
 
 	var currentNumber, lastNumber, lastNumberAngle;
 
+	var volume;
+
 	var scene, sweet_spot;
 
 	//indicator references;
@@ -64,6 +66,7 @@ var combinationScene = (function() {
 			this.lastNumberAngle = 0;
 			this.outRight = false;
 			this.outLeft = false;
+			this.volume = 0;
 
 			//load indicator
 			indicator = new CombinationIndicator(this.scene.stage);
@@ -118,7 +121,7 @@ var combinationScene = (function() {
 			//distance from sweet spot
 			var distance = Math.sqrt(Math.pow(this.sweet_spot.x - stethoscope.bitmap.x,2) + Math.pow(this.sweet_spot.y - stethoscope.bitmap.y,2));
 			if (distance > 100) distance = 100;
-			audioManager.setVolume((100-distance)/100, audioManagerAudioObject.NORMAL_CLICK);
+			this.volume =  (100-distance)/100;
 
 			//----------------------------------- update dial
 			var directionNow = false;
@@ -258,7 +261,7 @@ var combinationScene = (function() {
 
 				lastNumberAngle = rotation;
 
-				audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
+				audioManager.playSoundAtVolume(audioManagerAudioObject.NORMAL_CLICK, this.volume, false);
 			}
 
 			// --------------------------------Reset if we went to far

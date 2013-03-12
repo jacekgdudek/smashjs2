@@ -15,6 +15,7 @@ var scenes = new Object();
 //setup audio manager
 var audioManager;
 var transitionsManager;
+var background_volume = 0.6;
 
 //booleans
 var moduleLoaded = -1;
@@ -51,8 +52,7 @@ function init() {
 
 	//load sounds
 	audioManager = new SmashAndGrabAudioManager();
-	audioManager.setVolume(0.95,audioManagerAudioObject.NORMAL_CLICK);
-	audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
+	audioManager.playSoundAtVolume(audioManagerAudioObject.NORMAL_CLICK,0.95,false);
 
 	//init transitions
 	transitionsManager = new TransitionsManager();

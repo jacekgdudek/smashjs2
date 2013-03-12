@@ -113,6 +113,9 @@ var jobsScene = (function() {
 
 		},
 		update: function() {
+
+			//play background sound
+			audioManager.playSoundAtVolume(audioManagerAudioObject.BACKGROUND_MUSIC, background_volume, true);
 			//--------animate card
 			//if next card is ready
 			if(nextCardJob.id != -1 && nextCardJob.id != currentJobId && cardState != 3)

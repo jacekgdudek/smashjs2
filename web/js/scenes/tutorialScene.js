@@ -172,7 +172,7 @@ var tutorialScene = (function() {
 				//distance from sweet spot
 				var distance = Math.sqrt(Math.pow(this.sweet_spot.x - stethoscope.bitmap.x,2) + Math.pow(this.sweet_spot.y - stethoscope.bitmap.y,2));
 				if (distance > 100) distance = 100;
-				audioManager.setVolume((100-distance)/100, audioManagerAudioObject.NORMAL_CLICK);
+				audioManager.playSoundAtVolume(audioManagerAudioObject.NORMAL_CLICK,(100-distance)/100, false);
 				this.volume = distance;
 
 				//---------------------------------------------process Hint
@@ -297,7 +297,7 @@ var tutorialScene = (function() {
 				if (this.currentNumber != this.lastNumber)
 				{
 					console.log(this.currentNumber);
-					audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
+					audioManager.playSoundAtVolume(audioManagerAudioObject.NORMAL_CLICK,0.95);
 				}
 
 				//save last values

@@ -71,6 +71,11 @@ var defaultScene = (function() {
 			{
 				hideGUI();
 			}
+			else
+			{
+				//play background sound
+				audioManager.playSoundAtVolume(audioManagerAudioObject.BACKGROUND_MUSIC, background_volume, true);
+			}
 			
 			//update scene
 			this.scene.stage.update();
