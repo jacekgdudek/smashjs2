@@ -18,6 +18,11 @@ var audioContent = {
 			src: audioAssetsPath + "paper1.mp3",
 			id: audioManagerAudioObject.PAPER_EFFECT,
 			data: 1
+		},
+		{
+			src: audioAssetsPath + "bulbsound.mp3",
+			id: audioManagerAudioObject.BULB_SOUND,
+			data: 1
 		}
 	],
 	post_manifest: [

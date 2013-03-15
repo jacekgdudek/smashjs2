@@ -11,7 +11,7 @@ var combinationSceneStructure = {
 	},
 	visuals: [
 		{
-		  src: "assets/combination/safe_bg.jpg",
+		  src: "assets/combination/door.png",
 		  name: "bg"
 		},
 		{
@@ -48,6 +48,14 @@ var combinationSceneStructure = {
 		  refX: 400,
 		  y: -300,
 		  x: -400
+		},
+		{
+		  src: "assets/combination/handle.png",
+		  name: "handle",
+		  regX: 162.5,
+		  regY: 162.5,
+		  y: 300,
+		  x: 510
 		}
 	]
 }

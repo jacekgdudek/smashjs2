@@ -264,11 +264,10 @@ var structure = {
 			shadow_color: "#5a3e29",
 			regular_color: "#6d4c32",
 			horizontal_offset: 3,
-			vertical_offset: 8,
+			vertical_offset: 5,
 			x: 620,
 			y: 7,
-			src: "assets/credits/cash_frame.png",
-
+			src: "assets/credits/cash_frame.png"
 		}
 
 		],

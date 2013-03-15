@@ -138,7 +138,7 @@ function updateHeat()
 								heat.y, 
 								(newValue/heat.maxHeat)*(heat.width), 
 								heat.height);
-			scenes[currScene].stage.addChild(heat.bar, heat.text);
+			scenes[currScene].stage.addChild(heat.bar, heat.text, heat.frame);
 
 			heat.value = newValue;
 		}

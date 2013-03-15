@@ -45,6 +45,12 @@ var baseSceneStructure = {
 			content: "gallery_scene",
 			content2: 0
 			}	
+		},
+		{
+			x:0,
+			y:0,
+			src: "assets/bg/shadow2.png",
+			name: "overlayasdas",
 		}
 	]
 };

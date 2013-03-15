@@ -1,8 +1,12 @@
 console.log("Loading base scene");
 
+var overlay;
 var defaultScene = (function() {
 	//var input;
 	var scene;
+
+	var blinkerReset;
+	var blinkerPause;
 
 	return {
 		init: function(scene) {
@@ -17,6 +21,18 @@ var defaultScene = (function() {
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
 			setGUI();
+
+			if(this.scene._name == "welcome")
+			{
+				overlay = this.scene.visuals[5];
+			}
+			else if(this.scene._name == "base_scene")
+			{
+				overlay = this.scene.visuals[4];
+			}
+			overlay.bitmap.alpha = 0;
+			blinkerReset = 0;
+			blinkerPause = 0;
 
 			// add a handler for all the events we're interested in
 			//this.scene.stage.onTick = update;
@@ -67,6 +83,30 @@ var defaultScene = (function() {
 		},
 		update: function() {
 
+			//blink blibnk blink
+			if(blinkerReset > 300)
+			{
+				blinkerReset = 0;
+				blinkerPause = 0;
+				overlay.bitmap.alpha = 0;
+				console.log("Reset");
+			}
+			else
+			{
+				blinkerReset++;
+				if(blinkerPause > 250)
+				{
+					//blibky blinky
+					console.log("Blink");
+					overlay.bitmap.alpha = Math.random(); // random value between 0 and 1;
+					audioManager.playSoundAtVolume(audioManagerAudioObject.BULB_SOUND, 1, false);
+				}
+				else
+				{
+					blinkerPause++;
+				}
+			}
+
 			if(this.scene._name == "welcome")
 			{
 				hideGUI();
@@ -95,6 +135,8 @@ var defaultScene = (function() {
 			hideGUI();
 		},
 	};
+
+
 
 	function handleKeyDown(evt) {
 		// For now we use keyboard controls for the dial

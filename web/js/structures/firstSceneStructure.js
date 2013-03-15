@@ -55,6 +55,12 @@ var firstSceneStructure = {
 				content: "settings",
 				content2: 0
 			}	
+		},
+		{
+			x:0,
+			y:0,
+			src: "assets/bg/shadow.png",
+			name: "overlaysdfg",
 		}
 	]
 };
