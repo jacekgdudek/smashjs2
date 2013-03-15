@@ -19,9 +19,9 @@ var citySceneStructure = {
 		  name: "bkg"
 		},
 		{
-			x:20,
-			y:20,
-		  src: "assets/map/europe_map.jpg",
+			x:100,
+			y:100,
+		  src: "assets/map/europemap_TEMP.png",
 		  name: "btn_play"
 		},
 		{

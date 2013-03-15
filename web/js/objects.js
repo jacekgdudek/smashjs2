@@ -121,8 +121,11 @@ function loadObjects() {
 			if ( typeof visual.regY === 'undefined')visual.bitmap.regY = 0;
 			else visual.bitmap.regY = visual.regY;
 
-			visual.bitmap.x = visual.bitmap.regX + visual.x;
-			visual.bitmap.y = visual.bitmap.regY + visual.y;
+			if ( typeof visual.x === 'undefined')visual.bitmap.x = 0 + visual.bitmap.regX;
+			else visual.bitmap.x = visual.bitmap.regX + visual.x;
+			if ( typeof visual.y === 'undefined')visual.bitmap.y = 0 + visual.bitmap.regY;
+			else visual.bitmap.y = visual.bitmap.regY + visual.y;
+			
 			if(visual.visible == false)
 			{
 				visual.bitmap.visible = false;

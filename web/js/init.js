@@ -20,6 +20,7 @@ var background_volume = 0.6;
 //booleans
 var moduleLoaded = -1;
 var flipX = true;
+var currentBuffer = false; // false - 0 true - 2
 
 //init inputs
 var inputArray = new Array();

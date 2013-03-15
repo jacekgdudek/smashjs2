@@ -299,7 +299,7 @@ function finnishedJob(success)
 	{
 		currentJob.finnished = true;
 		clearConditionsForJobs(currentJob.index);
-		addEvent("SWITCH_SCENE", "reward_scene");
+		addEvent("SWITCH_SCENE", "reward_scene", 2);
 		addEvent("DECREASE_GLOBAL_HEAT");
 	}
 	else
@@ -393,10 +393,10 @@ function switchStage(content, content2)
 		console.log("Switched stage to " + content);
 
 		//init transition if defined
-		if(typeof content2 !== 'undefined')
-		{
-			transitionsManager.transition(scenes[lastScene], scenes[currScene],content2);
-		}
+		//if(typeof content2 !== 'undefined')
+		//{
+			transitionsManager.transition(scenes[lastScene], scenes[currScene],2);//content2);
+		//}
 		
 	}
 	

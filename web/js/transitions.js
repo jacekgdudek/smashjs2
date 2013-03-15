@@ -18,10 +18,13 @@ function TransitionsManager(){
 	var maxTime = 0;
 	var time = 0;
 	var bg;
+	var front_stage;
+	var frontCanvas;
 
 	//--------------------------------INIT
 	this.transition = function(scene1, scene2, type, time)
 	{
+
 		this.scene1 = scene1;
 		this.scene2 = scene2;
 		if(typeof type === 'undefined') this.type = TransitionType.CROSS_FADE;
@@ -30,19 +33,43 @@ function TransitionsManager(){
 			else this.maxTime = time;
 		this.time = 0;
 		this.active = true;
-		//this.tempStage = new createjs.Stage("game_canvas");
+
+		//prepare canvas
+		var canvasName = "transition";
+		this.frontCanvas = document.createElement("canvas");
+		this.frontCanvas.className = "state_rotate";
+		this.frontCanvas.id = canvasName;
+		this.frontCanvas.width = 800;
+		this.frontCanvas.height = 600;
+
+		var object = document.getElementById("wrapper");
+		object.appendChild(this.frontCanvas);
+
+		this.front_stage = new createjs.Stage(canvasName);
+		
 
 		this.initScenes();
 	};
 
 	this.initScenes = function()
 	{
+		//previous
+		//-----------------------move object to disappear onto a front stage
 		for(var i = 0; i < this.scene1.visuals.length ; i ++)
 		{
-		 	this.scene2.stage.addChild(this.scene1.visuals[i].bitmap);
+			if(this.type == 2)
+			{
+				this.front_stage.addChild(this.scene1.visuals[i].bitmap);
+			}
+			else
+			{
+				this.scene2.stage.addChild(this.scene1.visuals[i].bitmap);
+			}
 		 	this.scene1.visuals[i].bitmap.alpha = 1;
-		// 	this.tempStage.addChild(this.scene1.visuals[i].bitmap);
 		}
+		this.front_stage.update();
+
+		//next
 		for(var i = 0; i < this.scene2.visuals.length ; i ++)
 		{
 			switch(this.type)
@@ -101,7 +128,21 @@ function TransitionsManager(){
 
 	this.updateOpenSafe = function()
 	{
-		this.active = false;
+		this.front_stage.update();
+		for(var i = 0; i < this.scene1.visuals.length ; i ++)
+		{
+		// 	//scale it 
+		//  	this.scene1.visuals[i].bitmap.scaleX = (this.maxTime - this.time)/this.maxTime;
+		//  	//move it
+		//  	this.scene1.visuals[i].bitmap.x = ((this.maxTime - this.time)/this.maxTime)*this.scene1.visuals[i].preset_x;
+		//  	//hide it
+		  		this.scene1.visuals[i].bitmap.alpha = (this.maxTime - this.time)/this.maxTime;
+		//  	//skew ii
+		//  	this.scene1.visuals[i].bitmap.skewY = (this.time/this.maxTime) * 20;
+		//  	//boom rewind it 
+		//  	this.scene1.visuals[i].bitmap.x -= (this.time/this.maxTime)*100;
+		}
+
 	};
 
 
@@ -146,10 +187,25 @@ function TransitionsManager(){
 	//----------------------------FINALIZE
 	this.finalize = function()
 	{
+		if(this.type == 2)
+		{
+			var object = document.getElementById('wrapper');
+			object.removeChild(this.frontCanvas);
+		}
+		
+
 		for(var i = 0; i < this.scene1.visuals.length ; i ++)
 		{
 			this.scene1.visuals[i].bitmap.alpha = 1;
-		 	this.scene2.stage.removeChild(this.scene1.visuals[i].bitmap);
+			if(this.type == 2)
+			{
+				
+			}
+			else
+			{
+				this.scene2.stage.removeChild(this.scene1.visuals[i].bitmap);
+			}
+		 	
 		}
 		//this.scene1.finalize();
 
