@@ -90,7 +90,7 @@ function TransitionsManager(){
 		}
 
 		this.bg = new createjs.Shape();
-		this.bg.graphics.beginStroke("#F00").beginFill("#000").drawRect(0, 0, 800, 600)
+		this.bg.graphics.beginFill("#000").drawRect(0, 0, 800, 600)
 		this.scene2.stage.addChildAt(this.bg,0); 
 	}
 
