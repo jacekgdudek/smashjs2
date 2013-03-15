@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Flickering</title>
+	<script src="easeljs-0.6.0.min.js"></script>
+	<script src="soundjs-0.4.0.min.js"></script>
+	
+	<script>
+		var canvas;
+		var stage;
+		var tickN = 0;
+		
+		var ball;
+		var lightBulbSound;
+
+		function init(){
+			canvas = document.getElementById("canvas");
+			stage = new createjs.Stage(canvas);
+
+			img = new Image();
+			img.src = "ball.png";
+			img.onload = setImg;
+			lightBulbSound = "bulbsound.mp3|bulbsound.ogg"
+
+			//update stage every 0.1 second
+			createjs.Ticker.setFPS(10);
+			createjs.Ticker.addListener(window);
+		}
+
+		//add image to stage, 
+		function setImg(event){
+			ball = new createjs.Bitmap(img);
+			ball.alpha = 1;
+			stage.addChild(ball);
+		}
+
+		//do 20ticks then pause the ticker
+		function tick(){ 
+			if (tickN < 20){
+				if (tickN == 1){
+					createjs.Sound.play(lightBulbSound);
+				}
+			//ball.alpha = parseInt(Math.random()*10)/10; // random value between 1-10 with single decimal place;
+			ball.alpha = Math.random(); // random value between 0 and 1;
+			tickN++;
+			//console.log(ball.alpha);
+			console.log(tickN);
+			}else{
+				ball.alpha = 1;
+				createjs.Ticker.setPaused = true;
+				console.log("paused");
+			}
+
+			stage.update();
+		}
+		//reset tickNumber to 0 every 10 seconds
+		setInterval(function(){ 
+    	  tickN = 0;
+		}, 10000);
+		
+	</script>
+</head>
+
+<body onload="init();">
+		<canvas id="canvas" width="960" height="580"></canvas>
+</body>
+</html>

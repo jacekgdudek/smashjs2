@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"enlar",
+				"enlargedReward"
+			],
+			[
+				"c",
+				"currSpecialRewards"
+			],
+			[
+				"curr",
+				"currSpecialRewards"
+			],
+			[
 				"backgro",
 				"background-color"
 			],
@@ -16,93 +28,43 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/index.html",
 			"settings":
 			{
-				"buffer_size": 3536,
+				"buffer_size": 5478,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "js/scenes/galleryZoomScene.js",
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/index.html",
 			"settings":
 			{
-				"buffer_size": 3939,
+				"buffer_size": 6096,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/rotate.html",
+			"settings":
+			{
+				"buffer_size": 1887,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/Jakub/Google Drive/IMD/Responsive/Max5/challenge6.maxpat",
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/style.css",
 			"settings":
 			{
-				"buffer_size": 132068,
+				"buffer_size": 172,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "Searching 123 files for \"specialRewards\"\n\nC:\\Users\\Jakub\\Documents\\GitHub\\smashjs2\\web\\js\\eventHandler.js:\n   86  	if(currScene == \"reward_scene\")\n   87  	{\n   88: 		currSpecialRewards.push(id);\n   89  	}\n   90  	else if (currScene == \"gallery_scene\")\n\nC:\\Users\\Jakub\\Documents\\GitHub\\smashjs2\\web\\js\\init.js:\n   24  \n   25  function init() {\n   26: 	currSpecialRewards.push(0);\n   27: 	currSpecialRewards.push(1);\n   28  	loadFlipX();\n   29  	if(typeof flipX === 'undefined') flipX = true;\n\nC:\\Users\\Jakub\\Documents\\GitHub\\smashjs2\\web\\js\\objects.js:\n   27  var cities = {};\n   28  var currCity;\n   29: var currSpecialRewards = new Array();\n   30: var specialRewards = new Array();\n   31  \n   32  var sweetSpot = (function() {\n   ..\n   69  	currCity = \"Edinburgh\";\n   70  	//setup special rewards\n   71: 	specialRewards = gamejson.game.specialRewards;\n   72: 	for(var i = 0 ; i < specialRewards.rewards.length ; i ++)\n   73  	{\n   74: 		specialRewards.rewards[i].thumbnail = new createjs.Bitmap(specialRewards.thumbnails[specialRewards.rewards[i].type].src);\n   75: 		specialRewards.rewards[i].thumbnail.x = -100;\n   76: 		specialRewards.rewards[i].thumbnail.y = -100;\n   77  	}\n   78  \n\nC:\\Users\\Jakub\\Documents\\GitHub\\smashjs2\\web\\js\\saveData.js:\n    7  	data.currCity = currCity;\n    8  	data.heat = heat.nextValue;\n    9: 	data.rewards = currSpecialRewards;\n   10  	data.flipX = flipX;\n   11  	//data.currentJobs = currentJobs;\n   ..\n   38  	cities = parsedObject.cities;\n   39  	currCity = parsedObject.currCity;\n   40: 	currSpecialRewards = parsedObject.rewards;\n   41  	addEvent(\"RANDOMIZE_JOBS\");\n   42  	setLocation();\n\nC:\\Users\\Jakub\\Documents\\GitHub\\smashjs2\\web\\js\\structure.js:\n  150  \n  151  		},\n  152: 		specialRewards:{\n  153  			thumbnails:[\n  154  				{\n\nC:\\Users\\Jakub\\Documents\\GitHub\\smashjs2\\web\\js\\scenes\\galleryScene.js:\n  126  \n  127  		//------------------------getClonesOfThumbnails\n  128: 		for(var i = 0 ; i < currSpecialRewards.length ; i ++)\n  129  		{\n  130  			var newThumbnail = new Object();\n  131: 			newThumbnail.contentId = currSpecialRewards[i];\n  132  			rewardImages.push(newThumbnail);\n  133  		}\n  ...\n  159  						var rewardBMP  = new Object();\n  160  						rewardBMP.hasDown = true;\n  161: 						rewardBMP.downEvent = specialRewards.rewards[grid[i][j].contentId].downEvent;\n  162: 						rewardBMP.bitmap =  specialRewards.rewards[grid[i][j].contentId].thumbnail.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);\n  163  						rewardBMP.bitmap.x = 100+i * 100;\n  164  						rewardBMP.bitmap.y = 100+j * 100;\n\nC:\\Users\\Jakub\\Documents\\GitHub\\smashjs2\\web\\js\\scenes\\galleryZoomScene.js:\n  107  \n  108  		//------------------------getClonesOfThumbnails\n  109: 		for(var i = 0 ; i < currSpecialRewards.length ; i ++)\n  110  		{\n  111  			var newReward = new Object();\n  112: 			newReward.contentId = currSpecialRewards[i];\n  113  			rewardImages.push(newReward);\n  114  			grid[x][y] = rewardImages[i];\n  ...\n  123  						enlargedReward  = new Object();\n  124  						enlargedReward.hasDown = true;\n  125: 						//enlargedReward.downEvent = specialRewards.rewards[grid[i][j].contentId].downEvent;\n  126: 						//enlargedReward.bitmap =  specialRewards.rewards[grid[i][j].contentId].thumbnail.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);\n  127: 						enlargedReward.bitmap = specialRewards.rewards[contentId].thumbnail.clone();\n  128  						enlargedReward.bitmap.x = 200;\n  129  						enlargedReward.bitmap.y = 200;\n\nC:\\Users\\Jakub\\Documents\\GitHub\\smashjs2\\web\\js\\scenes\\rewardScene.js:\n  160  			{\n  161  				finnished = true;\n  162: 				rewardId = Math.floor(Math.random()*specialRewards.rewards.length);\n  163  \n  164: 				for(var i = 0 ; i < currSpecialRewards.length ; i ++)\n  165  				{\n  166: 					if(currSpecialRewards[i] == rewardId) finnished = false;\n  167  				}\n  168  \n  169  				if(finnished)\n  170  				{\n  171: 					specialRewards.rewards[rewardId].visualId = -2;\n  172: 					rewards.push(specialRewards.rewards[rewardId]);\n  173  				}\n  174  			}	\n  ...\n  204  							var rewardBMP  = new Object();\n  205  							rewardBMP.hasDown = true;\n  206: 							rewardBMP.downEvent = specialRewards.rewards[grid[i][j].contentId].downEvent;\n  207: 							rewardBMP.bitmap =  specialRewards.rewards[grid[i][j].contentId].thumbnail.clone();//new createjs.Bitmap(scenes[currScene].visuals[grid[i][j]].src);\n  208  							rewardBMP.bitmap.x = 100+i * 100;\n  209  							rewardBMP.bitmap.y = 100+j * 100;\n\n32 matches across 8 files\n",
+			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Transform.html",
 			"settings":
 			{
-				"buffer_size": 4529,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "js/objects.js",
-			"settings":
-			{
-				"buffer_size": 13208,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/eventHandler.js",
-			"settings":
-			{
-				"buffer_size": 9299,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/scenes/galleryScene.js",
-			"settings":
-			{
-				"buffer_size": 5730,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/structure.js",
-			"settings":
-			{
-				"buffer_size": 4998,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/structures/galleryZoomSceneStructure.js",
-			"settings":
-			{
-				"buffer_size": 1073,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/structures/gallerySceneStructure.js",
-			"settings":
-			{
-				"buffer_size": 589,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/init.js",
-			"settings":
-			{
-				"buffer_size": 2802,
-				"line_ending": "Windows"
+				"buffer_size": 6925,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -134,33 +96,57 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/upload/export.php",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/kitchensink/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/kitchensink/js/kitchensink.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/kitchensink/kitchensink.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/export canvas to php/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/DragAndDrop.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/draw2.html",
+		"/C/Users/Jakub/Downloads/challenge7.maxpat",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/basic.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/color-polyfill.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/libs/export_canvas/canvas2image.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/libs/export_canvas/base64.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/upload/export.php",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/color-polyfill.css",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/export canvas to php/upload/export.php",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/export canvas to php/libs/export_canvas/canvas2image.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/export canvas to php/libs/export_canvas/base64.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/draw.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/CurveTo.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/CurveTo.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision2.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/galleryScene.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/galleryZoomScene.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structures/gallerySceneStructure.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structures/galleryZoomSceneStructure.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/index.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structure.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/eventHandler.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/objects.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/playvideo.html",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/init.js",
+		"/C/Users/Jakub/Google Drive/IMD/Responsive/Max5/challenge6.maxpat",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/combinationScene.js",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/fullScreen/style.css",
-		"/C/Users/Jakub/Google Drive/IMD/Responsive/Max5/challenge6.maxpat",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/fullScreen/fullscreen.html",
-		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/playvideo.html",
-		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/main.js",
-		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structure.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/jobScene.js",
-		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision2.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/index.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Masks.html",
-		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/DragAndDrop.html",
 		"/C/Users/Jakub/AppData/Local/Temp/7zO8958.tmp/index.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/fancyapps-fancyBox-0ffc358/demo - Copy/iframe.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/fancyapps-fancyBox-0ffc358/demo - Copy/index.html",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/HTML/html.sublime-snippet",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/easel.sublime-snippet",
-		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
-		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/index.html",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/mazeScene.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/collisionStructure.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structure.json",
-		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/basic.html",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/hitTest.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/combinationScene.js",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/style.css",
@@ -185,7 +171,6 @@
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/js/ColorFilter.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/src/easeljs/filters/Filter.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index2.html",
-		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index.html",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/doctype.sublime-snippet",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
@@ -220,6 +205,40 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"drawingMode",
+			"stage.clear",
+			"src",
+			"scr",
+			"wheel",
+			"stage2",
+			"canvas1",
+			"stage.auto",
+			"stage.update",
+			"remove",
+			"new createjs",
+			"\\",
+			"myCa",
+			"canvas1",
+			"saveAs",
+			"savaAs",
+			"oCanvas.width",
+			"oCanvas",
+			"ioCanvas.width",
+			"oldMid",
+			"switch",
+			"SWITCH",
+			"console",
+			"video",
+			"specialRe",
+			"scene",
+			"removeCHild",
+			"enlarged",
+			"stage",
+			"video",
+			"videoPaus",
+			"enlargedReward",
+			"galleryZoom",
+			"GALLERY_SET",
 			"currSpecial",
 			"specialRewards",
 			"nextImage",
@@ -305,7 +324,7 @@
 			"	<"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
@@ -320,69 +339,43 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/index.html",
 					"settings":
 					{
-						"buffer_size": 3536,
+						"buffer_size": 5478,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								174,
-								174
+								1337,
+								1337
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 179.0,
+						"translation.y": 1361.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "js/scenes/galleryZoomScene.js",
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/index.html",
 					"settings":
 					{
-						"buffer_size": 3939,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2174,
-								2174
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1296.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/Jakub/Google Drive/IMD/Responsive/Max5/challenge6.maxpat",
-					"settings":
-					{
-						"buffer_size": 132068,
+						"buffer_size": 6096,
 						"regions":
 						{
 						},
@@ -390,180 +383,68 @@
 						[
 							[
 								0,
-								132068
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 810.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/rotate.html",
+					"settings":
+					{
+						"buffer_size": 1887,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								624,
+								624
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1674.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/style.css",
 					"settings":
 					{
-						"buffer_size": 4529,
+						"buffer_size": 172,
 						"regions":
 						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										170,
-										184
-									],
-									[
-										355,
-										369
-									],
-									[
-										391,
-										405
-									],
-									[
-										612,
-										626
-									],
-									[
-										653,
-										667
-									],
-									[
-										806,
-										820
-									],
-									[
-										837,
-										851
-									],
-									[
-										881,
-										895
-									],
-									[
-										938,
-										952
-									],
-									[
-										996,
-										1010
-									],
-									[
-										1022,
-										1036
-									],
-									[
-										1069,
-										1083
-									],
-									[
-										1124,
-										1138
-									],
-									[
-										1347,
-										1361
-									],
-									[
-										1531,
-										1545
-									],
-									[
-										1721,
-										1735
-									],
-									[
-										1945,
-										1959
-									],
-									[
-										2068,
-										2082
-									],
-									[
-										2265,
-										2279
-									],
-									[
-										2354,
-										2368
-									],
-									[
-										2752,
-										2766
-									],
-									[
-										2869,
-										2883
-									],
-									[
-										3105,
-										3119
-									],
-									[
-										3201,
-										3215
-									],
-									[
-										3367,
-										3381
-									],
-									[
-										3668,
-										3682
-									],
-									[
-										3743,
-										3757
-									],
-									[
-										3805,
-										3819
-									],
-									[
-										3926,
-										3940
-									],
-									[
-										3999,
-										4013
-									],
-									[
-										4187,
-										4201
-									],
-									[
-										4277,
-										4291
-									]
-								],
-								"scope": ""
-							}
 						},
 						"selection":
 						[
 							[
-								969,
-								969
+								132,
+								132
 							]
 						],
 						"settings":
 						{
-							"detect_indentation": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -573,189 +454,28 @@
 				},
 				{
 					"buffer": 4,
-					"file": "js/objects.js",
+					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Transform.html",
 					"settings":
 					{
-						"buffer_size": 13208,
+						"buffer_size": 6925,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								96,
-								96
+								2640,
+								2640
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1458.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "js/eventHandler.js",
-					"settings":
-					{
-						"buffer_size": 9299,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								984,
-								984
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "js/scenes/galleryScene.js",
-					"settings":
-					{
-						"buffer_size": 5730,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2304,
-								2304
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2754.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "js/structure.js",
-					"settings":
-					{
-						"buffer_size": 4998,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2363,
-								2363
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2663.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "js/structures/galleryZoomSceneStructure.js",
-					"settings":
-					{
-						"buffer_size": 1073,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								741,
-								741
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "js/structures/gallerySceneStructure.js",
-					"settings":
-					{
-						"buffer_size": 589,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								547,
-								547
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "js/init.js",
-					"settings":
-					{
-						"buffer_size": 2802,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1522,
-								1524
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 863.0,
+						"translation.y": 1167.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
