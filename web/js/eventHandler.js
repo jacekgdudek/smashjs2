@@ -393,10 +393,10 @@ function switchStage(content, content2)
 		console.log("Switched stage to " + content);
 
 		//init transition if defined
-		//if(typeof content2 !== 'undefined')
-		//{
-			transitionsManager.transition(scenes[lastScene], scenes[currScene],2);//content2);
-		//}
+		if(typeof content2 !== 'undefined')
+		{
+			transitionsManager.transition(scenes[lastScene], scenes[currScene],content2);
+		}
 		
 	}
 	

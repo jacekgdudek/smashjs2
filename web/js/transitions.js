@@ -34,20 +34,22 @@ function TransitionsManager(){
 		this.time = 0;
 		this.active = true;
 
-		//prepare canvas
-		var canvasName = "transition";
-		this.frontCanvas = document.createElement("canvas");
-		this.frontCanvas.className = "state_rotate";
-		this.frontCanvas.id = canvasName;
-		this.frontCanvas.width = 800;
-		this.frontCanvas.height = 600;
+		if(type == 2)
+		{
+			//prepare canvas
+			var canvasName = "transition";
+			this.frontCanvas = document.createElement("canvas");
+			this.frontCanvas.className = "state_rotate";
+			this.frontCanvas.id = canvasName;
+			this.frontCanvas.width = 800;
+			this.frontCanvas.height = 600;
 
-		var object = document.getElementById("wrapper");
-		object.appendChild(this.frontCanvas);
+			var object = document.getElementById("wrapper");
+			object.appendChild(this.frontCanvas);
 
-		this.front_stage = new createjs.Stage(canvasName);
+			this.front_stage = new createjs.Stage(canvasName);
+		}
 		
-
 		this.initScenes();
 	};
 
@@ -67,7 +69,6 @@ function TransitionsManager(){
 			}
 		 	this.scene1.visuals[i].bitmap.alpha = 1;
 		}
-		this.front_stage.update();
 
 		//next
 		for(var i = 0; i < this.scene2.visuals.length ; i ++)
@@ -129,19 +130,19 @@ function TransitionsManager(){
 	this.updateOpenSafe = function()
 	{
 		this.front_stage.update();
-		for(var i = 0; i < this.scene1.visuals.length ; i ++)
-		{
+		//for(var i = 0; i < this.scene1.visuals.length ; i ++)
+		//{
 		// 	//scale it 
 		//  	this.scene1.visuals[i].bitmap.scaleX = (this.maxTime - this.time)/this.maxTime;
 		//  	//move it
 		//  	this.scene1.visuals[i].bitmap.x = ((this.maxTime - this.time)/this.maxTime)*this.scene1.visuals[i].preset_x;
 		//  	//hide it
-		  		this.scene1.visuals[i].bitmap.alpha = (this.maxTime - this.time)/this.maxTime;
+		 // 		this.scene1.visuals[i].bitmap.alpha = (this.maxTime - this.time)/this.maxTime;
 		//  	//skew ii
 		//  	this.scene1.visuals[i].bitmap.skewY = (this.time/this.maxTime) * 20;
 		//  	//boom rewind it 
 		//  	this.scene1.visuals[i].bitmap.x -= (this.time/this.maxTime)*100;
-		}
+		//}
 
 	};
 
