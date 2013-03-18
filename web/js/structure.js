@@ -152,11 +152,11 @@ var structure = {
 		specialRewards:{
 			thumbnails:[
 				{
-					src: "assets/credits/0.jpg",
+					src: "assets/reward/dvd_1.png",
 					name: "audio",
 				},
 				{
-					src: "assets/credits/2.jpg",
+					src: "assets/reward/dvd_2.png",
 					name: "video",
 				}
 			],
@@ -197,47 +197,79 @@ var structure = {
 		},
 		elements:[
 		{
-			src: "assets/credits/bg.jpg",
+			horizontal_offset: 6,
+
+			vertical_offset: 5,
+			slot_width: 20,
+			x:10,
+			y:7,
+
+			src: "assets/credits/cash_frame.png",
+			roller: "assets/credits/roller.png",
 			name: "bg",
 			subelements:[
 			{
-				src: "assets/credits/0.jpg",
+				src: "assets/credits/0.png",
 			},
 			{
-				src: "assets/credits/1.jpg",
+				src: "assets/credits/1.png",
 			},
 			{
-				src: "assets/credits/2.jpg",
+				src: "assets/credits/2.png",
 			},
 			{
-				src: "assets/credits/3.jpg",
+				src: "assets/credits/3.png",
 			},
 			{
-				src: "assets/credits/4.jpg",
+				src: "assets/credits/4.png",
 			},
 			{
-				src: "assets/credits/5.jpg",
+				src: "assets/credits/5.png",
 			},
 			{
-				src: "assets/credits/6.jpg",
+				src: "assets/credits/6.png",
 			},
 			{
-				src: "assets/credits/7.jpg",
+				src: "assets/credits/7.png",
 			},
 			{
-				src: "assets/credits/8.jpg",
+				src: "assets/credits/8.png",
 			},
 			{
-				src: "assets/credits/9.jpg",
+				src: "assets/credits/9.png",
 			},
 			{
-				src: "assets/credits/dollar.jpg",
+				src: "assets/credits/dollar.png",
 			},
 			{
-				src: "assets/credits/comma.jpg",
+				src: "assets/credits/comma.png",
 			}
 			]
+		},
+		{
+			highlight_color: "#aa764d",
+			shadow_color: "#5a3e29",
+			regular_color: "#6d4c32",
+			horizontal_offset: 3,
+			vertical_offset: 5,
+			x: 225,
+			y: 7,
+			width: 335,
+			height: 40,
+			maxHeat: 200,
+			src: "assets/heat/frame.png"
+		},
+		{
+			highlight_color: "#aa764d",
+			shadow_color: "#5a3e29",
+			regular_color: "#6d4c32",
+			horizontal_offset: 3,
+			vertical_offset: 5,
+			x: 620,
+			y: 7,
+			src: "assets/credits/cash_frame.png"
 		}
+
 		],
 		cities:[
 			{
@@ -311,6 +343,11 @@ var structure = {
 		{
 			_type: "24px Arial",
 			_color: "#ffffff",
-		}
+		},
+		audio:
+		[
+			audioContent
+		]
+
 	}
 };

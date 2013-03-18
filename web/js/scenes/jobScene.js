@@ -113,6 +113,9 @@ var jobsScene = (function() {
 
 		},
 		update: function() {
+
+			//play background sound
+			audioManager.playSoundAtVolume(audioManagerAudioObject.BACKGROUND_MUSIC, background_volume, true);
 			//--------animate card
 			//if next card is ready
 			if(nextCardJob.id != -1 && nextCardJob.id != currentJobId && cardState != 3)
@@ -202,6 +205,7 @@ var jobsScene = (function() {
 
 	function setupCard(card , job)
 	{
+		scenes[currScene].stage.addChild(card.bitmap);
 		if (typeof card.cats !== 'undefined') {
 			for(var j = 0 ; j < card.cats.length ; j ++)
 			{

@@ -11,19 +11,22 @@ var combinationSceneStructure = {
 	},
 	visuals: [
 		{
-		  src: "assets/combination/safe_bg.jpg",
+		  src: "assets/combination/door.png",
 		  name: "bg"
 		},
 		{
-		  src: "assets/combination/dial_base.png",
+		  src: "assets/combination/knob.png",
 		  name: "knob"
 		},
 		{
-		  src: "assets/combination/dial_numbers.png",
+		  src: "assets/combination/numbers_0_12.png",
 		  name: "numbers",
-		  maxNumber: 20
+		  maxNumber: 13,
+		  span: 260,
+		  offset: 130 
 		},
 		{
+
 		  src: "assets/combination/stethoscope_2.png",
 		  name: "stethoscope"
 		},
@@ -45,6 +48,14 @@ var combinationSceneStructure = {
 		  refX: 400,
 		  y: -300,
 		  x: -400
+		},
+		{
+		  src: "assets/combination/handle.png",
+		  name: "handle",
+		  regX: 162.5,
+		  regY: 162.5,
+		  y: 300,
+		  x: 510
 		}
 	]
 }

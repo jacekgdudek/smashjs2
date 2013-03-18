@@ -50,11 +50,17 @@ function smoothInputs() {
 			{
 				inputArray[0].x = smoothing*inputArray[0].x+ (1-smoothing)*inputArray[0].lastx ;
 				inputArray[0].y = smoothing*inputArray[0].y+ (1-smoothing)*inputArray[0].lasty ;
+				//angle
+				inputArray[0].startingAngleDelay++;
+				if(inputArray[0].startingAngleDelay > 20) inputArray[0].startingAngle = 9999;
 			}
 			if(!inputArray[2].wasUpdated) 
 			{
 				inputArray[2].x = smoothing*inputArray[2].x+ (1-smoothing)*inputArray[2].lastx ;
 				inputArray[2].y = smoothing*inputArray[2].y+ (1-smoothing)*inputArray[2].lasty ;
+				//angle
+				inputArray[2].startingAngleDelay++;
+				if(inputArray[2].startingAngleDelay > 20) inputArray[2].startingAngle = 9999;
 			}
 };
 
@@ -127,12 +133,12 @@ function updateHeat()
 			scenes[currScene].stage.removeChild(heat.bar, heat.text);
 			heat.bar = null;
 			heat.bar = new createjs.Shape();
-			heat.bar.graphics	.beginLinearGradientFill(["#F66","#FAA","#F66","#D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6)
-						.drawRect(	heat.x + 10, 
-								heat.y+3, 
-								(newValue/heat.maxHeat)*(heat.width-20), 
-								heat.height-6);
-			scenes[currScene].stage.addChild(heat.bar, heat.text);
+			heat.bar.graphics	.beginLinearGradientFill([heat.regular_color,heat.highlight_color,heat.regular_color,heat.shadow_color], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6)
+						.drawRect(	heat.x, 
+								heat.y, 
+								(newValue/heat.maxHeat)*(heat.width), 
+								heat.height);
+			scenes[currScene].stage.addChild(heat.bar, heat.text, heat.frame);
 
 			heat.value = newValue;
 		}
@@ -162,7 +168,7 @@ function updateHeat()
 			break;
 		}
 
-		scenes[currScene].stage.removeChild(heat.bg, heat.bar,heat.modules, heat.text);
+		scenes[currScene].stage.removeChild(heat.bg, heat.bar,heat.modules, heat.text, heat.frame);
 		heat.bar = null;
 		heat.modules = null;
 		heat.modules = new createjs.Shape();
@@ -171,25 +177,25 @@ function updateHeat()
 		//	Awesome drawing function, 
 		// 	Although, what do all those numbers mean? 
 		// 	http://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad 
-		heat.bar.graphics	.beginLinearGradientFill(["#66F","#AAF","#66F","00D"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6)
-					.drawRect(	heat.x + 10 + ((heat.value + (heat.maxTime-heat.time)) /heat.maxHeat)*(heat.width-20), 
-							heat.y+3, 
-							(heat.time/heat.maxHeat)*(heat.width-20), 
-							heat.height-6)
-					.beginLinearGradientFill(["#F66","#FAA","#F66","D00"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6)
-					.drawRect(	heat.x + 10, 
-							heat.y+3, 
-							(heat.nextValue/heat.maxHeat)*(heat.width-20), 
-							heat.height-6);
+		heat.bar.graphics	.beginLinearGradientFill(["#66F","#AAF","#66F","00D"], [0,0.3,0.6, 1], 0, 0, 0, heat.height)
+					.drawRect(	heat.x + ((heat.value + (heat.maxTime-heat.time)) /heat.maxHeat)*(heat.width), 
+							heat.y, 
+							(heat.time/heat.maxHeat)*(heat.width), 
+							heat.height)
+					.beginLinearGradientFill([heat.regular_color,heat.highlight_color,heat.regular_color,heat.shadow_color], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6)
+					.drawRect(	heat.x, 
+							heat.y, 
+							(heat.nextValue/heat.maxHeat)*(heat.width), 
+							heat.height);
 
 		//draw risk
 		heat.modules.graphics	.beginLinearGradientFill(["#AAA","#FFF","#AAA","555"], [0,0.3,0.6, 1], 0, 0, 0, heat.height-6)
-					.drawRect(	heat.x + 10 + ((heat.value + heat.maxTime-heat.risk-heat.riskOffset) /heat.maxHeat)*(heat.width-20), 
-							heat.y+3, 
-							(heat.risk/heat.maxHeat)*(heat.width-20), 
-							heat.height-6);
+					.drawRect(	heat.x + ((heat.value + heat.maxTime-heat.risk-heat.riskOffset) /heat.maxHeat)*(heat.width-20), 
+							heat.y, 
+							(heat.risk/heat.maxHeat)*(heat.width), 
+							heat.height);
 
-		scenes[currScene].stage.addChild(heat.bg, heat.bar,heat.modules, heat.text);
+		scenes[currScene].stage.addChild(heat.bg, heat.bar, heat.modules, heat.text, heat.frame);
 	}
 	
 }

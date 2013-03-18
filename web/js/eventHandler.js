@@ -299,7 +299,7 @@ function finnishedJob(success)
 	{
 		currentJob.finnished = true;
 		clearConditionsForJobs(currentJob.index);
-		addEvent("SWITCH_SCENE", "reward_scene");
+		addEvent("SWITCH_SCENE", "reward_scene", 2);
 		addEvent("DECREASE_GLOBAL_HEAT");
 	}
 	else

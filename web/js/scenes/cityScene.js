@@ -113,6 +113,8 @@ var cityScene = (function() {
 
 		},
 		update: function() {
+			//play background sound
+			audioManager.playSoundAtVolume(audioManagerAudioObject.BACKGROUND_MUSIC, background_volume, true);
 			//--------animate card
 			//if next card is ready
 			if(nextCardCity.id != -1 && nextCardCity.id != currentCityId && cardState != 3)
@@ -121,6 +123,7 @@ var cityScene = (function() {
 				{
 					//hidden
 					case 0:
+						audioManager.playSoundAtVolume(audioManagerAudioObject.PAPER_EFFECT, 1, false);
 						currentCityId = nextCardCity.id;
 						setupCard(card, nextCardCity);
 						currentCity = cityPointers[currentCityId].name;
@@ -151,6 +154,7 @@ var cityScene = (function() {
 			{
 				if(cardState != 2)
 				{
+					audioManager.playSoundAtVolume(audioManagerAudioObject.PAPER_EFFECT, 1, false);
 					cardState = 1;
 				}
 			}
@@ -158,6 +162,7 @@ var cityScene = (function() {
 			{
 				if(card.bitmap.y > 600)
 				{
+					audioManager.playSoundAtVolume(audioManagerAudioObject.PAPER_EFFECT, 1, false);
 					currentCityId = nextCardCity.id;
 					setupCard(card, nextCardCity);
 					currentCity = cityPointers[currentCityId].name;

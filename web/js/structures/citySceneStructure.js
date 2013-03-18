@@ -15,13 +15,13 @@ var citySceneStructure = {
 		},
 	visuals: [
 		{
-		  src: "assets/base/base_bkg2.jpg",
+		  src: "assets/base/desk_base.jpg",
 		  name: "bkg"
 		},
 		{
-			x:20,
-			y:20,
-		  src: "assets/map/europe_map.jpg",
+			x:100,
+			y:100,
+		  src: "assets/map/europemap_TEMP.png",
 		  name: "btn_play"
 		},
 		{

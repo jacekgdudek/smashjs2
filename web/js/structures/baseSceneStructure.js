@@ -7,13 +7,13 @@ var baseSceneStructure = {
 	stage_id: "game_canvas",
 	visuals: [
 		{
-		  src: "assets/base/base_bkg2.jpg",
+		  src: "assets/base/desk_base.jpg",
 		  name: "bkg"
 		},
 		{
-			x: 0,
-			y: 20,
-		  src: "assets/button/map_button.jpg",
+			x: 60,
+			y: 200,
+		  src: "assets/map/desk_europemap.png",
 		  name: "btn_play",
 		  hasDown: true,
 		  downEvent: {
@@ -23,9 +23,9 @@ var baseSceneStructure = {
 			}	
 		},
 		{
-			x:400,
-			y:500,
-		  src: "assets/button/job_button.jpg",
+			x:130,
+			y:150,
+		  src: "assets/city_map/desk_citymap.png",
 		  name: "btn_play",
 		  hasDown: true,
 		  downEvent: {
@@ -35,9 +35,9 @@ var baseSceneStructure = {
 			}	
 		},
 		{
-			x:0,
-			y:120,
-		  src: "assets/button/gallery_button.png",
+			x:540,
+			y:80,
+		  src: "assets/gallery/desk_notebook_1.png",
 		  name: "btn_play",
 		  hasDown: true,
 		  downEvent: {
@@ -45,6 +45,12 @@ var baseSceneStructure = {
 			content: "gallery_scene",
 			content2: 0
 			}	
+		},
+		{
+			x:0,
+			y:0,
+			src: "assets/bg/shadow2.png",
+			name: "overlayasdas",
 		}
 	]
 };

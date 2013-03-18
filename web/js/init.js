@@ -15,10 +15,12 @@ var scenes = new Object();
 //setup audio manager
 var audioManager;
 var transitionsManager;
+var background_volume = 0.6;
 
 //booleans
 var moduleLoaded = -1;
 var flipX = true;
+var currentBuffer = false; // false - 0 true - 2
 
 //init inputs
 var inputArray = new Array();
@@ -38,6 +40,11 @@ function init() {
 		fid.rotation = -1;
 		fid.lastx = -1;
 		fid.lasty = -1;
+
+		//angle
+		fid.startingAngle = 9999;
+		fid.startingAngleDelay = 0;
+		fid.relative_rotation = -1;
 		fid.wasUpdated = false;
 		inputArray[i] = fid;
 	}
@@ -46,8 +53,7 @@ function init() {
 
 	//load sounds
 	audioManager = new SmashAndGrabAudioManager();
-	audioManager.setVolume(0.95,audioManagerAudioObject.NORMAL_CLICK);
-	audioManager.playSound(audioManagerAudioObject.NORMAL_CLICK);
+	audioManager.playSoundAtVolume(audioManagerAudioObject.NORMAL_CLICK,0.95,false);
 
 	//init transitions
 	transitionsManager = new TransitionsManager();
@@ -72,6 +78,7 @@ function popPixels(imgStr) {
 //Handle message
 messageCount = 0;
 var smoothing = 0.1;
+//starting angle
 function handleMessage(message_event) {
 	//reset was updated
 	if(useFiducials)
@@ -87,10 +94,13 @@ function handleMessage(message_event) {
 			for (var i = 0; i < fidInfo.length; i+=4) {
 				
 				var x = parseInt(fidInfo[i+1]);
-				(flipX ? x = 640 - x : null)
 				var y = parseInt(fidInfo[i+2]);
 				var rotation = parseInt(fidInfo[i+3]);
-				if( x < 3000)
+
+				//do some flippin
+				if(flipX) x = 640 - x;
+				if(flipX) rotation = (-1*rotation)+360;
+				if( x < 3000 && x > -3000)
 				{ 
 					var fidId = parseInt(fidInfo[i]);
 					inputArray[fidId].lastx = inputArray[fidId].x;
@@ -99,6 +109,13 @@ function handleMessage(message_event) {
 					inputArray[fidId].y = smoothing*y + (1-smoothing)*inputArray[fidId].lasty ;
 					inputArray[fidId].rotation = rotation;
 					inputArray[fidId].wasUpdated = true;
+
+					//update relative angle
+					if(inputArray[fidId].startingAngle == 9999) inputArray[fidId].startingAngle = rotation;
+					inputArray[fidId].relative_rotation = rotation - inputArray[fidId].startingAngle;
+					if(inputArray[fidId].relative_rotation > 360 ) inputArray[fidId].relative_rotation -= 360;
+					else if(inputArray[fidId].relative_rotation < 0 ) inputArray[fidId].relative_rotation += 360;
+					inputArray[fidId].startingAngleDelay = 0;
 				}
 				
 			}
