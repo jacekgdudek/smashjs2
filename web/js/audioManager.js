@@ -14,6 +14,7 @@ function SmashAndGrabAudioManager() {
 	var assetsPath = "assets/audio/";
 	var audioPlayer;
 	var masterVolume = 0;
+	var disabled = false;
 	
 	//INIT======================================
 	createjs.FlashPlugin.BASE_PATH = "./soundjs/" // Initialize the base path from this document to the Flash Plugin
@@ -28,37 +29,45 @@ function SmashAndGrabAudioManager() {
 	
 	//SOUND PLAYBACK METHODS
 	this.playSoundAtVolume = function(id,volume,loop) {
-		console.log('Smash And Grab Audio Manager is playing sound :\'' + id + '\' at volume :'+volume);
-		
-		//Play the sound: play (src, interrupt, delay, offset, loop, volume, pan)
-		//var instance = createjs.SoundJS.play(1, cr
-		//	eatejs.SoundJS.INTERRUPT_NONE,0,0,false,volume);
+		if(!disabled)
+		{
+			console.log('Smash And Grab Audio Manager is playing sound :\'' + id + '\' at volume :'+volume);
+			
+			//Play the sound: play (src, interrupt, delay, offset, loop, volume, pan)
+			//var instance = createjs.SoundJS.play(1, cr
+			//	eatejs.SoundJS.INTERRUPT_NONE,0,0,false,volume);
 
-		var instance = createjs.SoundJS;
-		instance.play(id, createjs.SoundJS.INTERRUPT_NONE,0,0,loop,volume);
+			var instance = createjs.SoundJS;
+			instance.play(id, createjs.SoundJS.INTERRUPT_NONE,0,0,loop,volume);
 
 
-	    if(instance.setVolume(volume)){console.log('set volume');}else{
-	    console.log('coulnt set volume');
-	    };
-	    
+		    if(instance.setVolume(volume)){console.log('set volume');}else{
+		    console.log('coulnt set volume');
+		    };
 
-		if (instance == null || instance.playState == createjs.SoundJS.PLAY_FAILED) { 
-	    		console.log("error: audio play request failed");
-	    		return; 
-	    }
+			if (instance == null || instance.playState == createjs.SoundJS.PLAY_FAILED) { 
+		    		console.log("error: audio play request failed");
+		    		return; 
+		    }
+
+		}
 
 
 	};
 	
 	
 	this.setVolumeForID = function(id,volume) {
-				audioPlayer.setVolume(id,volume);
+		audioPlayer.setVolume(id,volume);
 	}
 	
 	
-	this.isEnabled = function(){
-		//return audioPlayer.getMute();
+	this.getMute = function(){
+		return disabled;
+	}
+
+	this.toggleMute = function(){
+		disabled = !disabled;
+		console.log("audio manager MUTED : " + disabled);
 	}
 	
 	this.mute = function() {

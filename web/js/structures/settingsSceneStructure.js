@@ -64,7 +64,7 @@ var settingsSceneStructure = {
 			normal: 1,
 			hover: 2,
 			checkbox: [3,4],
-			downEvent: "SETIINGS_SOUND_ENABLE",
+			downEvent: "SETIINGS_SOUND_TOGGLE",
 			text: "Enable Sound"
 		},
 		{

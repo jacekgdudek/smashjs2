@@ -3,8 +3,8 @@ console.log("Loading structure");
 var structure = { 
 	preload: {
 		stage_id: "game_canvas",
-		bgsrc: "assets/loading/bg.jpg",
-		bar:{
+		bgsrc: "assets/loading/bg2.png",
+		/*bar:{
 			x: 150,
 			y: 400,
 			width: 400,
@@ -13,7 +13,12 @@ var structure = {
 			highlight:"#6b0277",
 			shadow: "#6b0277",
 			ratio: [0,0.3,0.6, 1]
-			}
+			},*/
+		knob:{
+			src: "assets/loading/dial_base.png",
+			src2: "assets/loading/dial_numbers.png",
+			offset_angle: 112.5
+		} 
 		},
 	game: {
 		scenes: [	firstSceneStructure, 

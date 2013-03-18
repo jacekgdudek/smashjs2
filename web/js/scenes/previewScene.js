@@ -4,7 +4,7 @@ var previewScene = (function() {
 	//var input;
 	var scene;
 
-	var capture;
+	var reflection;
 
 	var left, right;
 
@@ -20,15 +20,8 @@ var previewScene = (function() {
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
 
-			var video = document.getElementById("live");
-			capture = new createjs.Bitmap(video);
-
-			capture.regX = 320;
-			(flipX ? capture.scaleX = -1 : null)
-			capture.x =capture.regX+ 80;
-			capture.y = 60;
-			this.scene.stage.addChild(capture);
-			capture.alpha = 0.2;
+			reflection = new Reflection(scene.stage);
+			reflection.init();
 
 			//setup indicators
 			left = this.scene.visuals[1].bitmap;
@@ -89,7 +82,7 @@ var previewScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
-			this.scene.stage.removeChild(capture);
+			reflection.finalize();
 
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{

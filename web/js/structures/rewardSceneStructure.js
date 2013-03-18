@@ -84,7 +84,7 @@ var rewardSceneStructure = {
 	],
 	visuals: [
 		{
-		  src: "assets/base/base_bkg2.jpg",
+		  src: "assets/base/desk_base.jpg",
 		  name: "bkg"
 		},
 		{
@@ -195,3 +195,5 @@ var rewardSceneStructure = {
 		}
 	]
 };
+
+

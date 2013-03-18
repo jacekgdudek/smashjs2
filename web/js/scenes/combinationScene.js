@@ -29,7 +29,8 @@ var combinationScene = (function() {
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
 
-			setGUI();
+			setGUI(true);
+			
 			//start countdown
 			armHeat();
 			

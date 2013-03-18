@@ -114,7 +114,10 @@ function loadObjects() {
 		// For set up the visuals in the scene and attach them to the stage
 		for (var j = 0; j < _scenes[i].visuals.length; j++) {
 			var visual = _scenes[i].visuals[j];
+
+			//load visual
 			visual.bitmap = new createjs.Bitmap(visual.src);
+			
 
 			if ( typeof visual.regX === 'undefined')visual.bitmap.regX = 0;
 			else visual.bitmap.regX = visual.regX;
@@ -131,6 +134,27 @@ function loadObjects() {
 				visual.bitmap.visible = false;
 			}
 			_scenes[i].stage.addChild(visual.bitmap);
+
+			//load highlight if exists
+			if( typeof visual.hoverSrc !== 'undefined')
+			{
+				visual.hover = new createjs.Bitmap(visual.hoverSrc);
+
+				if ( typeof visual.regX === 'undefined')visual.hover.regX = 0;
+				else visual.hover.regX = visual.regX;
+				if ( typeof visual.regY === 'undefined')visual.hover.regY = 0;
+				else visual.hover.regY = visual.regY;
+
+				if ( typeof visual.x === 'undefined')visual.hover.x = 0 + visual.hover.regX;
+				else visual.hover.x = visual.hover.regX + visual.x;
+				if ( typeof visual.y === 'undefined')visual.hover.y = 0 + visual.hover.regY;
+				else visual.hover.y = visual.hover.regY + visual.y;
+
+				visual.hover.visible = false;
+
+				_scenes[i].stage.addChild(visual.hover);
+			}
+
 			if (typeof visual.textLines !== 'undefined') {
 				for (var k = 0; k < visual.textLines.length; k++) {
 					console.log(j);
@@ -182,9 +206,15 @@ function loadObjects() {
 	scenes[currScene].init(scenes[currScene]);
 
 }
-function setGUI()
+function setGUI(isGame)
 {
-	setLocation();
+	if(typeof isGame === 'undefined')
+	{
+		if(!isGame)
+		{
+			setLocation();
+		}
+	}
 	setHeat();
 	setCredits();
 	//setMessage();
