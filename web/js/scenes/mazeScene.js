@@ -12,6 +12,7 @@ var mazeScene = (function() {
     var scene;
 
     var gameStarted = false;
+    var reflection;
 
 	return {
 		init: function(scene) {
@@ -24,6 +25,10 @@ var mazeScene = (function() {
                 this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
                 this.scene.stage.addChild(this.scene.visuals[i].bitmap);
             }
+
+            reflection = new Reflection(scene.stage);
+            reflection.init(0.1);
+
             setGUI();
             armHeat();
             gameStarted = false;
@@ -49,18 +54,16 @@ var mazeScene = (function() {
 		},
 		update: function() {
 			//burger follows mouse cursor
-            if(useFiducials)
+            if(useFiducials && inputArray[0].y != -1)
             {
-                burger.x = 800 - burger.image.width - (((800 - burger.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
-                burger.y = (600/480)*inputArray[0].y;
+                burger.x = (((800 - burger.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
+                burger.y = 1.25*inputArray[0].y - 50;//(((600 - burger.image.height)/(480 - (2*100)))*(inputArray[0].y - 100));
             }
-            else
+            else if (!useFiducials)
             {
                 burger.x = this.scene.stage.mouseX - burger.image.width/2;
                 burger.y = this.scene.stage.mouseY - burger.image.height/2;
             }
-            
-
             
             if(this.cable)
             {
@@ -172,9 +175,11 @@ var mazeScene = (function() {
             }
             setGUI();
             //update scene
+            reflection.update();
             this.scene.stage.update();
         },
         finalize: function() {
+            reflection.finalize();
             for(var i = 0 ; i < this.scene.visuals.length ; i++)
             {
                 this.scene.visuals[i].visible = false;

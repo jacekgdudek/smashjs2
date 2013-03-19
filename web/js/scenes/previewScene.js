@@ -21,7 +21,7 @@ var previewScene = (function() {
 			}
 
 			reflection = new Reflection(scene.stage);
-			reflection.init();
+			reflection.init(0.4);
 
 			//setup indicators
 			left = this.scene.visuals[1].bitmap;
@@ -72,7 +72,7 @@ var previewScene = (function() {
 
 			left.x = 80 + inputArray[0].x;
 			left.y = 60+ inputArray[0].y;
-			left.rotation = -inputArray[0].rotation;
+			left.rotation = inputArray[0].rotation;
 
 			right.x = 80+ inputArray[2].x - 95;
 			right.y = 60+inputArray[2].y - 90;

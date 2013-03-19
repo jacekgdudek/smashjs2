@@ -19,6 +19,8 @@ var jobsScene = (function() {
 	//jobpointers
 	var jobPointers = new Array();
 
+
+	var overlay;
 	return {
 		init: function(scene) {
 			console.log("init: jobScene");
@@ -30,6 +32,14 @@ var jobsScene = (function() {
 				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
+
+			// init overlay if exists
+			if(typeof scene.overlayStructure !== 'undefined')
+			{
+				this.overlay = new StageOverlay(scene.stage);
+				this.overlay.init(scene.overlayStructure);
+			}
+
 			setGUI();
 
 			currentJobId = -1; // -1 for not selected ?
@@ -114,6 +124,11 @@ var jobsScene = (function() {
 		},
 		update: function() {
 
+			//update overlay
+			if(typeof this.overlay !== 'undefined')
+			{
+				this.overlay.update();
+			}
 			//play background sound
 			audioManager.playSoundAtVolume(audioManagerAudioObject.BACKGROUND_MUSIC, background_volume, true);
 			//--------animate card
@@ -176,6 +191,13 @@ var jobsScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
+			//finalize overlay
+			if(typeof this.overlay !== 'undefined')
+			{
+				this.overlay.finalize();
+			}
+
+
 			for(var i = 0 ; i < jobPointers.length ; i++)
 			{
 				this.scene.stage.removeChild(jobPointers[i].pointer);

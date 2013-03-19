@@ -42,5 +42,15 @@ var citySceneStructure = {
 			src: "assets/city_map/card.jpg",
 			name: "btn_play"
 		}
-	]
+	],
+	overlayStructure:{
+		x:0,
+		y:0,
+		src: "assets/bg/shadow2.png",
+		pause:  220,
+		duration: 265,
+		min_value: 0.3,
+		soundEffect: audioManagerAudioObject.BULB_SOUND
+
+	}
 };

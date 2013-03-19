@@ -123,6 +123,12 @@ var defaultScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
+			//finalize overlay
+			if(typeof this.overlay !== 'undefined')
+			{
+				this.overlay.finalize();
+			}
+
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{
 				this.scene.visuals[i].visible = false;

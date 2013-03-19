@@ -99,7 +99,7 @@ function handleMessage(message_event) {
 
 				//do some flippin
 				if(flipX) x = 640 - x;
-				if(!flipX) rotation = (-1*rotation)+360;
+				if(flipX) rotation = (-1*rotation)+360;
 				if( x < 3000 && x > -3000)
 				{ 
 					var fidId = parseInt(fidInfo[i]);

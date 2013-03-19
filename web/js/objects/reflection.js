@@ -5,7 +5,7 @@ function Reflection(_stage){
 	var capture;
 	
 	//INIT======================================
-	this.init = function()
+	this.init = function(alpha)
 	{
 		var video = document.getElementById("live");
 		capture = new createjs.Bitmap(video);
@@ -17,7 +17,14 @@ function Reflection(_stage){
 		capture.x = 400;
 		capture.y = 300;
 		stage.addChild(capture);
-		capture.alpha = 0.4;
+		capture.alpha = alpha;
+	}
+
+	//UPDATE==================================		(optional)
+	this.update = function()
+	{
+		stage.removeChild(capture);
+		stage.addChild(capture);
 	}
 
 	//FINALIZE==================================
@@ -27,4 +34,3 @@ function Reflection(_stage){
 	}
 
 }
-
