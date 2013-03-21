@@ -346,6 +346,11 @@ function addCredits(_credits)
 	{
 		credits.nextValue += _credits;
 	}
+
+	//update twitter link
+	socialMediaManager.twitterScore(credits.nextValue);
+
+
 	console.log("Credits : " + credits.nextValue);
 }
 

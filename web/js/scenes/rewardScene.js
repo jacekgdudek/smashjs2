@@ -26,13 +26,6 @@ var rewardScene = (function() {
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
 
-			// init overlay if exists
-			if(typeof scene.overlayStructure !== 'undefined')
-			{
-				this.overlay = new StageOverlay(scene.stage);
-				this.overlay.init(scene.overlayStructure);
-			}
-
 			setGUI();
 
 
@@ -117,20 +110,9 @@ var rewardScene = (function() {
 		update: function() {
 			//update scene
 
-			//update overlay
-			if(typeof this.overlay !== 'undefined')
-			{
-				this.overlay.update();
-			}
 			this.scene.stage.update();
 		},
 		finalize: function() {
-			//finalize overlay
-			if(typeof this.overlay !== 'undefined')
-			{
-				this.overlay.finalize();
-			}
-
 
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{

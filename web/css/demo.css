@@ -26,25 +26,42 @@ canvas {
 	color: rgb(99,66,00);
 	position: relative;
 	left : 300px;
+	top : -50px;
 }
 
 .state_static {
 	position: fixed;
-    left:100;
-    top:100;
+    top:60px;
     width:800px;
     height:600px;
 }
 
-
-
 .state_rotate {
 	position: fixed;
-    left:100;
-    top:100;
-	width:800px;
-	height:600px;
+    top:60px;
+    width:800px;
+    height:600px;
     -webkit-animation: example 1s ease 0s alternate;
+}
+
+.social_media {
+	width: 100px;
+}
+
+#twitter_share_div {
+	position: fixed;
+	left:40%;
+    top:680px;
+	width:800px;
+	height:25px;
+}
+
+#facebook_share_div {
+	position: fixed;
+	left: 60%;
+    top:680px;
+	width:800px;
+	height:25px;
 }
 
 .grayscale {

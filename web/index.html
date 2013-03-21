@@ -21,6 +21,7 @@
 	<script src="js/objects/combinationIndicator.js"></script>
 	<script src="js/objects/stageOverlay.js"></script>
 	<script src="js/objects/reflection.js"></script>
+	<script src="js/objects/socialMedia.js"></script>
 	
 
 	<!-- preload -->
@@ -107,6 +108,20 @@
     	<!-- game canvas -->
         <canvas id="game_canvas" width="800" height="600" class="state_static">
         </canvas>
+
+        
+		<div class="social_media" id="twitter_share_div">
+			<a id="twitter_share" href="javascript:socialMediaManager.twitterScore(500)" class="twitter-share-button" data-url="" data-text="I played SmashNGrab and scored : ">
+				<img src="assets/social/tweeter.jpg" />
+			</a>
+		</div>
+
+        <div class="social_media" id="facebook_share_div">
+			<a href="javascript:socialMediaManager.facebookScore(credits.nextValue)">
+				<img src="assets/social/facebook.png" />
+			</a>
+		</div>
+
         
         <!-- -->
         <video 	id="live" class="hidden"

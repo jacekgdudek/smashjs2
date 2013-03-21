@@ -31,6 +31,8 @@ var cities = {};
 var currCity;
 var currSpecialRewards = new Array();
 var specialRewards = new Array();
+//socialMedia
+socialMediaManager = new SocialMediaManager();
 
 var sweetSpot = (function() {
 	var scene;
