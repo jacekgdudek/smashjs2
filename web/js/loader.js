@@ -34,6 +34,15 @@ function SmashAndGrabPreLoader() {
 				loadCounter++;
 			}
 		}
+
+		// For each city
+		var cities = gamejson.game.cities;
+		for (var i = 0; i < cities.length; i++) {
+			// Load the visuals
+			queue.loadFile(cities[j].pointerSrc);
+			queue.loadFile(cities[j].pointerHighlightsSrc);
+			loadCounter++;
+		}
 		//add audio manifests
 		queue.loadManifest(gamejson.game.audio[0].pre_manifest);
 		postManifest = gamejson.game.audio[0].post_manifest;

@@ -71,7 +71,7 @@ function loadObjects() {
 		cities[_cities[i].name] = _cities[i];
 		_cities[i].heat = 20;
 	}
-	currCity = "Edinburgh";
+	currCity = "Poland";
 	//setup special rewards
 	specialRewards = gamejson.game.specialRewards;
 	for(var i = 0 ; i < specialRewards.rewards.length ; i ++)

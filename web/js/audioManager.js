@@ -4,7 +4,7 @@ var audioManagerAudioObject = {
 	'SPECIAL_CLICK': 2,
 	'BACKGROUND_MUSIC': 3,
 	'PAPER_EFFECT': 4,
-	'BULB_SOUND': 4
+	'BULB_SOUND': 5
 };
 
 

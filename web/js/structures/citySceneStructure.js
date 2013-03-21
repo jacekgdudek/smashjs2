@@ -19,9 +19,7 @@ var citySceneStructure = {
 		  name: "bkg"
 		},
 		{
-			x:100,
-			y:100,
-		  src: "assets/map/europemap_TEMP.png",
+		  src: "assets/map/euromap_full.png",
 		  name: "btn_play"
 		},
 		{
@@ -37,9 +35,9 @@ var citySceneStructure = {
 			}	
 		},
 		{
-			x:40,
-			y:600,
-			src: "assets/city_map/card.jpg",
+			x:800,
+			y:80,
+			src: "assets/city_map/paperslip.png",
 			name: "btn_play"
 		}
 	],
@@ -54,3 +52,5 @@ var citySceneStructure = {
 
 	}
 };
+
+
