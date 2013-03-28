@@ -64,6 +64,10 @@ function handleEvents()
 
 		else if(event.type == "SETTINGS_FLIP_X") flipX = !flipX;
 
+		else if(event.type == "SETIINGS_SOUND_TOGGLE") audioManager.toggleMute();
+
+		
+
 		//------------------------------ start game
 		else if(event.type == "START_NEW_GAME") startNewGame();
 
@@ -342,6 +346,11 @@ function addCredits(_credits)
 	{
 		credits.nextValue += _credits;
 	}
+
+	//update twitter link
+	socialMediaManager.twitterScore(credits.nextValue);
+
+
 	console.log("Credits : " + credits.nextValue);
 }
 

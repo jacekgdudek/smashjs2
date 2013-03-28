@@ -3,8 +3,8 @@ console.log("Loading structure");
 var structure = { 
 	preload: {
 		stage_id: "game_canvas",
-		bgsrc: "assets/loading/bg.jpg",
-		bar:{
+		bgsrc: "assets/loading/bg2.png",
+		/*bar:{
 			x: 150,
 			y: 400,
 			width: 400,
@@ -13,7 +13,12 @@ var structure = {
 			highlight:"#6b0277",
 			shadow: "#6b0277",
 			ratio: [0,0.3,0.6, 1]
-			}
+			},*/
+		knob:{
+			src: "assets/loading/dial_base.png",
+			src2: "assets/loading/dial_numbers.png",
+			offset_angle: 112.5
+		} 
 		},
 	game: {
 		scenes: [	firstSceneStructure, 
@@ -273,10 +278,11 @@ var structure = {
 		],
 		cities:[
 			{
-				name:"Edinburgh",
-				pointerSrc:"assets/credits/8.jpg",
-				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				name:"Poland",
+				pointerSrc:"assets/map/europe_poland.png",
+				pointerHighlightsSrc:"assets/map/europe_poland.png",
 				info:"Small town.. burke and hare",
+				heat: 0,
 				maxHeat: 200,
 				currHeat: 20,
 				travelCost: 200,
@@ -284,59 +290,112 @@ var structure = {
 				risk:1
 			},
 			{
-				name:"London",
-				pointerSrc:"assets/credits/8.jpg",
-				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				name:"Albania",
+				pointerSrc:"assets/map/europe_albania.png",
+				pointerHighlightsSrc:"assets/map/europe_albania.png",
 				info:"Hello governor !",
 				maxHeat: 2000,
 				currHeat: 20,
 				travelCost: 2000,
 				reward:1,
-				risk:2
+				risk:2,
+				heat: 0
 			},
 			{
-				name:"Praga",
-				pointerSrc:"assets/credits/8.jpg",
-				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				name:"Bulgaria",
+				pointerSrc:"assets/map/europe_bulgaria.png",
+				pointerHighlightsSrc:"assets/map/europe_bulgaria.png",
 				info:"You be good .. or else",
 				maxHeat: 400,
 				currHeat: 20,
 				travelCost: 2000,
 				reward:2,
-				risk:1
+				risk:1,
+				heat: 0
 			},
 			{
-				name:"Rome",
-				pointerSrc:"assets/credits/8.jpg",
-				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				name:"Czech Republic",
+				pointerSrc:"assets/map/europe_czech.png",
+				pointerHighlightsSrc:"assets/map/europe_czech.png",
 				info:"Me gusto spaghetti",
 				maxHeat: 200,
 				currHeat: 20,
 				travelCost: 20000,
 				reward:2,
-				risk:4
+				risk:4,
+				heat: 0
 			},
 			{
-				name:"Paris",
-				pointerSrc:"assets/credits/8.jpg",
-				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				name:"Herzegovina",
+				pointerSrc:"assets/map/europe_herz.png",
+				pointerHighlightsSrc:"assets/map/europe_herz.png",
 				info:"Take whatever you want.. I surrender",
 				maxHeat: 200,
 				currHeat: 20,
 				travelCost: 20000,
 				reward:3,
-				risk:3
+				risk:3,
+				heat: 0
 			},
 			{
-				name:"PeekabuLand",
-				pointerSrc:"assets/credits/8.jpg",
-				pointerHighlightsSrc:"assets/credits/dollar.jpg",
+				name:"Hungary",
+				pointerSrc:"assets/map/europe_hungary.png",
+				pointerHighlightsSrc:"assets/map/europe_hungary.png",
 				info:"...",
 				maxHeat: 2000,
 				currHeat: 20,
 				travelCost: 20000,
 				reward:5,
-				risk:1
+				risk:1,
+				heat: 0
+			},
+			{
+				name:"Montenegro",
+				pointerSrc:"assets/map/europe_montenegro.png",
+				pointerHighlightsSrc:"assets/map/europe_montenegro.png",
+				info:"...",
+				maxHeat: 2000,
+				currHeat: 20,
+				travelCost: 20000,
+				reward:5,
+				risk:1,
+				heat: 0
+			},
+			{
+				name:"Romania",
+				pointerSrc:"assets/map/europe_romania.png",
+				pointerHighlightsSrc:"assets/map/europe_romania.png",
+				info:"...",
+				maxHeat: 2000,
+				currHeat: 20,
+				travelCost: 20000,
+				reward:5,
+				risk:1,
+				heat: 0
+			},
+			{
+				name:"Serbia",
+				pointerSrc:"assets/map/europe_serbia.png",
+				pointerHighlightsSrc:"assets/map/europe_serbia.png",
+				info:"...",
+				maxHeat: 2000,
+				currHeat: 20,
+				travelCost: 20000,
+				reward:5,
+				risk:1,
+				heat: 0
+			},
+			{
+				name:"Slovakia",
+				pointerSrc:"assets/map/europe_slovak.png",
+				pointerHighlightsSrc:"assets/map/europe_slovak.png",
+				info:"...",
+				maxHeat: 2000,
+				currHeat: 20,
+				travelCost: 20000,
+				reward:5,
+				risk:1,
+				heat: 0
 			}
 		],
 		font:
@@ -351,3 +410,5 @@ var structure = {
 
 	}
 };
+
+

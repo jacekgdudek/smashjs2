@@ -131,6 +131,16 @@ var settingsScene = (function() {
 								break;
 								case 1:
 									addEvent(scene.settings[i].downEvent, false);
+									if(audioManager.getMute())
+									{
+										scene.settings[i].checkbox_bmp.ticked.visible = true;
+										scene.settings[i].checkbox_bmp.unticked.visible = false;
+									}
+									else
+									{
+										scene.settings[i].checkbox_bmp.ticked.visible = false;
+										scene.settings[i].checkbox_bmp.unticked.visible = true;
+									}
 								break;
 							}
 

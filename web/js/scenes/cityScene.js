@@ -19,6 +19,9 @@ var cityScene = (function() {
 	//jobpointers
 	var cityPointers = new Array();
 
+	
+	var overlay;
+
 	return {
 		init: function(scene) {
 			console.log("init: jobScene");
@@ -30,6 +33,14 @@ var cityScene = (function() {
 				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
+
+			// init overlay if exists
+			if(typeof scene.overlayStructure !== 'undefined')
+			{
+				this.overlay = new StageOverlay(scene.stage);
+				this.overlay.init(scene.overlayStructure);
+			}
+
 			setGUI();
 
 			currentCityId = -1; // -1 for not selected ?
@@ -41,11 +52,12 @@ var cityScene = (function() {
 				scene.scene.visuals[i].visible = true;
 			}
 
+
 			//----------------- Setup the game stage
 			//setup card
 			card = this.scene.visuals[3];
-			card.bitmap.x = 40;
-			card.bitmap.y = 601;
+			card.bitmap.x = 800;
+			card.bitmap.y = 100;
 			card.bitmap.regX += 0;
 			card.bitmap.regY += 0;
 			//setupCard(card, currentJobs[currentJobId]);
@@ -113,6 +125,13 @@ var cityScene = (function() {
 
 		},
 		update: function() {
+
+			//update overlay
+			if(typeof this.overlay !== 'undefined')
+			{
+				this.overlay.update();
+			}
+
 			//play background sound
 			audioManager.playSoundAtVolume(audioManagerAudioObject.BACKGROUND_MUSIC, background_volume, true);
 			//--------animate card
@@ -150,6 +169,7 @@ var cityScene = (function() {
 					cardState = 3;
 				}
 			}
+
 			else if (nextCardCity.id == currentCityId)	
 			{
 				if(cardState != 2)
@@ -160,7 +180,7 @@ var cityScene = (function() {
 			}
 			else if( cardState == 3)
 			{
-				if(card.bitmap.y > 600)
+				if(card.bitmap.x > 800)
 				{
 					audioManager.playSoundAtVolume(audioManagerAudioObject.PAPER_EFFECT, 1, false);
 					currentCityId = nextCardCity.id;
@@ -178,6 +198,13 @@ var cityScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
+
+			//finalize overlay
+			if(typeof this.overlay !== 'undefined')
+			{
+				this.overlay.finalize();
+			}
+
 			hideCard(card);
 			for(var i = 0 ; i < cityPointers.length ; i++)
 			{
@@ -231,8 +258,8 @@ var cityScene = (function() {
 					for(var j = 0 ; j < city.reward ; j ++)
 					{
 						cat = new createjs.Bitmap(scenes[currScene].catSrc);
-						cat.x = 40 + text.getMeasuredWidth() + j*25;
-						cat.y = card.bitmap.y + 30 + i*40;
+						cat.x = card.bitmap.x + text.getMeasuredWidth() + j*25 + 40;
+						cat.y = card.bitmap.y + 50 + i*40;
 						cats.push(cat);
 						scenes[currScene].stage.addChild(cat);
 					}
@@ -243,8 +270,8 @@ var cityScene = (function() {
 					for(var j = 0 ; j < Math.floor((city.currHeat*5)/city.maxHeat)+1 ; j ++)
 					{
 						cat = new createjs.Bitmap(scenes[currScene].catSrc);
-						cat.x = 40 + text.getMeasuredWidth() + j*25;
-						cat.y = card.bitmap.y + 30 + i*40;
+						cat.x = card.bitmap.x + text.getMeasuredWidth() + j*25 + 40;
+						cat.y = card.bitmap.y + 50 + i*40;
 						cats.push(cat);
 						scenes[currScene].stage.addChild(cat);
 					}
@@ -254,8 +281,8 @@ var cityScene = (function() {
 				break;
 			}
 
-			text.y = card.bitmap.y + 40 + i*40;
-			text.x = 40;
+			text.y = card.bitmap.y + 50 + i*40;
+			text.x = card.bitmap.x + 40;
 			text.textBaseline = "alphabetic";
 			text.lineWidth = 280;
 
@@ -265,6 +292,7 @@ var cityScene = (function() {
 		card.textLines = textLines;
 		card.cats = cats;
 	}
+	
 
 	function hideCard(card)
 	{
@@ -291,10 +319,10 @@ var cityScene = (function() {
 			cities[i].pointerHighlight = new createjs.Bitmap(cities[i].pointerHighlightsSrc);
 			cities[i].pointerHighlight.visible = false;
 			//change to 0
-			cities[i].pointer.x = (i+1)*50;
-			cities[i].pointer.y = (i+1)*50;
-			cities[i].pointerHighlight.x = (i+1)*50;
-			cities[i].pointerHighlight.y = (i+1)*50;
+			cities[i].pointer.x = 0;
+			cities[i].pointer.y = 0;
+			cities[i].pointerHighlight.x = 0;
+			cities[i].pointerHighlight.y = 0;
 
 			scenes[currScene].stage.addChild(cities[i].pointer, cities[i].pointerHighlight);
 		}
@@ -306,38 +334,38 @@ var cityScene = (function() {
 		{
 			//sliding up
 			case 1:
-				card.bitmap.y -= 20;
-				if(card.bitmap.y < 600 - card.bitmap.image.height + 20)
+				card.bitmap.x -= 20;
+				if(card.bitmap.x < 800 - card.bitmap.image.width + 20)
 				{
 					cardState = 2;
 				}
 				//adjust textlines
 				for(var i = 0 ; i < card.textLines.length ; i++)
 				{
-					card.textLines[i].y -= 20;
+					card.textLines[i].x -= 20;
 				}
 				//adjust cats
 				for(var i = 0 ; i < card.cats.length ; i++)
 				{
-					card.cats[i].y -= 20;
+					card.cats[i].x -= 20;
 				}
 			break;
 			//sliding down
 			case 3:
-				card.bitmap.y += 30;
-				if(card.bitmap.y > 600)
+				card.bitmap.x += 30;
+				if(card.bitmap.x > 800)
 				{
 					cardState = 0;
 				}
 				//adjust textlines
 				for(var i = 0 ; i < card.textLines.length ; i++)
 				{
-					card.textLines[i].y += 30;
+					card.textLines[i].x += 30;
 				}
 				//adjust cats
 				for(var i = 0 ; i < card.cats.length ; i++)
 				{
-					card.cats[i].y += 30;
+					card.cats[i].x += 30;
 				}
 			break;
 		}

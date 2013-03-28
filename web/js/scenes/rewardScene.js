@@ -10,6 +10,9 @@ var rewardScene = (function() {
 	var rewardImages = new Array();
 	var _rewards = new Array();
 
+	
+	var overlay;
+
 	return {
 		init: function(scene) {
 			console.log("init: reward scene");
@@ -22,6 +25,7 @@ var rewardScene = (function() {
 				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
 			}
+
 			setGUI();
 
 
@@ -109,6 +113,7 @@ var rewardScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
+
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{
 				this.scene.visuals[i].bitmap.visible = false;

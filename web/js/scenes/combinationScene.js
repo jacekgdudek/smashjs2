@@ -27,9 +27,16 @@ var combinationScene = (function() {
 				this.scene.visuals[i].bitmap.alpha = 1;
 				this.scene.stage.removeChild(this.scene.visuals[i].bitmap);
 				this.scene.stage.addChild(this.scene.visuals[i].bitmap);
+				if(i ==0)
+				{
+					//setup reflection
+					reflection = new Reflection(scene.stage);
+					reflection.init(0.1);
+				}
 			}
 
-			setGUI();
+			setGUI(true);
+			
 			//start countdown
 			armHeat();
 			
@@ -133,7 +140,7 @@ var combinationScene = (function() {
 				//-------update sthetoscope
 				//scale up and flip as well
 				stethoscope.bitmap.x = (((800 - stethoscope.bitmap.image.width)/(640 - (2*100)))*(inputArray[0].x - 100));
-				stethoscope.bitmap.y = (600/480)*inputArray[0].y;
+				stethoscope.bitmap.y = (600/480)*inputArray[0].y - 50;
 				//------------------------------------ update volume
 				//distance from sweet spot
 				var distance = Math.sqrt(Math.pow(this.sweet_spot.x - stethoscope.bitmap.x,2) + Math.pow(this.sweet_spot.y - stethoscope.bitmap.y,2));
@@ -305,6 +312,7 @@ var combinationScene = (function() {
 			this.scene.stage.update();
 		},
 		finalize: function() {
+			reflection.finalize();
 			indicator.finalize();
 			for(var i = 0 ; i < this.scene.visuals.length ; i++)
 			{
