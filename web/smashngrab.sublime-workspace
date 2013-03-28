@@ -28,43 +28,12 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/index.html",
+			"file": "/C/Users/Jakub/Dropbox/Work/Game Design/jsonExample.js",
 			"settings":
 			{
-				"buffer_size": 5478,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/index.html",
-			"settings":
-			{
-				"buffer_size": 6096,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/rotate.html",
-			"settings":
-			{
-				"buffer_size": 1887,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/style.css",
-			"settings":
-			{
-				"buffer_size": 172,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Transform.html",
-			"settings":
-			{
-				"buffer_size": 6925,
-				"line_ending": "Unix"
+				"buffer_size": 679,
+				"line_ending": "Windows",
+				"name": "JSONExample = {"
 			}
 		}
 	],
@@ -96,8 +65,61 @@
 	},
 	"file_history":
 	[
-		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/BrowserDetect/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/BrowserDetect/webrtc4all.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fileUpload/browserDetect.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fabricjs/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fileUpload/fileUpload.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fileUpload/style.css",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fabricjs2/register-draw.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fabricjs/register-draw.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fabricjs/libs/register_img.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fileUpload/fileUpload2.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fileUpload/lib.js",
+		"/C/Users/Jakub/Documents/GitHub/peekabu.eezl/peekabu.eezl/trunk/eezl_page/eezl_login.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fabricjs/libs/color_picker/spectrum.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/draw/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/pixastic/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fileUpload/fileUpload.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs2/libs/register_img.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs2/style.css",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/pixastic/js/main.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs2/libs/histogram.js",
+		"/C/Users/Jakub/Documents/GitHub/peekabu.eezl/peekabu.eezl/trunk/eezl_page/eezl_register1_canvas.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs2/register-draw.html",
+		"/C/Users/Jakub/Documents/GitHub/peekabu.eezl/peekabu.eezl/trunk/eezl_page/eezl_register1_canvas_print_and_save.html",
+		"/C/Users/Jakub/Documents/GitHub/peekabu.eezl/peekabu.eezl/trunk/eezl_page/eezl_register1_drawing.html",
+		"/C/Users/Jakub/Documents/GitHub/peekabu.eezl/peekabu.eezl/trunk/eezl_page/style.css",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs2/libs/fabric.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/pixastic/js/cameraAccess.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/register-draw.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs2/libs/pixastic.custom.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/pixastic/js/init.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/index.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/style.css",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/register - Copy.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/libs/export_canvas/canvas2image.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/print-image.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/saveImage.php",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/upload/export.php",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/hero-graphic.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/print-image",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/libs/color_picker/spectrum.css",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/flickering image/basic.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/index.html",
+		"/C/Users/Jakub/.ssh/id_rsa.pub",
+		"/C/Users/Jakub/.ssh/id_rsa",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/libs/color_picker/color-polyfill.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/libs/slider/fd-slider.js",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/SoundJS-release_v0.4.0/examples/JustPlay.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/pong/index.html",
+		"/C/Users/Jakub/Dropbox/Work/js/createjs/SoundJS-release_v0.4.0/examples/SoundGrid.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/BitmapAnimation.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/rotate.html",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/draw/style.css",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/libs/fabric.js",
+		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Transform.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/kitchensink/index.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/kitchensink/js/kitchensink.js",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/kitchensink/kitchensink.html",
@@ -120,7 +142,6 @@
 		"/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/CurveTo.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision2.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
-		"/C/Users/Jakub/Dropbox/Work/peekabu/imageGallery/gallery.html",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/galleryScene.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/galleryZoomScene.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structures/gallerySceneStructure.js",
@@ -151,7 +172,6 @@
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/combinationScene.js",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/style.css",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/rewardScene.js",
-		"/C/Users/Jakub/Dropbox/Work/js/createjs/pong/index.html",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/pong/Main.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/particles.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/Collision-Detection-for-EaselJS-master/example/index.html",
@@ -172,21 +192,7 @@
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/src/easeljs/filters/Filter.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index2.html",
 		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/doctype.sublime-snippet",
-		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
-		"/C/Users/Jakub/Dropbox/Work/tuts/git/test/css/reset.css",
-		"/C/Users/Jakub/Dropbox/Work/tuts/git/test/index.html",
-		"/C/Users/Jakub/Dropbox/node/drawtut/index.html",
-		"/C/Users/Jakub/Google Drive/IMD/Playful/CW1/test.html",
-		"/C/Users/Jakub/Google Drive/other/dolezite/edinburgh.txt",
-		"/C/Users/Jakub/Google Drive/IMD/Playful (2)/handin/readme.txt",
-		"/C/Program Files (x86)/Git/etc/gitconfig",
-		"/C/Users/Jakub/Google Drive/IMD/Playful/CW1/style.css",
-		"/C/Users/Jakub/Dropbox/Icarus/web/ikarus.css",
-		"/C/Users/Jakub/Dropbox/node/drawtut/assets/js/script.js",
-		"/E/Crack/install.txt",
-		"/C/Users/Jakub/Dropbox/node/drawtut/index.html.txt"
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings"
 	],
 	"find":
 	{
@@ -205,6 +211,114 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"console",
+			"console.log",
+			"totF",
+			"removeClass",
+			"addClass",
+			".js",
+			"getParent",
+			"lastchild",
+			"get_",
+			"getLast",
+			"nextElement",
+			"getParrent",
+			"$",
+			"loadImage",
+			"evt",
+			"reader.onload",
+			"onSelected",
+			"gutUserMedia",
+			"upload",
+			"print",
+			"updateComplexity",
+			"body",
+			"localSto",
+			"localStorage",
+			"toData",
+			"();\n",
+			"complexity",
+			"path:created",
+			"drawingMode",
+			"histogram",
+			"histoCanvas",
+			"canvasScreen",
+			"img",
+			"image",
+			"canvasScreenShot",
+			"canvasToD",
+			"canvasToDa",
+			"dataURL",
+			"text-histo",
+			"histogram",
+			"test",
+			"text",
+			"hist2",
+			"text",
+			"console.log",
+			"hist2",
+			"hist",
+			"histoCanvas",
+			"canvas",
+			"myCanvas",
+			"ctx",
+			"video",
+			"stage2",
+			"stage",
+			"stage2",
+			"test",
+			"imageProcessing",
+			"test",
+			"hist",
+			"test",
+			"hist",
+			"myCanvas",
+			"camera",
+			"canvas",
+			"game-canvas",
+			"verbose",
+			"toData",
+			"exportandSave",
+			"png",
+			"cnvs",
+			"saveFile",
+			"strDownloadMime",
+			"strDownload",
+			"saveCanvas",
+			"setItem",
+			"localStorage",
+			"canvas",
+			"saveCanvas",
+			"Canvas",
+			"canvas",
+			"scaleCanvas",
+			"oCanvas",
+			"iWidth",
+			"oCanvas",
+			"oSave",
+			"}\n",
+			"data",
+			"canvas",
+			"_self",
+			"register",
+			"800",
+			"320",
+			"canvas",
+			"video",
+			"canvas.getContext",
+			"video",
+			"gotStream",
+			"video",
+			"drawImage",
+			"video",
+			"myC",
+			"my",
+			"canvas",
+			"change",
+			"firesChange",
+			"drawingColor",
+			"addHouse",
+			"style",
 			"drawingMode",
 			"stage.clear",
 			"src",
@@ -224,104 +338,7 @@
 			"oCanvas.width",
 			"oCanvas",
 			"ioCanvas.width",
-			"oldMid",
-			"switch",
-			"SWITCH",
-			"console",
-			"video",
-			"specialRe",
-			"scene",
-			"removeCHild",
-			"enlarged",
-			"stage",
-			"video",
-			"videoPaus",
-			"enlargedReward",
-			"galleryZoom",
-			"GALLERY_SET",
-			"currSpecial",
-			"specialRewards",
-			"nextImage",
-			"contentId",
-			"thumbnail",
-			"scale",
-			"curr",
-			"currScene",
-			"currHeat",
-			"setImag",
-			"switchStage",
-			"switch",
-			"update",
-			"thumb",
-			"thumbnail",
-			"thumb",
-			"thumbnail",
-			"clone",
-			"clone()",
-			"rewards",
-			"showCurrentZ",
-			"special_REWARD",
-			"specialRewardDown",
-			"addHeat",
-			"setImageId",
-			"setImage",
-			"message",
-			"POP_UP",
-			"GALLERY_SET",
-			"GALLERY",
-			"SWITCH",
-			"load",
-			"reposition",
-			"galleryGrid",
-			"galleryFrid",
-			"rewardObject",
-			"thumbnail",
-			"thumb",
-			"thumbnail",
-			"rewards",
-			"reards",
-			"rewardImages",
-			"loadThumbnails",
-			"rewardImages",
-			"specialReward",
-			"specialrewar",
-			"SPECIAL_REWA",
-			"speCiaL",
-			"loadFlipX",
-			"rewards",
-			"reward",
-			"gallery",
-			"galleryGrid",
-			"grid",
-			"watch",
-			"key",
-			"onMouse",
-			"for",
-			"mouse",
-			"click",
-			"onClick",
-			"length",
-			"lenth",
-			"map",
-			"startBurger",
-			"stage",
-			"4",
-			"Ticker",
-			"ticker",
-			"tick",
-			"maze",
-			"context",
-			"visualId",
-			"rewards",
-			"visualId",
-			"grid",
-			"updateImage",
-			"colorFilter",
-			"visuals",
-			"Bitmap",
-			"img",
-			"snippet",
-			"	<"
+			"oldMid"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -344,138 +361,27 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/fabricjs/index.html",
+					"file": "/C/Users/Jakub/Dropbox/Work/Game Design/jsonExample.js",
 					"settings":
 					{
-						"buffer_size": 5478,
+						"buffer_size": 679,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1337,
-								1337
+								659,
+								659
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1361.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/index.html",
-					"settings":
-					{
-						"buffer_size": 6096,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 810.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/rotate.html",
-					"settings":
-					{
-						"buffer_size": 1887,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								624,
-								624
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1674.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/draw/style.css",
-					"settings":
-					{
-						"buffer_size": 172,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								132,
-								132
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
+							"auto_name": "JSONExample = {",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/Users/Jakub/Dropbox/Work/peekabu/EaselJS-release_v0.6.0/examples/Transform.html",
-					"settings":
-					{
-						"buffer_size": 6925,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2640,
-								2640
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1167.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
