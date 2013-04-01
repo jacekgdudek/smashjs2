@@ -109,6 +109,7 @@ var galleryZoomScene = (function() {
 			videoPaused = true;
 			console.log("removing VIDEO");
 			}
+			scenes[currScene].stage.removeChild(enlargedReward.bitmap);
 			this.scene.stage.update();
 			showCurrentZoom(contentId);
 			
@@ -128,6 +129,7 @@ var galleryZoomScene = (function() {
 			videoPaused = true;
 			console.log("removing VIDEO");
 			}
+			scenes[currScene].stage.removeChild(enlargedReward.bitmap);
 			this.scene.stage.update();
 			showCurrentZoom(contentId);
 			
@@ -157,11 +159,12 @@ var galleryZoomScene = (function() {
 						enlargedReward.bitmap = specialRewards.rewards[contentId].thumbnail.clone();
 						enlargedReward.bitmap.x = 200;
 						enlargedReward.bitmap.y = 200;
-						enlargedReward.bitmap.scaleX = 8.0;
-						enlargedReward.bitmap.scaleY = 8.0;
+						enlargedReward.bitmap.scaleX = 2.0;
+						enlargedReward.bitmap.scaleY = 2.0;
 						enlargedReward.bitmap.visible = true;
 						
 						scenes[currScene].stage.addChild(enlargedReward.bitmap);
+						console.log(enlargedReward.bitmap);
 
 						//Video stuff
 						videoOpen = false;

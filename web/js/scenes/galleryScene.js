@@ -173,6 +173,7 @@ var galleryScene = (function() {
 						rewardBMP.bitmap.y = 100+j * 100;
 						rewardBMP.bitmap.visible = true;
 						console.log("putting object on x:" + (i+1)*100 + " y : " + (100+(j*100)));
+						console.log(rewardBMP.bitmap);
 						
 						// rewardBMP.bitmap.cache(0, 0, rewardBMP.bitmap.image.width, rewardBMP.bitmap.image.height);
 						// /*var cFilter;

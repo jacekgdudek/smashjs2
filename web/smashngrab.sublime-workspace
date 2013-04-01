@@ -35,6 +35,62 @@
 				"line_ending": "Windows",
 				"name": "JSONExample = {"
 			}
+		},
+		{
+			"file": "js/scenes/galleryZoomScene.js",
+			"settings":
+			{
+				"buffer_size": 5528,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Jakub/Google Drive/IMD/Responsive/bouncingBall.html",
+			"settings":
+			{
+				"buffer_size": 2048,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Jakub/Dropbox/localhost/www/quicksand/wp-content/themes/quicksand/style.css",
+			"settings":
+			{
+				"buffer_size": 3834,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Jakub/Dropbox/localhost/www/quicksand/wp-content/themes/quicksand/functions.php",
+			"settings":
+			{
+				"buffer_size": 1162,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Jakub/Dropbox/localhost/www/quicksand/wp-content/themes/quicksand/portfolio.php",
+			"settings":
+			{
+				"buffer_size": 3661,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/scenes/galleryScene.js",
+			"settings":
+			{
+				"buffer_size": 6068,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/structure.js",
+			"settings":
+			{
+				"buffer_size": 7003,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
@@ -65,6 +121,9 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structures/gallerySceneStructure.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structures/rewardSceneStructure.js",
+		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structures/galleryZoomSceneStructure.js",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/BrowserDetect/index.html",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/BrowserDetect/webrtc4all.js",
 		"/C/Users/Jakub/Dropbox/Work/peekabu/Eezl/fileUpload/browserDetect.js",
@@ -144,8 +203,6 @@
 		"/C/Users/Jakub/Dropbox/Work/peekabu/collision/collision.html",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/galleryScene.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/scenes/galleryZoomScene.js",
-		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structures/gallerySceneStructure.js",
-		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structures/galleryZoomSceneStructure.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/index.html",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/structure.js",
 		"/C/Users/Jakub/Documents/GitHub/smashjs2/web/js/eventHandler.js",
@@ -191,8 +248,7 @@
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/js/ColorFilter.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelJS/src/easeljs/filters/Filter.js",
 		"/C/Users/Jakub/Dropbox/Work/js/createjs/easelTuts/index2.html",
-		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/doctype.sublime-snippet",
-		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings"
+		"/C/Users/Jakub/AppData/Roaming/Sublime Text 2/Packages/User/doctype.sublime-snippet"
 	],
 	"find":
 	{
@@ -203,6 +259,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"C:\\Users\\Jakub\\Documents\\GitHub\\smashjs2",
 			""
 		]
 	},
@@ -211,6 +268,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"dvd_1",
+			"specialRewards",
 			"console",
 			"console.log",
 			"totF",
@@ -336,9 +395,7 @@
 			"saveAs",
 			"savaAs",
 			"oCanvas.width",
-			"oCanvas",
-			"ioCanvas.width",
-			"oldMid"
+			"oCanvas"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -356,7 +413,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -378,10 +435,199 @@
 						"settings":
 						{
 							"auto_name": "JSONExample = {",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/scenes/galleryZoomScene.js",
+					"settings":
+					{
+						"buffer_size": 5528,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3803,
+								3803
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2169.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/Jakub/Google Drive/IMD/Responsive/bouncingBall.html",
+					"settings":
+					{
+						"buffer_size": 2048,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/Jakub/Dropbox/localhost/www/quicksand/wp-content/themes/quicksand/style.css",
+					"settings":
+					{
+						"buffer_size": 3834,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/Jakub/Dropbox/localhost/www/quicksand/wp-content/themes/quicksand/functions.php",
+					"settings":
+					{
+						"buffer_size": 1162,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/Jakub/Dropbox/localhost/www/quicksand/wp-content/themes/quicksand/portfolio.php",
+					"settings":
+					{
+						"buffer_size": 3661,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 766.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "js/scenes/galleryScene.js",
+					"settings":
+					{
+						"buffer_size": 6068,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4339,
+								4339
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2233.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "js/structure.js",
+					"settings":
+					{
+						"buffer_size": 7003,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2514,
+								2514
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2211.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
